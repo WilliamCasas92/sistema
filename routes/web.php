@@ -14,3 +14,6 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('social/{provider?}', 'SocialController@getSocialAuth');
+Route::get('social/callback/{provider?}', 'SocialController@getSocialAuthCallback');
