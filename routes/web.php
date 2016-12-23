@@ -15,6 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//Rutas Usuarios
+Route::resource('users', 'UserController');
 
 //Rutas Google
 Route::get('social/{provider?}', 'SocialController@getSocialAuth');
