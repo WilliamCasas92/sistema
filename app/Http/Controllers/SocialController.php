@@ -23,11 +23,15 @@ class SocialController extends Controller {
 
        public function getSocialAuthCallback($provider=null)
        {
-          if($user = Socialite::driver($provider)->user()){
-              //dd($user);
-              return $user->email;
-          }else{
-             return 'Error al cargar la información';
-          }
+          $user = Socialite::driver($provider)->user();
+              $email=$user->email;
+              $domain = explode('@', $email);
+              if(strcmp($domain[1],'elpoli.edu.co')==0)
+              {
+                  return 'bienvenido estudiante del politecnico Jaime isaza Cadavid';
+              }else {
+
+                  return 'ingreso con un correo que no pertenece a la intitución';
+              }
        }
 }
