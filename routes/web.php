@@ -14,5 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+//Rutas Google
 Route::get('social/{provider?}', 'SocialController@getSocialAuth');
 Route::get('social/callback/{provider?}', 'SocialController@getSocialAuthCallback');

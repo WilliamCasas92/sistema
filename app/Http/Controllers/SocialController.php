@@ -24,8 +24,8 @@ class SocialController extends Controller {
        public function getSocialAuthCallback($provider=null)
        {
           if($user = Socialite::driver($provider)->user()){
-             dd($user);
-             //Controlador
+              //dd($user);
+              return $user->email;
           }else{
              return 'Error al cargar la información';
           }
