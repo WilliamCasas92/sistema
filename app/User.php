@@ -9,6 +9,11 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    public function roles()
+    {
+        return $this->belongsToMany('App\Rol', 'user_rol', 'user_id', 'rol_id');
+    }
+
     protected $fillable = [
         'nombre', 'apellidos', 'email',
     ];

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Rol;
 use Exception;
 
 class UserController extends Controller
@@ -29,6 +30,7 @@ class UserController extends Controller
             $user->apellidos    = $request->apellidos;
             $user->email        = $request->email;
             $user->save();
+            //$user->roles()->attach(1);
             return redirect()->route('users.index');
         } catch(Exception $e){
             return "Fatal error -".$e->getMessage();
