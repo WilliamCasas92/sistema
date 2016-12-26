@@ -42,6 +42,21 @@ class UserController extends Controller
             if ($request['rol_abogado']) {
                 $user->roles()->attach(4);
             }
+            if ($request['rol_gestorcontratacion']) {
+                $user->roles()->attach(5);
+            }
+            if ($request['rol_gestornotificacion']) {
+                $user->roles()->attach(6);
+            }
+            if ($request['rol_gestorafiliacion']) {
+                $user->roles()->attach(7);
+            }
+            if ($request['rol_gestorarchivo']) {
+                $user->roles()->attach(8);
+            }
+            if ($request['rol_gestorpublicacion']) {
+                $user->roles()->attach(9);
+            }
             return redirect()->route('users.index');
         } catch(Exception $e){
             return "Fatal error -".$e->getMessage();
@@ -76,6 +91,21 @@ class UserController extends Controller
         }
         if ($request['rol_abogado']) {
             $user->roles()->attach(4);
+        }
+        if ($request['rol_gestorcontratacion']) {
+            $user->roles()->attach(5);
+        }
+        if ($request['rol_gestornotificacion']) {
+            $user->roles()->attach(6);
+        }
+        if ($request['rol_gestorafiliacion']) {
+            $user->roles()->attach(7);
+        }
+        if ($request['rol_gestorarchivo']) {
+            $user->roles()->attach(8);
+        }
+        if ($request['rol_gestorpublicacion']) {
+            $user->roles()->attach(9);
         }
         return redirect()->route('users.index');
     }

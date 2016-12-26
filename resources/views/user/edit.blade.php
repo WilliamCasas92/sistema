@@ -32,22 +32,21 @@
                 <label><input type="checkbox" {{ $user->hasRol('Abogado') ? 'checked':''}} name="rol_abogado" value="4">Abogado</label>
             </div>
             <div class="checkbox">
-                <label><input type="checkbox" name="rols[]" value="5" disabled>Gestor de Contratación</label>
+                <label><input type="checkbox" {{ $user->hasRol('Gestor de contratación') ? 'checked':''}} name="rol_gestorcontratacion" value="5">Gestor de Contratación</label>
             </div>
             <div class="checkbox">
-                <label><input type="checkbox" name="rols[]" value="6" disabled>Gestor de Notificación</label>
+                <label><input type="checkbox" {{ $user->hasRol('Gestor de notificación') ? 'checked':''}} name="rol_gestornotificacion" value="6">Gestor de Notificación</label>
             </div>
             <div class="checkbox">
-                <label><input type="checkbox" name="rols[]" value="7" disabled>Gestor de Afiliación</label>
+                <label><input type="checkbox" {{ $user->hasRol('Gestor de afiliación') ? 'checked':''}} name="rol_gestorafiliacion" value="7">Gestor de Afiliación</label>
             </div>
             <div class="checkbox">
-                <label><input type="checkbox" name="rols[]" value="8" disabled>Gestor de Archivo</label>
+                <label><input type="checkbox" {{ $user->hasRol('Gestor de archivo') ? 'checked':''}} name="rol_gestorarchivo" value="8">Gestor de Archivo</label>
             </div>
             <div class="checkbox">
-                <label><input type="checkbox" name="rols[]" value="9" disabled>Gestor de Publicación</label>
+                <label><input type="checkbox" {{ $user->hasRol('Gestor de publicación') ? 'checked':''}} name="rol_gestorpublicacion" value="9">Gestor de Publicación</label>
             </div>
         </div>
-
         <button type="submit" class="btn btn-default">Actualizar</button>
     </form>
 </div>
