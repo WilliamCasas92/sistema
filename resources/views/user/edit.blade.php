@@ -20,31 +20,31 @@
         <div class="form-group">
             <label for="InputRoles">Roles</label>
             <div class="checkbox">
-                <label><input type="checkbox" name="administrador" value="">Administrador</label>
+                <label><input type="checkbox" {{ $user->hasRol('Administrador') ? 'checked':''}} name="rol_admin" value="1">Administrador</label>
             </div>
             <div class="checkbox">
-                <label><input type="checkbox" name="coordinador" value="">Coordinador</label>
+                <label><input type="checkbox" {{ $user->hasRol('Coordinador') ? 'checked':''}} name="rol_coordinador" value="2">Coordinador</label>
             </div>
             <div class="checkbox">
-                <label><input type="checkbox" name="secretario" value="">Secretario</label>
+                <label><input type="checkbox" {{ $user->hasRol('Secretario') ? 'checked':''}} name="rol_secretario" value="3">Secretario</label>
             </div>
             <div class="checkbox">
-                <label><input type="checkbox" name="abogado" value="">Abogado</label>
+                <label><input type="checkbox" {{ $user->hasRol('Abogado') ? 'checked':''}} name="rol_abogado" value="4">Abogado</label>
             </div>
             <div class="checkbox">
-                <label><input type="checkbox" name="gestorcontratacion" value="">Gestor de Contratación</label>
+                <label><input type="checkbox" name="rols[]" value="5" disabled>Gestor de Contratación</label>
             </div>
             <div class="checkbox">
-                <label><input type="checkbox" name="gestornotificacion" value="">Gestor de Notificación</label>
+                <label><input type="checkbox" name="rols[]" value="6" disabled>Gestor de Notificación</label>
             </div>
             <div class="checkbox">
-                <label><input type="checkbox" name="gestorafiliacion" value="">Gestor de Afiliación</label>
+                <label><input type="checkbox" name="rols[]" value="7" disabled>Gestor de Afiliación</label>
             </div>
             <div class="checkbox">
-                <label><input type="checkbox" name="gestorarchivo" value="">Gestor de Archivo</label>
+                <label><input type="checkbox" name="rols[]" value="8" disabled>Gestor de Archivo</label>
             </div>
             <div class="checkbox">
-                <label><input type="checkbox" name="gestorpublicacion" value="">Gestor de Publicación</label>
+                <label><input type="checkbox" name="rols[]" value="9" disabled>Gestor de Publicación</label>
             </div>
         </div>
 

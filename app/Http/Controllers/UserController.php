@@ -30,7 +30,18 @@ class UserController extends Controller
             $user->apellidos    = $request->apellidos;
             $user->email        = $request->email;
             $user->save();
-            //$user->roles()->attach(1);
+            if ($request['rol_admin']){
+                $user->roles()->attach(1);
+            }
+            if ($request['rol_coordinador']){
+                $user->roles()->attach(2);
+            }
+            if ($request['rol_secretario']){
+                $user->roles()->attach(3);
+            }
+            if ($request['rol_abogado']) {
+                $user->roles()->attach(4);
+            }
             return redirect()->route('users.index');
         } catch(Exception $e){
             return "Fatal error -".$e->getMessage();
@@ -53,6 +64,19 @@ class UserController extends Controller
         $user->apellidos    = $request->apellidos;
         $user->email    = $request->email;
         $user->save();
+        $user->roles()->detach();
+        if ($request['rol_admin']){
+            $user->roles()->attach(1);
+        }
+        if ($request['rol_coordinador']){
+            $user->roles()->attach(2);
+        }
+        if ($request['rol_secretario']){
+            $user->roles()->attach(3);
+        }
+        if ($request['rol_abogado']) {
+            $user->roles()->attach(4);
+        }
         return redirect()->route('users.index');
     }
 
@@ -60,6 +84,7 @@ class UserController extends Controller
     {
         try{
             $user = User::findOrFail($id);
+            $user->roles()->detach();
             $user->delete();
             return redirect()->route('users.index');
         } catch(Exception $e){

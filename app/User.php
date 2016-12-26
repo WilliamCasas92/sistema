@@ -14,6 +14,30 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Rol', 'user_rol', 'user_id', 'rol_id');
     }
 
+    public function hasAnyRol($roles)
+    {
+        if (is_array($roles)){
+            foreach ($roles as $rol){
+                if ($this->hasRol($rol)){
+                    return true;
+                }
+            }
+        }else{
+            if ($this->hasRol($roles)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function hasRol($rol)
+    {
+        if ($this->roles()->where('nombre', $rol)->first()){
+            return true;
+        }
+        return false;
+    }
+
     protected $fillable = [
         'nombre', 'apellidos', 'email',
     ];
@@ -21,4 +45,5 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
 }
