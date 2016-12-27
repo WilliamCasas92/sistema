@@ -11,15 +11,17 @@
 |
 */
 
+//Ruta Login
 Route::get('/', function () {
     return view('welcome');
 });
-
+//Ruta Home
+Route::get('home', function () {
+    return view('home');
+});
 //Rutas Usuarios
 Route::resource('users', 'UserController');
-
 //Rutas Google
 Route::get('social/google', 'SocialController@getSocialAuth');
 Route::get('social/callback/google', 'SocialController@getSocialAuthCallback');
-//Rutas Middleware
-Route::get('/home', function(){});
+

@@ -1,3 +1,5 @@
+@extends('master')
+@section('edituser')
 <div class="container">
     <h1>Crear usuario</h1>
     <h4><a href="{{route('users.index')}}">Ver Usuarios</a></h4>
@@ -50,3 +52,4 @@
         <button type="submit" class="btn btn-default">Actualizar</button>
     </form>
 </div>
+@endsection

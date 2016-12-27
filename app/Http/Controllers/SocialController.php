@@ -36,10 +36,9 @@ class SocialController extends Controller {
                       Auth::login($registro);
                       return ('home');
                   }
-                  return ('No existe ningun usuario en el sistema con este correo');
+                  return ('No existe ningun usuario en el sistema con el email ingresado.');
               }else {
-
-                  return 'ingreso con un correo que no pertenece a la intitución';
+                  return 'Usted esta ingresando con un correo que no pertenece a la intitución.';
               }
        }
 }
