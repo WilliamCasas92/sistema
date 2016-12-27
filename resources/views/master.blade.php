@@ -17,7 +17,7 @@
             <div class="col-md-3">
                 <img src="{{asset('images/logo-institucion-300dpi-blanco-05.png')}}" width='350' height='70'>
             </div>
-            <div align="center" class="col-md-7">
+            <div align="center" class="col-md-6">
                 <h1>Sistema de gestión para procesos contractuales</h1>
             </div>
             <div align="left">
@@ -44,23 +44,25 @@
 <body>
 <!-- Vistas -->
 <div class="panel-body">
-    <div class="col-md-2 navbar">
-        <div class="list-group">
-            <li class="list-group-item"><h2>
-                    <span class="glyphicon glyphicon-menu-hamburger"></span>Opciones</h2></li>
-            <a href="{{ url('') }}" class="list-group-item list-group-item-success active">
-                <span class=""></span> Opción 1</a>
-            <a href="{{ url('') }}" class="list-group-item list-group-item-success">
-                <span class=""></span> Opción 2</a>
-            <a href="{{ url('') }}" class="list-group-item list-group-item-success">
-                <span class=""></span> Opción 3</a>
+    <div class="row">
+        <div class="col-md-2 navbar">
+            <div class="list-group">
+                <li class="list-group-item"><h2>
+                        <span class="glyphicon glyphicon-menu-hamburger"></span>Opciones</h2></li>
+                <a href="{{ url('') }}" class="list-group-item list-group-item-success active">
+                    <span class=""></span> Opción 1</a>
+                <a href="{{ url('') }}" class="list-group-item list-group-item-success">
+                    <span class=""></span> Opción 2</a>
+                <a href="{{ url('') }}" class="list-group-item list-group-item-success">
+                    <span class=""></span> Opción 3</a>
+            </div>
         </div>
-    </div>
-    <div class="col-md-10">
-        @yield("homecontent")
-        @yield("createuser")
-        @yield("indexuser")
-        @yield("edituser")
+        <div class="col-md-10">
+            @yield("homecontent")
+            @yield("createuser")
+            @yield("indexuser")
+            @yield("edituser")
+        </div>
     </div>
 </div>
 <!-- JS -->
