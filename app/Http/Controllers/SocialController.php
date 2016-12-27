@@ -34,7 +34,8 @@ class SocialController extends Controller {
               {
                   if($registro = User::select()->where('email','=', $user->email)->first()){
                       Auth::login($registro);
-                      return ('home');
+                      //return ('home');
+                      //return view('home', compact('registro'));
                   }
                   return ('No existe ningun usuario en el sistema con el email ingresado.');
               }else {
