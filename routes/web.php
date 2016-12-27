@@ -19,5 +19,9 @@ Route::get('/', function () {
 Route::resource('users', 'UserController');
 
 //Rutas Google
-Route::get('social/{provider?}', 'SocialController@getSocialAuth');
-Route::get('social/callback/{provider?}', 'SocialController@getSocialAuthCallback');
+Route::get('social/google', 'SocialController@getSocialAuth');
+Route::get('social/callback/google', 'SocialController@getSocialAuthCallback');
+//Rutas Middleware
+Route::get('/home', function(){
+
+})->middleware('home');

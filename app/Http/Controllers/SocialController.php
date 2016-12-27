@@ -12,23 +12,31 @@ class SocialController extends Controller {
     public function __construct(){
      $this->middleware('guest');
     }
+    public function redirectToProvider()
+    {
+        return Socialite::driver('google')->redirect();
+    }
 
-       public function getSocialAuth($provider=null)
+       public function getSocialAuth()
        {
-           if(!config("services.$provider")) abort('404');
+           if(!config("services.google")) abort('404');
 
-           return Socialite::driver($provider)->redirect();
+           return Socialite::driver('google')->redirect();
        }
 
 
-       public function getSocialAuthCallback($provider=null)
+       public function getSocialAuthCallback()
        {
-          $user = Socialite::driver($provider)->user();
+          $user = Socialite::driver('google')->user();
               $email=$user->email;
               $domain = explode('@', $email);
               if(strcmp($domain[1],'elpoli.edu.co')==0)
               {
-                  return 'bienvenido estudiante del politecnico Jaime isaza Cadavid';
+                  if($registro = User::select()->where('email','=', $user->email)->first()){
+                      Auth::login($registro);
+                      return ('home');
+                  }
+                  return ('No existe ningun usuario en el sistema con este correo');
               }else {
 
                   return 'ingreso con un correo que no pertenece a la intitución';
