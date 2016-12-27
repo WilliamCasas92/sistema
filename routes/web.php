@@ -22,6 +22,4 @@ Route::resource('users', 'UserController');
 Route::get('social/google', 'SocialController@getSocialAuth');
 Route::get('social/callback/google', 'SocialController@getSocialAuthCallback');
 //Rutas Middleware
-Route::get('/home', function(){
-
-})->middleware('home');
+Route::get('/home', function(){});
