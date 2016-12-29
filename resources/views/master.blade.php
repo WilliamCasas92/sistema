@@ -23,8 +23,13 @@
             <div align="left">
                 <div class="col-md-2">
                     <h4>Conectado como</h4>
-                    <h5>Aca va el usuario conectado</h5>
-                    <h5>nombre completo del usuario</h5>
+                    <h5>{{ Auth::user()->email }}</h5>
+                    <h5>{{ Auth::user()->nombre }} {{ Auth::user()->apellidos }}</h5>
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="{{ Auth::logout() }}" class="btn btn-lg">
+                                <span class="glyphicon "></span> Salir </a></li>
+                    </ul>
+
                 </div>
             </div>
         </div>

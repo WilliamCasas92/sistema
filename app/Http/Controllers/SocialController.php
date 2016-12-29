@@ -34,12 +34,15 @@ class SocialController extends Controller {
               {
                   if($registro = User::select()->where('email','=', $user->email)->first()){
                       Auth::login($registro);
-                      //return ('home');
+                      return redirect('home');
                       //return view('home', compact('registro'));
                   }
                   return ('No existe ningun usuario en el sistema con el email ingresado.');
               }else {
                   return 'Usted esta ingresando con un correo que no pertenece a la intitución.';
               }
+
        }
+
+
 }
