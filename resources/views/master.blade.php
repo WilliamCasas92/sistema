@@ -12,16 +12,16 @@
 </head>
 <header>
     <!-- Header Welcome -->
-    <div class="container-fluid well-sm" style="background-color:rgb(159, 178, 82);">
+    <div class="container-fluid well-md" style="background-color:rgb(159, 178, 82);">
         <div class="row">
             <div class="col-md-3">
                 <img src="{{asset('images/logo-institucion-300dpi-blanco-05.png')}}" width='350' height='70'>
             </div>
-            <div align="center" class="col-md-7">
+            <div align="center" class="col-md-6">
                 <h1>Sistema de gestión para procesos contractuales</h1>
             </div>
             <div align="left">
-                <div class="col-md-2">
+                <div class="col-md-3">
                     <h4>Conectado como</h4>
                     <h5>{{ Auth::user()->email }}</h5>
                     <h5>{{ Auth::user()->nombre }} {{ Auth::user()->apellidos }}</h5>
@@ -51,34 +51,34 @@
 </header>
 <body>
 <!-- Vistas -->
-<div class="panel-body">
-    <div class="row">
-        <div class="col-md-3 navbar">
-            <div class="list-group">
-                <li class="list-group-item"><h2>
-                        <span class="glyphicon glyphicon-menu-hamburger"></span>Opciones</h2></li>
-                <a href="{{ url('home') }}" class="list-group-item list-group-item-success">
-                    <span class=""></span> Home</a>
-                <a href="{{ url('users') }}" class="list-group-item list-group-item-success">
-                    <span class=""></span> Gestión de Usuarios</a>
-                <a href="{{ url('') }}" class="list-group-item list-group-item-success">
-                    <span class=""></span> Opción 3</a>
+    <div class="container-fluid panel-body">
+        <div class="row">
+            <div class="col-md-3 navbar">
+                <div class="list-group">
+                    <li class="list-group-item"><h2>
+                            <span class="glyphicon glyphicon-menu-hamburger"></span>Opciones</h2></li>
+                    <a href="{{ url('home') }}" class="list-group-item list-group-item-success">
+                        <span class=""></span> Home</a>
+                    <a href="{{ url('users') }}" class="list-group-item list-group-item-success">
+                        <span class=""></span> Gestión de Usuarios</a>
+                    <a href="{{ url('tipoproceso') }}" class="list-group-item list-group-item-success">
+                        <span class=""></span> Gestión de Tipos de Proceso de Contratación</a>
+                </div>
+            </div>
+            <div>
+                @yield("homecontent")
+                @yield("createuser")
+                @yield("indexuser")
+                @yield("edituser")
+                @yield("createprocesstype")
+                @yield("indexprocesstype")
+                @yield("editprocesstype")
             </div>
         </div>
-        <div class="col-md-9">
-            @yield("homecontent")
-            @yield("createuser")
-            @yield("indexuser")
-            @yield("edituser")
-            @yield("createprocesstype")
-            @yield("indexprocesstype")
-            @yield("editprocesstype")
-        </div>
     </div>
-</div>
-<!-- JS -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="assets/js/bootstrap.js"></script>
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.js"></script>
 </body>
 <!-- Footer -->
 <footer class="footer container-fluid text-center">

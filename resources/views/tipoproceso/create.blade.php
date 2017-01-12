@@ -1,6 +1,6 @@
 @extends('master')
 @section('createprocesstype')
-    <div class="container">
+    <div class="container col-md-9">
         <div class="panel panel-success">
             <div class="panel-heading"><h3>Crear Nuevo Tipo de Proceso de Contratación</h3></div>
             <div class="panel-body">

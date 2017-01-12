@@ -1,6 +1,6 @@
 @extends('master')
 @section('indexuser')
-    <div class="container">
+    <div class="container col-md-9">
         <div class="panel panel-success">
             <div class="panel-heading"><h3>Usuarios Registrados</h3></div>
             <div class="panel-body">
