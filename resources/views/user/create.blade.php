@@ -24,6 +24,9 @@
                             <input type="email" name="email" class="form-control" placeholder="Email" value="@elpoli.edu.co">
                         </div>
                     </div>
+                    @if(session()->has('msj'))
+                        <div class="alert alert-danger" role="alert">{{ session('msj') }}</div>
+                    @endif
                     <div class="form-group">
                         <label class="control-label col-md-4" for="InputRoles">Seleccione los Roles:</label><br>
                         <div class="col-md-4">
