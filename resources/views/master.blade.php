@@ -17,7 +17,7 @@
             <div class="col-md-3">
                 <img src="{{asset('images/logo-institucion-300dpi-blanco-05.png')}}" width='350' height='70'>
             </div>
-            <div align="center" class="col-md-6">
+            <div align="center" class="col-md-7">
                 <h1>Sistema de gestión para procesos contractuales</h1>
             </div>
             <div align="left">
@@ -25,11 +25,14 @@
                     <h4>Conectado como</h4>
                     <h5>{{ Auth::user()->email }}</h5>
                     <h5>{{ Auth::user()->nombre }} {{ Auth::user()->apellidos }}</h5>
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="{{ Auth::logout() }}" class="btn btn-lg">
-                                <span class="glyphicon "></span> Salir </a></li>
-                    </ul>
-
+                    <a href="{{ url('/logout') }}"
+                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                        Logout
+                    </a>
+                    <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                        {{ csrf_field() }}
+                    </form>
                 </div>
             </div>
         </div>
@@ -41,7 +44,7 @@
                 <li class="active"><a href="{{ url('home') }}" class="btn btn-lg">
                         <span class="glyphicon glyphicon-home"></span> Home</a></li>
                 <li><a href="#" class="btn btn-lg" >
-                        <span class="glyphicon glyphicon-info-sign"></span> Acerca</a></li>
+                        <span class="glyphicon glyphicon-info-sign disabledsqdwcev"></span> Acerca</a></li>
             </ul>
         </div>
     </nav>
@@ -50,19 +53,19 @@
 <!-- Vistas -->
 <div class="panel-body">
     <div class="row">
-        <div class="col-md-2 navbar">
+        <div class="col-md-3 navbar">
             <div class="list-group">
                 <li class="list-group-item"><h2>
                         <span class="glyphicon glyphicon-menu-hamburger"></span>Opciones</h2></li>
-                <a href="{{ url('') }}" class="list-group-item list-group-item-success active">
-                    <span class=""></span> Opción 1</a>
-                <a href="{{ url('') }}" class="list-group-item list-group-item-success">
-                    <span class=""></span> Opción 2</a>
+                <a href="{{ url('home') }}" class="list-group-item list-group-item-success">
+                    <span class=""></span> Home</a>
+                <a href="{{ url('users') }}" class="list-group-item list-group-item-success">
+                    <span class=""></span> Gestión de Usuarios</a>
                 <a href="{{ url('') }}" class="list-group-item list-group-item-success">
                     <span class=""></span> Opción 3</a>
             </div>
         </div>
-        <div class="col-md-10">
+        <div class="col-md-9">
             @yield("homecontent")
             @yield("createuser")
             @yield("indexuser")

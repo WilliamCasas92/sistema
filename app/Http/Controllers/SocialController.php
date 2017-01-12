@@ -24,7 +24,6 @@ class SocialController extends Controller {
            return Socialite::driver('google')->redirect();
        }
 
-
        public function getSocialAuthCallback()
        {
           $user = Socialite::driver('google')->user();
@@ -41,8 +40,5 @@ class SocialController extends Controller {
               }else {
                   return 'Usted esta ingresando con un correo que no pertenece a la intitución.';
               }
-
        }
-
-
 }
