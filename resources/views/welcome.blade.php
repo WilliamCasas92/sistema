@@ -9,7 +9,7 @@
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
     </head>
     <body>
-    <form action="{{ url('social/google') }}">
+    <form action="{{ urcxdl('social/google') }}">
         <div class="container-fluid text-center">
             <img src="images/logo-institucion-300dpi-02.png" width='700' height='150'><br><br>
             <h1>Bienvenido al Sistema de gestión para procesos contractuales</h1>

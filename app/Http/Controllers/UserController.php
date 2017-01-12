@@ -29,7 +29,13 @@ class UserController extends Controller
             $user->nombre       = $request->nombre;
             $user->apellidos    = $request->apellidos;
             $user->email        = $request->email;
-            $user->save();
+            if(User::select()->where('email','=', $user->email)->first())
+            {
+
+            }else{
+                $user->save();
+            }
+
             if ($request['rol_admin']){
                 $user->roles()->attach(1);
             }
