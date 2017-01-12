@@ -30,7 +30,7 @@ class UserController extends Controller
             $user->apellidos    = $request->apellidos;
             $user->email        = $request->email;
             if(User::select()->where('email','=', $user->email)->first()) {
-                return back()->with('msj', 'el correo que intenta ingresar ya existe en el sistema');
+                return back()->with('msj', 'El correo que intenta ingresar ya existe en el sistema.');
             }
             $user->save();
 

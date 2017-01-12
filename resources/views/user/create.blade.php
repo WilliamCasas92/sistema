@@ -1,5 +1,5 @@
 @extends('master')
-@section('indexuser')
+@section('createuser')
     <div class="container">
         <div class="panel panel-success">
             <div class="panel-heading"><h3>Registrar Nuevo Usuario</h3></div>

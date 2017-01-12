@@ -70,6 +70,9 @@
             @yield("createuser")
             @yield("indexuser")
             @yield("edituser")
+            @yield("createprocesstype")
+            @yield("indexprocesstype")
+            @yield("editprocesstype")
         </div>
     </div>
 </div>

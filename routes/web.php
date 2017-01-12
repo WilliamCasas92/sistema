@@ -11,12 +11,11 @@
 |
 */
 
-//Ruta Login
+//Ruta Inicio
 Route::get('/', function () {
     return view('welcome');
 });
-//Ruta Logout
-Route::get('logout','Auth\LoginController@getLogout');
+
 //Ruta Home
 Route::get('home', function () {
     return view('home');
@@ -27,7 +26,10 @@ Route::resource('users', 'UserController');
 Route::get('social/google', 'SocialController@getSocialAuth');
 Route::get('social/callback/google', 'SocialController@getSocialAuthCallback');
 
-
+//Rutas LogIn LogOut
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+//Rutas TipoProceso
+Route::resource('tipoproceso', 'TipoProcesoController');
