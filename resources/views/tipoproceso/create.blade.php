@@ -73,6 +73,9 @@
                                                 "</div>" +
                                             "</div>" +
                                         "</div>" +
+                                        "<div><input id='btnAddDato" + count + "' type='button' value='Añadir Dato' class='btn btn-success'><br><div id='datos" + count + "'> </div><br></div>" +
+                                        "<div><input id='btnAddDatoPredeterminado" + count + "' type='button' value='Añadir Dato Predeterminado' class='btn btn-success'><br><br></div>" +
+                                        "<div><input id='btnAddCheckBox" + count + "' type='button' value='Añadir Dato CheckBox' class='btn btn-success'><br><br></div>" +
                                     "</div>" +
                                 "</div>" +
                             "</div>");
@@ -89,6 +92,13 @@
                 }
             });
         });
+
+        $(document).ready(function(){
+            $("#btnAddDato1").click(function(){
+                $("#datos1").append(" <b>Appended text</b>.");
+            });
+        });
+
 
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
