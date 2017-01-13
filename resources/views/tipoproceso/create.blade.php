@@ -12,11 +12,8 @@
                             <input type="text" name="nombre" class="form-control" placeholder="Tipo de Proceso - Versión - Año">
                         </div>
                     </div>
-                    @if(session()->has('msj'))
-                        <div class="alert alert-danger" role="alert">{{ session('msj') }}</div>
-                    @endif
                     <div class="form-group">
-                        <label class="control-label col-md-4" for="InputActivo">Determine el estado del Tipo de Proceso:</label><br>
+                        <label class="control-label col-md-4" for="InputActivo">Determine el estado del Tipo de Proceso:</label>
                         <div class="col-md-4">
                             <div class="checkbox">
                                 <label><input type="checkbox" checked="checked" name="activo" value="1">Activo</label>
@@ -24,11 +21,16 @@
                         </div>
                     </div><br>
                     <div >
-                        <input id="btn1" type="button" value="Añadir Etapa" class="btn btn-success">
+                        <input id="btnAddEtapa" type="button" value="Añadir Etapa" class="btn btn-success">
+                        <input id="btnRemoveEtapa" type="button" value="Eliminar Etapa" class="btn btn-danger">
                     </div><br>
-                    <div id="etapa">
-                        <!-- En este div se estan creando las estapas del proceso-->
+
+                    <div class="panel-group" id="accordion">
+                        <div id="etapas">
+                            <!-- En este div se estan creando las estapas del proceso-->
+                        </div>
                     </div>
+
                     <form class="form-inline">
                         <div align="center">
                             <button type="submit" class="btn btn-default">Crear Tipo de Proceso de Contratación</button>
@@ -44,31 +46,50 @@
 @section('Myscripts')
     <script>
 
-        function añadirEtapa() {
-            var lblNombre= $("<label></label>").text("Nombre Etapa");
-            var inputNombre=$("<input></input>");
-            $("body").append(lblNombre, inputNombre);
-        }
         var count=0;
         $(document).ready(function () {
-            $('#btn1').click(function () {
+            $('#btnAddEtapa').click(function () {
                 count+=1;
-                $("#etapa").append("" +
-                    "<div class='form-group'>" +
-                        "<div class='panel-group' id='accordion'>" +
-                            "<div class='panel panel-default'>" +
+                $("#etapas").append("" +
+                            "<div id='etapa" + count + "' class='panel panel-default'>" +
                                 "<div class='panel-heading'>" +
                                     "<h4 class='panel-title'>" +
                                         "<a data-toggle='collapse' data-parent='#accordion' href='#collapse" + count + "'>Etapa " + count + "</a>" +
-                                "</h4></div>" +
-                                "<div id='collapse" + count + "' class='panel-collapse collapse in'>" +
+                                    "</h4>" +
+                                "</div>" +
+                                "<div id='collapse" + count + "' class='panel-collapse collapse'>" +
                                     "<div class='panel-body'>" +
-                                        "<label class='control-label col-md-4' for='InputNameEtapa'>Nombre de la Etapa:</label>" +
-                                        "<div class='col-md-4'>" +
-                                        "<input type='text' name='nombreEtapa" + count + "' class='form-control' placeholder='Nombre de la Etapa'>" +
-                    "</div></div></div></div></div></div>");
+                                        "<div class='form-group'>" +
+                                            "<label class='control-label col-md-4' for='InputNameEtapa'>Nombre de la Etapa:</label>" +
+                                            "<div class='col-md-4'>" +
+                                            "<input type='text' name='nombreEtapa" + count + "' class='form-control' placeholder='Nombre de la Etapa'>" +
+                                            "</div>" +
+                                        "</div>" +
+                                        "<div class='form-group'>" +
+                                            "<label class='control-label col-md-4' for='InputDocuemtnos'>Permitir añadir documentos:</label>" +
+                                            "<div class='col-md-4'>" +
+                                                "<div class='checkbox'>" +
+                                                    "<label><input type='checkbox' checked='checked' name='addDocumentos" + count + "' value='1'>Activo</label>" +
+                                                "</div>" +
+                                            "</div>" +
+                                        "</div>" +
+                                    "</div>" +
+                                "</div>" +
+                            "</div>");
             });
         });
+
+        $(document).ready(function(){
+            $("#btnRemoveEtapa").click(function(){
+                $("#etapa" + count + "").remove();
+                if (count > 0){
+                    count-=1;
+                } else{
+                    alert("No existen Etapas para eliminar.");
+                }
+            });
+        });
+
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
