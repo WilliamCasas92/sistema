@@ -8,6 +8,7 @@
     <link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <script src="js/jquery-3.1.1.js" type="text/javascript"></script>
     <title>Sistema Contratación</title>
 </head>
 <header>
@@ -28,7 +29,7 @@
                     <a href="{{ url('/logout') }}"
                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                        Logout
+                        Salir
                     </a>
                     <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                         {{ csrf_field() }}
@@ -79,6 +80,8 @@
     <!-- JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="assets/js/bootstrap.js"></script>
+    <script src="js/jquery-3.1.1.js" type="text/javascript"></script>
+    @yield('Myscripts')
 </body>
 <!-- Footer -->
 <footer class="footer container-fluid text-center">

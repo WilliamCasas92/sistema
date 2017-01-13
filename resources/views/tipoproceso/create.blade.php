@@ -23,6 +23,12 @@
                             </div>
                         </div>
                     </div><br>
+                    <div >
+                        <input id="btn1" type="button" value="Añadir Etapa" class="btn btn-success">
+                    </div><br>
+                    <div id="etapa">
+                        <!-- En este div se estan creando las estapas del proceso-->
+                    </div>
                     <form class="form-inline">
                         <div align="center">
                             <button type="submit" class="btn btn-default">Crear Tipo de Proceso de Contratación</button>
@@ -33,4 +39,37 @@
         </div>
         <h4><a class="btn btn-default" href="{{route('tipoproceso.index')}}">Volver a la lista de Tipos de Procesos</a></h4>
     </div>
+@endsection
+
+@section('Myscripts')
+    <script>
+
+        function añadirEtapa() {
+            var lblNombre= $("<label></label>").text("Nombre Etapa");
+            var inputNombre=$("<input></input>");
+            $("body").append(lblNombre, inputNombre);
+        }
+        var count=0;
+        $(document).ready(function () {
+            $('#btn1').click(function () {
+                count+=1;
+                $("#etapa").append("" +
+                    "<div class='form-group'>" +
+                        "<div class='panel-group' id='accordion'>" +
+                            "<div class='panel panel-default'>" +
+                                "<div class='panel-heading'>" +
+                                    "<h4 class='panel-title'>" +
+                                        "<a data-toggle='collapse' data-parent='#accordion' href='#collapse" + count + "'>Etapa " + count + "</a>" +
+                                "</h4></div>" +
+                                "<div id='collapse" + count + "' class='panel-collapse collapse in'>" +
+                                    "<div class='panel-body'>" +
+                                        "<label class='control-label col-md-4' for='InputNameEtapa'>Nombre de la Etapa:</label>" +
+                                        "<div class='col-md-4'>" +
+                                        "<input type='text' name='nombreEtapa" + count + "' class='form-control' placeholder='Nombre de la Etapa'>" +
+                    "</div></div></div></div></div></div>");
+            });
+        });
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 @endsection
