@@ -19,7 +19,7 @@
                         <label class="control-label col-md-4" for="InputActivo">Determine el estado del Tipo de Proceso:</label><br>
                         <div class="col-md-4">
                             <div class="checkbox">
-                                <label><input type="checkbox" name="activo" value="1">Activo</label>
+                                <label><input type="checkbox" checked="checked" name="activo" value="1">Activo</label>
                             </div>
                         </div>
                     </div><br>

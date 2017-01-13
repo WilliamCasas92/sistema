@@ -21,7 +21,22 @@ class TipoProcesoController extends Controller
 
     public function store(Request $request)
     {
-        //
+        try{
+            $tipoproceso = new TipoProceso();
+            $tipoproceso->nombre       = $request->nombre;
+            if(TipoProceso::select()->where('nombre','=', $tipoproceso->nombre)->first()) {
+                return back()->with('msj', 'El nombre que intenta ingresar ya existe en el sistema.');
+            }
+            if ($request['activo']){
+                $tipoproceso->activo       = $request->activo;
+            } else {
+                $tipoproceso->activo       ='0';
+            }
+            $tipoproceso->save();
+            return redirect()->route('tipoproceso.index');
+        } catch(Exception $e){
+            return "Fatal error -".$e->getMessage();
+        }
     }
 
     public function show($id)
@@ -31,16 +46,31 @@ class TipoProcesoController extends Controller
 
     public function edit($id)
     {
-        //
+        $tipoproceso = TipoProceso::findOrFail($id);
+        return view($this->path.'.edit', compact('tipoproceso'));
     }
 
     public function update(Request $request, $id)
     {
-        //
+        $tipoproceso = TipoProceso::findOrFail($id);
+        $tipoproceso->nombre       = $request->nombre;
+        if ($request['activo']){
+            $tipoproceso->activo       = $request->activo;
+        } else {
+            $tipoproceso->activo       ='0';
+        }
+        $tipoproceso->save();
+        return redirect()->route('tipoproceso.index');
     }
 
     public function destroy($id)
     {
-        //
+        try{
+            $tipoproceso = TipoProceso::findOrFail($id);
+            $tipoproceso->delete();
+            return redirect()->route('tipoproceso.index');
+        } catch(Exception $e){
+            return "Fatal error -".$e->getMessage();
+        }
     }
 }
