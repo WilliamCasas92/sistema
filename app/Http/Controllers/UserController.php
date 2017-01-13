@@ -82,6 +82,11 @@ class UserController extends Controller
         $user->nombre       = $request->nombre;
         $user->apellidos    = $request->apellidos;
         $user->email    = $request->email;
+        if($userAux=User::select()->where('email','=', $user->email)->first()) {
+            if ($user->id <> $userAux->id) {
+                return back()->with('msj', 'El correo que intenta ingresar ya existe en el sistema.');
+            }
+        }
         $user->save();
         $user->roles()->detach();
         if ($request['rol_admin']){
