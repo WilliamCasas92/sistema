@@ -1,5 +1,10 @@
 @extends('master')
 @section('indexuser')
+    @if (session('addUser'))
+        <div class="alert alert-success">
+            {{ session('addUser') }}
+        </div>
+    @endif
     <div class="container col-md-9">
         <div class="panel panel-success">
             <div class="panel-heading"><h3>Usuarios Registrados</h3></div>

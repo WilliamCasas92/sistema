@@ -1,5 +1,10 @@
 @extends('master')
 @section('edituser')
+    @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
     <div class="container col-md-9">
         <div class="panel panel-success">
             <div class="panel-heading"><h3>Editar Usuario</h3></div>

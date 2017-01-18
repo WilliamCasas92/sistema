@@ -30,7 +30,7 @@ class UserController extends Controller
             $user->apellidos    = $request->apellidos;
             $user->email        = $request->email;
             if(User::select()->where('email','=', $user->email)->first()) {
-                return back()->with('msj', 'El correo que intenta ingresar ya existe en el sistema.');
+                return back()->with('error', 'El correo que intenta ingresar ya existe en el sistema.');
             }
             $user->save();
 
@@ -61,7 +61,7 @@ class UserController extends Controller
             if ($request['rol_gestorpublicacion']) {
                 $user->roles()->attach(9);
             }
-            return redirect()->route('users.index');
+            return redirect()->route('users.index')->with('add', 'El usuario fue agregado con exito.');
         } catch(Exception $e){
             return "Fatal error -".$e->getMessage();
         }
@@ -84,7 +84,8 @@ class UserController extends Controller
         $user->email    = $request->email;
         if($userAux=User::select()->where('email','=', $user->email)->first()) {
             if ($user->id <> $userAux->id) {
-                return back()->with('msj', 'El correo que intenta ingresar ya existe en el sistema.');
+                Alert::message('El usuario ya existe en el sistema', 'danger');
+                return back()->with('error', 'El correo que intenta ingresar ya existe en el sistema.');
             }
         }
         $user->save();
@@ -116,7 +117,7 @@ class UserController extends Controller
         if ($request['rol_gestorpublicacion']) {
             $user->roles()->attach(9);
         }
-        return redirect()->route('users.index');
+        return redirect()->route('users.index')->with('add', 'El usuario fue actulizado con exito.');
     }
 
     public function destroy($id)

@@ -13,6 +13,7 @@
                             <thead>
                             <tr>
                                 <th class="text-center">Nombre</th>
+                                <th class="text-center">Activo</th>
                                 <th class="text-center">Fecha de creación</th>
                                 <th class="text-center"></th>
                             </tr>
@@ -21,6 +22,7 @@
                             @foreach($data as $row)
                                 <tr>
                                     <td class="text-center">{{ $row->nombre }}</td>
+                                    <td class="text-center">{{ $row->activo }}</td>
                                     <td class="text-center">{{ $row->created_at }}</td>
                                     <td class="text-center">
                                         <a href="{{ route('tipoproceso.edit', $row->id) }}" class="btn btn-info btn-xs">Editar</a>
@@ -29,6 +31,7 @@
                                             <input name="_token" type="hidden"  value="{{ csrf_token() }}">
                                             <button type="submit" class="btn btn-danger btn-xs">Eliminar</button>
                                         </form>
+                                        <a href="{{ route('etapa.create') }}" class="btn btn-success btn-xs">Gestionar Etapas</a>
                                     </td>
                                 </tr>
                             </tbody>

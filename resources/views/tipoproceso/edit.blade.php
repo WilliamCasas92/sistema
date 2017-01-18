@@ -20,7 +20,7 @@
                                 <label><input type="checkbox" {{ $tipoproceso->activo ? 'checked':''}} name="activo" value="1">Activo</label>
                             </div>
                         </div>
-                    </div><br>
+                    </div>
                     <form class="form-inline">
                         <div align="center">
                             <button type="submit" class="btn btn-default">Actualizar</button>

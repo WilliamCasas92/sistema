@@ -33,3 +33,5 @@ Route::get('/home', 'HomeController@index');
 
 //Rutas TipoProceso
 Route::resource('tipoproceso', 'TipoProcesoController');
+//Rutas Etapa
+Route::resource('etapa', 'EtapaController');

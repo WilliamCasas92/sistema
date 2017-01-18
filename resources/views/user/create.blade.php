@@ -1,5 +1,10 @@
 @extends('master')
 @section('createuser')
+    @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
     <div class="container col-md-9">
         <div class="panel panel-success">
             <div class="panel-heading"><h3>Registrar Nuevo Usuario</h3></div>
