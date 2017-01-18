@@ -17,6 +17,8 @@ class CreateEtapasTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->string('nombre');
+            $table->integer('tipo_procesos_id')->unsigned();
+            $table->foreign('tipo_procesos_id')->references('id')->on('tipo_procesos');
         });
     }
 

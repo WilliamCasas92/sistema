@@ -15,19 +15,19 @@
                     <div class="form-group">
                         <label class="control-label col-md-4" for="InputName">Nombres:</label>
                         <div class="col-md-4">
-                            <input type="text" name="nombre" class="form-control" placeholder="Nombres" value="{{ $user->nombre }}">
+                            <input type="text" name="nombre" class="form-control" placeholder="Nombres" value="{{ $user->nombre }}" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-4" for="InputApellidos">Apellidos:</label>
                         <div class="col-md-4">
-                            <input type="text" name="apellidos" class="form-control" placeholder="Apellidos" value="{{ $user->apellidos }}">
+                            <input type="text" name="apellidos" class="form-control" placeholder="Apellidos" value="{{ $user->apellidos }}" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-4" for="InputEmail">Correo electronico institucional:</label>
                         <div class="col-md-4">
-                            <input type="email" name="email" class="form-control" placeholder="Email" value="{{ $user->email }}">
+                            <input type="email" name="email" class="form-control" placeholder="Email" value="{{ $user->email }}" required>
                         </div>
                     </div>
                     <div class="form-group">

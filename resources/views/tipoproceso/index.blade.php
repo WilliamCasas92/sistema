@@ -31,7 +31,7 @@
                                             <input name="_token" type="hidden"  value="{{ csrf_token() }}">
                                             <button type="submit" class="btn btn-danger btn-xs">Eliminar</button>
                                         </form>
-                                        <a href="{{ route('etapa.create') }}" class="btn btn-success btn-xs">Gestionar Etapas</a>
+                                        <a href="{{ route('etapa.edit', $row, 'row') }}" class="btn btn-success btn-xs">Gestionar Etapas</a>
                                     </td>
                                 </tr>
                             </tbody>

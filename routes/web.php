@@ -33,5 +33,16 @@ Route::get('/home', 'HomeController@index');
 
 //Rutas TipoProceso
 Route::resource('tipoproceso', 'TipoProcesoController');
+
 //Rutas Etapa
 Route::resource('etapa', 'EtapaController');
+
+
+//ejemplo
+Route::get('test1', function (){
+    $etapas=App\Etapa::all();
+    foreach ($etapas as $etapa){
+        //$proceso= App\TipoProceso::find($etapa->tipo_procesos_id);
+        echo $etapa->nombre." del proceso: ". $etapa->tipo_procesos->nombre ."<br/>" ;
+    }
+});

@@ -3,6 +3,11 @@
         <h4 class="panel-title">
             <a data-toggle="collapse" href="#collapse<?php echo $data->id ?>">{{ $data->nombre }}</a>
         </h4>
+        <form action="{{ route('etapa.destroy', $data->id) }}" method="post">
+            <input name="_method" type="hidden" value="DELETE">
+            <input name="_token" type="hidden"  value="{{ csrf_token() }}">
+            <button type="submit" class="btn btn-danger btn-xs">Eliminar</button>
+        </form>
     </div>
     <div id="collapse<?php echo $data->id ?>" class="panel-collapse collapse">
         <div class="panel-body">

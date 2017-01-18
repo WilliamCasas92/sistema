@@ -14,19 +14,19 @@
                     <div class="form-group">
                         <label class="control-label col-md-4" for="InputName">Nombres:</label>
                         <div class="col-md-4">
-                            <input type="text" name="nombre" class="form-control" placeholder="Nombres">
+                            <input type="text" name="nombre" class="form-control" placeholder="Nombres" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-4" for="InputApellidos">Apellidos:</label>
                         <div class="col-md-4">
-                            <input type="text" name="apellidos" class="form-control" placeholder="Apellidos">
+                            <input type="text" name="apellidos" class="form-control" placeholder="Apellidos" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-4" for="InputEmail">Correo electronico institucional:</label>
                         <div class="col-md-4">
-                            <input type="email" name="email" class="form-control" placeholder="Email" value="@elpoli.edu.co">
+                            <input type="email" name="email" class="form-control" placeholder="Email" value="@elpoli.edu.co" required>
                         </div>
                     </div>
                     @if(session()->has('msj'))

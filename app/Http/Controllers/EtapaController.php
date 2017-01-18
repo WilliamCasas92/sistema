@@ -17,8 +17,9 @@ class EtapaController extends Controller
 
     public function create()
     {
-        $data=Etapa::all();
-        return view($this->path.'.create', compact('data'));
+        //return view($this->path.'.create', compact('id'));
+        //$data=Etapa::all();
+        //return view($this->path.'.create', compact('data'));
     }
 
 
@@ -27,6 +28,7 @@ class EtapaController extends Controller
         try{
             $etapa = new Etapa();
             $etapa->nombre       = $request->nombre;
+            $etapa->tipo_procesos_id = '2';
             if(Etapa::select()->where('nombre','=', $etapa->nombre)->first()) {
                 return back()->with('msj', 'El nombre que intenta ingresar ya existe en el sistema.');
             }
@@ -39,40 +41,39 @@ class EtapaController extends Controller
 
     public function show($id)
     {
-        //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        $data=Etapa::where('tipo_procesos_id', $id)
+        ->get();
+        return view($this->path.'.edit', compact('data', 'id'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        try{
+            $etapa = new Etapa();
+            $etapa->nombre       = $request->nombre;
+            $etapa->tipo_procesos_id = $id;
+            if(Etapa::select()->where('nombre','=', $etapa->nombre)->first()) {
+                return back()->with('msj', 'El nombre que intenta ingresar ya existe en el sistema.');
+            }
+            $etapa->save();
+            return redirect()->back();
+        } catch(Exception $e){
+            return "Fatal error -".$e->getMessage();
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        try{
+            $etapa = Etapa::findOrFail($id);
+            $etapa->delete();
+            return redirect()->back();
+        } catch(Exception $e){
+            return "Fatal error -".$e->getMessage();
+        }
     }
 }

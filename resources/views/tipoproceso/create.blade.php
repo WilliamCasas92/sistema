@@ -9,7 +9,7 @@
                     <div class="form-group">
                         <label class="control-label col-md-4" for="InputName">Nombre del Tipo de Proceso:</label>
                         <div class="col-md-4">
-                            <input type="text" name="nombre" class="form-control" placeholder="Tipo de Proceso - Versión - Año">
+                            <input type="text" name="nombre" class="form-control" placeholder="Tipo de Proceso - Versión - Año" required>
                         </div>
                     </div>
                     <div class="form-group">

@@ -75,6 +75,7 @@
                 @yield("indexprocesstype")
                 @yield("editprocesstype")
                 @yield("createetapa")
+                @yield("editetapa")
             </div>
         </div>
     </div>
