@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\TipoProceso;
 use App\Etapa;
+use App\Requisito;
 
 class EtapaController extends Controller
 {

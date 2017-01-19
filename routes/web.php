@@ -37,6 +37,13 @@ Route::resource('tipoproceso', 'TipoProcesoController');
 //Rutas Etapa
 Route::resource('etapa', 'EtapaController');
 
+//Rutas Requisitos
+Route::get('requisito/{req1}', ['as'=>'requisito.almacenar','uses'=> 'RequisitoController@almacenar']);
+
+Route::post('requisito/{requisito}', ['as'=>'requisito.guardar','uses'=> 'RequisitoController@guardar']);
+
+Route::resource('requisito', 'RequisitoController');
+
 
 //ejemplo
 Route::get('test1', function (){
