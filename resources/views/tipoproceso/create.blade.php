@@ -27,7 +27,7 @@
                     </form>
                 </form>
             </div>
-        </div>
+        </div>,.
         <h4><a class="btn btn-default" href="{{route('tipoproceso.index')}}">Volver a la lista de Tipos de Procesos</a></h4>
     </div>
 @endsection

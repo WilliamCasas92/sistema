@@ -22,7 +22,7 @@ class EtapaController extends Controller
         //return view($this->path.'.create', compact('data'));
     }
 
-
+    //este metodo aun no funciona como debe ser...
     public function store(Request $request)
     {
         try{
@@ -45,8 +45,7 @@ class EtapaController extends Controller
 
     public function edit($id)
     {
-        $data=Etapa::where('tipo_procesos_id', $id)
-        ->get();
+        $data=Etapa::where('tipo_procesos_id', $id)->get();
         return view($this->path.'.edit', compact('data', 'id'));
     }
 
