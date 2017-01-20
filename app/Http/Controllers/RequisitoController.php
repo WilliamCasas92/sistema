@@ -33,17 +33,35 @@ class RequisitoController extends Controller
 
     public function edit($id)
     {
-        //
+        $requsito = Requisito::findOrFail($id);
+        return view($this->path.'.edit', compact('requsito'));
     }
 
     public function update(Request $request, $id)
     {
-        //
+        $requsito = Requisito::findOrFail($id);
+        $requsito->nombre       = $request->nombre;
+        $requsito->etapas_id    =$id;
+        $requsito->tipo_requisitos_id =$request->tiporequisito;
+        if ($request['obligatorio']){
+            $requsito->obligatorio       = $request->obligatorio;
+        } else {
+            $requsito->obligatorio       ='0';
+        }
+        $requsito->save();
+        return redirect()->back();
+
     }
 
     public function destroy($id)
     {
-        //
+        try{
+            $requsito = Requisito::findOrFail($id);
+            $requsito->delete();
+            return redirect()->back();
+        } catch(Exception $e){
+            return "Fatal error -".$e->getMessage();
+        }
     }
 
     public function almacenar($id)
@@ -57,9 +75,6 @@ class RequisitoController extends Controller
             $requsito->nombre       = $request->nombre;
             $requsito->etapas_id    =$id;
             $requsito->tipo_requisitos_id =$request->tiporequisito;
-            if(Requisito::select()->where('nombre','=', $requsito->nombre)->first()) {
-                return back()->with('msj', 'El nombre que intenta ingresar ya existe en el sistema.');
-            }
             if ($request['obligatorio']){
                 $requsito->obligatorio       = $request->obligatorio;
             } else {
