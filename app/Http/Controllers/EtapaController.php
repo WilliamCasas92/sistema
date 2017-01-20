@@ -47,7 +47,9 @@ class EtapaController extends Controller
     public function edit($id)
     {
         $data=Etapa::where('tipo_procesos_id', $id)->get();
-        return view($this->path.'.edit', compact('data', 'id'));
+        $data1=Requisito::all();
+        //$array=array_collapse([$etapa, $requisito]);
+        return view($this->path.'.edit', compact('data', 'id', 'data1'));
     }
 
     public function update(Request $request, $id)
