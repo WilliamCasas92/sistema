@@ -10,4 +10,9 @@ class Etapa extends Model
     {
         return $this->belongsTo('App\TipoProceso');
     }
+
+    public function requisitos()
+    {
+        return $this->hasMany('App\Requisito');
+    }
 }

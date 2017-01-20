@@ -19,9 +19,9 @@ class CreateRequisitosTable extends Migration
             $table->string('nombre');
             $table->boolean('obligatorio');
             $table->integer('etapas_id')->unsigned();
-            //$table->foreign('tipo_procesos_id')->references('id')->on('tipo_procesos');
+            $table->foreign('etapas_id')->references('id')->on('etapas');
             $table->integer('tipo_requisitos_id')->unsigned();
-            //$table->foreign('tipo_procesos_id')->references('id')->on('tipo_procesos');
+            $table->foreign('tipo_requisitos_id')->references('id')->on('tipo_requisitos');
         });
     }
 
