@@ -13,7 +13,6 @@ class RequisitoController extends Controller
         $data1=Requisito::all();
         return view($this->path.'.index', compact('data1'));
     }
-
     //NO
     public function create()
     {
@@ -41,7 +40,6 @@ class RequisitoController extends Controller
     {
         $requsito = Requisito::findOrFail($id);
         $requsito->nombre       = $request->nombre;
-        $requsito->etapas_id    =$id;
         $requsito->tipo_requisitos_id =$request->tiporequisito;
         if ($request['obligatorio']){
             $requsito->obligatorio       = $request->obligatorio;

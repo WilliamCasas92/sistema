@@ -2,7 +2,7 @@
 @section('editetapa')
     <div class="container col-md-9">
         <div class="panel panel-success">
-            <div class="panel-heading"><h3>Gestión de Etapas para: {{$id}} </h3></div>
+            <div class="panel-heading"><h3>Gestión de Etapas</h3></div>
             <div class="panel-body">
                 <form class="form-horizontal" method="post" action="/etapa/{{$id}}">
                     <input name="_method" type="hidden" value="PUT">
@@ -15,7 +15,7 @@
                     </div>
                     <form class="form-inline">
                         <div align="center">
-                            <button type="submit" class="btn btn-default">Añadir Etapa</button>
+                            <button type="submit" class="btn btn-primary">Añadir Etapa</button>
                         </div>
                     </form>
                 </form>

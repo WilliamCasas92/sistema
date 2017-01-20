@@ -11,8 +11,9 @@
     </div>
     <div id="collapse<?php echo $etapa->id ?>" class="panel-collapse collapse">
         <div class="panel-body">
+
+            <!-- Modal Añadir Requisitos-->
             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal<?php echo $etapa->id ?>">Añadir Dato</button>
-            <!-- Modal -->
             <div class="modal fade" id="myModal<?php echo $etapa->id ?>" role="dialog">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
@@ -64,8 +65,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <br>
+            </div><br>
+
+            <!-- Tabla de Indice de Requisitos-->
             @if($data1)
                 <table class="table table-hover">
                     <thead>
@@ -87,18 +89,16 @@
                                 <td class="text-center">{{ $row1->created_at }}</td>
                                 <td class="text-center">
                                     <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModaledit<?php echo $etapa->id ?>">Editar</button>
-
-
-                                    <!-- Modal -->
+                                    <!-- Modal Editar Requisito-->
                                     <div class="modal fade" id="myModaledit<?php echo $etapa->id ?>" role="dialog">
                                         <div class="modal-dialog modal-lg">
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                    <h4 class="modal-title">Actualizacion de dato></h4>
+                                                    <h4 class="modal-title">Actualizacion de dato</h4>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form class="form-horizontal" method="post" action="/requisito/{{ $etapa->id }}">
+                                                    <form class="form-horizontal" method="post" action="/requisito/{{ $row1->id }}">
                                                         <input name="_method" type="hidden" value="PUT">
                                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                         <div class="form-group">
@@ -107,9 +107,6 @@
                                                                 <input type="text" name="nombre" class="form-control" placeholder="Escriba aquí el nombre del dato" value="{{ $row1->nombre }}" required>
                                                             </div>
                                                         </div>
-
-                                                        <h1>Hola</h1>
-
                                                         <div class="form-group">
                                                             <label for="seledit<?php echo $etapa->id ?>" class="control-label col-md-4" for="InputName"> Seleccione tipo de dato:</label>
                                                             <div class="col-md-4">
@@ -145,8 +142,6 @@
                                             </div>
                                         </div>
                                     </div>
-
-
                                     <form action="{{ route('requisito.destroy', $row1->id) }}" method="post">
                                         <input name="_method" type="hidden" value="DELETE">
                                         <input name="_token" type="hidden"  value="{{ csrf_token() }}">
@@ -159,8 +154,10 @@
                     @endforeach
                 </table>
             @endif
-            <!-- Fin Modal -->
-            <input type="button" value="Añadir Dato Predeterminado" class="btn btn-success"><br>Aca va la lista de datos predeterminados<br>
+
+            <!-- Modal Añadir Requisitos Predeterminados-->
+            <input type="button" value="Añadir Dato Predeterminado" class="btn btn-success"><br><br>
+
         </div>
     </div>
 </div>
