@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class TipoRequisito extends Model
 {
-    public function Requisito()
+    public function requisitos()
     {
         return $this->hasMany('App\Requisito');
     }

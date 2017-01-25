@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Requisito extends Model
 {
-    public function etapa()
-    {
-        return $this->belongsTo('App\Etapa');
-    }
-
-    public  function tiporequisito()
+    public function tipo_requisitos()
     {
         return $this->belongsTo('App\TipoRequisito');
+    }
+
+    public function etapas()
+    {
+        return $this->belongsTo('App\Etapa');
     }
 }

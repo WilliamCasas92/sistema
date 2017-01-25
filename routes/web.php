@@ -45,11 +45,19 @@ Route::post('requisito/{requisito}', ['as'=>'requisito.guardar','uses'=> 'Requis
 Route::resource('requisito', 'RequisitoController');
 
 
-//ejemplo
+//TESTS
 Route::get('test1', function (){
     $etapas=App\Etapa::all();
     foreach ($etapas as $etapa){
         //$proceso= App\TipoProceso::find($etapa->tipo_procesos_id);
         echo $etapa->nombre." del proceso: ". $etapa->tipo_procesos->nombre ."<br/>" ;
+    }
+});
+
+Route::get('test2', function (){
+    $reqs=App\Requisito::all();
+    foreach ($reqs as $req){
+        //$proceso= App\TipoProceso::find($etapa->tipo_procesos_id);
+        echo $req->etapas->nombre . " CONTIENE EL REQUISITO: " . $req->nombre." DEL TIPO: " . $req->tipo_requisitos->nombre . "<br/>";
     }
 });
