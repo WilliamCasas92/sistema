@@ -22,11 +22,11 @@
             </div>
             <!-- ACA ES DONDE SALEN LAS ETAPAS-->
             <div class="panel-group" id="accordion">
-            <!--<div id="resultado">-->
+                <div id="resultado">
                     @foreach($data as $etapa)
                         @include('etapa.index', compact($etapa, $data1))
                     @endforeach
-            <!--</div>-->
+                </div>
             </div>
 
         </div>
@@ -40,20 +40,21 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script language="javascript">
-        /**
+
         $(document).ready(function() {
-            $('#formEtapa').submit(function() {
+            $('#formEtapa').submit(function(event) {
+                event.preventDefault();
                 $.ajax({
                     type: 'POST',
                     url: $(this).attr('action'),
                     data: $(this).serialize(),
                     success: function(data) {
-                        ///$('#resultado').load(data);
-                        //$('#resultado').append(data[]);
+                        event.preventDefault();
+                        $('#resultado').html(data);
                     }
                 })
                 return false;
             });
-        })*/
+        })
     </script>
 @endsection
