@@ -21,6 +21,7 @@ class EtapaController extends Controller
     {
         $data=Etapa::where('tipo_procesos_id', $id)->get();
         $data1=Requisito::all();
+        //return view($this->path.'.almacenar', compact('data', 'id', 'data1'));
         return view($this->path.'.almacenar', compact('data', 'id', 'data1'));
     }
 
@@ -65,7 +66,10 @@ class EtapaController extends Controller
             if ($request['rol_gestorpublicacion']) {
                 $etapa->roles()->attach(9);
             }
-            return redirect()->back();
+            $data=Etapa::where('tipo_procesos_id', $request->idtipoproceso)->get();
+            $data1=Requisito::all();
+            return view($this->path.'.index', compact('data', 'data1'));
+            //return redirect()->back();
         } catch(Exception $e){
             return "Fatal error -".$e->getMessage();
         }
