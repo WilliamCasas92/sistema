@@ -35,6 +35,8 @@ Route::get('/home', 'HomeController@index');
 Route::resource('tipoproceso', 'TipoProcesoController');
 
 //Rutas Etapa
+Route::get('etapa/{et1}', ['as'=>'etapa.almacenar','uses'=> 'EtapaController@almacenar']);
+
 Route::resource('etapa', 'EtapaController');
 
 //Rutas Requisitos

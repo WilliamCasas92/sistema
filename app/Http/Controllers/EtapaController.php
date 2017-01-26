@@ -16,25 +16,56 @@ class EtapaController extends Controller
         //return view($this->path.'.index', compact('data'));
     }
 
-    public function create()
+
+    public function almacenar($id)
     {
-        //return view($this->path.'.create', compact('id'));
-        //$data=Etapa::all();
-        //return view($this->path.'.create', compact('data'));
+        $data=Etapa::where('tipo_procesos_id', $id)->get();
+        $data1=Requisito::all();
+        return view($this->path.'.almacenar', compact('data', 'id', 'data1'));
     }
 
-    //este metodo aun no funciona como debe ser...
+    public function create()
+    {
+
+    }
+
     public function store(Request $request)
     {
         try{
             $etapa = new Etapa();
             $etapa->nombre       = $request->nombre;
-            $etapa->tipo_procesos_id = '2';
-            if(Etapa::select()->where('nombre','=', $etapa->nombre)->first()) {
-                return back()->with('msj', 'El nombre que intenta ingresar ya existe en el sistema.');
-            }
+            $etapa->tipo_procesos_id = $request->idtipoproceso;
             $etapa->save();
-            return redirect()->route('etapa.create');
+
+            $etapa->roles()->detach();
+            if ($request['rol_admin']){
+                $etapa->roles()->attach(1);
+            }
+            if ($request['rol_coordinador']){
+                $etapa->roles()->attach(2);
+            }
+            if ($request['rol_secretario']){
+                $etapa->roles()->attach(3);
+            }
+            if ($request['rol_abogado']) {
+                $etapa->roles()->attach(4);
+            }
+            if ($request['rol_gestorcontratacion']) {
+                $etapa->roles()->attach(5);
+            }
+            if ($request['rol_gestornotificacion']) {
+                $etapa->roles()->attach(6);
+            }
+            if ($request['rol_gestorafiliacion']) {
+                $etapa->roles()->attach(7);
+            }
+            if ($request['rol_gestorarchivo']) {
+                $etapa->roles()->attach(8);
+            }
+            if ($request['rol_gestorpublicacion']) {
+                $etapa->roles()->attach(9);
+            }
+            return redirect()->back();
         } catch(Exception $e){
             return "Fatal error -".$e->getMessage();
         }
@@ -46,19 +77,47 @@ class EtapaController extends Controller
 
     public function edit($id)
     {
-        $data=Etapa::where('tipo_procesos_id', $id)->get();
-        $data1=Requisito::all();
-        //$array=array_collapse([$etapa, $requisito]);
-        return view($this->path.'.edit', compact('data', 'id', 'data1'));
+        $etapa = Etapa::findOrFail($id);
+        //return view($this->path.'.index', compact('etapa'));
+       // $data=Etapa::where('tipo_procesos_id', $id)->get();
+        //$data1=Requisito::all();
+        return view($this->path.'.modalrol', compact('etapa'));
     }
 
     public function update(Request $request, $id)
     {
         try{
-            $etapa = new Etapa();
-            $etapa->nombre       = $request->nombre;
-            $etapa->tipo_procesos_id = $id;
+            $etapa = Etapa::findOrFail($id);
             $etapa->save();
+
+            $etapa->roles()->detach();
+            if ($request['rol_admin']){
+                $etapa->roles()->attach(1);
+            }
+            if ($request['rol_coordinador']){
+                $etapa->roles()->attach(2);
+            }
+            if ($request['rol_secretario']){
+                $etapa->roles()->attach(3);
+            }
+            if ($request['rol_abogado']) {
+                $etapa->roles()->attach(4);
+            }
+            if ($request['rol_gestorcontratacion']) {
+                $etapa->roles()->attach(5);
+            }
+            if ($request['rol_gestornotificacion']) {
+                $etapa->roles()->attach(6);
+            }
+            if ($request['rol_gestorafiliacion']) {
+                $etapa->roles()->attach(7);
+            }
+            if ($request['rol_gestorarchivo']) {
+                $etapa->roles()->attach(8);
+            }
+            if ($request['rol_gestorpublicacion']) {
+                $etapa->roles()->attach(9);
+            }
             return redirect()->back();
         } catch(Exception $e){
             return "Fatal error -".$e->getMessage();
@@ -69,6 +128,7 @@ class EtapaController extends Controller
     {
         try{
             $etapa = Etapa::findOrFail($id);
+            $etapa->roles()->detach();
             $etapa->delete();
             return redirect()->back();
         } catch(Exception $e){

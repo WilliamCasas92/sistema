@@ -7,18 +7,18 @@ use Illuminate\Http\Request;
 
 class RequisitoController extends Controller
 {
-    private $path = 'requisito';
+    private $path = 'etapa';
     public function index()
     {
-        $data1=Requisito::all();
-        return view($this->path.'.index', compact('data1'));
+        //$data1=Requisito::all();
+        //return view($this->path.'.index', compact('data1'));
     }
-    //NO
+
     public function create()
     {
         //
     }
-    //NO
+
     public function store(Request $request)
     {
         //
@@ -33,7 +33,7 @@ class RequisitoController extends Controller
     public function edit($id)
     {
         $requsito = Requisito::findOrFail($id);
-        return view($this->path.'.edit', compact('requsito'));
+        return view($this->path.'.editrequisito', compact('requsito'));
     }
 
     public function update(Request $request, $id)
@@ -48,7 +48,6 @@ class RequisitoController extends Controller
         }
         $requsito->save();
         return redirect()->back();
-
     }
 
     public function destroy($id)
