@@ -3,7 +3,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a data-toggle="collapse"5r href="#collapse<?php echo $etapa->id ?>">{{ $etapa->nombre }}</a>
+                    <a data-toggle="collapse" href="#collapse<?php echo $etapa->id ?>">{{ $etapa->nombre }}</a>
                 </h4>
                 <!-- Boton Eliminar ETAPA-->
                 <form action="{{ route('etapa.destroy', $etapa->id) }}" method="post">
