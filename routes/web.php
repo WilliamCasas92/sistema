@@ -66,4 +66,3 @@ Route::get('test3', function (){
     $usuarios=App\User::all();
     echo $usuarios. " <br/>";
 });
-

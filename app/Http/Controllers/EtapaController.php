@@ -58,9 +58,6 @@ class EtapaController extends Controller
             $etapa = new Etapa();
             $etapa->nombre       = $request->nombre;
             $etapa->tipo_procesos_id = $id;
-            if(Etapa::select()->where('nombre','=', $etapa->nombre)->first()) {
-                return back()->with('msj', 'El nombre que intenta ingresar ya existe en el sistema.');
-            }
             $etapa->save();
             return redirect()->back();
         } catch(Exception $e){
