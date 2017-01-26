@@ -61,3 +61,9 @@ Route::get('test2', function (){
         echo $req->etapas->nombre . " CONTIENE EL REQUISITO: " . $req->nombre." DEL TIPO: " . $req->tipo_requisitos->nombre . "<br/>";
     }
 });
+
+Route::get('test3', function (){
+    $usuarios=App\User::all();
+    echo $usuarios. " <br/>";
+});
+

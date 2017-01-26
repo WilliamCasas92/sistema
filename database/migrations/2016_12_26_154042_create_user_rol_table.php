@@ -6,11 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateUserRolTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+
     public function up()
     {
         Schema::create('user_rol', function (Blueprint $table) {
