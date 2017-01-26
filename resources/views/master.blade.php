@@ -64,18 +64,27 @@
                         <span class=""></span> Gestión de Usuarios</a>
                     <a href="{{ url('tipoproceso') }}" class="list-group-item list-group-item-success">
                         <span class=""></span> Gestión de Tipos de Proceso de Contratación</a>
+                    <a href="{{ url('procesocontractual') }}" class="list-group-item list-group-item-success">
+                        <span class=""></span> Procesos Contractuales </a>
                 </div>
             </div>
             <div>
                 @yield("homecontent")
+
                 @yield("createuser")
                 @yield("indexuser")
                 @yield("edituser")
+
                 @yield("createprocesstype")
                 @yield("indexprocesstype")
                 @yield("editprocesstype")
+
                 @yield("createetapa")
                 @yield("editetapa")
+
+                @yield("indexcontractualprocess")
+                @yield("createcontractualprocess")
+
             </div>
         </div>
     </div>

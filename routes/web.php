@@ -46,6 +46,9 @@ Route::post('requisito/{requisito}', ['as'=>'requisito.guardar','uses'=> 'Requis
 
 Route::resource('requisito', 'RequisitoController');
 
+//Rutas Procesos Contractuales
+Route::resource('procesocontractual', 'ProcesoContractualController');
+
 
 //TESTS
 Route::get('test1', function (){
