@@ -11,13 +11,13 @@
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="form-group">
                         <label class="control-label col-md-4" for="InputName" required>Nombre del dato:</label>
-                        <div class="col-md-4">
+                        <div class="col-md-5">
                             <input type="text" name="nombre" class="form-control" placeholder="Escriba aquí el nombre del dato" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="sel<?php echo $etapa->id ?>" class="control-label col-md-4" for="InputName"> Seleccione tipo de dato:</label>
-                        <div class="col-md-4">
+                        <div class="col-md-5">
                             <select class="form-control" name="tiporequisito" id="sel<?php echo $etapa->id ?>" required>
                                 <option value="1">Texto</option>
                                 <option value="2">Documento</option>
@@ -39,14 +39,12 @@
                     </div>
                     <form class="form-inline">
                         <div align="center">
-                            <button type="submit" class="btn btn-default">Crear Dato</button>
+                            <button type="submit" class="btn btn-primary">Crear Dato</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
                         </div>
                     </form>
                 </form>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-            </div>
         </div>
     </div>
-</div><br>
+</div>

@@ -14,9 +14,9 @@ return [
     |
     */
     'google' => [
-        'client_id' => '614229516461-jcg1kcaj5vcai7035isj3inuobtttjlj.apps.googleusercontent.com',
-        'client_secret' => 'mstJLSYkYTPo7kGcviHUhOgS',
-        'redirect' => 'http://sistema.app/social/callback/google',
+        'client_id' => env('GOOGLE_client_id'),
+        'client_secret' => env('GOOGLE_secret'),
+        'redirect' => env('GOOGLE_url'),
     ],
 
     'mailgun' => [

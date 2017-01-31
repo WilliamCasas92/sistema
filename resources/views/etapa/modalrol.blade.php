@@ -11,8 +11,8 @@
                     <input name="_method" type="hidden" value="PUT">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="form-group">
-                        <label class="control-label col-md-4" for="InputRoles">Roles</label>
-                        <div class="col-md-4">
+                        <label class="control-label col-md-5" for="InputRoles">Roles</label>
+                        <div class="col-md-5">
                             <div class="checkbox">
                                 <label><input type="checkbox" {{ $etapa->hasRol('Administrador') ? 'checked':''}} name="rol_admin" value="1">Administrador</label>
                             </div>
@@ -44,14 +44,12 @@
                     </div><br>
                     <form class="form-inline">
                         <div align="center">
-                            <button type="submit" class="btn btn-default">Asignar Roles</button>
+                            <button type="submit" class="btn btn-primary">Asignar Roles</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
                         </div>
                     </form>
                 </form>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-            </div>
         </div>
     </div>
-</div><br>
+</div>

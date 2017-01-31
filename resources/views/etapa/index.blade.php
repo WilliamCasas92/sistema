@@ -15,16 +15,17 @@
             <div id="collapse<?php echo $etapa->id ?>" class="panel-collapse collapse">
                 <div class="panel-body">
                     <!-- Modal Añadir Requisitos-->
-                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal<?php echo $etapa->id ?>">Añadir Dato</button><br><br>
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal<?php echo $etapa->id ?>">Añadir Dato</button>
                     <!-- Se llama la vista con el modal de Add Requisitos-->
                     @include('etapa.modaladdrequisito', compact($etapa))
+                    <!-- Modal Añadir ROLES-->
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModalRol<?php echo $etapa->id ?>">Asignar Roles</button>
+                    <!-- Se llama la vista con el modal de Add Rol-->
+                    @include('etapa.modalrol', compact($etapa))
+                    <br><br>
                     <!-- Tabla de Indice de Requisitos-->
                     <!-- Se llama la vista con la tabla de Requisitos-->
                     @include('etapa.indexrequisitos', compact($data1, $etapa))
-                    <!-- Modal Añadir ROLES-->
-                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModalRol<?php echo $etapa->id ?>">Asignar Roles</button><br><br>
-                    <!-- Se llama la vista con el modal de Add Rol-->
-                    @include('etapa.modalrol', compact($etapa))
                 </div>
             </div>
         </div>

@@ -18,7 +18,7 @@
                     <td class="text-center">{{ $row1->id }}</td>
                     <td class="text-center">{{ $row1->created_at }}</td>
                     <td class="text-center">
-                        <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModaledit<?php echo $etapa->id ?>">Editar</button>
+                        <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModaledit<?php echo $etapa->id ?>" disabled>Editar</button>
                         <!-- Modal Editar Requisito-->
                         @include('etapa.editrequisito', compact($row1, $etapa))
                         <form action="{{ route('requisito.destroy', $row1->id) }}" method="post">

@@ -12,7 +12,7 @@
                             <input type="text" name="nombre" class="form-control" autocomplete="off" placeholder="Nombre de la Etapa" required>
                         </div>
                     </div>
-                    <input type="text" name="idtipoproceso" class="form-control" value="{{ $id }}" required><br>
+                    <input type="hidden" name="idtipoproceso" class="form-control" value="{{ $id }}" required><br>
                     <form class="form-inline">
                         <div align="center">
                             <button id="" type="submit" class="btn btn-primary">Añadir Etapa</button>
