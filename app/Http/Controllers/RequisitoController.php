@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Etapa;
 use App\Requisito;
 use Illuminate\Http\Request;
 
@@ -78,7 +79,10 @@ class RequisitoController extends Controller
                 $requsito->obligatorio       ='0';
             }
             $requsito->save();
-            return redirect()->back();
+            $data1=Requisito::all();
+            $etapa=Etapa::findOrFail($id);
+            //return redirect()->back();
+            return view($this->path.'.indexrequisitos', compact('data1','etapa'));
         } catch(Exception $e){
             return "Fatal error -".$e->getMessage();
         }

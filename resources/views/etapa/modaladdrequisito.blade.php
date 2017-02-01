@@ -1,13 +1,14 @@
-<div class="modal fade" id="myModal<?php echo $etapa->id ?>" role="dialog">
+<div class="modal fade" id="modalRequisito" tabindex="-1" role="dialog" >
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Definición de nuevo dato para: <?php echo $etapa->nombre ?></h4>
+                <h4 class="modal-title">Definición de nuevo dato para: <span id="modalRequisitoNombre"></span></h4>
+                <span id="modalRequisitoId"></span>
             </div>
             <div class="modal-body">
                 <!-- Formulario Añadir Requisitos-->
-                <form class="form-horizontal" method="post" action="/requisito/{{ $etapa->id }}">
+                <form class="form-horizontal" id="modalRequisitoForm" method="post" >
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="form-group">
                         <label class="control-label col-md-4" for="InputName" required>Nombre del dato:</label>
@@ -16,9 +17,9 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="sel<?php echo $etapa->id ?>" class="control-label col-md-4" for="InputName"> Seleccione tipo de dato:</label>
+                        <label for="sel" class="control-label col-md-4" for="InputName"> Seleccione tipo de dato:</label>
                         <div class="col-md-5">
-                            <select class="form-control" name="tiporequisito" id="sel<?php echo $etapa->id ?>" required>
+                            <select class="form-control" name="tiporequisito" id="sel" required>
                                 <option value="1">Texto</option>
                                 <option value="2">Documento</option>
                                 <option value="3">Email</option>
