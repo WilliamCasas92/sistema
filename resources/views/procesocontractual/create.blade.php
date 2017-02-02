@@ -8,55 +8,55 @@
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="form-group">
                         <label class="control-label col-md-4" for="InputName">Tipo de Proceso: </label>
-                        <div class="col-md-4">
-                            <input type="text" name="tipoproceso" class="form-control" autocomplete="off" placeholder="Seleccione el Tipo de Proceso" required>
+                        <div class="col-md-5">
+                            <input type="text" name="tipo_proceso" class="form-control" autocomplete="off" placeholder="Seleccione el tipo de proceso de contratación" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-4" for="InputName">Número de CDP: </label>
-                        <div class="col-md-4">
-                            <input type="number" name="numcdp" class="form-control" autocomplete="off" placeholder="Número de CDP" required>
+                        <div class="col-md-3">
+                            <input type="text" name="num_cdp" class="form-control" autocomplete="off" placeholder="Digite el número de CDP" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-4" for="InputName">Objeto: </label>
-                        <div class="col-md-4">
-                            <input type="text" name="objeto" class="form-control" autocomplete="off" placeholder="Objeto del contrato" required>
+                        <div class="col-md-5">
+                            <textarea rows="5" name="objeto" class="form-control" autocomplete="off" placeholder="Digite el objeto del contrato" required></textarea>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-4" for="InputName">Depedencia: </label>
-                        <div class="col-md-4">
-                            <input type="text" name="dependencia" class="form-control" autocomplete="off" placeholder="Seleccione Dependencia" required>
+                        <div class="col-md-5">
+                            <input type="text" name="dependencia" class="form-control" autocomplete="off" placeholder="Seleccione la dependencia correspondiente" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-4" for="InputName">Número de Contrato: </label>
-                        <div class="col-md-4">
-                            <input type="number" name="numcontrato" class="form-control" autocomplete="off" placeholder="Número de Contrato">
+                        <div class="col-md-3">
+                            <input type="text" name="num_contrato" class="form-control" autocomplete="off" placeholder="Digite el número de contrato">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-4" for="InputName">Fecha de Aprobación: </label>
-                        <div class="col-md-4">
-                            <input type="date" name="dateaprobación" class="form-control" autocomplete="off" placeholder="" required>
+                        <div class="col-md-3">
+                            <input type="date" name="date_aprobación" class="form-control" autocomplete="off" placeholder="" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-4" for="InputName">Nombre del Supervisor: </label>
-                        <div class="col-md-4">
-                            <input type="text" name="nombresupervisor" class="form-control" autocomplete="off" placeholder="Nombre del Supervisor">
+                        <div class="col-md-5">
+                            <input type="text" name="nombre_supervisor" class="form-control" autocomplete="off" placeholder="Digite el nombre del supervisor">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-4" for="InputName">Email del Supervisor: </label>
-                        <div class="col-md-4">
-                            <input type="email" name="emailsupervisor" class="form-control" autocomplete="off" placeholder="Email del Supervisor">
+                        <div class="col-md-5">
+                            <input type="email" name="email_supervisor" class="form-control" autocomplete="off" placeholder="Digite el email del supervisor">
                         </div>
                     </div>
                     <form class="form-inline">
                         <div align="center">
-                            <button type="submit" class="btn btn-default">Crear Proceso de Contratación</button>
+                            <br><button type="submit" class="btn btn-default">Crear Proceso de Contratación</button>
                         </div>
                     </form>
                 </form>

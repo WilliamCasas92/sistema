@@ -14,41 +14,46 @@
                 <br><br>
                 <!-- Tabla de Indice de Procesos creados-->
                 <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th class="text-center">CDP</th>
-                            <th class="text-center">Objeto</th>
-                            <th class="text-center">Dependencia</th>
-                            <th class="text-center">Fecha de creación</th>
-                            <th class="text-center"></th>
-                            <th class="text-center"></th>
-                        </tr>
-                        </thead>
-                        <tbody>
+                    @if($procesos_contractuales)
+                        <table class="table table-hover">
+                            <thead>
                             <tr>
-                                <td class="text-center"></td>
-                                <td class="text-center"></td>
-                                <td class="text-center"></td>
-                                <td class="text-center"></td>
-                                <td class="text-center">
-                                    <a href="" class="btn btn-success btn-xs disabled">Check</a>
-                                </td>
-                                <td class="text-center">
-                                    <a href="" class="btn btn-info btn-xs disabled">Editar</a>
-                                    <form action="" method="post">
-                                        <input name="_method" type="hidden" value="DELETE">
-                                        <input name="_token" type="hidden"  value="">
-                                        <button type="submit" class="btn btn-danger btn-xs disabled">Eliminar</button>
-                                    </form>
-                                </td>
+                                <th class="text-center">CDP</th>
+                                <th class="text-center">Objeto</th>
+                                <th class="text-center">Dependencia</th>
+                                <th class="text-center">Tipo de Proceso</th>
+                                <th class="text-center">Fecha de creación</th>
+                                <th class="text-center"></th>
+                                <th class="text-center"></th>
                             </tr>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                            @foreach($procesos_contractuales as $proceso_contractual)
+                                <tr>
+                                    <td class="text-center">{{ $proceso_contractual->numero_cdp }}</td>
+                                    <td class="text-center">{{ $proceso_contractual->objeto }}</td>
+                                    <td class="text-center">{{ $proceso_contractual->dependencia }}</td>
+                                    <td class="text-center">{{ $proceso_contractual->tipo_proceso }}</td>
+                                    <td class="text-center">{{ $proceso_contractual->created_at }}</td>
+                                    <td class="text-center">
+                                        <a href="" class="btn btn-success btn-xs disabled">Chequear</a>
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="" class="btn btn-info btn-xs disabled">Editar</a>
+                                        <form action="" method="post">
+                                            <input name="_method" type="hidden" value="DELETE">
+                                            <input name="_token" type="hidden"  value="">
+                                            <button type="submit" class="btn btn-danger btn-xs disabled">Eliminar</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            @endforeach
+                        </table>
+                    @endif
                 </div>
 
             </div>
         </div>
     </div>
-
 @endsection
