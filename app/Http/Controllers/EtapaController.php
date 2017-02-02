@@ -133,8 +133,12 @@ class EtapaController extends Controller
         try{
             $etapa = Etapa::findOrFail($id);
             $etapa->roles()->detach();
+            $idProceso=$etapa->tipo_procesos_id;
             $etapa->delete();
-            return redirect()->back();
+            $data=Etapa::where('tipo_procesos_id', $idProceso)->get();
+            $data1=Requisito::all();
+            return view($this->path.'.index', compact('data', 'data1'));
+            //return redirect()->back();
         } catch(Exception $e){
             return "Fatal error -".$e->getMessage();
         }
