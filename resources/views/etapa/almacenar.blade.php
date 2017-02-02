@@ -35,14 +35,15 @@
 
 
 @section('Myscripts')
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="jquery-1.3.min.js" language="javascript"></script>
+    <script src="/jquery-1.3.min.js" language="javascript"></script>
     <script language="javascript">
         var listarRequisito = "";
         $(document).ready(function() {
             // Interceptamos el evento submit
-            $('#formEtapa').submit(function() {
+            $('#formEtapa, #formELiminarEtapa').submit(function() {
                 // Enviamos el formulario usando AJAX
                 $.ajax({
                     type: 'POST',
@@ -59,7 +60,6 @@
                 $('#modalRequisito').on("show.bs.modal", function (e) {
                     $("#modalRequisitoNombre").html($(e.relatedTarget).data('nombre'));
                     $("#modalRequisitoForm").attr('action', $(e.relatedTarget).data('url'));
-                    $("#modalRequisitoId").val($(e.relatedTarget).data('id'));
                     listarRequisito=$(e.relatedTarget).data('listar');
                     alert(listarRequisito);
                 });

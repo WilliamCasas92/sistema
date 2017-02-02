@@ -1,5 +1,4 @@
 <div id="listarRequisitos{{$etapa->id}}">
-    <h1>listarRequisitos{{$etapa->id}}</h1>
     @if($data1)
         <table class="table table-hover">
             <thead>
