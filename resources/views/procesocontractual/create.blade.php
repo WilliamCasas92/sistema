@@ -21,13 +21,18 @@
                     <div class="form-group">
                         <label class="control-label col-md-4" for="InputName">Objeto: </label>
                         <div class="col-md-5">
-                            <textarea rows="5" name="objeto" class="form-control" autocomplete="off" placeholder="Digite el objeto del contrato" required></textarea>
+                            <textarea rows="6" name="objeto" class="form-control" autocomplete="off" placeholder="Digite el objeto del contrato" required></textarea>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-4" for="InputName">Depedencia: </label>
                         <div class="col-md-5">
-                            <input type="text" name="dependencia" class="form-control" autocomplete="off" placeholder="Seleccione la dependencia correspondiente" required>
+                            <select class="form-control" name="dependencia" id="dependencia" required>
+                                <option value="Rectoría">Rectoría</option>
+                                <option value="Vicerrectoría de Docencia e Investigación">Vicerrectoría de Docencia e Investigación</option>
+                                <option value="Vicerrectoría de Extensión">Vicerrectoría de Extensión</option>
+                                <option value="Vicerrectoría Administrativa">Vicerrectoría Administrativa</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">
@@ -46,6 +51,12 @@
                         <label class="control-label col-md-4" for="InputName">Nombre del Supervisor: </label>
                         <div class="col-md-5">
                             <input type="text" name="nombre_supervisor" class="form-control" autocomplete="off" placeholder="Digite el nombre del supervisor">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-4" for="InputName">Identificación del Supervisor: </label>
+                        <div class="col-md-3">
+                            <input type="text" name="id_supervisor" class="form-control" autocomplete="off" placeholder="Digite C.C. del supervisor">
                         </div>
                     </div>
                     <div class="form-group">

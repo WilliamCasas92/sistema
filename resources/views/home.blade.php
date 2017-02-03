@@ -3,7 +3,7 @@
 @section('homecontent')
     <div class="container col-md-9">
         <div class="panel panel-success">
-            <div class="panel-heading text-center"><h1>Servcios de la plataforma</h1></div>
+            <div class="panel-heading text-center"><h1>Servicios de la plataforma</h1></div>
             <div class="panel-body">
                 <!-- Container (Services Section) -->
                 <div class="container-fluid text-center">

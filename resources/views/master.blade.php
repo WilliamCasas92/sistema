@@ -84,6 +84,7 @@
 
                 @yield("indexcontractualprocess")
                 @yield("createcontractualprocess")
+                @yield("editcontractualprocess")
 
             </div>
         </div>

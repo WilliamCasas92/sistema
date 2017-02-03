@@ -12,38 +12,41 @@
                 <label class="control-label" for="InputName">Filtro de búsqueda:</label>
                 <input type="text" name="" class="form-control" autocomplete="off" placeholder="" disabled>
                 <br><br>
+
                 <!-- Tabla de Indice de Procesos creados-->
                 <div class="table-responsive">
                     @if($procesos_contractuales)
                         <table class="table table-hover">
-                            <thead>
+                            <thead style="font-size : 11px;">
                             <tr>
                                 <th class="text-center">CDP</th>
                                 <th class="text-center">Objeto</th>
                                 <th class="text-center">Dependencia</th>
                                 <th class="text-center">Tipo de Proceso</th>
                                 <th class="text-center">Fecha de creación</th>
+                                <th class="text-center">Fecha de Aprobación</th>
                                 <th class="text-center"></th>
                                 <th class="text-center"></th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody style="font-size : 11px;">
                             @foreach($procesos_contractuales as $proceso_contractual)
                                 <tr>
-                                    <td class="text-center">{{ $proceso_contractual->numero_cdp }}</td>
-                                    <td class="text-center">{{ $proceso_contractual->objeto }}</td>
-                                    <td class="text-center">{{ $proceso_contractual->dependencia }}</td>
-                                    <td class="text-center">{{ $proceso_contractual->tipo_proceso }}</td>
-                                    <td class="text-center">{{ $proceso_contractual->created_at }}</td>
+                                    <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->numero_cdp }}</td>
+                                    <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->objeto }}</td>
+                                    <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->dependencia }}</td>
+                                    <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->tipo_proceso }}</td>
+                                    <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->created_at }}</td>
+                                    <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->fecha_aprobacion }}</td>
                                     <td class="text-center">
                                         <a href="" class="btn btn-success btn-xs disabled">Chequear</a>
                                     </td>
                                     <td class="text-center">
-                                        <a href="" class="btn btn-info btn-xs disabled">Editar</a>
-                                        <form action="" method="post">
+                                        <a href="{{ route('procesocontractual.edit', $proceso_contractual->id) }}" class="btn btn-info btn-xs">Editar</a>
+                                        <form action="{{ route('procesocontractual.destroy', $proceso_contractual->id) }}"method="post">
                                             <input name="_method" type="hidden" value="DELETE">
-                                            <input name="_token" type="hidden"  value="">
-                                            <button type="submit" class="btn btn-danger btn-xs disabled">Eliminar</button>
+                                            <input name="_token" type="hidden"  value="{{ csrf_token() }}">
+                                            <button type="submit" class="btn btn-danger btn-xs">Eliminar</button>
                                         </form>
                                     </td>
                                 </tr>
@@ -52,7 +55,6 @@
                         </table>
                     @endif
                 </div>
-
             </div>
         </div>
     </div>

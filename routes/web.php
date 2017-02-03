@@ -71,3 +71,10 @@ Route::get('test3', function (){
     $usuarios=App\User::all();
     echo $usuarios. " <br/>";
 });
+
+Route::get('test4', function (){
+    $etapas = \App\Etapa::all();
+    foreach ($etapas as $etapa){
+        echo $etapa->tipo_procesos->nombre;
+    }
+});
