@@ -8,9 +8,18 @@
                     <input name="_method" type="hidden" value="PUT">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="form-group">
-                        <label class="control-label col-md-4" for="InputName">Tipo de Proceso: </label>
+                        <label class="control-label col-md-4" for="InputName">Seleccione el Tipo de Proceso de Contratación: </label>
                         <div class="col-md-5">
-                            <input type="text" name="tipo_proceso" class="form-control" autocomplete="off" placeholder="Seleccione el tipo de proceso de contratación" value="{{$proceso_contractual->tipo_proceso}}" required>
+                            <select class="form-control" name="tipo_proceso" id="tipo_proceso" required>
+                                @foreach($tipos_procesos as $tipo_proceso)
+                                    @if ($tipo_proceso->nombre == $proceso_contractual->tipo_proceso)
+                                        <option selected value="{{$proceso_contractual->tipo_proceso}}">{{$proceso_contractual->tipo_proceso}}</option>
+                                    @else
+                                        <option value="{{$tipo_proceso->nombre}}">{{$tipo_proceso->nombre}}</option>
+                                    @endif
+                                @endforeach
+
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">
@@ -56,7 +65,6 @@
                             </select>
                         </div>
                     </div>
-
                     @if ($proceso_contractual->numero_contrato==null)
                         <div class="form-group">
                             <label class="control-label col-md-4" for="InputName">Número de Contrato: </label>

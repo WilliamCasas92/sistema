@@ -6,10 +6,15 @@
             <div class="panel-body">
                 <form class="form-horizontal" method="post" action="/procesocontractual">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
                     <div class="form-group">
-                        <label class="control-label col-md-4" for="InputName">Tipo de Proceso: </label>
+                        <label class="control-label col-md-4" for="InputName">Seleccione el Tipo de Proceso de Contratación: </label>
                         <div class="col-md-5">
-                            <input type="text" name="tipo_proceso" class="form-control" autocomplete="off" placeholder="Seleccione el tipo de proceso de contratación" required>
+                            <select class="form-control" name="tipo_proceso" id="tipo_proceso" required>
+                                @foreach($tipos_procesos as $tipo_proceso)
+                                    <option value="{{$tipo_proceso->nombre}}">{{$tipo_proceso->nombre}}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">

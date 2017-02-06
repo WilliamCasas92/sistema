@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 use App\ProcesoContractual;
+use App\TipoProceso;
 
 class ProcesoContractualController extends Controller
 {
@@ -16,7 +18,8 @@ class ProcesoContractualController extends Controller
 
     public function create()
     {
-        return view($this->path.'.create');
+        $tipos_procesos= TipoProceso::where('activo',1)->get();
+        return view($this->path.'.create', compact('tipos_procesos'));
     }
 
     public function store(Request $request)
@@ -36,6 +39,8 @@ class ProcesoContractualController extends Controller
             $proceso_contractual->nombre_supervisor  = $request->nombre_supervisor;
             $proceso_contractual->id_supervisor      = $request->id_supervisor;
             $proceso_contractual->email_supervisor   = $request->email_supervisor;
+            $proceso_contractual->tipo_procesos_id   = DB::table('tipo_procesos')->where('nombre', $request->tipo_proceso)->value('id');
+
             $proceso_contractual->save();
             return redirect()->route('procesocontractual.index');
         } catch(Exception $e){
@@ -51,7 +56,8 @@ class ProcesoContractualController extends Controller
     public function edit($id)
     {
         $proceso_contractual = ProcesoContractual::findOrFail($id);
-        return view($this->path.'.edit', compact('proceso_contractual'));
+        $tipos_procesos= TipoProceso::where('activo',1)->get();
+        return view($this->path.'.edit', compact('proceso_contractual', 'tipos_procesos'));
     }
 
 
@@ -71,6 +77,7 @@ class ProcesoContractualController extends Controller
         $proceso_contractual->nombre_supervisor  = $request->nombre_supervisor;
         $proceso_contractual->id_supervisor      = $request->id_supervisor;
         $proceso_contractual->email_supervisor   = $request->email_supervisor;
+
         $proceso_contractual->save();
         return redirect()->route('procesocontractual.index');
     }

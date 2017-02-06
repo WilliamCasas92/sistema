@@ -73,8 +73,4 @@ Route::get('test3', function (){
 });
 
 Route::get('test4', function (){
-    $etapas = \App\Etapa::all();
-    foreach ($etapas as $etapa){
-        echo $etapa->tipo_procesos->nombre;
-    }
 });

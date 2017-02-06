@@ -24,6 +24,8 @@ class CreateProcesoContractualsTable extends Migration
             $table->string('nombre_supervisor');
             $table->string('id_supervisor');
             $table->string('email_supervisor');
+            $table->integer('tipo_procesos_id')->unsigned();
+            $table->foreign('tipo_procesos_id')->references('id')->on('tipo_procesos');
             $table->rememberToken();
             $table->timestamps();
         });

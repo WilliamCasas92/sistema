@@ -20,12 +20,11 @@
                             <thead style="font-size : 11px;">
                             <tr>
                                 <th class="text-center">CDP</th>
-                                <th class="text-center">Objeto</th>
+                                <th class="text-center" width="35%">Objeto</th>
                                 <th class="text-center">Dependencia</th>
                                 <th class="text-center">Tipo de Proceso</th>
                                 <th class="text-center">Fecha de creación</th>
                                 <th class="text-center">Fecha de Aprobación</th>
-                                <th class="text-center"></th>
                                 <th class="text-center"></th>
                             </tr>
                             </thead>
@@ -33,15 +32,14 @@
                             @foreach($procesos_contractuales as $proceso_contractual)
                                 <tr>
                                     <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->numero_cdp }}</td>
-                                    <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->objeto }}</td>
+                                    <td style="font-size : 11px;" class="text-center" width="35%">{{ $proceso_contractual->objeto }}</td>
                                     <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->dependencia }}</td>
                                     <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->tipo_proceso }}</td>
                                     <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->created_at }}</td>
                                     <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->fecha_aprobacion }}</td>
                                     <td class="text-center">
                                         <a href="" class="btn btn-success btn-xs disabled">Chequear</a>
-                                    </td>
-                                    <td class="text-center">
+
                                         <a href="{{ route('procesocontractual.edit', $proceso_contractual->id) }}" class="btn btn-info btn-xs">Editar</a>
                                         <form action="{{ route('procesocontractual.destroy', $proceso_contractual->id) }}"method="post">
                                             <input name="_method" type="hidden" value="DELETE">
