@@ -50,6 +50,9 @@ Route::resource('requisito', 'RequisitoController');
 Route::resource('procesocontractual', 'ProcesoContractualController');
 
 
+
+
+
 //TESTS
 Route::get('test1', function (){
     $etapas=App\Etapa::all();
@@ -73,4 +76,20 @@ Route::get('test3', function (){
 });
 
 Route::get('test4', function (){
+    $etapas=App\Etapa::where('tipo_procesos_id', 1)->get();
+    foreach ($etapas as $etapa){
+        echo $etapa->nombre." del proceso: ". $etapa->tipo_procesos->nombre ."<br/><br/>";
+        $reqs=App\Requisito::all();
+        foreach ($reqs as $req){
+            if ($req->etapas_id==$etapa->id){
+                echo $req->nombre."<br/>";
+                $tipo_reqs=App\TipoRequisito::find($req->tipo_requisitos_id);
+                echo $tipo_reqs->nombre."<br/>";
+            }
+        }
+    }
 });
+
+//Route::get('ProcesoContractual/Procesocheck', function (){
+  //  return view('procesocontractual.diligenciaproceso');
+//});

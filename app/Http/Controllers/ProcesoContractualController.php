@@ -92,4 +92,9 @@ class ProcesoContractualController extends Controller
             return "Fatal error -".$e->getMessage();
         }
     }
+
+    //public function chequear_proceso(){
+      //  return view($this->path.'.diligenciaproceso');
+    //}
+
 }

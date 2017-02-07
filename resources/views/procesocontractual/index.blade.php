@@ -7,7 +7,6 @@
                 <div align="left">
                     <h4><a class="btn btn-primary" href="{{route('procesocontractual.create')}}">Crear nuevo proceso de contratación</a></h4>
                 </div><br>
-
                 <!-- Seccion para la busqueda-->
                 <label class="control-label" for="InputName">Filtro de búsqueda:</label>
                 <input type="text" name="" class="form-control" autocomplete="off" placeholder="" disabled>
@@ -39,7 +38,6 @@
                                     <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->fecha_aprobacion }}</td>
                                     <td class="text-center">
                                         <a href="" class="btn btn-success btn-xs disabled">Chequear</a>
-
                                         <a href="{{ route('procesocontractual.edit', $proceso_contractual->id) }}" class="btn btn-info btn-xs">Editar</a>
                                         <form action="{{ route('procesocontractual.destroy', $proceso_contractual->id) }}"method="post">
                                             <input name="_method" type="hidden" value="DELETE">
