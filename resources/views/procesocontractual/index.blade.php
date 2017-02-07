@@ -37,7 +37,7 @@
                                     <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->created_at }}</td>
                                     <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->fecha_aprobacion }}</td>
                                     <td class="text-center">
-                                        <a href="" class="btn btn-success btn-xs disabled">Chequear</a>
+                                        <a href="{{ route('datosetapas.menu', $proceso_contractual->id) }}" class="btn btn-success btn-xs ">Chequear</a>
                                         <a href="{{ route('procesocontractual.edit', $proceso_contractual->id) }}" class="btn btn-info btn-xs">Editar</a>
                                         <form action="{{ route('procesocontractual.destroy', $proceso_contractual->id) }}"method="post">
                                             <input name="_method" type="hidden" value="DELETE">

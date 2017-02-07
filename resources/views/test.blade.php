@@ -270,3 +270,34 @@
         </div>
     </div>
 </div>
+
+foreach ($etapas as $etapa){
+
+echo $etapa->nombre." del proceso: ". $etapa->tipo_procesos->nombre ."<br/><br/>";
+
+$reqs=Requisito::all();
+foreach ($reqs as $req){
+if ($req->etapas_id==$etapa->id){
+echo $req->nombre."<br/>";
+$tipo_reqs=TipoRequisito::find($req->tipo_requisitos_id);
+echo $tipo_reqs->nombre."<br/>";
+}
+echo "<br/>";
+}
+
+
+}
+
+
+{{\App\Http\Controllers\DatosEtapaController::imprimir($proceso_contractual->tipo_procesos_id)}}
+
+{{\App\Http\Controllers\DatosEtapaController::imprimir()}}
+
+
+<div class="form-group">
+    <label class="control-label col-md-4" for="InputName">{{$requisito->nombre}}</label>
+    <div class="col-md-4">
+        <input type="{{\App\Http\Controllers\DatosEtapaController::imprimir_tipo_requisitos($requisito->tipo_requisitos_id)}}" name="{{$requisito->nombre}}" class="form-control">
+    </div>
+</div>
+

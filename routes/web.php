@@ -49,6 +49,10 @@ Route::resource('requisito', 'RequisitoController');
 //Rutas Procesos Contractuales
 Route::resource('procesocontractual', 'ProcesoContractualController');
 
+//Rutas Datos Etapas
+Route::get('datosetapas/{datoetapa}', ['as'=>'datosetapas.menu','uses'=> 'DatosEtapaController@menu']);
+Route::resource('datosetapas', 'DatosEtapaController');
+
 
 
 
@@ -86,10 +90,7 @@ Route::get('test4', function (){
                 $tipo_reqs=App\TipoRequisito::find($req->tipo_requisitos_id);
                 echo $tipo_reqs->nombre."<br/>";
             }
+            echo "<br/>";
         }
     }
 });
-
-//Route::get('ProcesoContractual/Procesocheck', function (){
-  //  return view('procesocontractual.diligenciaproceso');
-//});

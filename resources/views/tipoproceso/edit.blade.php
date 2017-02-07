@@ -8,7 +8,7 @@
                     <input name="_method" type="hidden" value="PUT">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="form-group">
-                        <label class="control-label col-md-4" for="InputName">Nombres:</label>
+                        <label class="control-label col-md-4" for="InputName">Nombre del Tipo de Proceso:</label>
                         <div class="col-md-4">
                             <input type="text" name="nombre" class="form-control" placeholder="Nombre del Tipo de Proceso:" value="{{ $tipoproceso->nombre }}" required>
                         </div>
