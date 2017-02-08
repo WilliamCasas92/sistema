@@ -15,4 +15,9 @@ class Requisito extends Model
     {
         return $this->belongsTo('App\Etapa');
     }
+
+    public function dato_etapas()
+    {
+        return $this->hasMany('App\DatoEtapa');
+    }
 }

@@ -7,7 +7,7 @@
             </div>
             <!-- ACA ES DONDE SALEN LAS ETAPAS-->
             <div class="panel-group" id="accordion">
-                @include('datosetapas.showetapas', compact($etapas, $requisitos))
+                @include('datosetapas.showetapas', compact($proceso_contractual, $etapas, $requisitos))
             </div>
         </div>
         <h4><a class="btn btn-default" href="{{route('procesocontractual.index')}}">Volver a la lista de Procesos Contractuales</a></h4>

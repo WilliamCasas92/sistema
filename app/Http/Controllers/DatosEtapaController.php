@@ -34,7 +34,24 @@ class DatosEtapaController extends Controller
 
     public function store(Request $request)
     {
+        try{
+            foreach ($request['requisito_id'] as $requisito_id_) {
+                foreach ($request['atributo'] as $atributo_) {
+                    if ($atributo_ != "") {
+                        $dato_etapa = new DatoEtapa();
+                        $dato_etapa->proceso_contractual_id = $request->proceso_contractual_id;
+                        $dato_etapa->valor = $atributo_;
+                        $dato_etapa->requisitos_id = $requisito_id_;
+                        $dato_etapa->save();
+                    }
+                    break;
+                }
+            }
 
+            return redirect()->back();
+        } catch(Exception $e){
+            return "Fatal error -".$e->getMessage();
+        }
     }
 
     public function show($id)
@@ -57,9 +74,9 @@ class DatosEtapaController extends Controller
 
     }
 
-    public static function imprimir_tipo_requisitos($tipo_requisito_id)
+    static function imprimir_tipo_requisitos($tipo_requisito_id)
     {
         $tipo_requisito=TipoRequisito::find($tipo_requisito_id);
-        echo $tipo_requisito->tipo;
+        return $tipo_requisito->tipo;
     }
 }
