@@ -14,11 +14,17 @@ class TipoRequisitoTableSeeder extends Seeder
     {
         //Tipo de dato 1: texto
         $tipo_text = new TipoRequisito();
-        $tipo_text->nombre='Texto';
+        $tipo_text->nombre='Campo de texto corto';
         $tipo_text->tipo='string';
         $tipo_text->save();
 
-        //Tipo de dato 2: documento
+        //Tipo de dato 2: TextArea
+        $tipo_double = new TipoRequisito();
+        $tipo_double->nombre='Campo de texto largo';
+        $tipo_double->tipo='textarea';
+        $tipo_double->save();
+
+        //Tipo de dato 3: documento
         $tipo_documento = new TipoRequisito();
         $tipo_documento->nombre='Documento';
         $tipo_documento->tipo='file';

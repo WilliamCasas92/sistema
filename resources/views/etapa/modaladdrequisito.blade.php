@@ -17,16 +17,15 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        @php
+                            $tipos_requisitos=\App\Http\Controllers\EtapaController::buscar_tipos_requisitos();
+                        @endphp
                         <label for="sel" class="control-label col-md-4" for="InputName"> Seleccione tipo de dato:</label>
                         <div class="col-md-5">
                             <select class="form-control" name="tiporequisito" id="sel" required>
-                                <option value="1">Texto</option>
-                                <option value="2">Documento</option>
-                                <option value="3">Email</option>
-                                <option value="4">Fecha</option>
-                                <option value="5">Hora</option>
-                                <option value="6">Casilla de Verificación</option>
-                                <option value="7">Número</option>
+                                @foreach($tipos_requisitos as $tipo_requisito)
+                                    <option value="{{$tipo_requisito->id}}">{{$tipo_requisito->nombre}}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>

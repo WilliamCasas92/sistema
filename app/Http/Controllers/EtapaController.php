@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\TipoProceso;
 use App\Etapa;
 use App\Requisito;
+use App\TipoRequisito;
 
 class EtapaController extends Controller
 {
@@ -142,5 +143,11 @@ class EtapaController extends Controller
         } catch(Exception $e){
             return "Fatal error -".$e->getMessage();
         }
+    }
+
+    static function buscar_tipos_requisitos()
+    {
+        $tipos_requisitos=TipoRequisito::all();
+        return $tipos_requisitos;
     }
 }

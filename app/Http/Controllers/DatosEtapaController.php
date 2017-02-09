@@ -24,6 +24,7 @@ class DatosEtapaController extends Controller
         $proceso_contractual=DB::table('proceso_contractuals')->where('id', $proceso_contractual_id)->first();
         $etapas=Etapa::where('tipo_procesos_id', $proceso_contractual->tipo_procesos_id)->get();
         $requisitos=Requisito::all();
+        //$datos_etapas_proceso=DatoEtapa::where('proceso_contractual_id', $proceso_contractual->id)->get();
         return view($this->path.'.menu', compact('proceso_contractual', 'etapas', 'requisitos'));
     }
 
@@ -35,19 +36,30 @@ class DatosEtapaController extends Controller
     public function store(Request $request)
     {
         try{
-            foreach ($request['requisito_id'] as $requisito_id_) {
-                foreach ($request['atributo'] as $atributo_) {
-                    if ($atributo_ != "") {
+            $cont=0;
+            foreach ($request['atributo'] as $atributo_) {
+                if ($atributo_ != "") {
+                    $dato_etapa_id = DB::table('dato_etapas')
+                        ->where('proceso_contractual_id', $request->proceso_contractual_id)
+                        ->where('requisitos_id', $request->requisito_id[$cont])
+                        ->value('id');
+                    if ($dato_etapa_id != null ){
+                        //Edita Dato de la Etapa
+                        $dato_etapa = DatoEtapa::findOrFail($dato_etapa_id);
+                        $dato_etapa->valor = $atributo_;
+                        $dato_etapa->save();
+                        $cont++;
+                    }else{
+                        //Crea Dato de la Etapa
                         $dato_etapa = new DatoEtapa();
                         $dato_etapa->proceso_contractual_id = $request->proceso_contractual_id;
                         $dato_etapa->valor = $atributo_;
-                        $dato_etapa->requisitos_id = $requisito_id_;
+                        $dato_etapa->requisitos_id = $request->requisito_id[$cont];
                         $dato_etapa->save();
+                        $cont++;
                     }
-                    break;
                 }
             }
-
             return redirect()->back();
         } catch(Exception $e){
             return "Fatal error -".$e->getMessage();
@@ -78,5 +90,14 @@ class DatosEtapaController extends Controller
     {
         $tipo_requisito=TipoRequisito::find($tipo_requisito_id);
         return $tipo_requisito->tipo;
+    }
+
+    static function busqueda_valor_dato_etapa($proceso_id, $req_id)
+    {
+        $valor = DB::table('dato_etapas')
+            ->where('proceso_contractual_id', $proceso_id)
+            ->where('requisitos_id', $req_id)
+            ->value('valor');
+        return $valor;
     }
 }

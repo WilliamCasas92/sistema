@@ -8,8 +8,10 @@
             </div>
             <div id="collapse{{ $etapa->id }}" class="panel-collapse collapse">
                 <div class="panel-body">
-                        <!-- ACA ES DONDE SALE EL FORMULARIO CON REQUISITOS-->
-                        @include('datosetapas.showrequisitos', compact($proceso_contractual, $etapa, $requisitos))
+                    <h4>Diligencie los siguientes datos: </h4><br>
+                    Campos obligatorios (*)<br><br>
+                    <!-- ACA ES DONDE SALE EL FORMULARIO CON REQUISITOS-->
+                    @include('datosetapas.showrequisitos', compact($proceso_contractual, $etapa, $requisitos))
                 </div>
             </div>
         </div>

@@ -11,12 +11,13 @@ class CreateDatoEtapasTable extends Migration
     {
         Schema::create('dato_etapas', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('valor');
+            $table->longText('valor');
             $table->integer('proceso_contractual_id')->unsigned();
             $table->foreign('proceso_contractual_id')->references('id')->on('proceso_contractuals');
             $table->integer('requisitos_id')->unsigned();
             $table->foreign('requisitos_id')->references('id')->on('requisitos');
             $table->timestamps();
+            $table->unique(['proceso_contractual_id','requisitos_id']);
         });
     }
 

@@ -5,7 +5,7 @@
             <div class="panel-heading"><h3>Proceso contractual para: {{$proceso_contractual->objeto}}</h3></div>
             <div class="panel-body">
             </div>
-            <!-- ACA ES DONDE SALEN LAS ETAPAS-->
+           <!-- ACA ES DONDE SALEN LAS ETAPAS-->
             <div class="panel-group" id="accordion">
                 @include('datosetapas.showetapas', compact($proceso_contractual, $etapas, $requisitos))
             </div>
