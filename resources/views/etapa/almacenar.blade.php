@@ -28,6 +28,12 @@
             <!--ES DONDE SE LLAMA EL CODIGO DEL MODAL AÑADIR REQUISITO-->
             @include('etapa.modaladdrequisito')
 
+
+            <!-- se llama el modal eliminar etapa-->
+            @include('etapa.modaldeleteetapa')
+            <!--Se llama el modal para eliminar requisitos-->
+            @include('etapa.modaldeleterequisito')
+
         </div>
         <h4><a class="btn btn-default" href="{{route('tipoproceso.index')}}">Volver a la lista de Tipos de Procesos</a></h4>
     </div>
@@ -35,15 +41,15 @@
 
 
 @section('Myscripts')
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="/jquery-1.3.min.js" language="javascript"></script>
+    <!--<script src="/js/jquery-3.1.1.js" language="javascript"></script>-->
     <script language="javascript">
         var listarRequisito = "";
         $(document).ready(function() {
-            // Interceptamos el evento submit
-            $('#formEtapa, #formELiminarEtapa').submit(function() {
+            // Interceptamos el evento submit del formulario agregar Etapa, Al fomulario eliminar Etapa
+            $('#formEtapa, #modalDeleteForm').submit(function() {
                 // Enviamos el formulario usando AJAX
                 $.ajax({
                     type: 'POST',
@@ -52,21 +58,37 @@
                     // Mostramos un mensaje con la respuesta de PHP
                     success: function(data) {
                         $('#listarEtapas').html(data);
+                        $('#modalDelete').modal('hide');
+                        $('#formEtapa')[0].reset();
                     }
                 })
                 return false;
             });
+
+
+            //Esta función toma los datos del botton añadir requisito y los envia al modal para agregar el nuevo dato
             $(function() {
                 $('#modalRequisito').on("show.bs.modal", function (e) {
                     $("#modalRequisitoNombre").html($(e.relatedTarget).data('nombre'));
                     $("#modalRequisitoForm").attr('action', $(e.relatedTarget).data('url'));
                     listarRequisito=$(e.relatedTarget).data('listar');
-                    alert(listarRequisito);
+                });
+            });
+
+            //Esta función envia datos al eliminar requisito
+
+            $(function() {
+                $('#modaldeleteRequisito').on("show.bs.modal", function (e) {
+                    $("#modaldeleteRequisitoNombre").html($(e.relatedTarget).data('nombre'));
+                    $("#modaldeleteRequisitoForm").attr('action', $(e.relatedTarget).data('url'));
+                    listarRequisito=$(e.relatedTarget).data('listar');
                 });
             })
-            $('#modalRequisitoForm').submit(function(event) {
+
+
+            //Este responde al formulario guardar tipo de dato que esta en el modaladdrequisito
+            $('#modalRequisitoForm, #modaldeleteRequisitoForm').submit(function(event) {
                 // Enviamos el formulario usando AJAX
-                alert('entra');
                 $.ajax({
                     type: 'POST',
                     url: $(this).attr('action'),
@@ -74,14 +96,32 @@
                     // Mostramos un mensaje con la respuesta de PHP
                     success: function(data) {
                             $(listarRequisito).html(data);
+                            $('#modalRequisito, #modaldeleteRequisito').modal('hide');
+                            $('#modalRequisitoForm')[0].reset();
                     }
                 });
                 event.preventDefault();
                 return false;
             });
+            //Este toma los datos que seran enviados al modal rol
+            $(function() {
+                $('#modalRol').on("show.bs.modal", function (e) {
+                    $("#modalRolNombre").html($(e.relatedTarget).data('etapa'));
+                    $("#modalRolFormUrl").attr('action', $(e.relatedTarget).data('url'));
+                    $("#modalRolFormadmin").val($(e.relatedTarget).data('administrador'))
+                    scritEtapa=$(e.relatedTarget).data('administrador');
 
+                    alert(scritEtapa);
+                });
+            });
 
+                //Es la función que lleva los datos al modal eliminar etapas
+            $(function() {
+                $('#modalDelete').on("show.bs.modal", function (e) {
+                    $("#modalDeleteNombre").html($(e.relatedTarget).data('nombre'));
+                    $("#modalDeleteForm").attr('action', $(e.relatedTarget).data('url'));
+                });
+            });
         })
-
     </script>
 @endsection

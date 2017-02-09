@@ -22,11 +22,9 @@
                             <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModaledit<?php echo $etapa->id ?>" disabled>Editar</button>
                             <!-- Modal Editar Requisito-->
                             @include('etapa.editrequisito', compact($row1, $etapa))
-                            <form action="{{ route('requisito.destroy', $row1->id) }}" method="post">
-                                <input name="_method" type="hidden" value="DELETE">
-                                <input name="_token" type="hidden"  value="{{ csrf_token() }}">
-                                <button type="submit" class="btn btn-danger btn-xs">Eliminar</button>
-                            </form>
+                            <!-- boton que permite llamar el modal para eliminar un requisito-->
+                            <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#modaldeleteRequisito" data-nombre="{{$row1->nombre}}"
+                                    data-listar="#listarRequisitos{{$etapa->id}}" data-url="{{ route('requisito.destroy', $row1->id) }}" >Eliminar</button>
                         </td>
                     </tr>
                 @endif

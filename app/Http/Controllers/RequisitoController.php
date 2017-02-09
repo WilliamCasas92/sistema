@@ -54,9 +54,12 @@ class RequisitoController extends Controller
     public function destroy($id)
     {
         try{
-            $requsito = Requisito::findOrFail($id);
-            $requsito->delete();
-            return redirect()->back();
+            $requisito = Requisito::findOrFail($id);
+            $etapa=Etapa::findOrFail($requisito->etapas_id);
+            $requisito->delete();
+            $data1=Requisito::all();
+            //return redirect()->back();
+            return view($this->path.'.indexrequisitos', compact('data1','etapa'));
         } catch(Exception $e){
             return "Fatal error -".$e->getMessage();
         }

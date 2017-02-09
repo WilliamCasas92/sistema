@@ -2,24 +2,26 @@
     @foreach($data as $etapa)
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h4 class="panel-title">
-                    <a data-toggle="collapse"  href="#collapse<?php echo $etapa->id ?>">{{ $etapa->nombre }}</a>
+                <h4 class="panel-title row">
+                    <div class="col-md-4">
+                        <a data-toggle="collapse" style="color: black" href="#collapse{{ $etapa->id }}">{{ $etapa->nombre }}</a>
+                    </div>
+                    <!-- Boton Eliminar ETAPA-->
+                    <div class="col-md-1 col-md-offset-7">
+                        <button  type="button" class="btn btn-danger btn-xs " data-toggle="modal" data-target="#modalDelete" data-nombre="{{$etapa->nombre}}"
+                          data-id="{{$etapa->id}}"  data-url="{{ route('etapa.destroy', $etapa->id) }}">Eliminar</button>
+                    </div>
                 </h4>
-                <!-- Boton Eliminar ETAPA-->
-                <form id="formELiminarEtapa" action="{{ route('etapa.destroy', $etapa->id) }}" method="post" >
-                    <input name="_method" type="hidden" value="DELETE">
-                    <input name="_token" type="hidden"  value="{{ csrf_token() }}">
-                    <button type="submit" class="btn btn-danger btn-xs">Eliminar</button>
-                </form>
             </div>
             <div id="collapse<?php echo $etapa->id ?>" class="panel-collapse collapse">
                 <div class="panel-body">
                     <!-- Boton que activa el modal Añadir Requisitos-->
-                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalRequisito"data-nombre="{{$etapa->nombre}}"
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalRequisito" data-nombre="{{$etapa->nombre}}"
                             data-id="{{$etapa->id}}" data-listar="#listarRequisitos{{$etapa->id}}" data-url="/requisito/{{ $etapa->id }}">Añadir Requisito</button>
+
                     <!-- Modal Añadir ROLES-->
                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModalRol<?php echo $etapa->id ?>">Asignar Roles</button>
-                    <!-- Se llama la vista con el modal de Add Rol-->
+
                     @include('etapa.modalrol', compact($etapa))
                     <br><br>
                     <!-- Tabla de Indice de Requisitos-->
