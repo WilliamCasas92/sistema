@@ -18,19 +18,19 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-4" for="InputName">Número de CDP: </label>
+                        <label class="control-label col-md-4" for="InputNumCDP">Número de CDP: </label>
                         <div class="col-md-3">
                             <input type="text" name="num_cdp" class="form-control" autocomplete="off" placeholder="Digite el número de CDP" required>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-4" for="InputName">Objeto: </label>
+                        <label class="control-label col-md-4" for="InputObjeto">Objeto: </label>
                         <div class="col-md-5">
                             <textarea rows="6" name="objeto" class="form-control" autocomplete="off" placeholder="Digite el objeto del contrato" required></textarea>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-4" for="InputName">Depedencia: </label>
+                        <label class="control-label col-md-4" for="InputDependencia">Depedencia: </label>
                         <div class="col-md-5">
                             <select class="form-control" name="dependencia" id="dependencia" required>
                                 <option value="Rectoría">Rectoría</option>
@@ -41,31 +41,31 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-4" for="InputName">Número de Contrato: </label>
+                        <label class="control-label col-md-4" for="InputNumContrato">Número de Contrato: </label>
                         <div class="col-md-3">
                             <input type="text" name="num_contrato" class="form-control" autocomplete="off" placeholder="Digite el número de contrato">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-4" for="InputName">Fecha de Aprobación: </label>
+                        <label class="control-label col-md-4" for="InputDateAprobacion">Fecha de Aprobación: </label>
                         <div class="col-md-3">
                             <input type="date" name="date_aprobación" class="form-control" autocomplete="off" placeholder="" required>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-4" for="InputName">Nombre del Supervisor: </label>
+                        <label class="control-label col-md-4" for="InputNameSupervisor">Nombre del Supervisor: </label>
                         <div class="col-md-5">
                             <input type="text" name="nombre_supervisor" class="form-control" autocomplete="off" placeholder="Digite el nombre del supervisor">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-4" for="InputName">Identificación del Supervisor: </label>
+                        <label class="control-label col-md-4" for="InputIDSupervisor">Identificación del Supervisor: </label>
                         <div class="col-md-3">
                             <input type="text" name="id_supervisor" class="form-control" autocomplete="off" placeholder="Digite C.C. del supervisor">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-4" for="InputName">Email del Supervisor: </label>
+                        <label class="control-label col-md-4" for="InputEmailSupervisor">Email del Supervisor: </label>
                         <div class="col-md-5">
                             <input type="email" name="email_supervisor" class="form-control" autocomplete="off" placeholder="Digite el email del supervisor">
                         </div>

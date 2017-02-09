@@ -8,19 +8,8 @@
             </div>
             <div id="collapse{{ $etapa->id }}" class="panel-collapse collapse">
                 <div class="panel-body">
-                    <form class="form-horizontal">
-                        @foreach ($requisitos as $requisito)
-                            @if ($requisito->etapas_id==$etapa->id)
-                                <div class="checkbox">
-                                    <label class="control-label col-md-4" for="InputName">{{$requisito->nombre}}</label>
-                                    <div class="col-md-4">
-                                        <input type="{{\App\Http\Controllers\DatosEtapaController::imprimir_tipo_requisitos($requisito->tipo_requisitos_id)}}" name="{{$requisito->nombre}}" class="form-control">
-                                    </div>
-                                </div>
-                                <br>
-                            @endif
-                        @endforeach
-                    </form>
+                        <!-- ACA ES DONDE SALE EL FORMULARIO CON REQUISITOS-->
+                        @include('datosetapas.showrequisitos', compact($proceso_contractual, $etapa, $requisitos))
                 </div>
             </div>
         </div>

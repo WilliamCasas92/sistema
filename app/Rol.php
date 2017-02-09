@@ -7,12 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class Rol extends Model
 {
     //Uno o varios ROLES pertenecen a muchos USUARIOS
-    public function users(){
+    public function users()
+    {
         return $this->belongsToMany('App\User', 'user_rol', 'rol_id', 'user_id');
     }
 
     //Uno o varios ROLES pertenecen a muchas ETAPAS
-    public function etapas(){
+    public function etapas()
+    {
         return $this->belongsToMany('App\Etapa', 'etapa_rol', 'rol_id', 'etapa_id');
     }
 }
