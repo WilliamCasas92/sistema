@@ -96,6 +96,7 @@
     <script src="/assets/js/bootstrap.js"></script>
     <!--<script src="/js/jquery-3.1.1.js" type="text/javascript"></script>-->
     @yield('Myscripts')
+    @yield('MyscriptsDiligenciar')
 </body>
 <!-- Footer -->
 <footer class="footer container-fluid text-center">
