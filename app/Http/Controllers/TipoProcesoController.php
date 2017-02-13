@@ -10,8 +10,8 @@ class TipoProcesoController extends Controller
     private $path = 'tipoproceso';
     public function index()
     {
-        $data = TipoProceso::all();
-        return view($this->path.'.index', compact('data'));
+        $tipos_procesos = TipoProceso::all();
+        return view($this->path.'.index', compact('tipos_procesos'));
     }
 
     public function create()
@@ -24,9 +24,7 @@ class TipoProcesoController extends Controller
         try{
             $tipoproceso = new TipoProceso();
             $tipoproceso->nombre       = $request->nombre;
-            if(TipoProceso::select()->where('nombre','=', $tipoproceso->nombre)->first()) {
-                return back()->with('msj', 'El nombre que intenta ingresar ya existe en el sistema.');
-            }
+            $tipoproceso->version       = $request->version;
             if ($request['activo']){
                 $tipoproceso->activo       = $request->activo;
             } else {
@@ -54,6 +52,7 @@ class TipoProcesoController extends Controller
     {
         $tipoproceso = TipoProceso::findOrFail($id);
         $tipoproceso->nombre       = $request->nombre;
+        $tipoproceso->version       = $request->version;
         if ($request['activo']){
             $tipoproceso->activo       = $request->activo;
         } else {

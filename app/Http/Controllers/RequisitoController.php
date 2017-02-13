@@ -25,7 +25,6 @@ class RequisitoController extends Controller
         //
     }
 
-
     public function show($id)
     {
         //
