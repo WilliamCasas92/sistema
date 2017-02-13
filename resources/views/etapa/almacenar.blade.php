@@ -61,7 +61,9 @@
                         $('#modalDelete').modal('hide');
                         $('#formEtapa')[0].reset();
                     }
-                })
+                }).fail( function( jqXHR, textStatus, errorThrown ) {
+                    alert( 'La etapa no se puede eliminar porque tiene requisitos asociados' );
+                });
                 return false;
             });
 
@@ -103,19 +105,27 @@
                 event.preventDefault();
                 return false;
             });
-            //Este toma los datos que seran enviados al modal rol
-            $(function() {
-                $('#modalRol').on("show.bs.modal", function (e) {
-                    $("#modalRolNombre").html($(e.relatedTarget).data('etapa'));
-                    $("#modalRolFormUrl").attr('action', $(e.relatedTarget).data('url'));
-                    $("#modalRolFormadmin").val($(e.relatedTarget).data('administrador'))
-                    scritEtapa=$(e.relatedTarget).data('administrador');
 
-                    alert(scritEtapa);
+            $('.FormRequisito').submit(function(event) {
+                // Enviamos el formulario usando AJAX
+                $.ajax({
+                    type: 'POST',
+                    url: $(this).attr('action'),
+                    data: $(this).serialize(),
+                    // Mostramos un mensaje con la respuesta de PHP
+                    success: function(data) {
+                        //$(listarRequisito).html(data);
+                        alert(data);
+                    }
                 });
+                event.preventDefault();
+                return false;
             });
 
-                //Es la función que lleva los datos al modal eliminar etapas
+
+
+
+            //Es la función que lleva los datos al modal eliminar etapas
             $(function() {
                 $('#modalDelete').on("show.bs.modal", function (e) {
                     $("#modalDeleteNombre").html($(e.relatedTarget).data('nombre'));

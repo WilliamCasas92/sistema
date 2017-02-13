@@ -15,4 +15,9 @@ class ProcesoContractual extends Model
     {
         return $this->hasMany('App\DatoEtapa');
     }
+
+    public function proceso_etapas()
+    {
+        return $this->hasMany('App\ProcesoEtapa');
+    }
 }

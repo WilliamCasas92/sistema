@@ -46,4 +46,9 @@ class Etapa extends Model
         }
         return false;
     }
+    
+    public function proceso_etapas()
+    {
+        return $this->hasMany('App\ProcesoEtapa');
+    }
 }

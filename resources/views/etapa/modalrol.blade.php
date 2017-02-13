@@ -1,4 +1,4 @@
-<div class="modal fade" id="myModalRol<?php echo $etapa->id ?>" role="dialog">
+<div class="modalrol modal fade" id="myModalRol<?php echo $etapa->id ?>"  role="dialog">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -7,7 +7,7 @@
             </div>
             <div class="modal-body">
                 <!-- Formulario Añadir ROLES-->
-                <form class="form-horizontal" method="post" action="/etapa/{{ $etapa->id }}">
+                <form class="FormRequisito form-horizontal" method="POST" action="/etapa/{{ $etapa->id }}">
                     <input name="_method" type="hidden" value="PUT">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="form-group">
