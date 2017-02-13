@@ -15,4 +15,9 @@ class DatoEtapa extends Model
     {
         return $this->belongsTo('App\ProcesoContractual');
     }
+
+    public function historico_dato_etapas()
+    {
+        return $this->hasMany('App\HistoricoDatoEtapa');
+    }
 }

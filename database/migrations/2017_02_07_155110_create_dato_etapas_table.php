@@ -16,6 +16,7 @@ class CreateDatoEtapasTable extends Migration
             $table->foreign('proceso_contractual_id')->references('id')->on('proceso_contractuals');
             $table->integer('requisitos_id')->unsigned();
             $table->foreign('requisitos_id')->references('id')->on('requisitos');
+            $table->integer('user_id');
             $table->timestamps();
             $table->unique(['proceso_contractual_id','requisitos_id']);
         });

@@ -4,6 +4,7 @@
 <form class="form-horizontal" method="post" action="/datosetapas">
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
     <input type="hidden" name="proceso_contractual_id" value="{{$proceso_contractual->id}}">
+    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
     @foreach ($requisitos as $requisito)
         @if ($requisito->etapas_id==$etapa->id)
             @php
