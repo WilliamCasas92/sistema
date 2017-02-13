@@ -16,8 +16,10 @@ class CreateTipoProcesosTable extends Migration
         Schema::create('tipo_procesos', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->string('nombre')->unique();
+            $table->string('nombre');
+            $table->string('version');
             $table->boolean('activo');
+            $table->unique(['nombre','version']);
         });
     }
 

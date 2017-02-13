@@ -19,37 +19,31 @@
                 }
             @endphp
             @if( $tipo_req == 'checkbox')
+                @php
+                    if ($valor==1){
+                        $disabled='disabled';
+                    }else{
+                        $disabled='';
+                    }
+                @endphp
+                <input id="unchecked{{$requisito->id}}" type="hidden" name="atributo[]" value="0" {{$disabled}}>
                 <div class="form-group">
-                    <label class="control-label col-md-5" for="Input">{{$requisito->nombre}}:</label>
+                    <label class="control-label col-md-5" for="Input">{{$requisito->nombre}} {{$obligatorio}}:</label>
                     <div class="col-md-4">
                         <div class="checkbox">
-                            @if($valor=="")
-                                @php
-                                    $valor_checked='1';
-                                    $valor_unchecked='0';
-                                @endphp
-                                <h4>Llego vacio y enviare: {{$valor_checked}} si lo marco.
-                                    Si no marco envio {{$valor_unchecked}}.</h4>
-                                <input id='checkbox' type='checkbox' value='{{$valor_checked}}' name='atributo[]'>
-                                <input id='checkboxHidden' type='hidden' value='{{$valor_unchecked}}' name='atributo[]'>
-                                <input type="hidden" name="requisito_id[]" value="{{$requisito->id}}">
-                            @else
-                                @php
-                                    $valor_checked='1';
-                                    $valor_unchecked='0';
-                                @endphp
-                                <h4>Me llego este dato: {{$valor}}</h4>
-                                <h4>Pero enviare : {{$valor_checked}} si lo marco. sino {{$valor_unchecked}}</h4>
-                                <input id='checkbox' type='checkbox' value='{{$valor_checked}}' name='atributo[]'>
-                                <input id='checkboxHidden' type='hidden' value='{{$valor_unchecked}}' name='atributo[]'>
-                                <input type="hidden" name="requisito_id[]" value="{{$requisito->id}}">
-                            @endif
+                            <label><input id="checked{{$requisito->id}}" type="checkbox" {{ $valor==1 ? 'checked':''}} value="1" name="atributo[]"></label>
+                            <script>
+                                document.getElementById('checked{{$requisito->id}}').onchange = function() {
+                                    document.getElementById('unchecked{{$requisito->id}}').disabled = this.checked;
+                                };
+                            </script>
                         </div>
                     </div>
                 </div>
+                <input type="hidden" name="requisito_id[]" value="{{$requisito->id}}">
             @elseif ( $tipo_req == 'textarea' )
                 <div class="form-group">
-                    <label class="control-label col-md-5" for="Input">{{$requisito->nombre}}: </label>
+                    <label class="control-label col-md-5" for="Input">{{$requisito->nombre}} {{$obligatorio}}: </label>
                     <div class="col-md-4">
                         <textarea rows="6" name="atributo[]" class="form-control" autocomplete="off" {{$required}}>{{$valor}}</textarea>
                     </div>
@@ -76,13 +70,3 @@
         <h3>No hay información por diligenciar.</h3>
     @endif
 </form>
-
-@section('MyscriptsDiligenciar')
-    <script>
-        $(document).ready(function() {
-            if(document.getElementById("checkbox").checked) {
-                document.getElementById('checkboxHidden').disabled = true;
-            }
-        })
-    </script>
-@endsection

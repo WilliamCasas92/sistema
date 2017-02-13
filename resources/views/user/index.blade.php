@@ -13,7 +13,7 @@
                     <h4><a class="btn btn-primary" href="{{route('users.create')}}">Crear nuevo usuario</a></h4>
                 </div>
                 <div class="table-responsive">
-                    @if($data)
+                    @if($users)
                         <table class="table table-hover">
                             <thead>
                             <tr>
@@ -25,15 +25,15 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($data as $row)
+                            @foreach($users as $user)
                                 <tr>
-                                    <td class="text-center">{{ $row->nombre }}</td>
-                                    <td class="text-center">{{ $row->apellidos }}</td>
-                                    <td class="text-center">{{ $row->email }}</td>
-                                    <td class="text-center">{{ $row->created_at }}</td>
+                                    <td class="text-center">{{ $user->nombre }}</td>
+                                    <td class="text-center">{{ $user->apellidos }}</td>
+                                    <td class="text-center">{{ $user->email }}</td>
+                                    <td class="text-center">{{ $user->created_at }}</td>
                                     <td class="text-center">
-                                        <a href="{{ route('users.edit', $row->id) }}" class="btn btn-info btn-xs">Editar</a>
-                                        <form action="{{ route('users.destroy', $row->id) }}" method="post">
+                                        <a href="{{ route('users.edit', $user->id) }}" class="btn btn-info btn-xs">Editar</a>
+                                        <form action="{{ route('users.destroy', $user->id) }}" method="post">
                                             <input name="_method" type="hidden" value="DELETE">
                                             <input name="_token" type="hidden"  value="{{ csrf_token() }}">
                                             <button type="submit" class="btn btn-danger btn-xs">Eliminar</button>

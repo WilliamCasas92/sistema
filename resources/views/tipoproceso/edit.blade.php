@@ -14,6 +14,12 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label class="control-label col-md-4" for="InputVersion">Versión:</label>
+                        <div class="col-md-4">
+                            <input type="text" name="version" class="form-control" placeholder="Nombre del Tipo de Proceso:" value="{{ $tipoproceso->version }}" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="control-label col-md-4" for="InputActivo">Determine el estado del Tipo de Proceso:</label>
                         <div class="col-md-4">
                             <div class="checkbox">
