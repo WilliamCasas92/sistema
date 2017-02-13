@@ -7,6 +7,8 @@ use App\TipoProceso;
 use App\Etapa;
 use App\Requisito;
 use App\TipoRequisito;
+use Illuminate\Support\Facades\DB;
+use Symfony\Component\Finder\Exception\AccessDeniedException;
 
 class EtapaController extends Controller
 {
@@ -20,7 +22,7 @@ class EtapaController extends Controller
 
     public function almacenar($id)
     {
-        $data=Etapa::where('tipo_procesos_id', $id)->get();
+        $data=Etapa::where('tipo_procesos_id', $id)->orderBy('indice', 'asc')->get();
         $data1=Requisito::all();
         //return view($this->path.'.almacenar', compact('data', 'id', 'data1'));
         return view($this->path.'.almacenar', compact('data', 'id', 'data1'));
@@ -37,6 +39,10 @@ class EtapaController extends Controller
             $etapa = new Etapa();
             $etapa->nombre       = $request->nombre;
             $etapa->tipo_procesos_id = $request->idtipoproceso;
+            //En este se cuenta el numero de etapas que existen en proceso para añadir el indice a la etapa
+            $indice = Etapa::where('tipo_procesos_id',$request->idtipoproceso)->count();
+            //Despues de contar el número de etapas, este suma uno más para asignarse a la nueva etapa
+            $etapa->indice = $indice +1 ;
             $etapa->save();
 
             $etapa->roles()->detach();
@@ -67,7 +73,7 @@ class EtapaController extends Controller
             if ($request['rol_gestorpublicacion']) {
                 $etapa->roles()->attach(9);
             }
-            $data=Etapa::where('tipo_procesos_id', $request->idtipoproceso)->get();
+            $data=Etapa::where('tipo_procesos_id', $request->idtipoproceso)->orderBy('indice', 'asc')->get();
             $data1=Requisito::all();
             return view($this->path.'.index', compact('data', 'data1'));
             //return redirect()->back();
@@ -150,4 +156,38 @@ class EtapaController extends Controller
         $tipos_requisitos=TipoRequisito::all();
         return $tipos_requisitos;
     }
+
+    public function subir_etapa($id)
+    {
+        try{
+            $etapa = Etapa::findOrFail($id);
+            $auxEtapa= Etapa::where('tipo_procesos_id',$etapa->tipo_procesos_id)->where('indice', $etapa->indice - 1)->first();
+            $auxIndice = $etapa->indice;
+            $etapa->indice =$auxEtapa->indice;
+            $auxEtapa->indice = $auxIndice;
+            $etapa->save();
+            $auxEtapa->save();
+            return back();
+        }catch (Exception $exception){
+            return "Error al cambiar el index de la etapa".$exception->getMessage();
+        }
+    }
+
+    public function bajar_etapa($id)
+    {
+        try{
+            $etapa = Etapa::findOrFail($id);
+            //$auxEtapa= Etapa::where(['tipo_procesos_id',$etapa->idtipoproceso], ['indice', $etapa->indice + 1])->get();
+            $auxEtapa= Etapa::where('tipo_procesos_id',$etapa->tipo_procesos_id)->where('indice', $etapa->indice + 1)->first();
+            $auxIndice= $etapa->indice;
+            $etapa->indice =$auxEtapa->indice;
+            $auxEtapa->indice = $auxIndice;
+            $etapa->save();
+            $auxEtapa->save();
+            return back();
+        }catch (Exception $exception){
+            return "Error al cambiar el index de la etapa".$exception->getMessage();
+        }
+    }
+
 }

@@ -37,6 +37,10 @@ Route::resource('tipoproceso', 'TipoProcesoController');
 //Rutas Etapa
 Route::get('etapa/{et1}', ['as'=>'etapa.almacenar','uses'=> 'EtapaController@almacenar']);
 
+Route::put('etapa/subir/{etapa_id}', ['as'=>'etapa.subirEtapa','uses'=> 'EtapaController@subir_etapa']);
+
+Route::put('etapa/bajar/{etapa_id}', ['as'=>'etapa.bajarEtapa','uses'=> 'EtapaController@bajar_etapa']);
+
 Route::resource('etapa', 'EtapaController');
 
 //Rutas Requisitos

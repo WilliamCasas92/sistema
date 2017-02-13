@@ -4,10 +4,22 @@
             <div class="panel-heading">
                 <h4 class="panel-title row">
                     <div class="col-md-4">
-                        <a data-toggle="collapse" style="color: black" href="#collapse{{ $etapa->id }}">{{ $etapa->nombre }}</a>
+                        <a data-toggle="collapse" style="color: black" href="#collapse{{ $etapa->id }}">{{ $etapa->nombre }}-{{$etapa->indice}}</a>
+                    </div>
+                    <div class="col-md-2">
+                        <form  method="post" action="/etapa/subir/{{$etapa->id}}">
+                            <input name="_method" type="hidden" value="PUT">
+                            <input name="_token" type="hidden"  value="{{ csrf_token() }}">
+                            <button type="submit" class="glyphicon glyphicon-triangle-top"></button>
+                        </form>
+                        <form   method="post" action="/etapa/bajar/{{$etapa->id}}">
+                            <input name="_method" type="hidden" value="PUT">
+                            <input name="_token" type="hidden"  value="{{ csrf_token() }}">
+                            <button type="submit" class="glyphicon glyphicon-triangle-bottom"></button>
+                        </form>
                     </div>
                     <!-- Boton Eliminar ETAPA-->
-                    <div class="col-md-1 col-md-offset-7">
+                    <div class="col-md-1 col-md-offset-5">
                         <button  type="button" class="btn btn-danger btn-xs " data-toggle="modal" data-target="#modalDelete" data-nombre="{{$etapa->nombre}}"
                           data-id="{{$etapa->id}}"  data-url="{{ route('etapa.destroy', $etapa->id) }}">Eliminar</button>
                     </div>
