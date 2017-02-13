@@ -38,26 +38,24 @@ class DatosEtapaController extends Controller
         try{
             $cont=0;
             foreach ($request['atributo'] as $atributo_) {
-                if ($atributo_ != "") {
-                    $dato_etapa_id = DB::table('dato_etapas')
-                        ->where('proceso_contractual_id', $request->proceso_contractual_id)
-                        ->where('requisitos_id', $request->requisito_id[$cont])
-                        ->value('id');
-                    if ($dato_etapa_id != null ){
-                        //Edita Dato de la Etapa
-                        $dato_etapa = DatoEtapa::findOrFail($dato_etapa_id);
-                        $dato_etapa->valor = $atributo_;
-                        $dato_etapa->save();
-                        $cont++;
-                    }else{
-                        //Crea Dato de la Etapa
-                        $dato_etapa = new DatoEtapa();
-                        $dato_etapa->proceso_contractual_id = $request->proceso_contractual_id;
-                        $dato_etapa->valor = $atributo_;
-                        $dato_etapa->requisitos_id = $request->requisito_id[$cont];
-                        $dato_etapa->save();
-                        $cont++;
-                    }
+                $dato_etapa_id = DB::table('dato_etapas')
+                    ->where('proceso_contractual_id', $request->proceso_contractual_id)
+                    ->where('requisitos_id', $request->requisito_id[$cont])
+                    ->value('id');
+                if ($dato_etapa_id != null ){
+                    //Edita Dato de la Etapa
+                    $dato_etapa = DatoEtapa::findOrFail($dato_etapa_id);
+                    $dato_etapa->valor = $atributo_;
+                    $dato_etapa->save();
+                    $cont++;
+                }else{
+                    //Crea Dato de la Etapa
+                    $dato_etapa = new DatoEtapa();
+                    $dato_etapa->proceso_contractual_id = $request->proceso_contractual_id;
+                    $dato_etapa->valor = $atributo_;
+                    $dato_etapa->requisitos_id = $request->requisito_id[$cont];
+                    $dato_etapa->save();
+                    $cont++;
                 }
             }
             return redirect()->back();
