@@ -23,7 +23,7 @@ class DatosEtapaController extends Controller
     public function menu($proceso_contractual_id)
     {
         $proceso_contractual=DB::table('proceso_contractuals')->where('id', $proceso_contractual_id)->first();
-        $etapas=Etapa::where('tipo_procesos_id', $proceso_contractual->tipo_procesos_id)->get();
+        $etapas=Etapa::where('tipo_procesos_id', $proceso_contractual->tipo_procesos_id)->orderBy('indice', 'asc')->get();
         $requisitos=Requisito::all();
         //$datos_etapas_proceso=DatoEtapa::where('proceso_contractual_id', $proceso_contractual->id)->get();
         return view($this->path.'.menu', compact('proceso_contractual', 'etapas', 'requisitos'));
