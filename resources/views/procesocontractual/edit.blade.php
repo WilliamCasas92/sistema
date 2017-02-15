@@ -8,34 +8,25 @@
                     <input name="_method" type="hidden" value="PUT">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="form-group">
-                        <label class="control-label col-md-4" for="InputName">Seleccione el Tipo de Proceso de Contratación: </label>
+                        <label class="control-label col-md-4" for="InputTipoProceso">Tipo de Proceso de Contratación: </label>
                         <div class="col-md-5">
-                            <select class="form-control" name="tipo_proceso" id="tipo_proceso" required>
-                                @foreach($tipos_procesos as $tipo_proceso)
-                                    @if ($tipo_proceso->nombre == $proceso_contractual->tipo_proceso)
-                                        <option selected value="{{$proceso_contractual->tipo_proceso}}">{{$proceso_contractual->tipo_proceso}}</option>
-                                    @else
-                                        <option value="{{$tipo_proceso->nombre}}">{{$tipo_proceso->nombre}}</option>
-                                    @endif
-                                @endforeach
-
-                            </select>
+                            <input type="text" name="tipo_proceso" readonly="readonly" class="form-control" value="{{$proceso_contractual->tipo_proceso}}" >
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-4" for="InputName">Número de CDP: </label>
+                        <label class="control-label col-md-4" for="InputCDP">Número de CDP: </label>
                         <div class="col-md-3">
                             <input type="text" name="num_cdp" class="form-control" autocomplete="off" placeholder="Digite el número de CDP" value="{{$proceso_contractual->numero_cdp}}" required>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-4" for="InputName">Objeto: </label>
+                        <label class="control-label col-md-4" for="InputObjeto">Objeto: </label>
                         <div class="col-md-5">
                             <textarea rows="6" name="objeto" class="form-control" autocomplete="off" required>{{$proceso_contractual->objeto}}</textarea>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-4" for="InputName">Depedencia: </label>
+                        <label class="control-label col-md-4" for="InputDependencia">Depedencia: </label>
                         <div class="col-md-5">
                             <select class="form-control" name="dependencia" id="dependencia" required>
                                 @if ($proceso_contractual->dependencia=='Rectoría')
@@ -67,14 +58,14 @@
                     </div>
                     @if ($proceso_contractual->numero_contrato==null)
                         <div class="form-group">
-                            <label class="control-label col-md-4" for="InputName">Número de Contrato: </label>
+                            <label class="control-label col-md-4" for="InputNumContrato">Número de Contrato: </label>
                             <div class="col-md-3">
                                 <input type="text" name="num_contrato" class="form-control" autocomplete="off" placeholder="Digite el número de contrato" >
                             </div>
                         </div>
                     @else
                         <div class="form-group">
-                            <label class="control-label col-md-4" for="InputName">Número de Contrato: </label>
+                            <label class="control-label col-md-4" for="InputNumContrato">Número de Contrato: </label>
                             <div class="col-md-3">
                                 <input type="text" name="num_contrato" class="form-control" autocomplete="off" placeholder="Digite el número de contrato" value="{{$proceso_contractual->numero_contrato}}" >
                             </div>
@@ -82,25 +73,25 @@
                     @endif
 
                     <div class="form-group">
-                        <label class="control-label col-md-4" for="InputName">Fecha de Aprobación: </label>
+                        <label class="control-label col-md-4" for="InputDateAprobacion">Fecha de Aprobación por Comité: </label>
                         <div class="col-md-3">
                             <input type="date" name="date_aprobación" class="form-control" autocomplete="off" value="{{$proceso_contractual->fecha_aprobacion}}" required>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-4" for="InputName">Nombre del Supervisor: </label>
+                        <label class="control-label col-md-4" for="InputSupervisor">Nombre del Supervisor: </label>
                         <div class="col-md-5">
                             <input type="text" name="nombre_supervisor" class="form-control" autocomplete="off" placeholder="Digite el nombre del supervisor" value="{{$proceso_contractual->nombre_supervisor}}" >
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-4" for="InputName">Identificación del Supervisor: </label>
+                        <label class="control-label col-md-4" for="InputIDSupervisor">Identificación del Supervisor: </label>
                         <div class="col-md-3">
                             <input type="text" name="id_supervisor" class="form-control" autocomplete="off" placeholder="Digite C.C. del supervisor" value="{{$proceso_contractual->id_supervisor}}" >
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-4" for="InputName">Email del Supervisor: </label>
+                        <label class="control-label col-md-4" for="InputEmailSupervisor">Email del Supervisor: </label>
                         <div class="col-md-5">
                             <input type="email" name="email_supervisor" class="form-control" autocomplete="off" placeholder="Digite el email del supervisor" value="{{$proceso_contractual->email_supervisor}}">
                         </div>

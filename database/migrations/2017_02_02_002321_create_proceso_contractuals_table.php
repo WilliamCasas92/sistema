@@ -6,11 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateProcesoContractualsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+
     public function up()
     {
         Schema::create('proceso_contractuals', function (Blueprint $table) {
@@ -24,6 +20,7 @@ class CreateProcesoContractualsTable extends Migration
             $table->string('nombre_supervisor');
             $table->string('id_supervisor');
             $table->string('email_supervisor');
+            $table->string('estado');
             $table->integer('tipo_procesos_id')->unsigned();
             $table->foreign('tipo_procesos_id')->references('id')->on('tipo_procesos');
             $table->rememberToken();

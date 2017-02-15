@@ -1,6 +1,8 @@
 @php
     $existen_datos=false;
 @endphp
+<h4>Diligencie los siguientes datos: </h4><br>
+Campos obligatorios (*)<br><br>
 <form class="form-horizontal" method="post" action="/datosetapas">
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
     <input type="hidden" name="proceso_contractual_id" value="{{$proceso_contractual->id}}">
@@ -18,6 +20,13 @@
                     $required="";
                     $obligatorio="(*)";
                 }
+                if($etapa_activa=='Activo'){
+                    $requisito_activado='';
+                    $btn_activado='';
+                }else{
+                    $requisito_activado='readonly';
+                    $btn_activado='disabled';
+                }
             @endphp
             @if( $tipo_req == 'checkbox')
                 @php
@@ -32,7 +41,7 @@
                     <label class="control-label col-md-5" for="Input">{{$requisito->nombre}} {{$obligatorio}}:</label>
                     <div class="col-md-4">
                         <div class="checkbox">
-                            <label><input id="checked{{$requisito->id}}" type="checkbox" {{ $valor==1 ? 'checked':''}} value="1" name="atributo[]"></label>
+                            <label><input {{$requisito_activado}} id="checked{{$requisito->id}}" type="checkbox" {{ $valor==1 ? 'checked':''}} value="1" name="atributo[]"></label>
                             <script>
                                 document.getElementById('checked{{$requisito->id}}').onchange = function() {
                                     document.getElementById('unchecked{{$requisito->id}}').disabled = this.checked;
@@ -46,7 +55,7 @@
                 <div class="form-group">
                     <label class="control-label col-md-5" for="Input">{{$requisito->nombre}} {{$obligatorio}}: </label>
                     <div class="col-md-4">
-                        <textarea rows="6" name="atributo[]" class="form-control" autocomplete="off" {{$required}}>{{$valor}}</textarea>
+                        <textarea {{$requisito_activado}} rows="6" name="atributo[]" class="form-control" autocomplete="off" {{$required}}>{{$valor}}</textarea>
                     </div>
                 </div>
                 <input type="hidden" name="requisito_id[]" value="{{$requisito->id}}">
@@ -54,7 +63,7 @@
                     <div class="form-group">
                         <label class="control-label col-md-5" for="Input">{{$requisito->nombre}} {{$obligatorio}}: </label>
                         <div class="col-md-4">
-                            <input type="{{$tipo_req}}" name="atributo[]" class="form-control" value="{{$valor}}" autocomplete="off" {{$required}}>
+                            <input {{$requisito_activado}} type="{{$tipo_req}}" name="atributo[]" class="form-control" value="{{$valor}}" autocomplete="off" {{$required}}>
                         </div>
                     </div>
                     <input type="hidden" name="requisito_id[]" value="{{$requisito->id}}">
@@ -64,7 +73,9 @@
     @if ($existen_datos==true)
         <form class="form-inline">
             <div align="center">
-                <button type="submit" class="btn btn-primary">Guardar</button>
+                <button {{$btn_activado}} type="submit" class="btn btn-primary">Guardar</button>
+                <a {{$btn_activado}} href="" class="btn btn-success"> Enviar a siguiente etapa</a><br>
+
             </div>
         </form>
     @else

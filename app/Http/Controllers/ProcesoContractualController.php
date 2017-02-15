@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\ProcesoContractual;
 use App\TipoProceso;
+use App\ProcesoEtapa;
 
 class ProcesoContractualController extends Controller
 {
@@ -40,7 +41,7 @@ class ProcesoContractualController extends Controller
             $proceso_contractual->id_supervisor      = $request->id_supervisor;
             $proceso_contractual->email_supervisor   = $request->email_supervisor;
             $proceso_contractual->tipo_procesos_id   = DB::table('tipo_procesos')->where('nombre', $request->tipo_proceso)->value('id');
-
+            $proceso_contractual->estado             = '';
             $proceso_contractual->save();
             return redirect()->route('procesocontractual.index');
         } catch(Exception $e){
@@ -77,7 +78,6 @@ class ProcesoContractualController extends Controller
         $proceso_contractual->nombre_supervisor  = $request->nombre_supervisor;
         $proceso_contractual->id_supervisor      = $request->id_supervisor;
         $proceso_contractual->email_supervisor   = $request->email_supervisor;
-
         $proceso_contractual->save();
         return redirect()->route('procesocontractual.index');
     }
@@ -93,8 +93,25 @@ class ProcesoContractualController extends Controller
         }
     }
 
-    //public function chequear_proceso(){
-      //  return view($this->path.'.diligenciaproceso');
-    //}
-
+    public function enviar($idproceso, $iduser)
+    {
+        try{
+            $proceso_contractual = ProcesoContractual::findOrFail($idproceso);
+            //Creando tabla proceso_etapa
+            $proceso_etapa = new ProcesoEtapa();
+            $proceso_etapa->proceso_contractual_id   = $idproceso;
+            $proceso_etapa->etapas_id                = DB::table('etapas')
+                ->where('tipo_procesos_id', $proceso_contractual->tipo_procesos_id )
+                ->where('indice', 1)
+                ->value('id');
+            $proceso_etapa->user_id                  = $iduser;
+            $proceso_etapa->estado                   = 'Activo';
+            $proceso_etapa->save();
+            $proceso_contractual->estado             = 'En Adquisiciones';
+            $proceso_contractual->save();
+        } catch(Exception $e){
+            return "Fatal error -".$e->getMessage();
+        }
+        return back();
+    }
 }

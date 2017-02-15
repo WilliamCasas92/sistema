@@ -11,7 +11,6 @@
                 <label class="control-label" for="InputName">Filtro de búsqueda:</label>
                 <input type="text" name="" class="form-control" autocomplete="off" placeholder="" disabled>
                 <br><br>
-
                 <!-- Tabla de Indice de Procesos creados-->
                 <div class="table-responsive">
                     @if($procesos_contractuales)
@@ -37,12 +36,28 @@
                                     <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->created_at }}</td>
                                     <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->fecha_aprobacion }}</td>
                                     <td class="text-center">
-                                        <a href="{{ route('datosetapas.menu', $proceso_contractual->id) }}" class="btn btn-success btn-xs ">Diligenciar</a>
-                                        <a href="{{ route('procesocontractual.edit', $proceso_contractual->id) }}" class="btn btn-info btn-xs">Editar</a>
+                                        @php
+                                            if($proceso_contractual->estado==''){
+                                                $enviar_adquisiciones='enabled';
+                                                $texto_enviar='Enviar a Adquisiciones';
+                                                $diligenciar='disabled';
+                                                $editar='enabled';
+                                                $eliminar='enabled';
+                                            }else{
+                                                $enviar_adquisiciones='disabled';
+                                                $texto_enviar='Enviado a Adquisiciones';
+                                                $diligenciar='enabled';
+                                                $editar='enabled';
+                                                $eliminar='disabled';
+                                            }
+                                        @endphp
+                                        <a {{$enviar_adquisiciones}} href="{{ route('procesocontractual.enviar', array($proceso_contractual->id, Auth::user()->id)) }}" class="btn btn-warning btn-xs ">{{$texto_enviar}}</a><br>
+                                        <a {{$diligenciar}} href="{{ route('datosetapas.menu', $proceso_contractual->id) }}" class="btn btn-success btn-xs ">Diligenciar</a><br>
+                                        <a {{$editar}} href="{{ route('procesocontractual.edit', $proceso_contractual->id) }}" class="btn btn-info btn-xs">Editar</a><br>
                                         <form action="{{ route('procesocontractual.destroy', $proceso_contractual->id) }}"method="post">
                                             <input name="_method" type="hidden" value="DELETE">
                                             <input name="_token" type="hidden"  value="{{ csrf_token() }}">
-                                            <button type="submit" class="btn btn-danger btn-xs">Eliminar</button>
+                                            <button {{$eliminar}} type="submit" class="btn btn-danger btn-xs">Eliminar</button>
                                         </form>
                                     </td>
                                 </tr>

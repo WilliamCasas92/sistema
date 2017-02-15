@@ -11,6 +11,7 @@ use App\Requisito;
 use App\TipoRequisito;
 use App\DatoEtapa;
 use App\HistoricoDatoEtapa;
+use App\ProcesoEtapa;
 
 class DatosEtapaController extends Controller
 {
@@ -114,5 +115,14 @@ class DatosEtapaController extends Controller
             ->where('requisitos_id', $req_id)
             ->value('valor');
         return $valor;
+    }
+
+    static function busqueda_etapa_activa($proceso_id, $etapa_id)
+    {
+       $activo= DB::table('proceso_etapas')
+           ->where('proceso_contractual_id', $proceso_id)
+           ->where('etapas_id', $etapa_id )
+           ->value('estado');
+       return $activo;
     }
 }

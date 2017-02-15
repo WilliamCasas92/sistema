@@ -17,17 +17,14 @@ class CreateHistoricoProcesoEtapasTable extends Migration
             $table->increments('id');
             $table->integer('proceso_etapa_id')->unsigned();
             $table->foreign('proceso_etapa_id')->references('id')->on('proceso_etapas');
+            $table->integer('proceso_contractual_id');
+            $table->integer('etapas_id');
             $table->integer('user_id');
             $table->string('estado');
-            $table->dateTime('fecha');
+            $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('historico_proceso_etapas');
