@@ -1,5 +1,5 @@
 <div id="listarEtapas">
-    @foreach($data as $etapa)
+    @foreach($etapas as $etapa)
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title row">
@@ -7,15 +7,15 @@
                         <a data-toggle="collapse" style="color: black" href="#collapse{{ $etapa->id }}">{{ $etapa->nombre }}-{{$etapa->indice}}</a>
                     </div>
                     <div class="col-md-2">
-                        <form  method="post" action="/etapa/subir/{{$etapa->id}}">
+                        <form  class="FormSubir" id="FormSubir{{$etapa->id}}" method="post" action="/etapa/subir/{{$etapa->id}}">
                             <input name="_method" type="hidden" value="PUT">
                             <input name="_token" type="hidden"  value="{{ csrf_token() }}">
-                            <button type="submit" class="glyphicon glyphicon-triangle-top"></button>
+                            <button type="submit" class="glyphicon glyphicon-triangle-top btn"></button>
                         </form>
-                        <form   method="post" action="/etapa/bajar/{{$etapa->id}}">
+                        <form  class="FormBajar" id="FormBajar{{$etapa->id}}" method="post" action="/etapa/bajar/{{$etapa->id}}">
                             <input name="_method" type="hidden" value="PUT">
                             <input name="_token" type="hidden"  value="{{ csrf_token() }}">
-                            <button type="submit" class="glyphicon glyphicon-triangle-bottom"></button>
+                            <button type="submit"  class="glyphicon glyphicon-triangle-bottom btn"></button>
                         </form>
                     </div>
                     <!-- Boton Eliminar ETAPA-->
@@ -39,7 +39,7 @@
                     <!-- Tabla de Indice de Requisitos-->
                     <!-- Se llama la vista con la tabla de Requisitos-->
 
-                    @include('etapa.indexrequisitos', compact($data1, $etapa))
+                    @include('etapa.indexrequisitos', compact($requisitos, $etapa))
                 </div>
             </div>
         </div>

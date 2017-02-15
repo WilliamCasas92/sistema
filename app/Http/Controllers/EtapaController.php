@@ -18,14 +18,13 @@ class EtapaController extends Controller
         //$data = Etapa::all();
         //return view($this->path.'.index', compact('data'));
     }
-
-
+    //este metodo es con el cual se muestran las etapas con los requisitos
     public function almacenar($id)
     {
-        $data=Etapa::where('tipo_procesos_id', $id)->orderBy('indice', 'asc')->get();
-        $data1=Requisito::all();
+        $etapas=Etapa::where('tipo_procesos_id', $id)->orderBy('indice', 'asc')->get();
+        $requisitos=Requisito::all();
         //return view($this->path.'.almacenar', compact('data', 'id', 'data1'));
-        return view($this->path.'.almacenar', compact('data', 'id', 'data1'));
+        return view($this->path.'.almacenar', compact('etapas', 'id', 'requisitos'));
     }
 
     public function create()
@@ -73,9 +72,7 @@ class EtapaController extends Controller
             if ($request['rol_gestorpublicacion']) {
                 $etapa->roles()->attach(9);
             }
-            $data=Etapa::where('tipo_procesos_id', $request->idtipoproceso)->orderBy('indice', 'asc')->get();
-            $data1=Requisito::all();
-            return view($this->path.'.index', compact('data', 'data1'));
+            return $this->mostrar($request->idtipoproceso);
             //return redirect()->back();
         } catch(Exception $e){
             return "Fatal error -".$e->getMessage();
@@ -142,9 +139,7 @@ class EtapaController extends Controller
             $etapa->roles()->detach();
             $idProceso=$etapa->tipo_procesos_id;
             $etapa->delete();
-            $data=Etapa::where('tipo_procesos_id', $idProceso)->get();
-            $data1=Requisito::all();
-            return view($this->path.'.index', compact('data', 'data1'));
+            return $this->mostrar($idProceso);
             //return redirect()->back();
         } catch(Exception $e){
             return "Fatal error -".$e->getMessage();
@@ -161,6 +156,7 @@ class EtapaController extends Controller
     {
         try{
             $etapa = Etapa::findOrFail($id);
+            $idProceso = $etapa->tipo_procesos_id;
             if($etapa->indice > 1) {
                 $auxEtapa = Etapa::where('tipo_procesos_id', $etapa->tipo_procesos_id)->where('indice', $etapa->indice - 1)->first();
                 $auxIndice = $etapa->indice;
@@ -169,7 +165,7 @@ class EtapaController extends Controller
                 $etapa->save();
                 $auxEtapa->save();
             }
-            return back();
+            return $this->mostrar($idProceso);
         }catch (Exception $exception){
             return "Error al cambiar el index de la etapa".$exception->getMessage();
         }
@@ -180,7 +176,8 @@ class EtapaController extends Controller
         try{
             $etapa = Etapa::findOrFail($id);
             $indice = Etapa::where('tipo_procesos_id',$etapa->tipo_procesos_id )->count();
-            if($etapa->indice > $indice) {
+            $idProceso = $etapa->tipo_procesos_id;
+            if($etapa->indice < $indice) {
                 //$auxEtapa= Etapa::where(['tipo_procesos_id',$etapa->idtipoproceso], ['indice', $etapa->indice + 1])->get();
                 $auxEtapa = Etapa::where('tipo_procesos_id', $etapa->tipo_procesos_id)->where('indice', $etapa->indice + 1)->first();
                 $auxIndice = $etapa->indice;
@@ -189,10 +186,15 @@ class EtapaController extends Controller
                 $etapa->save();
                 $auxEtapa->save();
             }
-            return back();
+            return $this->mostrar($idProceso);
         }catch (Exception $exception){
             return "Error al cambiar el index de la etapa".$exception->getMessage();
         }
     }
-
+    //Esta función envia las etapas para ser en la vistar index etapas
+    public function mostrar($id){
+        $etapas=Etapa::where('tipo_procesos_id', $id)->orderBy('indice', 'asc')->get();
+        $requisitos=Requisito::all();
+        return view($this->path.'.index', compact('etapas', 'requisitos'));
+    }
 }
