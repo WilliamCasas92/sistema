@@ -161,12 +161,14 @@ class EtapaController extends Controller
     {
         try{
             $etapa = Etapa::findOrFail($id);
-            $auxEtapa= Etapa::where('tipo_procesos_id',$etapa->tipo_procesos_id)->where('indice', $etapa->indice - 1)->first();
-            $auxIndice = $etapa->indice;
-            $etapa->indice =$auxEtapa->indice;
-            $auxEtapa->indice = $auxIndice;
-            $etapa->save();
-            $auxEtapa->save();
+            if($etapa->indice > 1) {
+                $auxEtapa = Etapa::where('tipo_procesos_id', $etapa->tipo_procesos_id)->where('indice', $etapa->indice - 1)->first();
+                $auxIndice = $etapa->indice;
+                $etapa->indice = $auxEtapa->indice;
+                $auxEtapa->indice = $auxIndice;
+                $etapa->save();
+                $auxEtapa->save();
+            }
             return back();
         }catch (Exception $exception){
             return "Error al cambiar el index de la etapa".$exception->getMessage();
@@ -177,13 +179,16 @@ class EtapaController extends Controller
     {
         try{
             $etapa = Etapa::findOrFail($id);
-            //$auxEtapa= Etapa::where(['tipo_procesos_id',$etapa->idtipoproceso], ['indice', $etapa->indice + 1])->get();
-            $auxEtapa= Etapa::where('tipo_procesos_id',$etapa->tipo_procesos_id)->where('indice', $etapa->indice + 1)->first();
-            $auxIndice= $etapa->indice;
-            $etapa->indice =$auxEtapa->indice;
-            $auxEtapa->indice = $auxIndice;
-            $etapa->save();
-            $auxEtapa->save();
+            $indice = Etapa::where('tipo_procesos_id',$etapa->tipo_procesos_id )->count();
+            if($etapa->indice > $indice) {
+                //$auxEtapa= Etapa::where(['tipo_procesos_id',$etapa->idtipoproceso], ['indice', $etapa->indice + 1])->get();
+                $auxEtapa = Etapa::where('tipo_procesos_id', $etapa->tipo_procesos_id)->where('indice', $etapa->indice + 1)->first();
+                $auxIndice = $etapa->indice;
+                $etapa->indice = $auxEtapa->indice;
+                $auxEtapa->indice = $auxIndice;
+                $etapa->save();
+                $auxEtapa->save();
+            }
             return back();
         }catch (Exception $exception){
             return "Error al cambiar el index de la etapa".$exception->getMessage();
