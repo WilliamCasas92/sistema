@@ -7,17 +7,37 @@
                         <a data-toggle="collapse" style="color: black" href="#collapse{{ $etapa->id }}">{{ $etapa->nombre }}-{{$etapa->indice}}</a>
                     </div>
                     <div class="col-md-2">
-                        <form  class="FormSubir" id="FormSubir{{$etapa->id}}" method="post" action="/etapa/subir/{{$etapa->id}}">
+                        <form  id="FormSubir{{$etapa->id}}" method="post" action="/etapa/subir/{{$etapa->id}}">
                             <input name="_method" type="hidden" value="PUT">
                             <input name="_token" type="hidden"  value="{{ csrf_token() }}">
-                            <button type="submit" class="glyphicon glyphicon-triangle-top btn"></button>
+                            <button type="submit" class="glyphicon glyphicon-triangle-top btn" ></button>
                         </form>
-                        <form  class="FormBajar" id="FormBajar{{$etapa->id}}" method="post" action="/etapa/bajar/{{$etapa->id}}">
+                        <form  id="FormBajar{{$etapa->id}}" method="post" action="/etapa/bajar/{{$etapa->id}}">
                             <input name="_method" type="hidden" value="PUT">
                             <input name="_token" type="hidden"  value="{{ csrf_token() }}">
                             <button type="submit"  class="glyphicon glyphicon-triangle-bottom btn"></button>
                         </form>
                     </div>
+                    <script>
+                        $(document).ready(function() {
+                            // Interceptamos el evento submit del formulario agregar Etapa, Al fomulario eliminar Etapa
+                            $('#FormSubir{{$etapa->id}}, #FormBajar{{$etapa->id}}').submit(function () {
+                                // Enviamos el formulario usando AJAX
+                                $.ajax({
+                                    type: 'POST',
+                                    url: $(this).attr('action'),
+                                    data: $(this).serialize(),
+                                    // Mostramos un mensaje con la respuesta de PHP
+                                    success: function (data) {
+                                        $('#listarEtapas').html(data);
+                                    }
+                                }).fail(function (jqXHR, textStatus, errorThrown) {
+                                    alert('La etapa no se puede eliminar porque tiene requisitos asociados');
+                                });
+                                return false;
+                            });
+                        });
+                    </script>
                     <!-- Boton Eliminar ETAPA-->
                     <div class="col-md-1 col-md-offset-5">
                         <button  type="button" class="btn btn-danger btn-xs " data-toggle="modal" data-target="#modalDelete" data-nombre="{{$etapa->nombre}}"

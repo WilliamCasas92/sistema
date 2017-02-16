@@ -67,22 +67,6 @@
                 return false;
             });
 
-            $('.FormSubir, .FormBajar').submit(function() {
-                // Enviamos el formulario usando AJAX
-                 $.ajax({
-                    type: 'PUT',
-                    url: $(this).attr('action'),
-                    data: $(this).serialize(),
-                    // Mostramos un mensaje con la respuesta de PHP
-                    success: function(data) {
-                        $('#listarEtapas').html(data);
-                        $('#modalDelete').modal('hide');
-                        $('#formEtapa')[0].reset();
-                    }
-                });
-
-                return false;
-            });
 
             //Esta función toma los datos del botton añadir requisito y los envia al modal para agregar el nuevo dato
             $(function() {
