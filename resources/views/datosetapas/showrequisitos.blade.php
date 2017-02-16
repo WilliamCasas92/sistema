@@ -3,7 +3,7 @@
 @endphp
 <h4>Diligencie los siguientes datos: </h4><br>
 Campos obligatorios (*)<br><br>
-<form class="form-horizontal" method="post" action="/datosetapas">
+<form id="FormEtapa{{$etapa->id}}" class="form-horizontal" method="post" action="/datosetapas">
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
     <input type="hidden" name="proceso_contractual_id" value="{{$proceso_contractual->id}}">
     <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
@@ -17,14 +17,16 @@ Campos obligatorios (*)<br><br>
                 $obligatorio="";
                 if ($requisito->obligatorio=='1'){
                     //cuando se vaya a pasar de etapa, se activa el required
-                    $required="";
+                    $required="required";
                     $obligatorio="(*)";
                 }
                 if($etapa_activa=='Activo'){
                     $requisito_activado='';
+                    $checkbox_activado='';
                     $btn_activado='';
                 }else{
                     $requisito_activado='readonly';
+                    $checkbox_activado='disabled';
                     $btn_activado='disabled';
                 }
             @endphp
@@ -41,7 +43,7 @@ Campos obligatorios (*)<br><br>
                     <label class="control-label col-md-5" for="Input">{{$requisito->nombre}} {{$obligatorio}}:</label>
                     <div class="col-md-4">
                         <div class="checkbox">
-                            <label><input {{$requisito_activado}} id="checked{{$requisito->id}}" type="checkbox" {{ $valor==1 ? 'checked':''}} value="1" name="atributo[]"></label>
+                            <label><input {{$checkbox_activado}} id="checked{{$requisito->id}}" type="checkbox" {{ $valor==1 ? 'checked':''}} value="1" name="atributo[]" {{$required}}></label>
                             <script>
                                 document.getElementById('checked{{$requisito->id}}').onchange = function() {
                                     document.getElementById('unchecked{{$requisito->id}}').disabled = this.checked;
@@ -73,11 +75,20 @@ Campos obligatorios (*)<br><br>
     @if ($existen_datos==true)
         <form class="form-inline">
             <div align="center">
-                <button {{$btn_activado}} type="submit" class="btn btn-primary">Guardar</button>
-                <a {{$btn_activado}} href="{{ route('datosetapas.enviaretapa', array($proceso_contractual->id, $etapa->id, Auth::user()->id)) }}" class="btn btn-success"> Enviar a siguiente etapa</a><br>
+                @if ($etapa_activa=='Activo')
+                    <button {{$btn_activado}} type="submit" class="btn btn-primary" formnovalidate>Guardar</button>
+                    @if($etapa->indice < count($etapas))
+                        <button {{$btn_activado}} href="{{ route('datosetapas.enviaretapa', array($proceso_contractual->id, $etapa->id, Auth::user()->id)) }}" class="btn btn-success">Enviar a siguiente etapa</button><br>
+                     @else
+                        <a {{$btn_activado}} href="" class="btn btn-danger"> Finalizar</a><br>
+                    @endif
+                @endif
             </div>
         </form>
     @else
         <h3>No hay información por diligenciar.</h3>
     @endif
 </form>
+<script>
+
+</script>
