@@ -85,7 +85,7 @@
                     $("#modaldeleteRequisitoForm").attr('action', $(e.relatedTarget).data('url'));
                     listarRequisito=$(e.relatedTarget).data('listar');
                 });
-            })
+            });
 
 
             //Este responde al formulario guardar tipo de dato que esta en el modaladdrequisito
@@ -106,7 +106,7 @@
                 return false;
             });
 
-            $('.FormRequisito').submit(function(event) {
+            $('#FormRequisito').submit(function(event) {
                 // Enviamos el formulario usando AJAX
                 $.ajax({
                     type: 'POST',
@@ -121,10 +121,6 @@
                 event.preventDefault();
                 return false;
             });
-
-
-
-
             //Es la función que lleva los datos al modal eliminar etapas
             $(function() {
                 $('#modalDelete').on("show.bs.modal", function (e) {

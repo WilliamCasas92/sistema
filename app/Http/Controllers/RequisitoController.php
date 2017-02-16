@@ -56,9 +56,9 @@ class RequisitoController extends Controller
             $requisito = Requisito::findOrFail($id);
             $etapa=Etapa::findOrFail($requisito->etapas_id);
             $requisito->delete();
-            $data1=Requisito::all();
+            $requisitos=Requisito::all();
             //return redirect()->back();
-            return view($this->path.'.indexrequisitos', compact('data1','etapa'));
+            return view($this->path.'.indexrequisitos', compact('requisitos','etapa'));
         } catch(Exception $e){
             return "Fatal error -".$e->getMessage();
         }
@@ -81,10 +81,10 @@ class RequisitoController extends Controller
                 $requsito->obligatorio       ='0';
             }
             $requsito->save();
-            $data1=Requisito::all();
+            $requisitos=Requisito::all();
             $etapa=Etapa::findOrFail($id);
             //return redirect()->back();
-            return view($this->path.'.indexrequisitos', compact('data1','etapa'));
+            return view($this->path.'.indexrequisitos', compact('requisitos','etapa'));
         } catch(Exception $e){
             return "Fatal error -".$e->getMessage();
         }
