@@ -4,7 +4,7 @@
             <div class="panel-heading">
                 <h4 class="panel-title row">
                     <div class="col-md-4">
-                        <a data-toggle="collapse" style="color: black" href="#collapse{{ $etapa->id }}">{{ $etapa->nombre }}-{{$etapa->indice}}</a>
+                        <a data-toggle="collapse" style="color: black" href="#collapse{{ $etapa->id }}">{{ $etapa->nombre }}</a>
                     </div>
                     <div class="col-md-1">
                         @if($etapa->indice > 1 )
