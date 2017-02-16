@@ -55,6 +55,7 @@ Route::get('procesocontractual/enviar/{idproceso}/{iduser}', ['as'=>'procesocont
 Route::resource('procesocontractual', 'ProcesoContractualController');
 
 //Rutas Datos Etapas
+Route::get('datosetapas/enviar/{idproceso}/{idetapa}/{iduser}', ['as'=>'datosetapas.enviaretapa','uses'=> 'DatosEtapaController@enviar_etapa']);
 Route::get('datosetapas/{datoetapa}', ['as'=>'datosetapas.menu','uses'=> 'DatosEtapaController@menu']);
 Route::resource('datosetapas', 'DatosEtapaController');
 

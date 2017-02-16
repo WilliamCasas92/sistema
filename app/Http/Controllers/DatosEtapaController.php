@@ -125,4 +125,28 @@ class DatosEtapaController extends Controller
            ->value('estado');
        return $activo;
     }
+
+    public function enviar_etapa($idproceso, $idetapa, $iduser)
+    {
+        try{
+            $etapa=Etapa::findOrFail($idetapa);
+            $proceso_contractual = ProcesoContractual::findOrFail($idproceso);
+            //Actualizando tabla proceso_etapa
+            $proceso_etapa=ProcesoEtapa::
+                  where('proceso_contractual_id', $idproceso)
+                ->where('etapas_id', $idetapa)
+                ->first();
+            $proceso_etapa->etapas_id                = DB::table('etapas')
+                ->where('tipo_procesos_id', $proceso_contractual->tipo_procesos_id )
+                ->where('indice', $etapa->indice + 1)
+                ->value('id');
+            $proceso_etapa->user_id                  = $iduser;
+            $proceso_contractual->estado             = $etapa->nombre;
+            $proceso_contractual->save();
+            $proceso_etapa->save();
+            return back();
+        } catch(Exception $e){
+            return "Fatal error -".$e->getMessage();
+        }
+    }
 }

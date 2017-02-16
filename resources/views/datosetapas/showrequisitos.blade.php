@@ -74,8 +74,7 @@ Campos obligatorios (*)<br><br>
         <form class="form-inline">
             <div align="center">
                 <button {{$btn_activado}} type="submit" class="btn btn-primary">Guardar</button>
-                <a {{$btn_activado}} href="" class="btn btn-success"> Enviar a siguiente etapa</a><br>
-
+                <a {{$btn_activado}} href="{{ route('datosetapas.enviaretapa', array($proceso_contractual->id, $etapa->id, Auth::user()->id)) }}" class="btn btn-success"> Enviar a siguiente etapa</a><br>
             </div>
         </form>
     @else
