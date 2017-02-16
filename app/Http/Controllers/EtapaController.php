@@ -39,7 +39,7 @@ class EtapaController extends Controller
             $etapa->nombre       = $request->nombre;
             $etapa->tipo_procesos_id = $request->idtipoproceso;
             //En este se cuenta el numero de etapas que existen en proceso para añadir el indice a la etapa
-            $indice = Etapa::where('tipo_procesos_id',$request->idtipoproceso)->count();
+            $indice = $this->contar_etapas($request->idtipoproceso);
             //Despues de contar el número de etapas, este suma uno más para asignarse a la nueva etapa
             $etapa->indice = $indice +1 ;
             $etapa->save();
@@ -137,8 +137,16 @@ class EtapaController extends Controller
         try{
             $etapa = Etapa::findOrFail($id);
             $etapa->roles()->detach();
-            $idProceso=$etapa->tipo_procesos_id;
+            $idProceso = $etapa->tipo_procesos_id;
+            $indiceEtapa= $etapa->indice;
             $etapa->delete();
+            $numEtapas = $indice = $this->contar_etapas($idProceso);
+            while($indiceEtapa <= $numEtapas) {
+                $auxEtapa = Etapa::where('tipo_procesos_id', $idProceso)->where('indice', $indiceEtapa + 1)->first();
+                $auxEtapa->indice = $indiceEtapa;
+                $auxEtapa->save();
+                $indiceEtapa = ++$indiceEtapa;
+            }
             return $this->mostrar($idProceso);
             //return redirect()->back();
         } catch(Exception $e){
@@ -175,7 +183,7 @@ class EtapaController extends Controller
     {
         try{
             $etapa = Etapa::findOrFail($id);
-            $indice = Etapa::where('tipo_procesos_id',$etapa->tipo_procesos_id )->count();
+            $indice = $this->contar_etapas($etapa->tipo_procesos_id);
             $idProceso = $etapa->tipo_procesos_id;
             if($etapa->indice < $indice) {
                 //$auxEtapa= Etapa::where(['tipo_procesos_id',$etapa->idtipoproceso], ['indice', $etapa->indice + 1])->get();
@@ -196,5 +204,9 @@ class EtapaController extends Controller
         $etapas=Etapa::where('tipo_procesos_id', $id)->orderBy('indice', 'asc')->get();
         $requisitos=Requisito::all();
         return view($this->path.'.index', compact('etapas', 'requisitos'));
+    }
+
+    public  function contar_etapas($idProceso){
+        return Etapa::where('tipo_procesos_id',$idProceso )->count();;
     }
 }
