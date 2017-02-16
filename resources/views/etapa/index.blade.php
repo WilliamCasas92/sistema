@@ -7,7 +7,7 @@
                         <a data-toggle="collapse" style="color: black" href="#collapse{{ $etapa->id }}">{{ $etapa->nombre }}-{{$etapa->indice}}</a>
                     </div>
                     <div class="col-md-1">
-                        @if($etapa->indice != 1 )
+                        @if($etapa->indice > 1 )
                             <form  id="FormSubir{{$etapa->id}}" method="post" action="/etapa/subir/{{$etapa->id}}">
                                 <input name="_method" type="hidden" value="PUT">
                                 <input name="_token" type="hidden"  value="{{ csrf_token() }}">
@@ -16,11 +16,13 @@
                         @endif
                     </div>
                     <div class="col-md-1">
+                        @if($etapa->indice < count($etapas))
                         <form  id="FormBajar{{$etapa->id}}" method="post" action="/etapa/bajar/{{$etapa->id}}">
                             <input name="_method" type="hidden" value="PUT">
                             <input name="_token" type="hidden"  value="{{ csrf_token() }}">
                             <button type="submit"  class="glyphicon glyphicon-triangle-bottom btn"></button>
                         </form>
+                        @endif
                     </div>
                     <script>
                         $(document).ready(function() {
