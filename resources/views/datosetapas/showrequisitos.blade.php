@@ -76,10 +76,10 @@ Campos obligatorios (*)<br><br>
         <form class="form-inline">
             <div align="center">
                 @if ($etapa_activa=='Activo')
-                    <button {{$btn_activado}} type="submit" class="btn btn-primary" formnovalidate>Guardar</button>
+                    <button id="btnGuardar{{$etapa->id}}" {{$btn_activado}} type="submit" class="btn btn-primary" formnovalidate>Guardar</button>
                     @if($etapa->indice < count($etapas))
-                        <a {{$btn_activado}} href="{{ route('datosetapas.enviaretapa', array($proceso_contractual->id, $etapa->id, Auth::user()->id)) }}" class="btn btn-success">Enviar a siguiente etapa</a>
-                     @else
+                        <a id="btnEnviar{{$etapa->id}}" href="{{ route('datosetapas.enviaretapa', array($proceso_contractual->id, $etapa->id, Auth::user()->id)) }}" {{$btn_activado}} class="btn btn-success">Enviar a siguiente etapa</a>
+                    @else
                         <a {{$btn_activado}} href="" class="btn btn-danger"> Finalizar</a><br>
                     @endif
                 @endif
@@ -89,3 +89,4 @@ Campos obligatorios (*)<br><br>
         <h3>No hay información por diligenciar.</h3>
     @endif
 </form>
+

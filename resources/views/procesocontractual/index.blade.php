@@ -51,14 +51,16 @@
                                                 $eliminar='disabled';
                                             }
                                         @endphp
-                                        <a {{$enviar_adquisiciones}} href="{{ route('procesocontractual.enviar', array($proceso_contractual->id, Auth::user()->id)) }}" class="btn btn-warning btn-xs ">{{$texto_enviar}}</a><br>
-                                        <a {{$diligenciar}} href="{{ route('datosetapas.menu', $proceso_contractual->id) }}" class="btn btn-success btn-xs ">Diligenciar</a><br>
+                                        <a href="{{ route('procesocontractual.enviar', array($proceso_contractual->id, Auth::user()->id)) }}" class="btn btn-warning btn-xs {{$enviar_adquisiciones}} ">{{$texto_enviar}}</a><br>
+                                        <a href="{{ route('datosetapas.menu', $proceso_contractual->id) }}" class="btn btn-success btn-xs {{$diligenciar}} ">Diligenciar</a><br>
                                         <a {{$editar}} href="{{ route('procesocontractual.edit', $proceso_contractual->id) }}" class="btn btn-info btn-xs">Editar</a><br>
-                                        <form action="{{ route('procesocontractual.destroy', $proceso_contractual->id) }}"method="post">
-                                            <input name="_method" type="hidden" value="DELETE">
-                                            <input name="_token" type="hidden"  value="{{ csrf_token() }}">
-                                            <button {{$eliminar}} type="submit" class="btn btn-danger btn-xs">Eliminar</button>
-                                        </form>
+                                        @if($eliminar=='enabled')
+                                            <form action="{{ route('procesocontractual.destroy', $proceso_contractual->id) }}"method="post">
+                                                <input name="_method" type="hidden" value="DELETE">
+                                                <input name="_token" type="hidden"  value="{{ csrf_token() }}">
+                                                <button type="submit" class="btn btn-danger btn-xs ">Eliminar</button>
+                                            </form>
+                                        @endif
                                     </td>
                                 </tr>
                             </tbody>
