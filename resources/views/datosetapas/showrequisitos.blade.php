@@ -85,6 +85,26 @@ Campos obligatorios (*)<br><br>
                 @endif
             </div>
         </form>
+        <script>
+            $(document).ready(function() {
+                // Interceptamos el evento submit del formulario agregar Etapa, Al fomulario eliminar Etapa
+                $('#FormEtapa{{$etapa->id}}').submit(function () {
+                    // Enviamos el formulario usando AJAX
+                    $.ajax({
+                        type: 'POST',
+                        url: $(this).attr('action'),
+                        data: $(this).serialize(),
+                        // Mostramos un mensaje con la respuesta de PHP
+                        success: function (data) {
+                            alert("Los datos fuerón guardados con exito!")
+                        }
+                    }).fail(function (jqXHR, textStatus, errorThrown) {
+                        alert('La etapa no se puede eliminar porque tiene requisitos asociados');
+                    });
+                    return false;
+                });
+            });
+        </script>
     @else
         <h3>No hay información por diligenciar.</h3>
     @endif
