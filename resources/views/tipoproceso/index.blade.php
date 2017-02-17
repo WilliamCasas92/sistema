@@ -1,6 +1,6 @@
 @extends('master')
 @section('indexprocesstype')
-    <div class="container col-md-9">
+    <div class="container col-md-12">
         <div class="panel panel-success">
             <div class="panel-heading"><h3>Tipos de Procesos Registrados</h3></div>
             <div class="panel-body">

@@ -1,7 +1,7 @@
 @extends('master')
 
 @section('homecontent')
-    <div class="container col-md-9">
+    <div class="container col-md-12">
         <div class="panel panel-success">
             <div class="panel-heading text-center"><h1>Servicios de la plataforma</h1></div>
             <div class="panel-body">
@@ -15,7 +15,7 @@
                             <p>Crea, suspende y edita los procesos de contratación.</p>
                         </div>
                         <div class="col-sm-4">
-                            <span class="glyphicon glyphicon-leaf"></span>
+                            <span class="glyphicon glyphicon-user"></span>
                             <h4>Gestión de Usuarios</h4>
                             <p>Agrega y asigna permisos a los usuarios.</p>
                         </div>
@@ -26,6 +26,7 @@
                         </div>
                     </div>
                 </div>
+                <br><br><br>
             </div>
         </div>
     </div>
