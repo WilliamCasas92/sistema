@@ -25,24 +25,7 @@
                         @endif
                     </div>
                     <script>
-                        $(document).ready(function() {
-                            // Interceptamos el evento submit del formulario agregar Etapa, Al fomulario eliminar Etapa
-                            $('#FormSubir{{$etapa->id}}, #FormBajar{{$etapa->id}}').submit(function () {
-                                // Enviamos el formulario usando AJAX
-                                $.ajax({
-                                    type: 'POST',
-                                    url: $(this).attr('action'),
-                                    data: $(this).serialize(),
-                                    // Mostramos un mensaje con la respuesta de PHP
-                                    success: function (data) {
-                                        $('#listarEtapas').html(data);
-                                    }
-                                }).fail(function (jqXHR, textStatus, errorThrown) {
-                                    alert('La etapa no se puede eliminar porque tiene requisitos asociados');
-                                });
-                                return false;
-                            });
-                        });
+
                     </script>
                     <!-- Boton Eliminar ETAPA-->
                     <div class="col-md-1 col-md-offset-5">
