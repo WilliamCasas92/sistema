@@ -6,6 +6,7 @@
     <!-- Styles -->
     <link href="{{asset('/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('/css/estilo.css')}}" rel="stylesheet">
+    @include('estilogeneral')
     <link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -14,16 +15,16 @@
 </head>
 <header>
     <!-- Header Welcome -->
-    <div class="container-fluid well-md" style="background-color:rgb(159, 178, 82);">
+    <div class="container-fluid well-md" id="colorheader">
         <div class="row">
             <div class="col-md-3">
                 <img src="{{asset('images/logo-institucion-300dpi-blanco-05.png')}}" width='350' height='70'>
             </div>
             <div align="center" class="col-md-6">
-                <h1>Sistema de gestión para procesos contractuales</h1>
+                <h1 style="color:white;">Sistema de gestión para procesos contractuales</h1>
             </div>
             <div align="left">
-                <div class="col-md-3">
+                <div class="col-md-3" style="color:white;">
                     <h4>Conectado como</h4>
                     <h5>{{ Auth::user()->email }}</h5>
                     <h5>{{ Auth::user()->nombre }} {{ Auth::user()->apellidos }}</h5>
@@ -41,7 +42,7 @@
     </div>
     <!-- Header NavBar -->
     <nav class="navbar navbar-default">
-        <div class="container-fluid" style="background-color:rgb(25, 104, 68);">
+        <div class="container-fluid">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="{{ url('home') }}" class="btn btn-lg">
                         <span class="glyphicon glyphicon-home"></span> Home</a></li>
@@ -71,22 +72,17 @@
             </div>
             <div>
                 @yield("homecontent")
-
                 @yield("createuser")
                 @yield("indexuser")
                 @yield("edituser")
-
                 @yield("createprocesstype")
                 @yield("indexprocesstype")
                 @yield("editprocesstype")
-
                 @yield("createetapa")
                 @yield("editetapa")
-
                 @yield("indexcontractualprocess")
                 @yield("createcontractualprocess")
                 @yield("editcontractualprocess")
-
                 @yield("checkprocess")
 
             </div>
@@ -97,6 +93,7 @@
     <script src="/assets/js/bootstrap.js"></script>
     <!--<script src="/js/jquery-3.1.1.js" type="text/javascript"></script>-->
     @yield('Myscripts')
+    @yield('scriptMenu')
     @yield('MyscriptsDiligenciar')
 </body>
 <!-- Footer -->
