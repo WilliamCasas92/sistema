@@ -13,6 +13,10 @@
         color: white;
     }
 
+    .darkgreen {
+        color: darkgreen;
+    }
+
     .navbarsize{
         padding-top: 10px;
         padding-bottom: 10px;
@@ -33,7 +37,13 @@
     .imglogo{
         margin-top: 20px;
     }
+    .margincollapse{
+        margin-top: -15px;
+    }
 
+    .bodycollapsegeneral {
+        background-color: #f0fff0;
+    }
 
 
 </style>

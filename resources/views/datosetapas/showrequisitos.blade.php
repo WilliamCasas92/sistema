@@ -1,7 +1,7 @@
 @php
     $existen_datos=false;
 @endphp
-<h4>Diligencie los siguientes datos: </h4><br>
+<h4>Diligencie los siguientes datos: </h4>
 Campos obligatorios (*)<br><br>
 <form id="FormEtapa{{$etapa->id}}" class="form-horizontal" method="post" action="/datosetapas">
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
