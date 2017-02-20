@@ -100,3 +100,24 @@ Route::get('test4', function (){
         }
     }
 });
+
+Route::get('test5', function (){
+    $datos = DB::table('dato_etapas')
+        ->join('requisitos', function ($join) {
+            $join->on('dato_etapas.requisitos_id', '=', 'requisitos.id')
+                ->where('requisitos.etapas_id', '=', 1);
+        })
+        ->get();
+
+    if ($datos->count()){
+        foreach ($datos as $dato){
+            if (($dato->obligatorio=='1') &&
+                ( ($dato->valor=='')||($dato->valor=='0') )){
+                echo 'El campo '.$dato->nombre. ' es obligatorio';
+            }
+        }
+    }else{
+        echo 'no existen datos';
+    }
+
+});

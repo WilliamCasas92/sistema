@@ -65,9 +65,6 @@ class DatosEtapaController extends Controller
                     $dato_etapa->user_id = $request->user_id;
                     $dato_etapa->valor = $atributo_;
                     $dato_etapa->requisitos_id = $request->requisito_id[$cont];
-                    $dato_etapa->obligatorio   = DB::table('requisitos')
-                        ->where('id', $request->requisito_id[$cont] )
-                        ->value('obligatorio');
                     $dato_etapa->save();
                     //Guardando en el historial
                     $historial_dato_etapa = new HistoricoDatoEtapa();

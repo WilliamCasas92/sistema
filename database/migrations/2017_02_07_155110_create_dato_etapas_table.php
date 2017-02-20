@@ -12,7 +12,6 @@ class CreateDatoEtapasTable extends Migration
         Schema::create('dato_etapas', function (Blueprint $table) {
             $table->increments('id');
             $table->longText('valor');
-            $table->boolean('obligatorio');
             $table->integer('proceso_contractual_id')->unsigned();
             $table->foreign('proceso_contractual_id')->references('id')->on('proceso_contractuals');
             $table->integer('requisitos_id')->unsigned();
