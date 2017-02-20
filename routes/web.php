@@ -119,5 +119,4 @@ Route::get('test5', function (){
     }else{
         echo 'no existen datos';
     }
-
 });

@@ -131,22 +131,53 @@ class DatosEtapaController extends Controller
         try{
             $etapa=Etapa::findOrFail($idetapa);
             $proceso_contractual = ProcesoContractual::findOrFail($idproceso);
-            //Actualizando tabla proceso_etapa
-            $proceso_etapa=ProcesoEtapa::
-                  where('proceso_contractual_id', $idproceso)
-                ->where('etapas_id', $idetapa)
-                ->first();
-            $proceso_etapa->etapas_id                = DB::table('etapas')
-                ->where('tipo_procesos_id', $proceso_contractual->tipo_procesos_id )
-                ->where('indice', $etapa->indice + 1)
-                ->value('id');
-            $proceso_etapa->user_id                  = $iduser;
-            $proceso_contractual->estado             = $etapa->nombre;
-            $proceso_contractual->save();
-            $proceso_etapa->save();
+            $contenido_validacion=$this->validar_datos_obligatorios($etapa->id);
+            if($contenido_validacion->resultado==true){
+                //Actualizando tabla proceso_etapa
+                $proceso_etapa=ProcesoEtapa::
+                where('proceso_contractual_id', $idproceso)
+                    ->where('etapas_id', $idetapa)
+                    ->first();
+                $proceso_etapa->etapas_id                = DB::table('etapas')
+                    ->where('tipo_procesos_id', $proceso_contractual->tipo_procesos_id )
+                    ->where('indice', $etapa->indice + 1)
+                    ->value('id');
+                $proceso_etapa->user_id                  = $iduser;
+                $proceso_contractual->estado             = $etapa->nombre;
+                $proceso_contractual->save();
+                $proceso_etapa->save();
+            }
             return back();
         } catch(Exception $e){
             return "Fatal error -".$e->getMessage();
         }
+    }
+
+    public function validar_datos_obligatorios($id_etapa)
+    {
+        $contenido_validacion = new \stdClass();
+        $datos = DB::table('dato_etapas')
+            ->join('requisitos', function ($join) use ($id_etapa) {
+                $join->on('dato_etapas.requisitos_id', '=', 'requisitos.id')
+                    ->where('requisitos.etapas_id', '=', $id_etapa);
+            })
+            ->get();
+        if ($datos->count()){
+            foreach ($datos as $dato){
+                if (($dato->obligatorio=='1') &&
+                    ( ($dato->valor=='')||($dato->valor=='0') )){
+                        $contenido_validacion->mensaje      = 'Debe diligenciar el campo "'.$dato->nombre.'" para finalizar la etapa.';
+                        $contenido_validacion->resultado    = false;
+                        return $contenido_validacion;
+                }
+            }
+        }else{
+            $contenido_validacion->mensaje      = 'No se ha guardado ningun dato';
+            $contenido_validacion->resultado    = false;
+            return $contenido_validacion;
+        }
+        $contenido_validacion->mensaje      = '';
+        $contenido_validacion->resultado    = true;
+        return $contenido_validacion;
     }
 }
