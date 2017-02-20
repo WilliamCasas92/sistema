@@ -79,6 +79,9 @@ Campos obligatorios (*)<br><br>
                     <button id="btnGuardar{{$etapa->id}}" {{$btn_activado}} type="submit" class="btn btn-primary" formnovalidate>Guardar</button>
                     @if($etapa->indice < count($etapas))
                         <a id="btnEnviar{{$etapa->id}}" href="{{ route('datosetapas.enviaretapa', array($proceso_contractual->id, $etapa->id, Auth::user()->id)) }}" {{$btn_activado}} class="btn btn-success">Enviar a siguiente etapa</a>
+
+                        <button type="button" {{$btn_activado}} class="btn btn-success" data-toggle="modal" data-target="#modalSave" data-url="{{ route('datosetapas.enviaretapa', array($proceso_contractual->id, $etapa->id, Auth::user()->id)) }}"
+                          data-nombre="{{$etapa->nombre}}">Enviar a siguiente etapa </button>
                     @else
                         <a {{$btn_activado}} href="" class="btn btn-danger"> Finalizar</a><br>
                     @endif

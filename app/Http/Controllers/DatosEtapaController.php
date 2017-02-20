@@ -35,7 +35,7 @@ class DatosEtapaController extends Controller
 
     }
 
-    public function store(Request $request)
+     public function store(Request $request)
     {
         try{
             $cont=0;
@@ -146,8 +146,9 @@ class DatosEtapaController extends Controller
                 $proceso_contractual->estado             = $etapa->nombre;
                 $proceso_contractual->save();
                 $proceso_etapa->save();
+                return view('datosetapas/pasoetapa');
             }
-            return back();
+            return $contenido_validacion->mensaje;
         } catch(Exception $e){
             return "Fatal error -".$e->getMessage();
         }
