@@ -13,9 +13,10 @@
             @endphp
             <div class="panel-heading" id="{{$color_panel_activo}}">
                 <h4 class="panel-title">
+                    <label>{{ $etapa->nombre }}</label>
                     <a data-toggle="collapse"  href="#collapse{{ $etapa->id }}">
-                        <span class="glyphicon glyphicon-plus {{$color_panel_activo}}"></span>
-                    </a><label>{{ $etapa->nombre }}</label></h4>
+                        <span class="glyphicon glyphicon-arrow-down {{$color_panel_activo}}"></span></a>
+                </h4>
             </div>
             <div id="collapse{{ $etapa->id }}" class="panel-collapse collapse">
                 <div class="panel-body" id="{{$color_body_activo}}">

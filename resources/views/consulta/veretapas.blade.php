@@ -5,8 +5,8 @@
                 <h4 class="panel-title">
                     <label>{{ $etapa->nombre }}</label>
                     <a data-toggle="collapse"  href="#collapse{{ $etapa->id }}">
-                        <span class="glyphicon glyphicon-arrow-down"></span>
-                    </a></h4>
+                        <span class="glyphicon glyphicon-arrow-down"></span></a>
+                </h4>
             </div>
             <div id="collapse{{ $etapa->id }}" class="panel-collapse collapse">
                 <div class="panel-body">
