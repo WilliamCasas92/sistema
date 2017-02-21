@@ -2,7 +2,7 @@
 @section('createcontractualprocess')
     <div class="container col-md-12">
         <div class="panel panel-success">
-            <div class="panel-heading"><h3>Crear Nuevo Proceso de Contratación</h3></div>
+            <div class="panel-heading"><h3>Crear nuevo proceso de contratación</h3></div>
             <div class="panel-body">
                 <form class="form-horizontal" method="post" action="/procesocontractual">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -47,7 +47,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-4" for="InputDateAprobacion">Fecha de Aprobación: </label>
+                        <label class="control-label col-md-4" for="InputDateAprobacion">Fecha de Aprobación por comité: </label>
                         <div class="col-md-3">
                             <input type="date" name="date_aprobación" class="form-control" autocomplete="off" placeholder="" required>
                         </div>

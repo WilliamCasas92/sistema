@@ -45,8 +45,10 @@
     <!-- Header NavBar -->
     <nav class="navbar navbar-default navbarsize" id="estilonavbar">
         <div align="center">
-            <a href="{{ url('home') }}" type="button" class="btn btn-success"><span class="glyphicon glyphicon-home"></span> Inicio</a>
-            <a type="button" class="btn btn-success"><span class="glyphicon glyphicon-search"></span> Consultar procesos</a>
+            <a href="{{ url('home') }}" type="button" class="btn btn-success">
+                <span class="glyphicon glyphicon-home"></span> Inicio</a>
+            <a href="{{ url('consultaproceso') }}" type="button" class="btn btn-success">
+                <span class="glyphicon glyphicon-search"></span> Consultar procesos</a>
             <a href="{{ url('procesocontractual') }}" type="button" class="btn btn-success">
                 <span class="glyphicon glyphicon-edit"></span> Diligenciar información de proceso</a>
             <div class="btn-group">
@@ -84,6 +86,8 @@
                 @yield("createcontractualprocess")
                 @yield("editcontractualprocess")
                 @yield("checkprocess")
+                @yield("consultacontent")
+                @yield("showcontractcontent")
             </div>
         </div>
     </div>

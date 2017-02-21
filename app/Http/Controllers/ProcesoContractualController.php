@@ -41,7 +41,7 @@ class ProcesoContractualController extends Controller
             $proceso_contractual->id_supervisor      = $request->id_supervisor;
             $proceso_contractual->email_supervisor   = $request->email_supervisor;
             $proceso_contractual->tipo_procesos_id   = DB::table('tipo_procesos')->where('nombre', $request->tipo_proceso)->value('id');
-            $proceso_contractual->estado             = '';
+            $proceso_contractual->estado             = 'Sin enviar al Área de Adquisiciones.';
             $proceso_contractual->save();
             return redirect()->route('procesocontractual.index');
         } catch(Exception $e){
@@ -107,7 +107,7 @@ class ProcesoContractualController extends Controller
             $proceso_etapa->user_id                  = $iduser;
             $proceso_etapa->estado                   = 'Activo';
             $proceso_etapa->save();
-            $proceso_contractual->estado             = 'En Adquisiciones';
+            $proceso_contractual->estado             = 'Enviado al Área de Adquisiciones.';
             $proceso_contractual->save();
         } catch(Exception $e){
             return "Fatal error -".$e->getMessage();

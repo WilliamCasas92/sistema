@@ -30,14 +30,14 @@
                             @foreach($procesos_contractuales as $proceso_contractual)
                                 <tr>
                                     <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->numero_cdp }}</td>
-                                    <td style="font-size : 11px;" class="text-center" width="35%">{{ $proceso_contractual->objeto }}</td>
+                                    <td style="font-size : 11px;"  class="text-justify" width="35%">{{ $proceso_contractual->objeto }}</td>
                                     <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->dependencia }}</td>
                                     <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->tipo_proceso }}</td>
                                     <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->created_at }}</td>
                                     <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->fecha_aprobacion }}</td>
                                     <td class="text-center">
                                         @php
-                                            if($proceso_contractual->estado==''){
+                                            if($proceso_contractual->estado=='Sin enviar al Área de Adquisiciones.'){
                                                 $enviar_adquisiciones='enabled';
                                                 $texto_enviar='Enviar a Adquisiciones';
                                                 $diligenciar='disabled';
@@ -45,7 +45,7 @@
                                                 $eliminar='enabled';
                                             }else{
                                                 $enviar_adquisiciones='disabled';
-                                                $texto_enviar='Enviado a Adquisiciones';
+                                                $texto_enviar='Enviado al Área de Adquisiciones.';
                                                 $diligenciar='enabled';
                                                 $editar='enabled';
                                                 $eliminar='disabled';

@@ -1,16 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| This file is where you may define all of the routes that are handled
-| by your application. Just tell Laravel the URIs it should respond
-| to using a Closure or controller method. Build something great!
-|
-*/
-
 //Ruta Inicio
 Route::get('/', function () {
     return view('welcome');
@@ -20,8 +9,10 @@ Route::get('/', function () {
 Route::get('home', function () {
     return view('home');
 });
+
 //Rutas Usuarios
 Route::resource('users', 'UserController');
+
 //Rutas Google
 Route::get('social/google', 'SocialController@getSocialAuth');
 Route::get('social/callback/google', 'SocialController@getSocialAuthCallback');
@@ -31,23 +22,19 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
+
 //Rutas TipoProceso
 Route::resource('tipoproceso', 'TipoProcesoController');
 
 //Rutas Etapa
 Route::get('etapa/{et1}', ['as'=>'etapa.almacenar','uses'=> 'EtapaController@almacenar']);
-
 Route::put('etapa/subir/{etapa_id}', ['as'=>'etapa.subirEtapa','uses'=> 'EtapaController@subir_etapa']);
-
 Route::put('etapa/bajar/{etapa_id}', ['as'=>'etapa.bajarEtapa','uses'=> 'EtapaController@bajar_etapa']);
-
 Route::resource('etapa', 'EtapaController');
 
 //Rutas Requisitos
 Route::get('requisito/{req1}', ['as'=>'requisito.almacenar','uses'=> 'RequisitoController@almacenar']);
-
 Route::post('requisito/{requisito}', ['as'=>'requisito.guardar','uses'=> 'RequisitoController@guardar']);
-
 Route::resource('requisito', 'RequisitoController');
 
 //Rutas Procesos Contractuales
@@ -59,8 +46,10 @@ Route::get('datosetapas/enviar/{idproceso}/{idetapa}/{iduser}', ['as'=>'datoseta
 Route::get('datosetapas/{datoetapa}', ['as'=>'datosetapas.menu','uses'=> 'DatosEtapaController@menu']);
 Route::resource('datosetapas', 'DatosEtapaController');
 
-
-
+//Rutas Consulta de procesos
+Route::get('consultaproceso', ['as'=>'consulta.mostrar','uses'=> 'ConsultasController@mostrar']);
+Route::get('consultaproceso/{idproceso}', ['as'=>'consulta.consultavermas','uses'=> 'ConsultasController@ver_mas']);
+Route::get('consultavermas/{idproceso}', ['as'=>'consultas.buscar','uses'=> 'ConsultasController@buscar']);
 
 
 //TESTS
