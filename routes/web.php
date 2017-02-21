@@ -49,7 +49,6 @@ Route::resource('datosetapas', 'DatosEtapaController');
 //Rutas Consulta de procesos
 Route::get('consultaproceso', ['as'=>'consulta.mostrar','uses'=> 'ConsultasController@mostrar']);
 Route::get('consultaproceso/{idproceso}', ['as'=>'consulta.consultavermas','uses'=> 'ConsultasController@ver_mas']);
-Route::get('consultavermas/{idproceso}', ['as'=>'consultas.buscar','uses'=> 'ConsultasController@buscar']);
 
 
 //TESTS

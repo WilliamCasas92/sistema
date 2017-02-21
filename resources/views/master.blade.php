@@ -51,19 +51,21 @@
                 <span class="glyphicon glyphicon-search"></span> Consultar procesos</a>
             <a href="{{ url('procesocontractual') }}" type="button" class="btn btn-success">
                 <span class="glyphicon glyphicon-edit"></span> Diligenciar información de proceso</a>
-            <div class="btn-group">
-                <button type="button" class="btn btn-success">
-                    <span class="glyphicon glyphicon-wrench"></span> Administración</button>
-                <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" role="menu">
-                    <li><a href="{{ url('users') }}">
-                            <span class="glyphicon glyphicon-user"></span> Gestión de Usuarios</a></li>
-                    <li><a href="{{ url('tipoproceso') }}">
-                            <span class="glyphicon glyphicon-lock"></span> Gestión de Tipos de Proceso de Contratación</a></li>
-                </ul>
-            </div>
+            @if(Auth::user()->hasRol('Administrador'))
+                <div class="btn-group">
+                    <button type="button" class="btn btn-success">
+                        <span class="glyphicon glyphicon-wrench"></span> Administración</button>
+                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="{{ url('users') }}">
+                                <span class="glyphicon glyphicon-user"></span> Gestión de Usuarios</a></li>
+                        <li><a href="{{ url('tipoproceso') }}">
+                                <span class="glyphicon glyphicon-lock"></span> Gestión de Tipos de Proceso de Contratación</a></li>
+                    </ul>
+                </div>
+            @endif
             <a href="{{ url('about') }}" type="button" class="btn btn-success"><span class="glyphicon glyphicon-info-sign"></span> Acerca</a>
         </div>
     </nav>
