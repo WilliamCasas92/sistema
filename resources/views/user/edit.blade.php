@@ -60,6 +60,12 @@
                             <div class="checkbox">
                                 <label><input type="checkbox" {{ $user->hasRol('Gestor de publicación') ? 'checked':''}} name="rol_gestorpublicacion" value="9">Gestor de Publicación</label>
                             </div>
+                            <div class="checkbox">
+                                <label><input type="checkbox" {{ $user->hasRol('Secretario técnico de dependencia') ? 'checked':''}} name="rol_secretariotecnico" value="10">Secretario técnico de dependencia</label>
+                            </div>
+                            <div class="checkbox">
+                                <label><input type="checkbox" {{ $user->hasRol('Usuario general') ? 'checked':''}} name="rol_usuariogeneral" value="11">Usuario general</label>
+                            </div>
                         </div>
                     </div><br>
                     <form class="form-inline">

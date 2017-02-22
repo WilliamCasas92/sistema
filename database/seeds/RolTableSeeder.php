@@ -57,5 +57,15 @@ class RolTableSeeder extends Seeder
         $rol_gestorpublicacion->nombre='Gestor de publicación';
         $rol_gestorpublicacion->descripcion='Se encarga de publicar los procesos contractuales en los portales SECOP y Gestión Transparente.';
         $rol_gestorpublicacion->save();
+        //SECRETARIO TECNICO DE DEPENDENCIA
+        $rol_gestorpublicacion = new Rol();
+        $rol_gestorpublicacion->nombre='Secretario técnico de dependencia';
+        $rol_gestorpublicacion->descripcion='Se encarga de crear los procesos de contratación.';
+        $rol_gestorpublicacion->save();
+        //USUARIO GENERAL
+        $rol_gestorpublicacion = new Rol();
+        $rol_gestorpublicacion->nombre='Usuario general';
+        $rol_gestorpublicacion->descripcion='Solo puede consultar procesos de contratación';
+        $rol_gestorpublicacion->save();
     }
 }

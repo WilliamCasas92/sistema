@@ -1,14 +1,14 @@
 @extends('master')
 @section('createuser')
-    @if (session('error'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
-        </div>
-    @endif
     <div class="container col-md-12">
         <div class="panel panel-success">
             <div class="panel-heading"><h3>Registrar Nuevo Usuario</h3></div>
             <div class="panel-body">
+                @if (session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
                 <form class="form-horizontal" method="post" action="/users">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="form-group">
@@ -61,6 +61,12 @@
                             </div>
                             <div class="checkbox">
                                 <label><input type="checkbox" name="rol_gestorpublicacion" value="9">Gestor de Publicación</label>
+                            </div>
+                            <div class="checkbox">
+                                <label><input type="checkbox" name="rol_secretariotecnico" value="10">Secretario técnico de dependencia</label>
+                            </div>
+                            <div class="checkbox">
+                                <label><input type="checkbox" name="rol_usuariogeneral" value="11">Usuario general</label>
                             </div>
                         </div>
                     </div><br>

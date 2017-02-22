@@ -64,7 +64,8 @@ Route::get('test2', function (){
     $reqs=App\Requisito::all();
     foreach ($reqs as $req){
         //$proceso= App\TipoProceso::find($etapa->tipo_procesos_id);
-        echo $req->etapas->nombre . " CONTIENE EL REQUISITO: " . $req->nombre." DEL TIPO: " . $req->tipo_requisitos->nombre . "<br/>";
+        echo $req->etapas->nombre . " CONTIENE EL REQUISITO: " . $req->nombre." DEL TIPO: "
+            . $req->tipo_requisitos->nombre . "<br/>";
     }
 });
 

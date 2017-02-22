@@ -29,7 +29,7 @@
                     <h4>Conectado como</h4>
                     <h5>{{ Auth::user()->nombre }} {{ Auth::user()->apellidos }}</h5>
                     <h5>{{ Auth::user()->email }}</h5>
-                    <a type="button" class="btn btn-success btn-xs" href="{{ url('/logout') }}"
+                    <a type="button" class="btn btn-danger btn-xs" href="{{ url('/logout') }}"
                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                         <span class="glyphicon glyphicon-log-out"></span>

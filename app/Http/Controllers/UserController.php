@@ -61,6 +61,12 @@ class UserController extends Controller
             if ($request['rol_gestorpublicacion']) {
                 $user->roles()->attach(9);
             }
+            if ($request['rol_secretariotecnico']) {
+                $user->roles()->attach(10);
+            }
+            if ($request['rol_usuariogeneral']) {
+                $user->roles()->attach(11);
+            }
             return redirect()->route('users.index')->with('add', 'El usuario fue agregado con exito.');
         } catch(Exception $e){
             return "Fatal error -".$e->getMessage();
@@ -116,6 +122,12 @@ class UserController extends Controller
         }
         if ($request['rol_gestorpublicacion']) {
             $user->roles()->attach(9);
+        }
+        if ($request['rol_secretariotecnico']) {
+            $user->roles()->attach(10);
+        }
+        if ($request['rol_usuariogeneral']) {
+            $user->roles()->attach(11);
         }
         return redirect()->route('users.index')->with('add', 'El usuario fue actulizado con exito.');
     }

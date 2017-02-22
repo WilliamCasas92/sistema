@@ -17,12 +17,20 @@
                                 <input type="text" name="NumContrato" class="form-control" autocomplete="off" placeholder="Número de contrato">
                             </div>
                         </div>
-
                         <div class="form-group">
+                            <h6><label class="control-label col-md-2" for="TipoProceso">Tipo de Proceso de Contratación: </label></h6>
+                            <div class="col-md-4">
+                                <select class="form-control" name="TipoProceso" id="TipoProceso">
+                                    <option value="">Seleccione una opción</option>
+                                    @foreach($tipos_procesos as $tipo_proceso)
+                                        <option value="{{$tipo_proceso->nombre}}">{{$tipo_proceso->nombre}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                             <h6><label class="control-label col-md-2" for="Dependencia">Depedencia: </label></h6>
                             <div class="col-md-4">
                                 <select class="form-control" name="dependencia" id="Dependencia">
-                                    <option value=""></option>
+                                    <option value="">Seleccione una opción</option>
                                     <option value="Rectoría">Rectoría</option>
                                     <option value="Vicerrectoría de Docencia e Investigación">Vicerrectoría de Docencia e Investigación</option>
                                     <option value="Vicerrectoría de Extensión">Vicerrectoría de Extensión</option>
@@ -30,7 +38,12 @@
                                 </select>
                             </div>
                         </div>
-
+                        <div class="form-group">
+                            <h6><label class="control-label col-md-2" for="Objeto">Objeto: </label></h6>
+                            <div class="col-md-4">
+                                <textarea rows="5" name="Objeto" class="form-control" autocomplete="off" placeholder="Objeto del contrato"></textarea>
+                            </div>
+                        </div>
 
                         <form class="form-inline">
                             <div align="center">
@@ -38,7 +51,6 @@
                             </div>
                         </form>
                     </form>
-
                 </div>
 
                 <div name="ResultadosDeBusqueda">
@@ -48,6 +60,7 @@
                                 <thead style="font-size : 11px;">
                                 <tr>
                                     <th class="text-center">CDP</th>
+                                    <th class="text-center">Año</th>
                                     <th class="text-center" width="35%">Objeto</th>
                                     <th class="text-center">Número de contrato</th>
                                     <th class="text-center">Dependencia</th>
@@ -61,6 +74,7 @@
                                 @foreach($procesos_contractuales as $proceso_contractual)
                                     <tr>
                                         <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->numero_cdp }}</td>
+                                        <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->year_cdp }}</td>
                                         <td style="font-size : 11px;" class="text-justify" width="35%">{{ $proceso_contractual->objeto }}</td>
                                         @if($proceso_contractual->numero_contrato!='')
                                             <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->numero_contrato }}</td>
@@ -81,7 +95,7 @@
                         @else
                             <h4 class="well" align="center">No existen procesos por consultar.</h4>
                         @endif
-                            {{ $procesos_contractuales->links() }}
+                           {{ $procesos_contractuales->links() }}
                     </div>
                 </div>
             </div>
