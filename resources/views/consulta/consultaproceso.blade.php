@@ -4,6 +4,8 @@
         <div class="panel panel-success">
             <div class="panel-heading text-center"><h1>Consulta de proceso de contratación</h1></div>
             <div class="panel-body">
+                {{date("Y")}}
+
                 <div class="well" name="FiltrosDeBusqueda">
 
                     <form class="form-horizontal" method="get" role="buscar" action="{{url('consultaproceso')}}">
@@ -11,6 +13,10 @@
                             <h6><label class="control-label col-md-2" for="NumCDP">Número de CDP: </label></h6>
                             <div class="col-md-3">
                                 <input type="text" name="NumCDP" class="form-control" placeholder="Número de CDP">
+                            </div>
+                            <h6><label class="control-label col-md-3" for="NumContrato">Número de Contrato: </label></h6>
+                            <div class="col-md-3">
+                                <input type="text" name="NumContrato" class="form-control" autocomplete="off" placeholder="Número de contrato">
                             </div>
                         </div>
 

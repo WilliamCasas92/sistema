@@ -29,17 +29,19 @@ class ProcesoContractualController extends Controller
             $proceso_contractual = new ProcesoContractual();
             $proceso_contractual->tipo_proceso       = $request->tipo_proceso;
             $proceso_contractual->numero_cdp         = $request->num_cdp;
+            $proceso_contractual->year_cdp           = date("Y");
             $proceso_contractual->objeto             = $request->objeto;
             $proceso_contractual->dependencia        = $request->dependencia;
             if ($request['num_contrato']){
                 $proceso_contractual->numero_contrato   = $request->num_contrato;
             } else {
-                $proceso_contractual->numero_contrato   =null;
+                $proceso_contractual->numero_contrato   ='0';
             }
             $proceso_contractual->fecha_aprobacion   = $request->date_aprobación;
             $proceso_contractual->nombre_supervisor  = $request->nombre_supervisor;
             $proceso_contractual->id_supervisor      = $request->id_supervisor;
             $proceso_contractual->email_supervisor   = $request->email_supervisor;
+            $proceso_contractual->user_id            = \Auth::user()->id;
             $proceso_contractual->tipo_procesos_id   = DB::table('tipo_procesos')->where('nombre', $request->tipo_proceso)->value('id');
             $proceso_contractual->estado             = 'Sin enviar al Área de Adquisiciones.';
             $proceso_contractual->save();
@@ -72,7 +74,7 @@ class ProcesoContractualController extends Controller
         if ($request['num_contrato']){
             $proceso_contractual->numero_contrato   = $request->num_contrato;
         } else {
-            $proceso_contractual->numero_contrato   =null;
+            $proceso_contractual->numero_contrato   =0;
         }
         $proceso_contractual->fecha_aprobacion   = $request->date_aprobación;
         $proceso_contractual->nombre_supervisor  = $request->nombre_supervisor;
@@ -93,7 +95,7 @@ class ProcesoContractualController extends Controller
         }
     }
 
-    public function enviar($idproceso, $iduser)
+    public function enviar($idproceso)
     {
         try{
             $proceso_contractual = ProcesoContractual::findOrFail($idproceso);
@@ -104,7 +106,7 @@ class ProcesoContractualController extends Controller
                 ->where('tipo_procesos_id', $proceso_contractual->tipo_procesos_id )
                 ->where('indice', 1)
                 ->value('id');
-            $proceso_etapa->user_id                  = $iduser;
+            $proceso_etapa->user_id                  = \Auth::user()->id;;
             $proceso_etapa->estado                   = 'Activo';
             $proceso_etapa->save();
             $proceso_contractual->estado             = 'Enviado al Área de Adquisiciones.';

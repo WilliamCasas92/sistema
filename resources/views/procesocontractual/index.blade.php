@@ -51,7 +51,7 @@
                                                 $eliminar='disabled';
                                             }
                                         @endphp
-                                        <a href="{{ route('procesocontractual.enviar', array($proceso_contractual->id, Auth::user()->id)) }}" class="btn btn-warning btn-xs {{$enviar_adquisiciones}} ">{{$texto_enviar}}</a><br>
+                                        <a href="{{ route('procesocontractual.enviar', array($proceso_contractual->id)) }}" class="btn btn-warning btn-xs {{$enviar_adquisiciones}} ">{{$texto_enviar}}</a><br>
                                         <a href="{{ route('datosetapas.menu', $proceso_contractual->id) }}" class="btn btn-success btn-xs {{$diligenciar}} ">Diligenciar</a><br>
                                         <a {{$editar}} href="{{ route('procesocontractual.edit', $proceso_contractual->id) }}" class="btn btn-info btn-xs">Editar</a><br>
                                         @if($eliminar=='enabled')

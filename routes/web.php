@@ -38,11 +38,11 @@ Route::post('requisito/{requisito}', ['as'=>'requisito.guardar','uses'=> 'Requis
 Route::resource('requisito', 'RequisitoController');
 
 //Rutas Procesos Contractuales
-Route::get('procesocontractual/enviar/{idproceso}/{iduser}', ['as'=>'procesocontractual.enviar','uses'=> 'ProcesoContractualController@enviar']);
+Route::get('procesocontractual/enviar/{idproceso}', ['as'=>'procesocontractual.enviar','uses'=> 'ProcesoContractualController@enviar']);
 Route::resource('procesocontractual', 'ProcesoContractualController');
 
 //Rutas Datos Etapas
-Route::get('datosetapas/enviar/{idproceso}/{idetapa}/{iduser}', ['as'=>'datosetapas.enviaretapa','uses'=> 'DatosEtapaController@enviar_etapa']);
+Route::get('datosetapas/enviar/{idproceso}/{idetapa}', ['as'=>'datosetapas.enviaretapa','uses'=> 'DatosEtapaController@enviar_etapa']);
 Route::get('datosetapas/{datoetapa}', ['as'=>'datosetapas.menu','uses'=> 'DatosEtapaController@menu']);
 Route::resource('datosetapas', 'DatosEtapaController');
 
@@ -107,4 +107,9 @@ Route::get('test5', function (){
     }else{
         echo 'no existen datos';
     }
+});
+
+Route::get('test6', function (){
+    $dt = new DateTime();
+    echo $dt->format('Y');
 });

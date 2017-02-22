@@ -54,7 +54,7 @@ class DatosEtapaController extends Controller
                     $historial_dato_etapa = new HistoricoDatoEtapa();
                     $historial_dato_etapa->proceso_contractual_id = $request->proceso_contractual_id;
                     $historial_dato_etapa->valor = $atributo_;
-                    $historial_dato_etapa->user_id = $request->user_id;
+                    $historial_dato_etapa->user_id = \Auth::user()->id;;
                     $historial_dato_etapa->requisitos_id = $request->requisito_id[$cont];
                     $historial_dato_etapa->save();
                     $cont++;
@@ -70,7 +70,7 @@ class DatosEtapaController extends Controller
                     $historial_dato_etapa = new HistoricoDatoEtapa();
                     $historial_dato_etapa->proceso_contractual_id = $request->proceso_contractual_id;
                     $historial_dato_etapa->valor = $atributo_;
-                    $historial_dato_etapa->user_id = $request->user_id;
+                    $historial_dato_etapa->user_id = \Auth::user()->id;;
                     $historial_dato_etapa->requisitos_id = $request->requisito_id[$cont];
                     $historial_dato_etapa->save();
                     $cont++;
@@ -126,7 +126,7 @@ class DatosEtapaController extends Controller
        return $activo;
     }
 
-    public function enviar_etapa($idproceso, $idetapa, $iduser)
+    public function enviar_etapa($idproceso, $idetapa)
     {
         try{
             $etapa=Etapa::findOrFail($idetapa);
@@ -142,7 +142,7 @@ class DatosEtapaController extends Controller
                     ->where('tipo_procesos_id', $proceso_contractual->tipo_procesos_id )
                     ->where('indice', $etapa->indice + 1)
                     ->value('id');
-                $proceso_etapa->user_id                  = $iduser;
+                $proceso_etapa->user_id                  = \Auth::user()->id;;
                 $nextetapa=Etapa::findOrFail($idetapa+1);
                 $proceso_contractual->estado             = $nextetapa->nombre;
                 $proceso_contractual->save();

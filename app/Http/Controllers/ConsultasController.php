@@ -17,7 +17,7 @@ class ConsultasController extends Controller
     public function mostrar()
     {
         $num_cdp = \Request::get('NumCDP');
-        //$num_contrato = \Request::get('NumContrato');
+        $num_contrato = \Request::get('NumContrato');
         //$tipo_proceso = \Request::get('TipoProceso');
         $dependencia = \Request::get('dependencia');
         //$objeto = \Request::get('Objeto');
@@ -25,11 +25,11 @@ class ConsultasController extends Controller
         $procesos_contractuales= ProcesoContractual::
                 Where('dependencia', 'like', '%'.$dependencia.'%')
                 ->Where('numero_cdp', 'like', '%'.$num_cdp.'%')
+                ->Where('numero_contrato', 'like', '%'.$num_contrato.'%')
                 ->orderBy('fecha_aprobacion')->paginate(5);
                         //where('tipo_proceso', 'like', '%'.$tipo_proceso.'%')
                         //->orWhere('numero_cdp', 'like', '%'.$num_cdp.'%')
                         //->orWhere('objeto', 'like', '%'.$objeto.'%')
-                        //->orWhere('numero_contrato', 'like', '%'.$num_contrato.'%')
                         //->orderBy('fecha_aprobacion')->paginate(2);
 
         $tipos_procesos= TipoProceso::all();
@@ -43,9 +43,5 @@ class ConsultasController extends Controller
         $etapas=Etapa::where('tipo_procesos_id', $proceso_contractual->tipo_procesos_id)->orderBy('indice', 'asc')->get();
         $requisitos=Requisito::all();
         return view($this->path.'.consultavermas', compact('proceso_contractual', 'etapas', 'requisitos'));
-    }
-
-    public function buscar(Request $request)
-    {
     }
 }
