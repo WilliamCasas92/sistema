@@ -76,7 +76,7 @@ class DatosEtapaController extends Controller
                     $cont++;
                 }
             }
-            return redirect()->back();
+            return view('datosetapas/modalsave');
         } catch(Exception $e){
             return "Fatal error -".$e->getMessage();
         }
@@ -149,7 +149,7 @@ class DatosEtapaController extends Controller
                 $proceso_etapa->save();
                 return view('datosetapas/pasoetapa');
             }
-            return $contenido_validacion->mensaje;
+            return view('datosetapas/datosfaltantes', compact('contenido_validacion'));
         } catch(Exception $e){
             return "Fatal error -".$e->getMessage();
         }

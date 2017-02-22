@@ -26,8 +26,12 @@
             </div>
         </div>
     @endforeach
-    @include('datosetapas.modalsave')
-    <script>
+        <div class="modal" id="modalSave" tabindex="-1" role="dialog" aria-labelledby="modalSaveTitulo" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog datos_faltantes" role="document" id="datos_faltantes">
+                @include('datosetapas.modalsave')
+            </div>
+        </div>
+        <script>
         $(document).ready(function() {
             // Interceptamos el evento submit del formulario agregar Etapa, Al fomulario eliminar Etapa
             $('#modalSaveForm').submit(function () {
@@ -45,6 +49,8 @@
                 });
                 return false;
             });
+
+
 
             $(function() {
                 $('#modalSave').on("show.bs.modal", function (e) {
