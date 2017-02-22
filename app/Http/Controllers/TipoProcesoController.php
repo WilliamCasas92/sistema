@@ -67,7 +67,7 @@ class TipoProcesoController extends Controller
         try{
             $tipoproceso = TipoProceso::findOrFail($id);
             $tipoproceso->delete();
-            return redirect()->route('tipoproceso.index');
+            return redirect()->route('tipoproceso.index')->with('status', 'Se elimino con exito!');;
         } catch(Exception $e){
             return "Fatal error -".$e->getMessage();
         }

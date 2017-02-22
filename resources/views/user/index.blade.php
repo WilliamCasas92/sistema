@@ -33,11 +33,8 @@
                                     <td class="text-center">{{ $user->created_at }}</td>
                                     <td class="text-center">
                                         <a href="{{ route('users.edit', $user->id) }}" class="btn btn-info btn-xs">Editar</a>
-                                        <form action="{{ route('users.destroy', $user->id) }}" method="post">
-                                            <input name="_method" type="hidden" value="DELETE">
-                                            <input name="_token" type="hidden"  value="{{ csrf_token() }}">
-                                            <button type="submit" class="btn btn-danger btn-xs">Eliminar</button>
-                                        </form>
+                                        <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#modalDelete" data-nombre="{{$user->nombre }}  {{$user->apellidos }} "
+                                           data-url="{{ route('users.destroy', $user->id) }}">Eliminar</button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -48,4 +45,44 @@
             </div>
         </div>
     </div>
+    <div class="modal" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="modalDeleteTitulo">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="modalDeleteTitulo">Confirmar eliminación</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Confirma que desea eliminar <b><span id="modalDeleteNombre"></span></b>?
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
+                <span class="pull-right">
+                    <form id="modalDeleteForm"  method="post">
+                        <input name="_method" type="hidden" value="DELETE">
+                        <input name="_token" type="hidden"  value="{{ csrf_token() }}">
+                        <button id="eliminar" type="submit" class="btn btn-danger btn-xs" >Eliminar</button>
+                    </form>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+
+@section('scriptUsers')
+    <script language="javascript">
+        $(document).ready(function() {
+            $(function() {
+                $('#modalDelete').on("show.bs.modal", function (e) {
+                    $("#modalDeleteNombre").html($(e.relatedTarget).data('nombre'));
+                    $("#modalDeleteForm").attr('action', $(e.relatedTarget).data('url'));
+                });
+            });
+        });
+    </script>
 @endsection

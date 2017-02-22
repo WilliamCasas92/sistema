@@ -97,8 +97,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="/assets/js/bootstrap.js"></script>
     <!--<script src="/js/jquery-3.1.1.js" type="text/javascript"></script>-->
-    @yield('Myscripts')
+    @yield('scriptEtapas')
     @yield('scriptMenu')
+    @yield('scriptTipoProceso')
+    @yield('scriptUsers')
     @yield('MyscriptsDiligenciar')
 <br>
     <!-- Footer -->
