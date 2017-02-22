@@ -4,8 +4,6 @@
         <div class="panel panel-success">
             <div class="panel-heading text-center"><h1>Consulta de proceso de contratación</h1></div>
             <div class="panel-body">
-                {{date("Y")}}
-
                 <div class="well" name="FiltrosDeBusqueda">
 
                     <form class="form-horizontal" method="get" role="buscar" action="{{url('consultaproceso')}}">

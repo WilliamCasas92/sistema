@@ -142,7 +142,7 @@ class DatosEtapaController extends Controller
                     ->where('tipo_procesos_id', $proceso_contractual->tipo_procesos_id )
                     ->where('indice', $etapa->indice + 1)
                     ->value('id');
-                $proceso_etapa->user_id                  = \Auth::user()->id;;
+                $proceso_etapa->user_id                  = \Auth::user()->id;
                 $nextetapa=Etapa::findOrFail($idetapa+1);
                 $proceso_contractual->estado             = $nextetapa->nombre;
                 $proceso_contractual->save();
