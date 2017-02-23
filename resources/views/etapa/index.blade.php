@@ -24,8 +24,23 @@
                         </form>
                         @endif
                     </div>
+                    <!--Este sccript es el que permite que las etapas cambien de lugar sin recargarse la pagina-->
                     <script>
-
+                        $(document).ready(function() {
+                            $('#FormSubir{{$etapa->id}}, #FormBajar{{$etapa->id}}').submit(function () {
+                            // Enviamos el formulario usando AJAX
+                                $.ajax({
+                                        type: 'POST',
+                                    url: $(this).attr('action'),
+                                    data: $(this).serialize(),
+                                    // Mostramos un mensaje con la respuesta de PHP
+                                        success: function (data) {
+                                            $('#listarEtapas').html(data);
+                                        }
+                                });
+                            return false;
+                            });
+                        });
                     </script>
                     <!-- Boton Eliminar ETAPA-->
                     <div class="col-md-1 col-md-offset-5">
