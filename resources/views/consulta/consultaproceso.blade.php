@@ -5,7 +5,6 @@
             <div class="panel-heading text-center"><h1>Consulta de proceso de contratación</h1></div>
             <div class="panel-body">
                 <div class="well" name="FiltrosDeBusqueda">
-
                     <form class="form-horizontal" method="get" role="buscar" action="{{url('consultaproceso')}}">
                         <div class="form-group">
                             <h6><label class="control-label col-md-2" for="NumCDP">Número de CDP: </label></h6>
@@ -76,7 +75,7 @@
                                         <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->numero_cdp }}</td>
                                         <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->year_cdp }}</td>
                                         <td style="font-size : 11px;" class="text-justify" width="35%">{{ $proceso_contractual->objeto }}</td>
-                                        @if($proceso_contractual->numero_contrato!='')
+                                        @if($proceso_contractual->numero_contrato!='0')
                                             <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->numero_contrato }}</td>
                                         @else
                                             <td style="font-size : 11px;" class="text-center">Sin asignar.</td>
@@ -86,7 +85,7 @@
                                         <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->fecha_aprobacion }}</td>
                                         <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->estado }}</td>
                                         <td class="text-center">
-                                            <a href="{{ route('consulta.consultavermas', $proceso_contractual->id) }}" class="btn btn-info btn-xs">Ver mas</a><br>
+                                            <a href="{{ route('consulta.consultavermas', $proceso_contractual->id) }}" class="btn btn-info btn-xs">Ver más</a><br>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -95,7 +94,7 @@
                         @else
                             <h4 class="well" align="center">No existen procesos por consultar.</h4>
                         @endif
-                           {{ $procesos_contractuales->links() }}
+                        {{$procesos_contractuales->appends(Request::all())->links()}}
                     </div>
                 </div>
             </div>

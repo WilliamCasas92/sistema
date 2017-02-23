@@ -46,12 +46,6 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-4" for="InputNumContrato">Número de Contrato: </label>
-                        <div class="col-md-3">
-                            <input type="text" name="num_contrato" class="form-control" autocomplete="off" placeholder="Digite el número de contrato">
-                        </div>
-                    </div>
-                    <div class="form-group">
                         <label class="control-label col-md-4" for="InputDateAprobacion">Fecha de Aprobación por comité: </label>
                         <div class="col-md-3">
                             <input type="date" name="date_aprobación" class="form-control" autocomplete="off" placeholder="" required>

@@ -42,12 +42,14 @@
                             </div>
                         </div>
                     </div><br>
-                    <form class="form-inline">
-                        <div align="center">
-                            <button type="submit" class="btn btn-primary">Asignar Roles</button>
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                        </div>
-                    </form>
+                    <div class="modal-footer">
+                        <form class="form-inline">
+                            <div align="center">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                                <button type="submit" class="btn btn-primary">Asignar Roles</button>
+                            </div>
+                        </form>
+                    </div>
                 </form>
             </div>
         </div>

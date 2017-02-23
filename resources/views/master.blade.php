@@ -66,7 +66,7 @@
                     </ul>
                 </div>
             @endif
-            <a href="{{ url('about') }}" type="button" class="btn btn-success"><span class="glyphicon glyphicon-info-sign"></span> Acerca</a>
+            <a href="{{ url('about') }}" type="button" class="btn btn-success disabled"><span class="glyphicon glyphicon-info-sign"></span> Acerca</a>
         </div>
     </nav>
 </header>

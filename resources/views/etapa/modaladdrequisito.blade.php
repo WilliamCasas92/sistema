@@ -37,12 +37,14 @@
                             </div>
                         </div>
                     </div>
-                    <form class="form-inline">
-                        <div align="center">
-                            <button type="submit" class="btn btn-primary">Crear Dato</button>
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                        </div>
-                    </form>
+                    <div class="modal-footer">
+                        <form class="form-inline">
+                            <div align="center">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                                <button type="submit" class="btn btn-primary">Crear Dato</button>
+                            </div>
+                        </form>
+                    </div>
                 </form>
             </div>
         </div>
