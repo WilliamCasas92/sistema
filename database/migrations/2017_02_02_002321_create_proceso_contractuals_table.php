@@ -16,7 +16,7 @@ class CreateProcesoContractualsTable extends Migration
             $table->string('year_cdp');
             $table->longText('objeto');
             $table->string('dependencia');
-            $table->double('numero_contrato')->unique()->nullable();
+            $table->string('numero_contrato');
             $table->string('fecha_aprobacion');
             $table->string('nombre_supervisor');
             $table->string('id_supervisor');
