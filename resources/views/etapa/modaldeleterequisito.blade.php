@@ -18,7 +18,7 @@
                     <form id="modaldeleteRequisitoForm"  method="post">
                         <input name="_method" type="hidden" value="DELETE">
                         <input name="_token" type="hidden"  value="{{ csrf_token() }}">
-                        <button id="eliminar" type="submit" class="btn btn-danger btn-xs" >Eliminar</button>
+                        <button id="eliminar" type="submit" class="btn btn-danger" >Eliminar</button>
                     </form>
                 </span>
             </div>

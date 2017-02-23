@@ -26,10 +26,10 @@ class ConsultasController extends Controller
                 Where('numero_cdp', 'like', '%'.$num_cdp.'%')
                 ->Where('numero_contrato', 'like', '%'.$num_contrato.'%')
                 ->Where('tipo_proceso', 'like', '%'.$tipo_proceso.'%')
-                ->Where('dependencia', 'like', '%'.$dependencia.'%')
+                ->Where('dependencia', 'like', $dependencia.'%')
                 ->Where('objeto', 'like', '%'.$objeto.'%')
                 ->orderBy('year_cdp', 'desc')
-                ->orderBy('numero_cdp', 'desc')->paginate(15);
+                ->orderBy('numero_cdp', 'desc')->paginate(10);
 
         $tipos_procesos= TipoProceso::all();
         return view($this->path.'.consultaproceso', compact('procesos_contractuales', 'tipos_procesos'));

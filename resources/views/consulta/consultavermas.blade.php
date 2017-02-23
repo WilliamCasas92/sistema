@@ -18,7 +18,7 @@
                                 <h5><label>Número de CDP:</label> {{ $proceso_contractual->numero_cdp }}</h5>
                                 <h5><label>Objeto del contrato:</label> {{ $proceso_contractual->objeto }}</h5>
                                 <h5><label>Dependencia correspondiente:</label> {{ $proceso_contractual->dependencia }}</h5>
-                                @if ($proceso_contractual->numero_contrato!='')
+                                @if ($proceso_contractual->numero_contrato!='0')
                                     <h5><label>Número de contrato:</label> {{ $proceso_contractual->numero_contrato }}</h5>
                                 @else
                                     <h5><label>Número de contrato:</label> Sin asignar.</h5>
