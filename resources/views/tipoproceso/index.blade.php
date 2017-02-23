@@ -22,6 +22,7 @@
                                 <th class="text-center">Activo</th>
                                 <th class="text-center">Fecha de creación</th>
                                 <th class="text-center"></th>
+                                <th class="text-center"></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -36,10 +37,12 @@
                                     @endif
                                     <td class="text-center">{{ $tipo_proceso->created_at }}</td>
                                     <td class="text-center">
-                                        <a href="{{ route('tipoproceso.edit', $tipo_proceso->id) }}" class="btn btn-info btn-xs">Editar</a><br>
+                                        <a href="{{ route('etapa.almacenar', $tipo_proceso, 'tipo_proceso') }}" class="btn btn-success btn-xs">Gestionar Etapas</a>
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="{{ route('tipoproceso.edit', $tipo_proceso->id) }}" class="btn btn-info btn-xs">Editar</a>
                                         <a type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#modalDelete" data-nombre=" {{$tipo_proceso->nombre}}  "
                                                 data-url="{{ route('tipoproceso.destroy', $tipo_proceso->id) }}">Eliminar</a><br>
-                                        <a href="{{ route('etapa.almacenar', $tipo_proceso, 'tipo_proceso') }}" class="btn btn-success btn-xs">Gestionar Etapas</a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -70,7 +73,7 @@
                     <form id="modalDeleteForm"  method="post">
                         <input name="_method" type="hidden" value="DELETE">
                         <input name="_token" type="hidden"  value="{{ csrf_token() }}">
-                        <button id="eliminar" type="submit" class="btn btn-danger btn-xs" >Eliminar</button>
+                        <button id="eliminar" type="submit" class="btn btn-danger" >Eliminar</button>
                     </form>
                 </span>
                 </div>

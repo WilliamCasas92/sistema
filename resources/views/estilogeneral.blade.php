@@ -13,6 +13,10 @@
         color: white;
     }
 
+    .red {
+        color: red;
+    }
+
     .darkgreen {
         color: darkgreen;
     }

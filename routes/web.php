@@ -92,11 +92,14 @@ Route::get('test4', function (){
 
 Route::get('test5', function (){
     $datos = DB::table('dato_etapas')
+        ->where('proceso_contractual_id', 1)
         ->join('requisitos', function ($join) {
             $join->on('dato_etapas.requisitos_id', '=', 'requisitos.id')
                 ->where('requisitos.etapas_id', '=', 1);
         })
         ->get();
+
+    $test= DB::table('dato_etapas')->where('proceso_contractual_id', 1)->get();
 
     if ($datos->count()){
         foreach ($datos as $dato){

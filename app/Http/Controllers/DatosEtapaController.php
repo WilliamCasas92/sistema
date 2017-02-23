@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Support\Facades\DB;
-use App\ProcesoContractual;
 use Illuminate\Http\Request;
+use App\ProcesoContractual;
 use App\TipoProceso;
 use App\Etapa;
 use App\Requisito;
 use App\TipoRequisito;
 use App\DatoEtapa;
+use App\HistoricoProcesoEtapa;
 use App\HistoricoDatoEtapa;
 use App\ProcesoEtapa;
 
@@ -131,7 +133,7 @@ class DatosEtapaController extends Controller
         try{
             $etapa=Etapa::findOrFail($idetapa);
             $proceso_contractual = ProcesoContractual::findOrFail($idproceso);
-            $contenido_validacion=$this->validar_datos_obligatorios($etapa->id);
+            $contenido_validacion=$this->validar_datos_obligatorios($etapa->id, $proceso_contractual->id);
             if($contenido_validacion->resultado==true){
                 //Actualizando tabla proceso_etapa
                 $proceso_etapa=ProcesoEtapa::
@@ -143,9 +145,22 @@ class DatosEtapaController extends Controller
                     ->where('indice', $etapa->indice + 1)
                     ->value('id');
                 $proceso_etapa->user_id                  = \Auth::user()->id;
-                $nextetapa=Etapa::findOrFail($idetapa+1);
-                $proceso_contractual->estado             = $nextetapa->nombre;
+
+                $nextetapa= DB::table('etapas')
+                    ->where('tipo_procesos_id', $proceso_contractual->tipo_procesos_id )
+                    ->where('indice', $etapa->indice + 1)
+                    ->value('nombre');
+
+                $proceso_contractual->estado             = $nextetapa;
                 $proceso_contractual->save();
+                //Guardando en el historial
+                $historial_proceso_etapa = new HistoricoProcesoEtapa();
+                $historial_proceso_etapa->proceso_etapa_id  = $proceso_etapa->id;
+                $historial_proceso_etapa->proceso_contractual_id = $proceso_etapa->proceso_contractual_id;
+                $historial_proceso_etapa->etapas_id         = $proceso_etapa->etapas_id;
+                $historial_proceso_etapa->user_id           = \Auth::user()->id;
+                $historial_proceso_etapa->estado            = $nextetapa;
+                $historial_proceso_etapa->save();
                 $proceso_etapa->save();
                 return view('datosetapas/pasoetapa');
             }
@@ -155,10 +170,11 @@ class DatosEtapaController extends Controller
         }
     }
 
-    public function validar_datos_obligatorios($id_etapa)
+    public function validar_datos_obligatorios($id_etapa, $id_proceso)
     {
         $contenido_validacion = new \stdClass();
         $datos = DB::table('dato_etapas')
+            ->where('proceso_contractual_id', $id_proceso)
             ->join('requisitos', function ($join) use ($id_etapa) {
                 $join->on('dato_etapas.requisitos_id', '=', 'requisitos.id')
                     ->where('requisitos.etapas_id', '=', $id_etapa);
@@ -174,7 +190,7 @@ class DatosEtapaController extends Controller
                 }
             }
         }else{
-            $contenido_validacion->mensaje      = 'Debe guardar los datos para antes de enviar a siguiente etapa.';
+            $contenido_validacion->mensaje      = 'Debe guardar los datos antes de enviar a la siguiente etapa.';
             $contenido_validacion->resultado    = false;
             return $contenido_validacion;
         }

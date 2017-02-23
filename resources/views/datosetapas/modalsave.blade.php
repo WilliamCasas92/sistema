@@ -9,7 +9,7 @@
             </div>
             <div class="modal-body">
                 <p>
-                    Seguro que desea enviar <b><span id="modalSaveNombre"></span></b>
+                    ¿Seguro que ha finalizado con la etapa <b><span id="modalSaveNombre"></span></b> ?
                 </p>
             </div>
             <div class="modal-footer">

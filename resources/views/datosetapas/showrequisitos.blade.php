@@ -1,9 +1,10 @@
 @php
     $existen_datos=false;
 @endphp
-<h4>Diligencie los siguientes datos: </h4>
+<h5>Diligencie los siguientes datos: </h5>
 Campos obligatorios (*)<br><br>
 <form id="FormEtapa{{$etapa->id}}" class="form-horizontal" method="post" action="/datosetapas">
+
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
     <input type="hidden" name="proceso_contractual_id" value="{{$proceso_contractual->id}}">
     <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
@@ -16,7 +17,6 @@ Campos obligatorios (*)<br><br>
                 $required="";
                 $obligatorio="";
                 if ($requisito->obligatorio=='1'){
-                    //cuando se vaya a pasar de etapa, se activa el required
                     $required="required";
                     $obligatorio="(*)";
                 }
@@ -100,7 +100,7 @@ Campos obligatorios (*)<br><br>
                             alert("Los datos fuerón guardados con exito!")
                         }
                     }).fail(function (jqXHR, textStatus, errorThrown) {
-                        alert('La etapa no se puede eliminar porque tiene requisitos asociados');
+                        alert('La etapa no se puede eliminar porque tiene requisitos asociados.');
                     });
                     return false;
                 });
