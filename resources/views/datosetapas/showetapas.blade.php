@@ -26,9 +26,10 @@
             </div>
         </div>
     @endforeach
-        <div class="modal" id="modalSave" tabindex="-1" role="dialog" aria-labelledby="modalSaveTitulo" data-backdrop="static" data-keyboard="false">
-            <div class="modal-dialog datos_faltantes" role="document" id="datos_faltantes">
-                @include('datosetapas.modalsave')
+        @include('datosetapas.modalsave')
+        <div class="modal" id="modalMensaje" tabindex="-1" role="dialog" aria-labelledby="modalMensaje" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog" role="document" id="datos_faltantes">
+
             </div>
         </div>
         <script>
@@ -43,6 +44,8 @@
                     // Mostramos un mensaje con la respuesta de PHP
                     success: function (data) {
                         $('#datos_faltantes').html(data);
+                        $('#modalSave').modal('hide');
+                        $('#modalMensaje').modal('show');
                     }
                 }).fail(function (jqXHR, textStatus, errorThrown) {
                     alert('No se pudo enviar a la otra etapa');

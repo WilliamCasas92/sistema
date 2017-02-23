@@ -174,7 +174,7 @@ class DatosEtapaController extends Controller
                 }
             }
         }else{
-            $contenido_validacion->mensaje      = 'No se ha guardado ningun dato.';
+            $contenido_validacion->mensaje      = 'Debe guardar los datos para antes de enviar a siguiente etapa.';
             $contenido_validacion->resultado    = false;
             return $contenido_validacion;
         }

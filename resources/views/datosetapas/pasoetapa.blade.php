@@ -1,6 +1,6 @@
 <div class="modal-content">
     <div class="modal-header">
-        <h4 class="modal-title" id="modalDeleteTitulo">Envio de etapa</h4>
+        <h4 class="modal-title" >Envio de etapa</h4>
     </div>
     <div class="modal-body">
         <p>
@@ -8,6 +8,6 @@
         </p>
     </div>
     <div class="modal-footer" id="datos_faltantes">
-        <button type="button" class="btn" data-dismiss="modal" onclick = "location.reload()">Aceptar</button>
+        <button type="button" class="btn center-block" data-dismiss="modal"  onclick = "location.reload()">Aceptar</button>
     </div>
 </div>
