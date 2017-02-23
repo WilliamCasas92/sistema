@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\TipoProceso;
+use Exception;
 
 class TipoProcesoController extends Controller
 {
@@ -25,6 +26,11 @@ class TipoProcesoController extends Controller
             $tipoproceso = new TipoProceso();
             $tipoproceso->nombre       = $request->nombre;
             $tipoproceso->version       = $request->version;
+            if(TipoProceso::select()
+                        ->where('nombre','=', $tipoproceso->nombre)
+                        ->where('version', '=', $tipoproceso->version)->first()) {
+                return back()->with('error', 'El Tipo de proceso:'.$tipoproceso->nombre .', con versión:'.$tipoproceso->version.', ya esta registrado en el sistema.');
+            }
             if ($request['activo']){
                 $tipoproceso->activo       = $request->activo;
             } else {
@@ -53,6 +59,14 @@ class TipoProcesoController extends Controller
         $tipoproceso = TipoProceso::findOrFail($id);
         $tipoproceso->nombre       = $request->nombre;
         $tipoproceso->version       = $request->version;
+        if($tipoprocesoAux=TipoProceso::select()
+                ->where('nombre','=', $tipoproceso->nombre)
+                ->where('version', '=', $tipoproceso->version)->first()){
+            if ($tipoproceso->id <> $tipoprocesoAux->id) {
+                //Alert::message('Este tipo de proceso ya existe en el sistema', 'danger');
+                return back()->with('error', 'El Tipo de proceso:'.$tipoproceso->nombre .', con versión:'.$tipoproceso->version.', ya esta registrado en el sistema.');
+            }
+        }
         if ($request['activo']){
             $tipoproceso->activo       = $request->activo;
         } else {
@@ -66,8 +80,10 @@ class TipoProcesoController extends Controller
     {
         try{
             $tipoproceso = TipoProceso::findOrFail($id);
+            $tipoproceso_nombre= $tipoproceso->nombre;
+            $tipoproceso_version= $tipoproceso->version;
             $tipoproceso->delete();
-            return redirect()->route('tipoproceso.index')->with('status', 'Se elimino con exito!');;
+            return redirect()->route('tipoproceso.index')->with('status', 'El Tipo de proceso:'.$tipoproceso_nombre.', versión '.$tipoproceso_version.' ha sido eliminado.');
         } catch(Exception $e){
             return "Fatal error -".$e->getMessage();
         }

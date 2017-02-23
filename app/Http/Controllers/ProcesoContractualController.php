@@ -35,7 +35,7 @@ class ProcesoContractualController extends Controller
             if ($request['num_contrato']){
                 $proceso_contractual->numero_contrato   = $request->num_contrato;
             } else {
-                $proceso_contractual->numero_contrato   ='0';
+                $proceso_contractual->numero_contrato   =null;
             }
             $proceso_contractual->fecha_aprobacion   = $request->date_aprobación;
             $proceso_contractual->nombre_supervisor  = $request->nombre_supervisor;
@@ -44,6 +44,17 @@ class ProcesoContractualController extends Controller
             $proceso_contractual->user_id            = \Auth::user()->id;
             $proceso_contractual->tipo_procesos_id   = DB::table('tipo_procesos')->where('nombre', $request->tipo_proceso)->value('id');
             $proceso_contractual->estado             = 'Sin enviar al Área de Adquisiciones.';
+
+            if(ProcesoContractual::select()
+                ->where('numero_cdp','=', $proceso_contractual->numero_cdp)
+                ->where('year_cdp', '=', $proceso_contractual->year_cdp )->first()) {
+                return back()->with('error', 'El Proceso Contractual con CDP:'.$proceso_contractual->numero_cdp .' ya esta registrado en el sistema.');
+            }
+
+            //if(ProcesoContractual::select()
+              //  ->where('numero_contrato','=', $proceso_contractual->num_contrato)->first()) {
+                //return back()->with('error', 'El Numero de contrato:'.$proceso_contractual->numero_contrato .' ya esta registrado en otro proceso.');
+            //}
             $proceso_contractual->save();
             return redirect()->route('procesocontractual.index');
         } catch(Exception $e){
@@ -74,12 +85,29 @@ class ProcesoContractualController extends Controller
         if ($request['num_contrato']){
             $proceso_contractual->numero_contrato   = $request->num_contrato;
         } else {
-            $proceso_contractual->numero_contrato   =0;
+            $proceso_contractual->numero_contrato   =null;
         }
         $proceso_contractual->fecha_aprobacion   = $request->date_aprobación;
         $proceso_contractual->nombre_supervisor  = $request->nombre_supervisor;
         $proceso_contractual->id_supervisor      = $request->id_supervisor;
         $proceso_contractual->email_supervisor   = $request->email_supervisor;
+
+        if($proceso_contractualAux=ProcesoContractual::select()
+            ->where('numero_cdp','=', $proceso_contractual->numero_cdp)
+            ->where('year_cdp', '=', $proceso_contractual->year_cdp )->first()) {
+            if ($proceso_contractual->id <> $proceso_contractualAux->id) {
+                return back()->with('error', 'El Proceso Contractual con CDP:'.$proceso_contractual->numero_cdp .' ya esta registrado en el sistema.');
+            }
+        }
+
+        if($proceso_contractualAux2=ProcesoContractual::select()
+                    ->where('numero_contrato','=', $proceso_contractual->numero_contrato)->first()) {
+            if ($proceso_contractual->id <> $proceso_contractualAux2->id) {
+                //Alert::message('El usuario ya existe en el sistema', 'danger');
+                return back()->with('error', 'El Numero de contrato:'.$proceso_contractual->numero_contrato .' ya esta registrado en otro proceso.');
+            }
+        }
+
         $proceso_contractual->save();
         return redirect()->route('procesocontractual.index');
     }

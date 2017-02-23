@@ -4,6 +4,11 @@
         <div class="panel panel-success">
             <div class="panel-heading"><h3>Crear nuevo proceso de contratación</h3></div>
             <div class="panel-body">
+                @if (session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
                 <form class="form-horizontal" method="post" action="/procesocontractual">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
 

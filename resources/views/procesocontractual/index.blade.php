@@ -18,7 +18,9 @@
                             <thead style="font-size : 11px;">
                             <tr>
                                 <th class="text-center">CDP</th>
+                                <th class="text-center">Año</th>
                                 <th class="text-center" width="35%">Objeto</th>
+                                <th class="text-center">Número de contrato</th>
                                 <th class="text-center">Dependencia</th>
                                 <th class="text-center">Tipo de Proceso</th>
                                 <th class="text-center">Fecha de creación</th>
@@ -30,7 +32,13 @@
                             @foreach($procesos_contractuales as $proceso_contractual)
                                 <tr>
                                     <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->numero_cdp }}</td>
-                                    <td style="font-size : 11px;"  class="text-justify" width="35%">{{ $proceso_contractual->objeto }}</td>
+                                    <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->year_cdp }}</td>
+                                    <td style="font-size : 11px;" class="text-justify" width="35%">{{ $proceso_contractual->objeto }}</td>
+                                    @if($proceso_contractual->numero_contrato!='')
+                                        <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->numero_contrato }}</td>
+                                    @else
+                                        <td style="font-size : 11px;" class="text-center">Sin asignar.</td>
+                                    @endif
                                     <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->dependencia }}</td>
                                     <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->tipo_proceso }}</td>
                                     <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->created_at }}</td>

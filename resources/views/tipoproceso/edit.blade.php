@@ -4,6 +4,11 @@
         <div class="panel panel-success">
             <div class="panel-heading"><h3>Editar Tipo de Proceso de Contratación</h3></div>
             <div class="panel-body">
+                @if (session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
                 <form class="form-horizontal" method="post" action="/tipoproceso/{{$tipoproceso->id}}">
                     <input name="_method" type="hidden" value="PUT">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
