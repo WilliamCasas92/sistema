@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\ProcesoContractual;
 use App\TipoProceso;
 use App\ProcesoEtapa;
+use App\HistoricoProcesoEtapa;
 
 class ProcesoContractualController extends Controller
 {
@@ -149,6 +150,14 @@ class ProcesoContractualController extends Controller
             $proceso_etapa->estado                   = 'Activo';
             $proceso_etapa->save();
             $proceso_contractual->estado             = 'Enviado al Área de Adquisiciones.';
+            //Guardando en el historial
+            $historial_proceso_etapa = new HistoricoProcesoEtapa();
+            $historial_proceso_etapa->proceso_etapa_id  = $proceso_etapa->id;
+            $historial_proceso_etapa->proceso_contractual_id = $idproceso;
+            $historial_proceso_etapa->etapas_id         = $proceso_etapa->etapas_id;
+            $historial_proceso_etapa->user_id           = \Auth::user()->id;
+            $historial_proceso_etapa->estado            = $proceso_contractual->estado;
+            $historial_proceso_etapa->save();
             $proceso_contractual->save();
         } catch(Exception $e){
             return "Fatal error -".$e->getMessage();

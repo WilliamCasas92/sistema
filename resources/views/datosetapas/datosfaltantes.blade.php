@@ -1,6 +1,6 @@
     <div class="modal-content">
     <div class="modal-header">
-        <h4 class="modal-title" id="modalSaveTitulo">Envio de etapa</h4>
+        <h4 class="modal-title" id="modalSaveTitulo">Envío de etapa</h4>
     </div>
     <div class="modal-body">
         <p>
