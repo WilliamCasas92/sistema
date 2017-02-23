@@ -24,9 +24,9 @@
                         </form>
                         @endif
                     </div>
-                    <!--Este sccript es el que permite que las etapas cambien de lugar sin recargarse la pagina-->
                     <script>
                         $(document).ready(function() {
+                            // Interceptamos el evento submit del formulario agregar Etapa, Al fomulario eliminar Etapa
                             $('#FormSubir{{$etapa->id}}, #FormBajar{{$etapa->id}}').submit(function () {
                             // Enviamos el formulario usando AJAX
                                 $.ajax({
@@ -35,8 +35,10 @@
                                     data: $(this).serialize(),
                                     // Mostramos un mensaje con la respuesta de PHP
                                         success: function (data) {
-                                            $('#listarEtapas').html(data);
-                                        }
+                                        $('#listarEtapas').html(data);
+                                    }
+                                    }).fail(function (jqXHR, textStatus, errorThrown) {
+                                    alert('La etapa no se puede eliminar porque tiene requisitos asociados');
                                 });
                             return false;
                             });

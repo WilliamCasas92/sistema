@@ -100,7 +100,7 @@ Campos obligatorios (*)<br><br>
                             alert("Los datos fuerón guardados con exito!")
                         }
                     }).fail(function (jqXHR, textStatus, errorThrown) {
-                        alert('La etapa no se puede eliminar porque tiene requisitos asociados');
+                        alert('Error al guardar los datos');
                     });
                     return false;
                 });
