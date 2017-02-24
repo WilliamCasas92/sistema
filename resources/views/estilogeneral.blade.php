@@ -49,5 +49,9 @@
         background-color: #f0fff0;
     }
 
+    .bordetabla{
+        border-radius: 30px;
+    }
+
 
 </style>
