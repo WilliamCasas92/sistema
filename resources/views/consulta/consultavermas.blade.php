@@ -2,27 +2,32 @@
 @section('showcontractcontent')
     <div class="container col-md-12">
         <div class="panel panel-success">
-            <div class="panel-heading"><h4>
-                    <h4><label>Datos generales del contrato</label>
-                        <br><a data-toggle="collapse"  data-parent="#accordion" href="#collapseprocesocontractual">
-                            <span class="glyphicon glyphicon-chevron-down darkgreen"></span>
-                        </a>
-                    </h4>
-                </h4></div>
+            <div class="panel-heading">
+                <a data-toggle="collapse"  data-parent="#accordion" href="#collapseprocesocontractual">
+                    <h4><label class="text-success">Datos generales del contrato</label></h4>
+                </a>
+            </div>
             <div class="panel-group" id="accordion">
                 <div class="panel panel-default">
                     <div id="collapseprocesocontractual" class="panel-collapse collapse">
-                        <div class="panel-body bodycollapsegeneral">
+                        <div class="panel-body">
                             <div class="table-responsive">
-                                <table class="bordetabla" style="background : lightgray;" >
-                                    <tbody>
+                                <table class="table table-condensed">
+                                    <h5 class="text-primary" ><label>Información general del contrato</label></h5>
+                                    <thead style="font-size : 11px;">
+                                        <tr>
+                                            <th class="text-center text-primary" width="35%"></th>
+                                            <th class="text-center" width="50%"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody style="font-size : 11px;">
                                         <tr>
                                             <td class="text-center" width="35%"><label>Tipo de proceso de contratacion:</label></td>
                                             <td width="35%">{{ $proceso_contractual->tipo_proceso }}</td>
                                         </tr>
                                         <tr>
                                             <td class="text-center" width="35%"><label>Número de CDP:</label></td>
-                                            <td width="50%">{{ $proceso_contractual->numero_cdp }}</td>
+                                            <td width="35%">{{ $proceso_contractual->numero_cdp }}</td>
                                         </tr>
                                         <tr>
                                             <td class="text-center" width="35%" ><label>Objeto del contrato:</label></td>

@@ -21,6 +21,10 @@
         color: darkgreen;
     }
 
+    .black {
+        color: black;
+    }
+
     .navbarsize{
         padding-top: 10px;
         padding-bottom: 10px;
@@ -45,13 +49,26 @@
         margin-top: -15px;
     }
 
-    .bodycollapsegeneral {
-        background-color: #f0fff0;
+    .table-borderless tbody tr td,
+    .table-borderless tbody tr th,
+    .table-borderless thead tr th,
+    .table-borderless thead tr td,
+    .table-borderless tfoot tr th,
+    .table-borderless tfoot tr td {
+        border: none;
     }
 
-    .bordetabla{
-        border-radius: 30px;
+    .table-headborderless thead tr th,
+    .table-headborderless thead tr td{
+        border: none;
     }
+
+    .table-tam {
+        width: 800px;
+        height: 200px;
+        margin: auto;
+    }
+
 
 
 </style>

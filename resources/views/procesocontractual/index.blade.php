@@ -11,13 +11,15 @@
                 <div class="panel-group" id="accordion">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h5>Filtrar búsqueda
-                                <a data-toggle="collapse"  data-parent="#accordion" href="#collapseconsulta">
+                            <a data-toggle="collapse"  data-parent="#accordion" href="#collapseconsulta">
+                                <h4><label class="text-info">Filtrar búsqueda
                                         <span class="glyphicon glyphicon-search"></span>
-                                </a></h5>
+                                    </label></h4>
+                            </a>
                         </div>
                         <div id="collapseconsulta" class="panel-collapse collapse">
                             <div class="panel-body">
+
                                 <div class="well" name="FiltrosDeBusqueda">
                                     <form class="form-horizontal" method="get" role="buscar" action="{{url('procesocontractual')}}">
                                         <div class="form-group">
