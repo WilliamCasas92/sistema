@@ -11,15 +11,13 @@
                 <div class="panel-group" id="accordion">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <a data-toggle="collapse"  data-parent="#accordion" href="#collapseconsulta">
-                                <h4><label class="text-info">Filtrar búsqueda
+                            <h5>Filtrar búsqueda
+                                <a data-toggle="collapse"  data-parent="#accordion" href="#collapseconsulta">
                                         <span class="glyphicon glyphicon-search"></span>
-                                    </label></h4>
-                            </a>
+                                </a></h5>
                         </div>
                         <div id="collapseconsulta" class="panel-collapse collapse">
                             <div class="panel-body">
-
                                 <div class="well" name="FiltrosDeBusqueda">
                                     <form class="form-horizontal" method="get" role="buscar" action="{{url('procesocontractual')}}">
                                         <div class="form-group">
@@ -118,16 +116,46 @@
                                                 $eliminar='disabled';
                                             }
                                         @endphp
-                                        <a href="{{ route('procesocontractual.enviar', array($proceso_contractual->id)) }}" class="btn btn-warning btn-xs {{$enviar_adquisiciones}} ">{{$texto_enviar}}</a><br>
-                                        <a href="{{ route('datosetapas.menu', $proceso_contractual->id) }}" class="btn btn-success btn-xs {{$diligenciar}} ">Diligenciar</a><br>
-                                        <a {{$editar}} href="{{ route('procesocontractual.edit', $proceso_contractual->id) }}" class="btn btn-info btn-xs">Editar</a><br>
+
+                                        @if( (Auth::user()->hasRol('Secretario técnico de dependencia')) ||
+                                                (Auth::user()->hasRol('Administrador')))
+                                            <a href="{{ route('procesocontractual.enviar', array($proceso_contractual->id)) }}" class="btn btn-warning btn-xs {{$enviar_adquisiciones}} ">{{$texto_enviar}}</a><br>
+                                            <a {{$editar}} href="{{ route('procesocontractual.edit', $proceso_contractual->id) }}" class="btn btn-info btn-xs">Editar proceso</a><br>
+                                            @if( (Auth::user()->hasRol('Administrador')) )
+                                                <a href="{{ route('datosetapas.menu', $proceso_contractual->id) }}" class="btn btn-success btn-xs {{$diligenciar}} ">Diligenciar</a><br>
+                                            @endif
                                         @if($eliminar=='enabled')
-                                            <form action="{{ route('procesocontractual.destroy', $proceso_contractual->id) }}"method="post">
-                                                <input name="_method" type="hidden" value="DELETE">
-                                                <input name="_token" type="hidden"  value="{{ csrf_token() }}">
-                                                <button type="submit" class="btn btn-danger btn-xs ">Eliminar</button>
-                                            </form>
+                                                <form action="{{ route('procesocontractual.destroy', $proceso_contractual->id) }}"method="post">
+                                                    <input name="_method" type="hidden" value="DELETE">
+                                                    <input name="_token" type="hidden"  value="{{ csrf_token() }}">
+                                                    <button type="submit" class="btn btn-danger btn-xs ">Eliminar</button>
+                                                </form>
+                                            @endif
                                         @endif
+                                        @if( (Auth::user()->hasRol('Secretario')) ||
+                                                (Auth::user()->hasRol('Coordinador')) )
+                                            <a href="{{ route('datosetapas.menu', $proceso_contractual->id) }}" class="btn btn-success btn-xs {{$diligenciar}} ">Diligenciar</a><br>
+                                        @endif
+
+                                        @if( (Auth::user()->hasRol('Coordinador')) )
+                                            <a {{$editar}} href="{{ route('procesocontractual.edit', $proceso_contractual->id) }}" class="btn btn-info btn-xs">Editar proceso</a><br>
+                                        @endif
+
+                                        @if( (Auth::user()->hasRol('Abogado')) ||
+                                                (Auth::user()->hasRol('Gestor de notificación')) ||
+                                                (Auth::user()->hasRol('Gestor de afiliación')) ||
+                                                (Auth::user()->hasRol('Gestor de archivo')) ||
+                                                (Auth::user()->hasRol('Gestor de publicación')) )
+                                            <a href="{{ route('datosetapas.menu', $proceso_contractual->id) }}" class="btn btn-success btn-xs {{$diligenciar}} ">Diligenciar</a><br>
+                                        @endif
+
+                                        @if( (Auth::user()->hasRol('Gestor de contratación')))
+                                            <a href="{{ route('datosetapas.menu', $proceso_contractual->id) }}" class="btn btn-success btn-xs {{$diligenciar}} ">Diligenciar</a><br>
+                                            <a {{$editar}} href="{{ route('procesocontractual.edit', $proceso_contractual->id) }}" class="btn btn-info btn-xs">Añadir número de contrato</a><br>
+                                        @endif
+
+
+
                                     </td>
                                 </tr>
                             </tbody>
