@@ -1,36 +1,52 @@
 @php
     $existen_datos=false;
 @endphp
-@foreach ($requisitos as $requisito)
-    @if ($requisito->etapas_id==$etapa->id)
-        @php
-            $existen_datos=true;
-            $tipo_req=\App\Http\Controllers\DatosEtapaController::imprimir_tipo_requisitos($requisito->tipo_requisitos_id);
-            $valor=\App\Http\Controllers\DatosEtapaController::busqueda_valor_dato_etapa($proceso_contractual->id, $requisito->id);
-        @endphp
-        @if( $tipo_req == 'checkbox')
-                <label class="">{{$requisito->nombre}} :</label>
-                @if ($valor==1)
-                    Si
-                @else
-                    No
-                @endif
-                <br>
-        @elseif ( $tipo_req == 'textarea' )
-                <label class="">{{$requisito->nombre}}: </label>
-                <div class="">
-                    <textarea rows="6" class="form-control" readonly>{{$valor}}</textarea>
-                </div>
-                <br>
-        @else
-            <label class="">{{$requisito->nombre}} : </label>
-            <div class="">
-                <input type="{{$tipo_req}}" class="form-control" value="{{$valor}}" readonly>
-            </div>
-            <br>
-        @endif
-    @endif
-@endforeach
+<div class="table-responsive">
+    <table class="table table-condensed table-headborderless">
+        <h5 class="text-info"><label>Información de Etapa</label></h5>
+        <thead style="font-size : 11px;">
+            <tr>
+                <th class="text-center text-info" width="35%"></th>
+                <th class="text-center" width="50%"></th>
+            </tr>
+        </thead>
+        <tbody style="font-size : 11px;">
+        @foreach ($requisitos as $requisito)
+            @if ($requisito->etapas_id==$etapa->id)
+                @php
+                    $existen_datos=true;
+                    $tipo_req=\App\Http\Controllers\DatosEtapaController::imprimir_tipo_requisitos($requisito->tipo_requisitos_id);
+                    $valor=\App\Http\Controllers\DatosEtapaController::busqueda_valor_dato_etapa($proceso_contractual->id, $requisito->id);
+                @endphp
+                    <tr>
+                        @if( $tipo_req == 'checkbox')
+                            <td class="text-center" width="35%"><label>{{$requisito->nombre}}</label></td>
+                            @if ($valor==1)
+                                <td width="35%">Si</td>
+                            @else
+                                <td width="35%">No</td>
+                            @endif
+                    </tr>
+                    <tr>
+                        @elseif ( $tipo_req == 'textarea' )
+                            <td class="text-center" width="35%"><label>{{$requisito->nombre}}</label></td>
+                            <td class="text-justify" width="35%">{{$valor}}</td>
+                    </tr>
+                    <tr>
+                        @else
+                            <td class="text-center" width="35%"><label>{{$requisito->nombre}}</label></td>
+                            <td width="35%">{{$valor}}</td>
+                        @endif
+                    </tr>
+            @endif
+        @endforeach
+        </tbody>
+    </table>
+</div>
 @if ($existen_datos!=true)
     <h3>No hay información para esta etapa.</h3>
 @endif
+
+
+
+

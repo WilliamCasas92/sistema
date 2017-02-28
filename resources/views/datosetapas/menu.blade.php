@@ -2,41 +2,102 @@
 @section('checkprocess')
     <div class="container col-md-12">
         <div class="panel panel-success">
-            <div class="panel-heading"><h4>
-                    <h4><label>Datos generales del contrato</label>
-                        <br><a data-toggle="collapse"  data-parent="#accordion" href="#collapseprocesocontractual">
-                            <span class="glyphicon glyphicon-chevron-down darkgreen"></span>
-                        </a>
-                    </h4>
-                </h4></div>
+            <div class="panel-heading">
+                <a data-toggle="collapse"  data-parent="#accordion" href="#collapseprocesocontractual">
+                    <h4><label class="text-success">Datos generales del contrato</label></h4>
+                </a>
+            </div>
             <div class="panel-group" id="accordion">
                 <div class="panel panel-default">
                     <div id="collapseprocesocontractual" class="panel-collapse collapse">
-                        <div class="panel-body bodycollapsegeneral">
-                            <div class="text-justify">
-                                <h5><label>Tipo de proceso de contratacion: </label></h5>
-                                    {{ $proceso_contractual->tipo_proceso }}
-                                <h5><label>Número de CDP: </label></h5>
-                                    {{ $proceso_contractual->numero_cdp }}
-                                <h5><label>Objeto del contrato: </label></h5>
-                                    {{ $proceso_contractual->objeto }}
-                                <h5><label>Dependencia correspondiente: </label></h5>
-                                    {{ $proceso_contractual->dependencia }}
-                                <h5><label>Número de contrato: </label></h5>
-                                    {{ $proceso_contractual->numero_contrato }}
-                                <h5><label>Fecha de aprobación por comité: </label></h5>
-                                    {{ $proceso_contractual->fecha_aprobacion }}
-                                <h5><label>Nombre del supervisor: </label></h5>
-                                    {{ $proceso_contractual->nombre_supervisor }}
-                                <h5><label>Identificación del supervisor: </label></h5>
-                                    {{ $proceso_contractual->id_supervisor }}
-                                <h5><label>Email del supervisor: </label></h5>
-                                    {{ $proceso_contractual->email_supervisor }}
-                                <h5><label>Estado del proceso: </label></h5>
-                                    {{ $proceso_contractual->estado }}
-                                <h5><label>Fecha de ingreso en el sistema: </label></h5>
-                                    {{ $proceso_contractual->created_at }}
-                                </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-condensed table-headborderless">
+                                    <h5 class="text-primary" ><label>Información general del contrato</label></h5>
+                                    <thead style="font-size : 11px;">
+                                    <tr>
+                                        <th class="text-center text-primary" width="35%"></th>
+                                        <th class="text-center" width="50%"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody style="font-size : 11px;">
+                                    <tr>
+                                        <td class="text-center" width="35%"><label>Tipo de proceso de contratacion:</label></td>
+                                        <td width="35%">{{ $proceso_contractual->tipo_proceso }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center" width="35%"><label>Número de CDP:</label></td>
+                                        <td width="35%">{{ $proceso_contractual->numero_cdp }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center" width="35%" ><label>Objeto del contrato:</label></td>
+                                        <td class="text-justify" width="35%">{{ $proceso_contractual->objeto }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center" width="35%"><label>Dependencia correspondiente:</label></td>
+                                        <td width="35%">{{ $proceso_contractual->dependencia }}</td>
+                                    </tr>
+                                    @if ($proceso_contractual->numero_contrato!='0')
+                                        <tr>
+                                            <td class="text-center" width="35%"><label>Número de contrato:</label></td>
+                                            <td width="35%">{{ $proceso_contractual->numero_contrato }}</td>
+                                        </tr>
+                                    @else
+                                        <tr>
+                                            <td class="text-center" width="35%"><label>Número de contrato:</label></td>
+                                            <td width="35%">Sin asignar.</td>
+                                        </tr>
+                                    @endif
+                                    <tr>
+                                        <td class="text-center" width="35%"><label>Fecha de reunión por comité:</label></td>
+                                        <td width="35%">{{ $proceso_contractual->fecha_aprobacion }}</td>
+                                    </tr>
+                                    @if ($proceso_contractual->nombre_supervisor!='')
+                                        <tr>
+                                            <td class="text-center" width="35%"><label>Nombre del supervisor:</label></td>
+                                            <td width="35%">{{ $proceso_contractual->nombre_supervisor }}</td>
+                                        </tr>
+                                    @else
+                                        <tr>
+                                            <td class="text-center" width="35%"><label>Nombre del supervisor:</label></td>
+                                            <td width="35%">Sin asignar.</td>
+                                        </tr>
+                                    @endif
+                                    @if ($proceso_contractual->id_supervisor!='')
+                                        <tr>
+                                            <td class="text-center" width="35%"><label>Identificación del supervisor:</label></td>
+                                            <td width="35%">{{ $proceso_contractual->id_supervisor }}</td>
+                                        </tr>
+                                    @else
+                                        <tr>
+                                            <td class="text-center" width="35%"><label>Identificación del supervisor:</label></td>
+                                            <td width="35%">Sin asignar.</td>
+                                        </tr>
+                                    @endif
+                                    @if ($proceso_contractual->email_supervisor!='')
+                                        <tr>
+                                            <td class="text-center" width="35%"><label>Email del supervisor:</label></td>
+                                            <td width="35%">{{ $proceso_contractual->email_supervisor }}</td>
+                                        </tr>
+                                    @else
+                                        <tr>
+                                            <td class="text-center" width="35%"><label>Email del supervisor:</label></td>
+                                            <td width="35%">Sin asignar.</td>
+                                        </tr>
+                                    @endif
+                                    @if(Auth::user()->hasRol('Administrador'))
+                                        <tr>
+                                            <td class="text-center" width="35%"><label>Fecha y Hora de ingreso en el sistema:</label></td>
+                                            <td width="35%">{{ $proceso_contractual->created_at }}</td>
+                                        </tr>
+                                    @endif
+                                    <tr>
+                                        <td class="text-center" width="35%"><label>Estado del proceso:</label></td>
+                                        <td width="35%">{{ $proceso_contractual->estado }}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
