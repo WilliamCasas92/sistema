@@ -48,10 +48,6 @@
                                             <td width="35%">Sin asignar.</td>
                                         </tr>
                                     @endif
-                                    <tr>
-                                        <td class="text-center" width="35%"><label>Fecha de reunión por comité:</label></td>
-                                        <td width="35%">{{ $proceso_contractual->fecha_aprobacion }}</td>
-                                    </tr>
                                     @if ($proceso_contractual->nombre_supervisor!='')
                                         <tr>
                                             <td class="text-center" width="35%"><label>Nombre del supervisor:</label></td>

@@ -102,6 +102,7 @@
     @yield('scriptTipoProceso')
     @yield('scriptUsers')
     @yield('MyscriptsDiligenciar')
+    @yield('scriptComites')
 <br>
     <!-- Footer -->
     <footer class="footer text-center">

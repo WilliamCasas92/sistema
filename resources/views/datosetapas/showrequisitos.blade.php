@@ -99,7 +99,14 @@
                             <tr><div class="form-group">
                                     <td class="text-right">
                                         <h5><label class="control-label " for="Input">{{$requisito->nombre}} {{$obligatorio}}:</label></h5></td>
-                                        <td><input {{$requisito_activado}} type="{{$tipo_req}}" name="atributo[]" class="form-control" value="{{$valor}}" autocomplete="off" {{$required}}></td>
+                                        @php
+                                            $maxdate=date("Y-m-d");
+                                            $mensajedate='max='.$maxdate.'';
+                                            if($tipo_req!="date"){
+                                                $mensajedate='';
+                                            }
+                                        @endphp
+                                        <td><input {{$requisito_activado}} type="{{$tipo_req}}" name="atributo[]" {{$mensajedate}} class="form-control" value="{{$valor}}" autocomplete="off" {{$required}}></td>
                                 </div></tr>
                                 <input type="hidden" name="requisito_id[]" value="{{$requisito->id}}">
                             @else
