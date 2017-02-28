@@ -26,7 +26,7 @@
             </div>
             <div align="right">
                 <div class="col-md-3" style="color:white;">
-                    <h4>Conectado como</h4>
+                    <h4>Bienvenido(a)</h4>
                     <h5>{{ Auth::user()->nombre }} {{ Auth::user()->apellidos }}</h5>
                     <h5>{{ Auth::user()->email }}</h5>
                     <a type="button" class="btn btn-danger btn-xs" href="{{ url('/logout') }}"

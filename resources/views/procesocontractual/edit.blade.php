@@ -2,7 +2,20 @@
 @section('editcontractualprocess')
     <div class="container col-md-12">
         <div class="panel panel-success">
-            <div class="panel-heading"><h3>Editar Proceso de Contratación</h3></div>
+            @if(Auth::user()->hasRol('Gestor de contratación'))
+                <div class="panel-heading"><h3>Asigne número de contrato</h3></div>
+            @else
+                <div class="panel-heading"><h3>Editar Proceso de Contratación</h3></div>
+            @endif
+            @php
+                if(Auth::user()->hasRol('Gestor de contratación')){
+                    $readonly='readonly';
+                    $disabled='disabled';
+                }else{
+                    $readonly='';
+                    $disabled='';
+                }
+            @endphp
             <div class="panel-body">
                 @if (session('error'))
                     <div class="alert alert-danger">
@@ -21,21 +34,21 @@
                     <div class="form-group">
                         <label class="control-label col-md-4" for="InputCDP">Número de CDP: </label>
                         <div class="col-md-3">
-                            <input type="text" name="num_cdp" class="form-control" autocomplete="off" placeholder="Digite el número de CDP" value="{{$proceso_contractual->numero_cdp}}" required>
+                            <input type="text" name="num_cdp" {{$readonly}} class="form-control" autocomplete="off" placeholder="Digite el número de CDP" value="{{$proceso_contractual->numero_cdp}}" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-4" for="InputObjeto">Objeto: </label>
                         <div class="col-md-5">
-                            <textarea rows="6" name="objeto" class="form-control" autocomplete="off" required>{{$proceso_contractual->objeto}}</textarea>
+                            <textarea rows="6" name="objeto" {{$readonly}} class="form-control" autocomplete="off" required>{{$proceso_contractual->objeto}}</textarea>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-4" for="InputDependencia">Depedencia: </label>
                         <div class="col-md-5">
-                            <select class="form-control" name="dependencia" id="dependencia" required>
+                            <select {{$disabled}} class="form-control" name="dependencia" {{$readonly}} id="dependencia" required>
                                 @if ($proceso_contractual->dependencia=='Rectoría')
-                                    <option selected value="{{$proceso_contractual->dependencia}}">{{$proceso_contractual->dependencia}}</option>
+                                    <option  selected value="{{$proceso_contractual->dependencia}}">{{$proceso_contractual->dependencia}}</option>
                                     <option value="Vicerrectoría de Docencia e Investigación">Vicerrectoría de Docencia e Investigación</option>
                                     <option value="Vicerrectoría de Extensión">Vicerrectoría de Extensión</option>
                                     <option value="Vicerrectoría Administrativa">Vicerrectoría Administrativa</option>
@@ -44,7 +57,7 @@
                                     <option value="Rectoria">Rectoría</option>
                                     <option selected value="{{$proceso_contractual->dependencia}}">{{$proceso_contractual->dependencia}}</option>
                                     <option value="Vicerrectoría de Extensión">Vicerrectoría de Extensión</option>
-                                    <option value="Vicerrectoría Administrativa">Vicerrectoría Administrativa</option>
+                                    <option  value="Vicerrectoría Administrativa">Vicerrectoría Administrativa</option>
                                 @endif
                                 @if($proceso_contractual->dependencia=='Vicerrectoría de Extensión')
                                     <option value="Rectoria">Rectoría</option>
@@ -80,25 +93,25 @@
                     <div class="form-group">
                         <label class="control-label col-md-4" for="InputDateAprobacion">Fecha de Aprobación por Comité: </label>
                         <div class="col-md-3">
-                            <input type="date" name="date_aprobación" class="form-control" autocomplete="off" value="{{$proceso_contractual->fecha_aprobacion}}" required>
+                            <input type="date" name="date_aprobación" {{$readonly}} class="form-control" autocomplete="off" value="{{$proceso_contractual->fecha_aprobacion}}" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-4" for="InputSupervisor">Nombre del Supervisor: </label>
                         <div class="col-md-5">
-                            <input type="text" name="nombre_supervisor" class="form-control" autocomplete="off" placeholder="Digite el nombre del supervisor" value="{{$proceso_contractual->nombre_supervisor}}" >
+                            <input type="text" name="nombre_supervisor" {{$readonly}} class="form-control" autocomplete="off" placeholder="Digite el nombre del supervisor" value="{{$proceso_contractual->nombre_supervisor}}" >
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-4" for="InputIDSupervisor">Identificación del Supervisor: </label>
                         <div class="col-md-3">
-                            <input type="text" name="id_supervisor" class="form-control" autocomplete="off" placeholder="Digite C.C. del supervisor" value="{{$proceso_contractual->id_supervisor}}" >
+                            <input type="text" name="id_supervisor" {{$readonly}} class="form-control" autocomplete="off" placeholder="Digite C.C. del supervisor" value="{{$proceso_contractual->id_supervisor}}" >
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-4" for="InputEmailSupervisor">Email del Supervisor: </label>
                         <div class="col-md-5">
-                            <input type="email" name="email_supervisor" class="form-control" autocomplete="off" placeholder="Digite el email del supervisor" value="{{$proceso_contractual->email_supervisor}}">
+                            <input type="email" name="email_supervisor" {{$readonly}} class="form-control" autocomplete="off" placeholder="Digite el email del supervisor" value="{{$proceso_contractual->email_supervisor}}">
                         </div>
                     </div>
                     <form class="form-inline">
