@@ -4,9 +4,13 @@
         <div class="panel panel-success">
             <div class="panel-heading"><h3>Procesos Contractuales</h3></div>
             <div class="panel-body">
-                <div align="left">
-                    <h4><a class="btn btn-primary" href="{{route('procesocontractual.create')}}">Crear nuevo proceso de contratación</a></h4>
-                </div><br>
+                @if( (Auth::user()->hasRol('Administrador'))||
+                        (Auth::user()->hasRol('Coordinador'))||
+                            (Auth::user()->hasRol('Secretario técnico de dependencia')) )
+                    <div align="left">
+                        <h4><a class="btn btn-primary" href="{{route('procesocontractual.create')}}">Crear nuevo proceso de contratación</a></h4>
+                    </div><br>
+                @endif
                 <!-- Seccion para la busqueda-->
                 <div class="panel-group" id="accordion">
                     <div class="panel panel-default">
@@ -81,7 +85,6 @@
                                 <th class="text-center">Número de contrato</th>
                                 <th class="text-center">Dependencia</th>
                                 <th class="text-center">Tipo de Proceso</th>
-                                <th class="text-center">Fecha de Aprobación</th>
                                 <th class="text-center">Estado</th>
                                 <th class="text-center"></th>
                             </tr>
@@ -92,14 +95,13 @@
                                     <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->numero_cdp }}</td>
                                     <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->year_cdp }}</td>
                                     <td style="font-size : 11px;" class="text-justify" width="35%">{{ $proceso_contractual->objeto }}</td>
-                                    @if($proceso_contractual->numero_contrato!='0')
-                                        <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->numero_contrato }}</td>
-                                    @else
+                                    @if(($proceso_contractual->numero_contrato=='0')||($proceso_contractual->numero_contrato=='') )
                                         <td style="font-size : 11px;" class="text-center">Sin asignar.</td>
+                                    @else
+                                        <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->numero_contrato }}</td>
                                     @endif
                                     <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->dependencia }}</td>
                                     <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->tipo_proceso }}</td>
-                                    <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->fecha_aprobacion }}</td>
                                     <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->estado }}</td>
                                     <td class="text-center">
                                         @php
@@ -169,7 +171,6 @@
                                                 <button type="submit" class="btn btn-danger btn-xs ">Eliminar</button>
                                             </form>
                                         @endif
-
                                     </td>
                                 </tr>
                             </tbody>

@@ -14,6 +14,7 @@
                 }else{
                     $readonly='';
                     $disabled='';
+                    $disabledcheckbox='';
                 }
             @endphp
             <div class="panel-body">
@@ -44,9 +45,21 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label class="control-label col-md-4" for="InputValor">Valor del contrato: </label>
+                        <div class="col-md-3">
+                            <input type="number" name="num_valor" {{$readonly}} class="form-control" autocomplete="off" min="1" step="1" placeholder="Digite el valor del contrato" value="{{$proceso_contractual->valor}}" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-4" for="InputValor">Plazo de ejecución: </label>
+                        <div class="col-md-5">
+                            <input type="number" name="num_plazo" {{$readonly}} class="form-control" autocomplete="off" min="1" step="1" placeholder="Digite el número de días de ejecución del contrato" value="{{$proceso_contractual->plazo}}" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="control-label col-md-4" for="InputDependencia">Depedencia: </label>
                         <div class="col-md-5">
-                            <select {{$disabled}} class="form-control" name="dependencia" {{$readonly}} id="dependencia" required>
+                            <select  class="form-control" name="dependencia" {{$readonly}} id="dependencia" required>
                                 @if ($proceso_contractual->dependencia=='Rectoría')
                                     <option  selected value="{{$proceso_contractual->dependencia}}">{{$proceso_contractual->dependencia}}</option>
                                     <option value="Vicerrectoría de Docencia e Investigación">Vicerrectoría de Docencia e Investigación</option>
@@ -89,13 +102,6 @@
                             </div>
                         </div>
                     @endif
-
-                    <div class="form-group">
-                        <label class="control-label col-md-4" for="InputDateAprobacion">Fecha de Aprobación por Comité: </label>
-                        <div class="col-md-3">
-                            <input type="date" name="date_aprobación" {{$readonly}} class="form-control" autocomplete="off" value="{{$proceso_contractual->fecha_aprobacion}}" required>
-                        </div>
-                    </div>
                     <div class="form-group">
                         <label class="control-label col-md-4" for="InputSupervisor">Nombre del Supervisor: </label>
                         <div class="col-md-5">
@@ -105,13 +111,61 @@
                     <div class="form-group">
                         <label class="control-label col-md-4" for="InputIDSupervisor">Identificación del Supervisor: </label>
                         <div class="col-md-3">
-                            <input type="text" name="id_supervisor" {{$readonly}} class="form-control" autocomplete="off" placeholder="Digite C.C. del supervisor" value="{{$proceso_contractual->id_supervisor}}" >
+                            <input type="text" name="id_supervisor" {{$readonly}} class="form-control" autocomplete="off" placeholder="Digite identificación del supervisor" value="{{$proceso_contractual->id_supervisor}}" >
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-4" for="InputEmailSupervisor">Email del Supervisor: </label>
                         <div class="col-md-5">
                             <input type="email" name="email_supervisor" {{$readonly}} class="form-control" autocomplete="off" placeholder="Digite el email del supervisor" value="{{$proceso_contractual->email_supervisor}}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-4" for="InputRoles">Comités participes:</label><br>
+                        <div class="col-md-8">
+                            <div class="checkbox">
+                                <label><input id="comite_docenciainv" type="checkbox" {{ $proceso_contractual->comiteinterno=='1' ? 'checked':''}} name="comite_docenciainv" value="1" required>Comité Interno de Docencia e Investigación</label>
+                            </div>
+                            <div class="checkbox">
+                                <label><input id="comite_extension" type="checkbox" {{ $proceso_contractual->comiteinterno=='2' ? 'checked':''}} name="comite_extension" value="2" required>Comité Interno de Extensión</label>
+                            </div>
+                            <div class="checkbox">
+                                <label><input id="comite_admin" type="checkbox" {{ $proceso_contractual->comiteinterno=='3' ? 'checked':''}} name="comite_admin" value="3" required>Comité Interno de Administración</label>
+                            </div>
+                            <div class="checkbox">
+                                <label><input id="comite_rectoria" type="checkbox" {{ $proceso_contractual->comiterectoria ? 'checked':''}} name="comite_rectoria" value="4" required>Comité Interno de Rectoría</label>
+                            </div>
+                            <div class="checkbox">
+                                <label><input id="comite_asesor" type="checkbox" {{ $proceso_contractual->comiteasesor ? 'checked':''}} name="comite_asesor" value="5">Comité Asesor de Contratación</label>
+                            </div>
+                            <div class="checkbox">
+                                <label><input id="comite_ev" type="checkbox" {{ $proceso_contractual->comiteevaluador ? 'checked':''}} name="comite_ev" value="6">Comité Evaluador</label>
+                            </div>
+                        </div>
+                    </div><br>
+                    <!-- Fechas Comités-->
+                    <div class="form-group">
+                        <label class="control-label col-md-4">Fecha de reunión de Comité Interno: </label>
+                        <div class="col-md-3">
+                            <input id="comitecheck1" type="date" name="date_aprobación1" max="{{date("Y-m-d")}}" {{$readonly}} class="form-control" value="{{$proceso_contractual->fecha_comiteinterno}}" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-4">Fecha de reunión de Comité Interno de Rectoría: </label>
+                        <div class="col-md-3">
+                            <input id="comitecheck2" type="date" name="date_aprobación2" max="{{date("Y-m-d")}}" {{$readonly}} class="form-control" value="{{$proceso_contractual->fecha_comiterectoria}}" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-4">Fecha de reunión de Comité Asesor de Contratación:</label>
+                        <div class="col-md-3">
+                            <input id="comitecheck3" type="date" name="date_aprobación3" max="{{date("Y-m-d")}}" {{$readonly}} class="form-control" value="{{$proceso_contractual->fecha_comiteasesor}}" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-4">Fecha de reunión de Comité Evaluador:</label>
+                        <div class="col-md-3">
+                            <input id="comitecheck4" type="date" name="date_aprobación4" max="{{date("Y-m-d")}}" {{$readonly}} class="form-control" value="{{$proceso_contractual->fecha_comiteevaluador}}" disabled>
                         </div>
                     </div>
                     <form class="form-inline">
@@ -125,3 +179,108 @@
         <h4><a class="btn btn-default" href="{{route('procesocontractual.index')}}">Volver a la lista de Tipos de Procesos</a></h4>
     </div>
 @endsection
+@section('scriptComites')
+    @if(Auth::user()->hasRol('Gestor de contratación'))
+        <script>
+            $(document).ready(function() {
+                $('option:not(:selected)').attr('disabled', true);
+
+                $( '#comite_docenciainv' ).click( function( e ) {
+                    e.preventDefault();
+                    return false;
+                } );
+                $( '#comite_extension' ).click( function( e ) {
+                    e.preventDefault();
+                    return false;
+                } );
+                $( '#comite_admin' ).click( function( e ) {
+                    e.preventDefault();
+                    return false;
+                } );
+                $( '#comite_rectoria' ).click( function( e ) {
+                    e.preventDefault();
+                    return false;
+                } );
+                $( '#comite_asesor' ).click( function( e ) {
+                    e.preventDefault();
+                    return false;
+                } );
+                $( '#comite_ev' ).click( function( e ) {
+                    e.preventDefault();
+                    return false;
+                } );
+            })
+        </script>
+    @endif
+    <script>
+        $(document).ready(function() {
+            if(document.getElementById('comite_docenciainv').checked) {
+                $('#comite_rectoria').attr("required",false);
+                $('#comite_extension').attr("disabled",true);
+                $('#comite_admin').attr("disabled",true);
+                $('#comitecheck1').attr("disabled",false);
+            }
+            if(document.getElementById('comite_extension').checked) {
+                $('#comite_rectoria').attr("required",false);
+                $('#comite_docenciainv').attr("disabled",true);
+                $('#comite_admin').attr("disabled",true);
+                $('#comitecheck1').attr("disabled",false);
+            }
+            if(document.getElementById('comite_admin').checked) {
+                $('#comite_rectoria').attr("required",false);
+                $('#comite_extension').attr("disabled",true);
+                $('#comite_docenciainv').attr("disabled",true);
+                $('#comitecheck1').attr("disabled",false);
+            }
+            if(document.getElementById('comite_rectoria').checked) {
+                $('#comite_docenciainv').attr("required",false);
+                $('#comite_extension').attr("required",false);
+                $('#comite_admin').attr("required",false);
+                $('#comitecheck2').attr("disabled",false);
+            }
+            if(document.getElementById('comite_asesor').checked) {
+                $('#comitecheck3').attr("disabled",false);
+            }
+            if(document.getElementById('comite_ev').checked) {
+                $('#comitecheck4').attr("disabled",false);
+            }
+            document.getElementById('comite_docenciainv').onchange = function() {
+                document.getElementById('comitecheck1').disabled = !this.checked;
+                $('#comitecheck1').attr("required",true);
+                $('#comite_rectoria').attr("required",false);
+                document.getElementById('comite_extension').disabled = this.checked;
+                document.getElementById('comite_admin').disabled = this.checked;
+            };
+            document.getElementById('comite_extension').onchange = function() {
+                document.getElementById('comitecheck1').disabled = !this.checked;
+                $('#comitecheck1').attr("required",true);
+                $('#comite_rectoria').attr("required",false);
+                document.getElementById('comite_docenciainv').disabled = this.checked;
+                document.getElementById('comite_admin').disabled = this.checked;
+            };
+            document.getElementById('comite_admin').onchange = function() {
+                document.getElementById('comitecheck1').disabled = !this.checked;
+                $('#comitecheck1').attr("required",true);
+                $('#comite_rectoria').attr("required",false);
+                document.getElementById('comite_extension').disabled = this.checked;
+                document.getElementById('comite_docenciainv').disabled = this.checked;
+            };
+            document.getElementById('comite_rectoria').onchange = function() {
+                document.getElementById('comitecheck2').disabled = !this.checked;
+                $('#comite_docenciainv').attr("required",false);
+                $('#comite_extension').attr("required",false);
+                $('#comite_admin').attr("required",false);
+                $('#comitecheck2').attr("required",true);
+            };
+            document.getElementById('comite_asesor').onchange = function() {
+                document.getElementById('comitecheck3').disabled = !this.checked;
+                $('#comitecheck3').attr("required",true);
+            };
+            document.getElementById('comite_ev').onchange = function() {
+                document.getElementById('comitecheck4').disabled = !this.checked;
+                $('#comitecheck4').attr("required",true);
+            };
+        })
+    </script>
+@endsection
+

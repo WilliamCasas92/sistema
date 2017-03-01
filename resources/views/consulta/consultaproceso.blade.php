@@ -89,10 +89,10 @@
                                         <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->numero_cdp }}</td>
                                         <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->year_cdp }}</td>
                                         <td style="font-size : 11px;" class="text-justify" width="35%">{{ $proceso_contractual->objeto }}</td>
-                                        @if($proceso_contractual->numero_contrato!='0')
-                                            <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->numero_contrato }}</td>
-                                        @else
+                                        @if(($proceso_contractual->numero_contrato=='0')||($proceso_contractual->numero_contrato=='') )
                                             <td style="font-size : 11px;" class="text-center">Sin asignar.</td>
+                                        @else
+                                            <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->numero_contrato }}</td>
                                         @endif
                                         <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->dependencia }}</td>
                                         <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->tipo_proceso }}</td>

@@ -34,6 +34,14 @@
                                         <td class="text-justify" width="35%">{{ $proceso_contractual->objeto }}</td>
                                     </tr>
                                     <tr>
+                                        <td class="text-center" width="35%"><label>Valor del contrato:</label></td>
+                                        <td width="35%">${{number_format($proceso_contractual->valor)}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center" width="35%"><label>Periodo de ejecución:</label></td>
+                                        <td width="35%">{{ $proceso_contractual->plazo }} día(s)</td>
+                                    </tr>
+                                    <tr>
                                         <td class="text-center" width="35%"><label>Dependencia correspondiente:</label></td>
                                         <td width="35%">{{ $proceso_contractual->dependencia }}</td>
                                     </tr>
@@ -87,6 +95,27 @@
                                             <td width="35%">{{ $proceso_contractual->created_at }}</td>
                                         </tr>
                                     @endif
+                                    <tr>
+                                        <td class="text-center" width="35%"><label>Comites participantes:</label></td>
+                                        <td width="35%">
+                                            @if ( ($proceso_contractual->comiteinterno)=='1' )
+                                                Comité Interno de Docencia e Investigación <label>Fecha:</label> {{$proceso_contractual->fecha_comiteinterno}}</br>
+                                            @elseif( ($proceso_contractual->comiteinterno)=='2' )
+                                                Comité Interno de Extensión <label>Fecha:</label> {{$proceso_contractual->fecha_comiteinterno}}<br>
+                                            @elseif( ($proceso_contractual->comiteinterno)=='3' )
+                                                Comité Interno de Administración <label>Fecha:</label> {{$proceso_contractual->fecha_comiteinterno}}<br>
+                                            @endif
+                                            @if (($proceso_contractual->comiterectoria)=='4' )
+                                                Comité Interno de Rectoría <label>Fecha:</label> {{$proceso_contractual->fecha_comiterectoria}}<br>
+                                            @endif
+                                            @if (($proceso_contractual->comiteasesor)=='5' )
+                                                Comité Asesor de Contratación <label>Fecha:</label> {{$proceso_contractual->fecha_comiteasesor}}<br>
+                                            @endif
+                                            @if (($proceso_contractual->comiteevaluador)=='6' )
+                                                Comité Evaluador <label>Fecha:</label> {{$proceso_contractual->fecha_comiteevaluador}}<br>
+                                            @endif
+                                        </td>
+                                    </tr>
                                     <tr>
                                         <td class="text-center" width="35%"><label>Estado del proceso:</label></td>
                                         <td width="35%">{{ $proceso_contractual->estado }}</td>

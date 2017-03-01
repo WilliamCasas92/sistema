@@ -11,7 +11,6 @@
                 @endif
                 <form class="form-horizontal" method="post" action="/procesocontractual">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-
                     <div class="form-group">
                         <label class="control-label col-md-4" for="InputName">Tipo de Proceso de Contratación: </label>
                         <div class="col-md-5">
@@ -37,7 +36,7 @@
                     <div class="form-group">
                         <label class="control-label col-md-4" for="InputValor">Valor del contrato: </label>
                         <div class="col-md-3">
-                            <input type="number" name="num_valor" class="form-control" autocomplete="off" min="0.01" step="0.01" placeholder="Digite el valor del contrato" required>
+                            <input type="number" name="num_valor" class="form-control" autocomplete="off" min="0" step="1" placeholder="Digite el valor del contrato" required>
                         </div>
                     </div>
                     <div class="form-group">
@@ -66,7 +65,7 @@
                     <div class="form-group">
                         <label class="control-label col-md-4" for="InputIDSupervisor">Identificación del Supervisor: </label>
                         <div class="col-md-3">
-                            <input type="text" name="id_supervisor" class="form-control" autocomplete="off" placeholder="Digite C.C. del supervisor">
+                            <input type="text" name="id_supervisor" class="form-control" autocomplete="off" placeholder="Digite identificación del supervisor">
                         </div>
                     </div>
                     <div class="form-group">
@@ -178,3 +177,4 @@
         })
     </script>
 @endsection
+
