@@ -119,4 +119,5 @@ Route::get('test6', function (){
     echo $dt->format('Y');
 });
 
-Route::resource('files','FileController');
+Route::resource('archivos','ArchivoController');
+
