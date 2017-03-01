@@ -91,6 +91,7 @@
                             </thead>
                             <tbody style="font-size : 11px;">
                             @foreach($procesos_contractuales as $proceso_contractual)
+
                                 <tr>
                                     <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->numero_cdp }}</td>
                                     <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->year_cdp }}</td>
@@ -165,7 +166,7 @@
                                             <!-- Editar -->
                                             <a  href="{{ route('procesocontractual.edit', $proceso_contractual->id) }}" class="btn btn-info btn-xs">Editar proceso</a><br>
                                             <!-- Eliminar -->
-                                            <form action="{{ route('procesocontractual.destroy', $proceso_contractual->id) }}"method="post">
+                                            <form action="{{ route('procesocontractual.destroy', $proceso_contractual->id) }}" method="post">
                                                 <input name="_method" type="hidden" value="DELETE">
                                                 <input name="_token" type="hidden"  value="{{ csrf_token() }}">
                                                 <button type="submit" class="btn btn-danger btn-xs ">Eliminar</button>
@@ -173,6 +174,7 @@
                                         @endif
                                     </td>
                                 </tr>
+
                             </tbody>
                             @endforeach
                         </table>

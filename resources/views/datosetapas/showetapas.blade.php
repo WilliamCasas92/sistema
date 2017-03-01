@@ -3,10 +3,27 @@
         <div class="panel panel-default">
             @php
                 $etapa_activa=\App\Http\Controllers\DatosEtapaController::busqueda_etapa_activa($proceso_contractual->id, $etapa->id);
-                if($etapa_activa=='Activo'){
-                    $color_panel_activo='panelcollapseactivo';
-                    $color_body_activo='bodycollapseactivo';
+                if(
+                    ( ($etapa->hasRol('Administrador')) && (Auth::user()->hasRol('Administrador'))) ||
+                    ( ($etapa->hasRol('Coordinador'))   && ((Auth::user()->hasRol('Coordinador')) || (Auth::user()->hasRol('Administrador'))) ) ||
+                    ( ($etapa->hasRol('Secretario'))    && ((Auth::user()->hasRol('Secretario')) || (Auth::user()->hasRol('Coordinador')) || (Auth::user()->hasRol('Administrador'))) ) ||
+                    ( ($etapa->hasRol('Abogado'))    && ((Auth::user()->hasRol('Abogado')) || (Auth::user()->hasRol('Coordinador')) || (Auth::user()->hasRol('Administrador'))) ) ||
+                    ( ($etapa->hasRol('Gestor de contratación'))    && ((Auth::user()->hasRol('Gestor de contratación')) || (Auth::user()->hasRol('Coordinador')) || (Auth::user()->hasRol('Administrador'))) ) ||
+                    ( ($etapa->hasRol('Gestor de notificación'))    && ((Auth::user()->hasRol('Gestor de notificación')) || (Auth::user()->hasRol('Coordinador')) || (Auth::user()->hasRol('Administrador'))) ) ||
+                    ( ($etapa->hasRol('Gestor de afiliación'))    && ((Auth::user()->hasRol('Gestor de afiliación')) || (Auth::user()->hasRol('Coordinador')) || (Auth::user()->hasRol('Administrador'))) ) ||
+                    ( ($etapa->hasRol('Gestor de archivo'))    && ((Auth::user()->hasRol('Gestor de archivo')) || (Auth::user()->hasRol('Coordinador')) || (Auth::user()->hasRol('Administrador'))) ) ||
+                    ( ($etapa->hasRol('Gestor de publicación'))    && ((Auth::user()->hasRol('Gestor de publicación')) || (Auth::user()->hasRol('Coordinador')) || (Auth::user()->hasRol('Administrador'))) )
+                    ){
+                    if($etapa_activa=='Activo'){
+                        $color_panel_activo='panelcollapseactivo';
+                        $color_body_activo='bodycollapseactivo';
+                    }else{
+                        $etapa_activa='';
+                        $color_panel_activo='';
+                        $color_body_activo='';
+                    }
                 }else{
+                    $etapa_activa='';
                     $color_panel_activo='';
                     $color_body_activo='';
                 }

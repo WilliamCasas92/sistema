@@ -49,8 +49,10 @@
                 <span class="glyphicon glyphicon-home"></span> Inicio</a>
             <a href="{{ url('consultaproceso') }}" type="button" class="btn btn-success">
                 <span class="glyphicon glyphicon-search"></span> Consultar procesos</a>
+            @if(!Auth::user()->hasRol('Usuario general'))
             <a href="{{ url('procesocontractual') }}" type="button" class="btn btn-success">
                 <span class="glyphicon glyphicon-edit"></span> Diligenciar información de proceso</a>
+            @endif
             @if(Auth::user()->hasRol('Administrador'))
                 <div class="btn-group">
                     <button type="button" class="btn btn-success">
