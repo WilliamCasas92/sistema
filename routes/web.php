@@ -39,6 +39,7 @@ Route::resource('requisito', 'RequisitoController');
 
 //Rutas Procesos Contractuales
 Route::get('procesocontractual/enviar/{idproceso}', ['as'=>'procesocontractual.enviar','uses'=> 'ProcesoContractualController@enviar']);
+Route::get('procesocontractual/recibir/{idproceso}', ['as'=>'procesocontractual.recibir','uses'=> 'ProcesoContractualController@recibir']);
 Route::resource('procesocontractual', 'ProcesoContractualController');
 
 //Rutas Datos Etapas

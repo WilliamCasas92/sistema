@@ -79,7 +79,6 @@
                                     <th class="text-center">Número de contrato</th>
                                     <th class="text-center">Dependencia</th>
                                     <th class="text-center">Tipo de Proceso</th>
-                                    <th class="text-center">Fecha de Aprobación por comité</th>
                                     <th class="text-center">Estado</th>
                                     <th class="text-center"></th>
                                 </tr>
@@ -97,7 +96,6 @@
                                         @endif
                                         <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->dependencia }}</td>
                                         <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->tipo_proceso }}</td>
-                                        <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->fecha_aprobacion }}</td>
                                         <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->estado }}</td>
                                         <td class="text-center">
                                             <a href="{{ route('consulta.consultavermas', $proceso_contractual->id) }}" class="btn btn-info btn-xs">Ver más</a><br>

@@ -47,13 +47,14 @@ class ProcesoContractualController extends Controller
             $proceso_contractual->numero_cdp         = $request->num_cdp;
             $proceso_contractual->year_cdp           = date("Y");
             $proceso_contractual->objeto             = $request->objeto;
+            $proceso_contractual->valor             = $request->num_valor;
+            $proceso_contractual->plazo             = $request->num_plazo;
             $proceso_contractual->dependencia        = $request->dependencia;
             if ($request['num_contrato']){
                 $proceso_contractual->numero_contrato   = $request->num_contrato;
             }else{
                 $proceso_contractual->numero_contrato   = '0';
             }
-            $proceso_contractual->fecha_aprobacion   = $request->date_aprobación;
             $proceso_contractual->nombre_supervisor  = $request->nombre_supervisor;
             $proceso_contractual->id_supervisor      = $request->id_supervisor;
             $proceso_contractual->email_supervisor   = $request->email_supervisor;
@@ -68,6 +69,44 @@ class ProcesoContractualController extends Controller
             }else if(ProcesoContractual::select()
                 ->where('numero_contrato','=', $proceso_contractual->num_contrato)->first()) {
                 return back()->with('error', 'El Numero de contrato:'.$proceso_contractual->numero_contrato .' ya esta registrado en otro proceso.');
+            }
+
+            if ($request['comite_docenciainv']){
+                $proceso_contractual->comiteinterno         = $request->comite_docenciainv;
+                $proceso_contractual->fecha_comiteinterno   = $request->date_aprobación1;
+            }elseif($request['comite_extension']){
+                $proceso_contractual->comiteinterno         = $request->comite_extension;
+                $proceso_contractual->fecha_comiteinterno   = $request->date_aprobación1;
+                }elseif ($request['comite_admin']){
+                    $proceso_contractual->comiteinterno         = $request->comite_admin;
+                    $proceso_contractual->fecha_comiteinterno   = $request->date_aprobación1;
+                }else{
+                $proceso_contractual->comiteinterno         ='0';
+                $proceso_contractual->fecha_comiteinterno   = '';
+            }
+
+            if ($request['comite_rectoria']){
+                $proceso_contractual->comiterectoria        = $request->comite_rectoria;
+                $proceso_contractual->fecha_comiterectoria   = $request->date_aprobación2;
+            } else {
+                $proceso_contractual->comiterectoria        ='0';
+                $proceso_contractual->fecha_comiterectoria   = '';
+            }
+
+            if ($request['comite_asesor']){
+                $proceso_contractual->comiteasesor          = $request->comite_asesor;
+                $proceso_contractual->fecha_comiteasesor   = $request->date_aprobación3;
+            } else {
+                $proceso_contractual->comiteasesor          ='0';
+                $proceso_contractual->fecha_comiteasesor   = '';
+            }
+
+            if ($request['comite_ev']){
+                $proceso_contractual->comiteevaluador       = $request->comite_ev;
+                $proceso_contractual->fecha_comiteevaluador   = $request->date_aprobación4;
+            } else {
+                $proceso_contractual->comiteevaluador       ='0';
+                $proceso_contractual->fecha_comiteevaluador   = '';
             }
 
             $proceso_contractual->save();
@@ -164,4 +203,41 @@ class ProcesoContractualController extends Controller
         }
         return back();
     }
+
+    public function recibir($idproceso)
+    {
+        try{
+            $proceso_contractual = ProcesoContractual::findOrFail($idproceso);
+            //Creando tabla proceso_etapa
+            $id_etapa   =DB::table('etapas')
+                            ->where('tipo_procesos_id', $proceso_contractual->tipo_procesos_id )
+                            ->where('indice', 1)
+                            ->value('id');
+            $proceso_etapa=ProcesoEtapa::
+                            where('proceso_contractual_id', $idproceso)
+                            ->where('etapas_id', $id_etapa)
+                            ->first();
+            $proceso_etapa->user_id                  = \Auth::user()->id;
+            $proceso_etapa->save();
+
+            $proceso_contractual->estado             = DB::table('etapas')
+                ->where('tipo_procesos_id', $proceso_contractual->tipo_procesos_id )
+                ->where('indice', 1)
+                ->value('nombre');
+
+            //Guardando en el historial
+            $historial_proceso_etapa = new HistoricoProcesoEtapa();
+            $historial_proceso_etapa->proceso_etapa_id  = $proceso_etapa->id;
+            $historial_proceso_etapa->proceso_contractual_id = $idproceso;
+            $historial_proceso_etapa->etapas_id         = $proceso_etapa->etapas_id;
+            $historial_proceso_etapa->user_id           = \Auth::user()->id;
+            $historial_proceso_etapa->estado            = $proceso_contractual->estado;
+            $historial_proceso_etapa->save();
+            $proceso_contractual->save();
+        } catch(Exception $e){
+            return "Fatal error -".$e->getMessage();
+        }
+        return back();
+    }
+
 }
