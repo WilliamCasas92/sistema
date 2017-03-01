@@ -90,6 +90,7 @@
                 @yield("checkprocess")
                 @yield("consultacontent")
                 @yield("showcontractcontent")
+                @yield('contenido')
             </div>
         </div>
     </div>

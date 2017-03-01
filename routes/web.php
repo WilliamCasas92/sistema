@@ -118,3 +118,5 @@ Route::get('test6', function (){
     $dt = new DateTime();
     echo $dt->format('Y');
 });
+
+Route::resource('files','FileController');
