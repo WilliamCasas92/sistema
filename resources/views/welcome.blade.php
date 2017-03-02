@@ -5,6 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <link href="assets/css/bootstrap.css" rel="stylesheet">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" type="image/gif/png" href="{{asset('images/logo-institucion.png')}}">
         <title>Contratación Poli</title>
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
     </head>
@@ -22,7 +23,7 @@
         <br><br><br><br><br><br><br><br><br><br><br>
         <div class="panel">
             <p class="text-muted">
-                Politécnico Colombiano Jaime Isaza Cadavid © 2017
+                Politécnico Colombiano Jaime Isaza Cadavid © {{date("Y")}}
                 Carrera 48 # 7-151 El Poblado, Medellín - PBX: 3197900
             </p>
         </div>
