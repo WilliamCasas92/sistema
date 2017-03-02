@@ -92,7 +92,7 @@
                 @yield("checkprocess")
                 @yield("consultacontent")
                 @yield("showcontractcontent")
-                @yield('contenido')
+                @yield('contenido')<!--es una prueba-->
             </div>
         </div>
     </div>
@@ -106,6 +106,7 @@
     @yield('scriptUsers')
     @yield('MyscriptsDiligenciar')
     @yield('scriptComites')
+    @yield('scriptDatosEtapas')
 <br>
     <!-- Footer -->
     <footer class="footer text-center">

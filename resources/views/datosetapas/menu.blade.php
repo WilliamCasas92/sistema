@@ -136,4 +136,45 @@
         </div>
         <h4><a class="btn btn-default" href="{{route('procesocontractual.index')}}">Volver a la lista de Procesos Contractuales</a></h4>
     </div>
+    @include('datosetapas.modalsave')
+    <div class="modal" id="modalMensaje" tabindex="-1" role="dialog" aria-labelledby="modalMensaje" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog" role="document" id="datos_faltantes">
+
+        </div>
+    </div>
+@endsection
+@section('scriptDatosEtapas')
+    <script src="/js/dropzone.js" type="text/javascript"></script>
+    <link href="{{asset('/css/dropzone.css')}}" rel="stylesheet">
+    <script>
+        $(document).ready(function() {
+            // Interceptamos el evento submit del formulario agregar Etapa, Al fomulario eliminar Etapa
+            $('#modalSaveForm').submit(function () {
+                // Enviamos el formulario usando AJAX
+                $.ajax({
+                    type: 'GET',
+                    url: $(this).attr('action'),
+                    data: $(this).serialize(),
+                    // Mostramos un mensaje con la respuesta de PHP
+                    success: function (data) {
+                        $('#datos_faltantes').html(data);
+                        $('#modalSave').modal('hide');
+                        $('#modalMensaje').modal('show');
+                    }
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    alert('No se pudo enviar a la otra etapa');
+                });
+                return false;
+            });
+
+
+
+            $(function() {
+                $('#modalSave').on("show.bs.modal", function (e) {
+                    $("#modalSaveNombre").html($(e.relatedTarget).data('nombre'));
+                    $("#modalSaveForm").attr('action', $(e.relatedTarget).data('url'));
+                });
+            });
+        });
+    </script>
 @endsection

@@ -40,11 +40,11 @@ class ArchivoController extends Controller
      */
     public function store(Request $request)
     {
-
-        $files2 = $request->file('file');
-        foreach ($files2 as $files)
-        {
-            if($files){
+        //$files2 = $request->file('file');
+        $files = Input::file('file');
+        //foreach ($files2 as $files)
+        //{
+           // if($files){
                 $fileName=$files->getClientOriginalName();
                 $path = public_path().'/uploads/';
                 $fileType=$files->guessExtension();
@@ -58,10 +58,10 @@ class ArchivoController extends Controller
                 if($files->move($path, $fileName.'.'.$fileType)){
                     $file->save();
                 }
-            }
+            //}
 
 
-        }
+        //}
         /*
         foreach($files as $file){
             $fileName = $file->getClientOriginalName();
@@ -117,8 +117,6 @@ class ArchivoController extends Controller
             if(unlink($file->ruta.$file->nombre.'.'.$file->tipo)){
                 $file->delete();
             }
-
-            //return $file->ruta.$file->nombre.'.'.$file->tipo;
             return back();
 
         }catch (Exception $exception){
