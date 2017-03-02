@@ -1,5 +1,6 @@
 @extends('master')
 @section('indexcontractualprocess')
+    @php($NoExist=false)
     <div class="container col-md-12">
         <div class="panel panel-success">
             <div class="panel-heading"><h3>Procesos Contractuales</h3></div>
@@ -91,8 +92,11 @@
                             </thead>
                             <tbody style="font-size : 11px;">
                             @foreach($procesos_contractuales as $proceso_contractual)
-
-                                <tr>
+                                @php
+                                    $etapa_usuario=\App\Http\Controllers\ProcesoContractualController::etapa_usuario($proceso_contractual->estado, $proceso_contractual->tipo_procesos_id);
+                                @endphp
+                                @if ($etapa_usuario==true)
+                                    <tr>
                                     <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->numero_cdp }}</td>
                                     <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->year_cdp }}</td>
                                     <td style="font-size : 11px;" class="text-justify" width="35%">{{ $proceso_contractual->objeto }}</td>
@@ -174,14 +178,97 @@
                                         @endif
                                     </td>
                                 </tr>
+                                    @elseif ($etapa_usuario==$proceso_contractual->estado)
+                                    <tr>
+                                        <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->numero_cdp }}</td>
+                                        <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->year_cdp }}</td>
+                                        <td style="font-size : 11px;" class="text-justify" width="35%">{{ $proceso_contractual->objeto }}</td>
+                                        @if(($proceso_contractual->numero_contrato=='0')||($proceso_contractual->numero_contrato=='') )
+                                            <td style="font-size : 11px;" class="text-center">Sin asignar.</td>
+                                        @else
+                                            <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->numero_contrato }}</td>
+                                        @endif
+                                        <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->dependencia }}</td>
+                                        <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->tipo_proceso }}</td>
+                                        <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->estado }}</td>
+                                        <td class="text-center">
+                                        @php
+                                            $enviar_adquisiciones='';
+                                            $recibir_adquisiciones='';
+                                            $diligenciar='';
+                                            $habilitar='';
+                                            $num_contrato='';
+                                            if($proceso_contractual->estado=='Sin enviar al Área de Adquisiciones.'){
+                                                if( (Auth::user()->hasRol('Administrador'))||
+                                                        (Auth::user()->hasRol('Coordinador'))||
+                                                            (Auth::user()->hasRol('Secretario técnico de dependencia'))){
+                                                    $enviar_adquisiciones='enabled';
+                                                    $habilitar='enabled';
+                                                }
+                                            }elseif ($proceso_contractual->estado=='Enviado al Área de Adquisiciones.'){
+                                                if( (Auth::user()->hasRol('Administrador'))||
+                                                            (Auth::user()->hasRol('Coordinador'))||
+                                                                (Auth::user()->hasRol('Secretario')) ){
+                                                    $recibir_adquisiciones='enabled';
+                                                }
+                                            }else{
+                                                if(Auth::user()->hasRol('Secretario técnico de dependencia')){
+                                                    $diligenciar='disabled';
+                                                }else{
+                                                    $diligenciar='enabled';
+                                                    if( (Auth::user()->hasRol('Administrador'))||
+                                                           (Auth::user()->hasRol('Coordinador'))||
+                                                            (Auth::user()->hasRol('Gestor de contratación')) ){
+                                                        $num_contrato='enabled';
+                                                    }
+                                                }
+                                            }
+                                        @endphp
 
+                                        @if ($enviar_adquisiciones=='enabled')
+                                            <!-- Enviar a Adqui -->
+                                                <a href="{{ route('procesocontractual.enviar', array($proceso_contractual->id)) }}" class="btn btn-warning btn-xs">Enviar al Área de Adquisiciones.</a><br>
+                                        @endif
+
+                                        @if ($recibir_adquisiciones=='enabled')
+                                            <!-- Recibir a Adqui -->
+                                                <a href="{{ route('procesocontractual.recibir', array($proceso_contractual->id)) }}" class="btn btn-warning btn-xs">Recibir proceso en el Área de Adquisiciones</a><br>
+                                        @endif
+
+                                        @if ($diligenciar=='enabled')
+                                            <!-- Diligenciar -->
+                                                <a href="{{ route('datosetapas.menu', $proceso_contractual->id) }}" class="btn btn-success btn-xs">Diligenciar</a><br>
+                                        @endif
+
+                                        @if ($num_contrato=='enabled')
+                                            <!-- Asignar Número de contrato -->
+                                                @if(Auth::user()->hasRol('Administrador'))
+                                                    <a href="{{ route('procesocontractual.edit', $proceso_contractual->id) }}" class="btn btn-info btn-xs">Editar proceso</a><br>
+                                                @else
+                                                    <a href="{{ route('procesocontractual.edit', $proceso_contractual->id) }}" class="btn btn-info btn-xs">Asignar número de contrato</a><br>
+                                                @endif
+                                            @endif
+
+                                            @if($habilitar=='enabled')
+                                            <!-- Editar -->
+                                                <a  href="{{ route('procesocontractual.edit', $proceso_contractual->id) }}" class="btn btn-info btn-xs">Editar proceso</a><br>
+                                                <!-- Eliminar -->
+                                                <form action="{{ route('procesocontractual.destroy', $proceso_contractual->id) }}" method="post">
+                                                    <input name="_method" type="hidden" value="DELETE">
+                                                    <input name="_token" type="hidden"  value="{{ csrf_token() }}">
+                                                    <button type="submit" class="btn btn-danger btn-xs ">Eliminar</button>
+                                                </form>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endif
                             </tbody>
                             @endforeach
                         </table>
                     @else
                         <h4 class="well" align="center">No existen procesos disponibles.</h4>
                     @endif
-                    {{$procesos_contractuales->appends(Request::all())->links()}}
+                    <!-- {$procesos_contractuales->appends(Request::all())->links()} -->
                 </div>
             </div>
         </div>

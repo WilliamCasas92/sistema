@@ -8,6 +8,7 @@ use App\ProcesoContractual;
 use App\TipoProceso;
 use App\ProcesoEtapa;
 use App\HistoricoProcesoEtapa;
+use App\Etapa;
 
 class ProcesoContractualController extends Controller
 {
@@ -27,7 +28,9 @@ class ProcesoContractualController extends Controller
             ->Where('dependencia', 'like', $dependencia.'%')
             ->Where('objeto', 'like', '%'.$objeto.'%')
             ->orderBy('year_cdp', 'desc')
-            ->orderBy('numero_cdp', 'desc')->paginate(10);
+            ->orderBy('numero_cdp', 'desc')
+            ->get();
+            //->paginate(50);
 
         $tipos_procesos= TipoProceso::all();
         return view($this->path.'.index', compact('procesos_contractuales', 'tipos_procesos'));
@@ -283,4 +286,72 @@ class ProcesoContractualController extends Controller
         return back();
     }
 
+    static function etapa_usuario($proceso_estado, $tipo_proceso_id)
+    {
+        if( (\Auth::user()->hasRol('Administrador'))||(\Auth::user()->hasRol('Coordinador')) ){
+            return true;
+        }
+        if( (\Auth::user()->hasRol('Secretario técnico de dependencia')&&($proceso_estado=='Sin enviar al Área de Adquisiciones.')) ){
+            return $proceso_estado;
+        }
+        if( (\Auth::user()->hasRol('Secretario')&&($proceso_estado=='Enviado al Área de Adquisiciones.')) ){
+            return $proceso_estado;
+        }
+        if(\Auth::user()->hasRol('Secretario')){
+            $etapas= Etapa::all();
+            foreach ($etapas as $etapa){
+                if($etapa->hasRol('Secretario')&&($etapa->nombre==$proceso_estado)&&($etapa->tipo_procesos_id==$tipo_proceso_id)){
+                    return $proceso_estado;
+                }
+            }
+        }
+        if(\Auth::user()->hasRol('Abogado')){
+            $etapas= Etapa::all();
+            foreach ($etapas as $etapa){
+                if($etapa->hasRol('Abogado')&&($etapa->nombre==$proceso_estado)&&($etapa->tipo_procesos_id==$tipo_proceso_id)){
+                    return $proceso_estado;
+                }
+            }
+        }
+        if(\Auth::user()->hasRol('Gestor de contratación')){
+            $etapas= Etapa::all();
+            foreach ($etapas as $etapa){
+                if($etapa->hasRol('Gestor de contratación')&&($etapa->nombre==$proceso_estado)&&($etapa->tipo_procesos_id==$tipo_proceso_id)){
+                    return $proceso_estado;
+                }
+            }
+        }
+        if(\Auth::user()->hasRol('Gestor de notificación')){
+            $etapas= Etapa::all();
+            foreach ($etapas as $etapa){
+                if($etapa->hasRol('Gestor de notificación')&&($etapa->nombre==$proceso_estado)&&($etapa->tipo_procesos_id==$tipo_proceso_id)){
+                    return $proceso_estado;
+                }
+            }
+        }
+        if(\Auth::user()->hasRol('Gestor de afiliación')){
+            $etapas= Etapa::all();
+            foreach ($etapas as $etapa){
+                if($etapa->hasRol('Gestor de afiliación')&&($etapa->nombre==$proceso_estado)&&($etapa->tipo_procesos_id==$tipo_proceso_id)){
+                    return $proceso_estado;
+                }
+            }
+        }
+        if(\Auth::user()->hasRol('Gestor de archivo')){
+            $etapas= Etapa::all();
+            foreach ($etapas as $etapa){
+                if($etapa->hasRol('Gestor de archivo')&&($etapa->nombre==$proceso_estado)&&($etapa->tipo_procesos_id==$tipo_proceso_id)){
+                    return $proceso_estado;
+                }
+            }
+        }
+        if(\Auth::user()->hasRol('Gestor de publicación')){
+            $etapas= Etapa::all();
+            foreach ($etapas as $etapa){
+                if($etapa->hasRol('Gestor de publicación')&&($etapa->nombre==$proceso_estado)&&($etapa->tipo_procesos_id==$tipo_proceso_id)){
+                    return $proceso_estado;
+                }
+            }
+        }
+    }
 }
