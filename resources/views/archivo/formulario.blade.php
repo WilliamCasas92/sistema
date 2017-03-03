@@ -3,6 +3,7 @@
     <script src="/js/dropzone.js" type="text/javascript"></script>
     <link href="{{asset('/css/dropzone.css')}}" rel="stylesheet">
     <script>
+        /**
         Dropzone.options.myDropzone = {
             autoProcessQueue: false,
             uploadMultiple: true,
@@ -31,6 +32,7 @@
                 );
             }
         };
+        **/
     </script>
     <div class="container">
         <div class="row">
@@ -40,12 +42,15 @@
                     <div class="panel-heading">
                         <h3 class="panel-title">Espacio para subir archivo</h3>
                     </div>
-                    {!! Form::open(['route'=> 'archivos.store', 'method' => 'POST', 'files'=>'true', 'id' => 'my-dropzone' , 'class' => 'dropzone']) !!}
-                    <div class="dz-message" style="height:200px;">
+                    {!! Form::open(['url'=> 'archivos',
+                                    'method'=> 'post',
+                                    'files'=>'true',
+                                    'id' => 'my-dropzone' ,
+                                    'class' => 'dropzone']) !!}
+                    <div class="dz-message needsclick" style="height:200px;">
                         Drop your files here
                     </div>
                     <div class="dropzone-previews"></div>
-                    <button type="submit" class="btn btn-success" id="submit">Save</button>
                     {!! Form::close() !!}
                 </div>
             </div>
