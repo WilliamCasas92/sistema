@@ -1,5 +1,6 @@
 <?php
 
+
 //Ruta Inicio
 Route::get('/', function () {
     return view('welcome');
@@ -10,42 +11,46 @@ Route::get('home', function () {
     return view('home');
 });
 
-//Rutas Usuarios
-Route::resource('users', 'UserController');
+//Rutas LogIn LogOut
+Auth::routes();
+Route::get('/home', 'HomeController@index');
 
 //Rutas Google
 Route::get('social/google', 'SocialController@getSocialAuth');
 Route::get('social/callback/google', 'SocialController@getSocialAuthCallback');
 
-//Rutas LogIn LogOut
-Auth::routes();
+//Rutas Administrador
+Route::group(['middleware' => 'onlyAdmin'], function() {
+    //Rutas Usuarios
+    Route::resource('users', 'UserController');
+    //Rutas TipoProceso
+    Route::resource('tipoproceso', 'TipoProcesoController');
+    //Rutas Etapa
+    Route::get('etapa/{et1}', ['as'=>'etapa.almacenar','uses'=> 'EtapaController@almacenar']);
+    Route::put('etapa/subir/{etapa_id}', ['as'=>'etapa.subirEtapa','uses'=> 'EtapaController@subir_etapa']);
+    Route::put('etapa/bajar/{etapa_id}', ['as'=>'etapa.bajarEtapa','uses'=> 'EtapaController@bajar_etapa']);
+    Route::resource('etapa', 'EtapaController');
+    //Rutas Requisitos
+    Route::get('requisito/{req1}', ['as'=>'requisito.almacenar','uses'=> 'RequisitoController@almacenar']);
+    Route::post('requisito/{requisito}', ['as'=>'requisito.guardar','uses'=> 'RequisitoController@guardar']);
+    Route::resource('requisito', 'RequisitoController');
+});
 
-Route::get('/home', 'HomeController@index');
 
+Route::group(['middleware' => 'onlyDiligenciar'], function() {
+    //Rutas Procesos Contractuales
+    Route::get('procesocontractual/enviar/{idproceso}', ['as'=>'procesocontractual.enviar','uses'=> 'ProcesoContractualController@enviar']);
+    Route::get('procesocontractual/recibir/{idproceso}', ['as'=>'procesocontractual.recibir','uses'=> 'ProcesoContractualController@recibir']);
+    //Desglosar
+    Route::resource('procesocontractual', 'ProcesoContractualController');
+    //Rutas Datos Etapas
+    Route::get('datosetapas/enviar/{idproceso}/{idetapa}', ['as'=>'datosetapas.enviaretapa','uses'=> 'DatosEtapaController@enviar_etapa']);
 
-//Rutas TipoProceso
-Route::resource('tipoproceso', 'TipoProcesoController');
+    Route::get('datosetapas/{datoetapa}', ['as'=>'datosetapas.menu','uses'=> 'DatosEtapaController@menu']);
 
-//Rutas Etapa
-Route::get('etapa/{et1}', ['as'=>'etapa.almacenar','uses'=> 'EtapaController@almacenar']);
-Route::put('etapa/subir/{etapa_id}', ['as'=>'etapa.subirEtapa','uses'=> 'EtapaController@subir_etapa']);
-Route::put('etapa/bajar/{etapa_id}', ['as'=>'etapa.bajarEtapa','uses'=> 'EtapaController@bajar_etapa']);
-Route::resource('etapa', 'EtapaController');
+    Route::resource('datosetapas', 'DatosEtapaController');
+});
 
-//Rutas Requisitos
-Route::get('requisito/{req1}', ['as'=>'requisito.almacenar','uses'=> 'RequisitoController@almacenar']);
-Route::post('requisito/{requisito}', ['as'=>'requisito.guardar','uses'=> 'RequisitoController@guardar']);
-Route::resource('requisito', 'RequisitoController');
-
-//Rutas Procesos Contractuales
-Route::get('procesocontractual/enviar/{idproceso}', ['as'=>'procesocontractual.enviar','uses'=> 'ProcesoContractualController@enviar']);
-Route::get('procesocontractual/recibir/{idproceso}', ['as'=>'procesocontractual.recibir','uses'=> 'ProcesoContractualController@recibir']);
-Route::resource('procesocontractual', 'ProcesoContractualController');
-
-//Rutas Datos Etapas
-Route::get('datosetapas/enviar/{idproceso}/{idetapa}', ['as'=>'datosetapas.enviaretapa','uses'=> 'DatosEtapaController@enviar_etapa']);
-Route::get('datosetapas/{datoetapa}', ['as'=>'datosetapas.menu','uses'=> 'DatosEtapaController@menu']);
-Route::resource('datosetapas', 'DatosEtapaController');
 
 //Rutas Consulta de procesos
 Route::get('consultaproceso', ['as'=>'consulta.mostrar','uses'=> 'ConsultasController@mostrar']);

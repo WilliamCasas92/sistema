@@ -49,8 +49,15 @@
                 <span class="glyphicon glyphicon-home"></span> Inicio</a>
             <a href="{{ url('consultaproceso') }}" type="button" class="btn btn-success">
                 <span class="glyphicon glyphicon-search"></span> Consultar procesos</a>
-            @if(!Auth::user()->hasRol('Usuario general'))
-            <a href="{{ url('procesocontractual') }}" type="button" class="btn btn-success">
+            @if (   (\Auth::user()->hasRol('Administrador'))                        ||
+                    (\Auth::user()->hasRol('Coordinador'))                          ||
+                    (\Auth::user()->hasRol('Secretario técnico de dependencia'))    ||
+                    (\Auth::user()->hasRol('Abogado'))                              ||
+                    (\Auth::user()->hasRol('Gestor de contratación'))               ||
+                    (\Auth::user()->hasRol('Gestor de notificación'))               ||
+                    (\Auth::user()->hasRol('Gestor de afiliación'))                 ||
+                    (\Auth::user()->hasRol('Gestor de archivo'))                    )
+                <a href="{{ url('procesocontractual') }}" type="button" class="btn btn-success">
                 <span class="glyphicon glyphicon-edit"></span> Diligenciar información de proceso</a>
             @endif
             @if(Auth::user()->hasRol('Administrador'))

@@ -26,7 +26,7 @@ class UserTableSeeder extends Seeder
         $user_juan->apellidos='Osorio Vásquez';
         $user_juan->email='juan_osorio82112@elpoli.edu.co';
         $user_juan->save();
-        $user_juan->roles()->attach(2);
+        $user_juan->roles()->attach(1);
 
         //Roberto
         $user_roberto = new User();

@@ -159,6 +159,10 @@
             @endif
         </form>
         </tbody>
-    </table>
+        @if($etapa_activa=='Activo')
+            </table>
+        @else
+            </table>
+        @endif
 </div>
 
