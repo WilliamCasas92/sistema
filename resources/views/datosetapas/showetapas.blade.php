@@ -48,35 +48,4 @@
 
             </div>
         </div>
-        <script>
-        $(document).ready(function() {
-            // Interceptamos el evento submit del formulario agregar Etapa, Al fomulario eliminar Etapa
-            $('#modalSaveForm').submit(function () {
-                // Enviamos el formulario usando AJAX
-                $.ajax({
-                    type: 'GET',
-                    url: $(this).attr('action'),
-                    data: $(this).serialize(),
-                    // Mostramos un mensaje con la respuesta de PHP
-                    success: function (data) {
-                        $('#datos_faltantes').html(data);
-                        $('#modalSave').modal('hide');
-                        $('#modalMensaje').modal('show');
-                    }
-                }).fail(function (jqXHR, textStatus, errorThrown) {
-                    alert('No se pudo enviar a la otra etapa');
-                });
-                return false;
-            });
-
-
-
-            $(function() {
-                $('#modalSave').on("show.bs.modal", function (e) {
-                    $("#modalSaveNombre").html($(e.relatedTarget).data('nombre'));
-                    $("#modalSaveForm").attr('action', $(e.relatedTarget).data('url'));
-                });
-            });
-        });
-    </script>
 </div>

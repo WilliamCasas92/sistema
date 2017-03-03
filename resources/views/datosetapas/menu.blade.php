@@ -138,14 +138,45 @@
     </div>
     @include('datosetapas.modalsave')
     <div class="modal" id="modalMensaje" tabindex="-1" role="dialog" aria-labelledby="modalMensaje" data-backdrop="static" data-keyboard="false">
-        <div class="modal-dialog" role="document" id="datos_faltantes">
-
-        </div>
+        <div class="modal-dialog" role="document" id="datos_faltantes"></div>
     </div>
+    @include('archivo.create')
 @endsection
 @section('scriptDatosEtapas')
     <script src="/js/dropzone.js" type="text/javascript"></script>
     <link href="{{asset('/css/dropzone.css')}}" rel="stylesheet">
+    <script>
+        $(document).ready(function()
+        {
+            /** Ecript de configuración de dropzone**/
+             Dropzone.options.myDropzone = {
+
+                 init: function () {
+                     var submitBtn = document.querySelector("#submit");
+                     myDropzone = this;
+
+                     this.on("complete", function (file) {
+                         setTimeout(function() {
+                             $('#modaladdDocumento').modal('hide');
+                             myDropzone.removeFile(file);
+                         },3000);
+
+                     });
+
+
+                 }
+            };
+
+            //En este se envian los datos al modal de montar documento
+            $(function() {
+                $('#modaladdDocumento').on("show.bs.modal", function (e) {
+                    $("#modaladdDocumentoIdrequisito").val($(e.relatedTarget).data('idrequisito'));
+                    $("#modalSaveIdproceso").val($(e.relatedTarget).data('idprocesocontractual'));
+              });
+            });
+
+        });
+    </script>
     <script>
         $(document).ready(function() {
             // Interceptamos el evento submit del formulario agregar Etapa, Al fomulario eliminar Etapa
@@ -161,8 +192,6 @@
                         $('#modalSave').modal('hide');
                         $('#modalMensaje').modal('show');
                     }
-                }).fail(function (jqXHR, textStatus, errorThrown) {
-                    alert('No se pudo enviar a la otra etapa');
                 });
                 return false;
             });

@@ -99,20 +99,15 @@
                                 <tr><div class="form-group">
                                         <td class="text-right">
                                             <h5><label class="control-label " for="Input">{{$requisito->nombre}} {{$obligatorio}}:</label></h5></td>
-                                        @php
-                                            $maxdate=date("Y-m-d");
-                                            $mensajedate='max='.$maxdate.'';
-                                            if($tipo_req!="date"){
-                                                $mensajedate='';
-                                            }
-                                        @endphp
-                                        <td>@include('archivo.create')</td>
+                                        <td> <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modaladdDocumento"
+                                                     data-idrequisito="{{$requisito->id}}"  data-idprocesocontractual="{{$proceso_contractual->id}}" >Subir Documento</button>
+                                        </td>
                                     </div></tr>
                                 <input type="hidden" name="requisito_id[]" value="{{$requisito->id}}">
                             @else
                                 <tr>
                                     <td class="text-center" width="35%"><label>{{$requisito->nombre}}</label></td>
-                                    <td width="35%">{{$valor}}</td>
+                                    <td width="35%">{{$valor}}<a href="/uploads/{{$valor}}-{{$requisito->id}}.doc" download="{{$valor}}">Descargar</a></td>
                                 </tr>
                             @endif
                         @else
@@ -169,7 +164,7 @@
                                     alert("Los datos fuerón guardados con exito!")
                                 }
                             }).fail(function (jqXHR, textStatus, errorThrown) {
-                                alert('La etapa no se puede eliminar porque tiene requisitos asociados.');
+                                alert('Los datos no se guardaron.');
                             });
                             return false;
                         });

@@ -1,22 +1,26 @@
-<div class="container">
-    <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-5">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Espacio para subir archivo</h3>
-                </div>
-                 {{  Form::open(['url'=> 'archivos',
+<div class="modal fade" id="modaladdDocumento" tabindex="-1" role="dialog" >
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Arrastre el documento a la pantalla o de click en medio<span id="modalRequisitoNombre"></span></h4>
+                <span id="modalRequisitoId"></span>
+            </div>
+            <div class="modal-body">
+                <!-- Formulario Subir Documento-->
+                {!! Form::open(['url'=> 'archivos',
                                   'method'=> 'post',
                                   'files'=>'true',
                                   'id' => 'my-dropzone' ,
-                                  'class' => 'dropzone']) }}
+                                  'class' => 'dropzone']) !!}
                 <div class="dz-message needsclick" style="height:200px;">
                     Drop your files here
+                    <input type="hidden" id="modalSaveIdproceso" name="proceso_contractual_id" />
+                    <input type="hidden" id="modaladdDocumentoIdrequisito" name="requisito_id" />
                 </div>
                 <div class="dropzone-previews"></div>
-                {{ Form::close() }}
-            </div>
+                {!! Form::close() !!}
+
         </div>
     </div>
 </div>

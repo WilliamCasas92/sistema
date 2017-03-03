@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Archivo;
+use App\DatoEtapa;
+use App\HistoricoDatoEtapa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -40,42 +42,65 @@ class ArchivoController extends Controller
      */
     public function store(Request $request)
     {
-        //$files2 = $request->file('file');
-        $files = Input::file('file');
-        //foreach ($files2 as $files)
-        //{
-           // if($files){
-                $fileName=$files->getClientOriginalName();
-                $path = public_path().'/uploads/';
-                $fileType=$files->guessExtension();
-                $fileSize=$files->getClientSize()/1024;
+        try{
+            $files = Input::file('file');
+            $fileName=$files->getClientOriginalName();
+            $path = public_path().'/uploads/';
+            $fileType=$files->guessExtension();
 
-                $file = new Archivo();
-                $file->nombre = $fileName;
-                $file->ruta = $path;
-                $file->tipo = $fileType;
-                $file->tamaño = $fileSize;
-                if($files->move($path, $fileName.'.'.$fileType)){
-                    $file->save();
+            $dato_etapa_id = DB::table('dato_etapas')
+                ->where('proceso_contractual_id', $request->proceso_contractual_id)
+                ->where('requisitos_id', $request->requisito_id)
+                ->value('id');
+            if ($dato_etapa_id != null ){
+                //Edita Dato de la Etapa
+                if($files->move($path, $fileName.'-'.$request->requisito_id.'.'.$fileType)){
+
+                $dato_etapa = DatoEtapa::findOrFail($dato_etapa_id);
+                $dato_etapa->valor = $fileName;
+                $dato_etapa->user_id = \Auth::user()->id;
+                $dato_etapa->save();
+                //Guardando en el historial
+                $historial_dato_etapa = new HistoricoDatoEtapa();
+                $historial_dato_etapa->proceso_contractual_id = $request->proceso_contractual_id;
+                $historial_dato_etapa->valor = $fileName;
+                $historial_dato_etapa->user_id = \Auth::user()->id;
+                $historial_dato_etapa->requisitos_id = $request->requisito_id;
+                $historial_dato_etapa->save();
                 }
-            //}
 
+            }else{
+                if($files->move($path, $fileName.'-'.$request->requisito_id.'.'.$fileType)) {
 
-        //}
-        /*
-        foreach($files as $file){
-            $fileName = $file->getClientOriginalName();
-            $file->move($path, $fileName);
+                    //Crea Dato de la Etapa
+                    $dato_etapa = new DatoEtapa();
+                    $dato_etapa->proceso_contractual_id = $request->proceso_contractual_id;
+                    $dato_etapa->user_id = \Auth::user()->id;
+                    $dato_etapa->valor = $fileName;
+                    $dato_etapa->requisitos_id = $request->requisito_id;
+                    $dato_etapa->save();
+                    //Guardando en el historial
+                    $historial_dato_etapa = new HistoricoDatoEtapa();
+                    $historial_dato_etapa->proceso_contractual_id = $request->proceso_contractual_id;
+                    $historial_dato_etapa->valor = $fileName;
+                    $historial_dato_etapa->user_id = \Auth::user()->id;;
+                    $historial_dato_etapa->requisitos_id = $request->requisito_id;
+                    $historial_dato_etapa->save();
+                }
+            }
+            return view('datosetapas/modalsave');
+        } catch(Exception $e){
+        return "Fatal error -".$e->getMessage();
         }
-         */
+
+
+
+
+
+
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
 
@@ -124,5 +149,27 @@ class ArchivoController extends Controller
         }
     }
 
+    public function store_funcional(Request $request)
+    {
+
+        $files = Input::file('file');
+
+        $fileName=$files->getClientOriginalName();
+        $path = public_path().'/uploads/';
+        $fileType=$files->guessExtension();
+        $fileSize=$files->getClientSize()/1024;
+
+        $file = new Archivo();
+        $file->nombre = $fileName;
+        $file->ruta = $path;
+        $file->tipo = $fileType;
+        $file->tamaño = $fileSize;
+        if($files->move($path, $fileName.'.'.$fileType)){
+            $file->save();
+        }
+    }
+
 
 }
+
+
