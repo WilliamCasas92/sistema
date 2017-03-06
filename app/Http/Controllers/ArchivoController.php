@@ -54,10 +54,12 @@ class ArchivoController extends Controller
                 ->value('id');
             if ($dato_etapa_id != null ){
                 //Edita Dato de la Etapa
-                if($files->move($path, $fileName.'-'.$request->requisito_id.'.'.$fileType)){
+                if($files->move($path, $fileName.'-'.$request->requisito_id.$request->proceso_contractual_id.'.'.$fileType)){
 
                 $dato_etapa = DatoEtapa::findOrFail($dato_etapa_id);
+                unlink($path.$dato_etapa->valor.'-'.$request->requisito_id.$request->proceso_contractual_id.'.'.$dato_etapa->tipo);
                 $dato_etapa->valor = $fileName;
+                $dato_etapa->tipo=$fileType;
                 $dato_etapa->user_id = \Auth::user()->id;
                 $dato_etapa->save();
                 //Guardando en el historial
@@ -70,13 +72,14 @@ class ArchivoController extends Controller
                 }
 
             }else{
-                if($files->move($path, $fileName.'-'.$request->requisito_id.'.'.$fileType)) {
+                if($files->move($path, $fileName.'-'.$request->requisito_id.$request->proceso_contractual_id.'.'.$fileType)) {
 
                     //Crea Dato de la Etapa
                     $dato_etapa = new DatoEtapa();
                     $dato_etapa->proceso_contractual_id = $request->proceso_contractual_id;
                     $dato_etapa->user_id = \Auth::user()->id;
                     $dato_etapa->valor = $fileName;
+                    $dato_etapa->tipo=$fileType;
                     $dato_etapa->requisitos_id = $request->requisito_id;
                     $dato_etapa->save();
                     //Guardando en el historial
