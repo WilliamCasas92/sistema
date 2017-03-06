@@ -40,7 +40,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-4" for="InputValor">Plazo de ejecución: </label>
+                        <label class="control-label col-md-4" for="InputValor">Plazo de ejecución (días): </label>
                         <div class="col-md-5">
                             <input type="number" name="num_plazo" class="form-control" autocomplete="off" min="1" step="1" placeholder="Digite el número de días de ejecución del contrato" required>
                         </div>

@@ -79,7 +79,7 @@ class ArchivoController extends Controller
                     $dato_etapa->proceso_contractual_id = $request->proceso_contractual_id;
                     $dato_etapa->user_id = \Auth::user()->id;
                     $dato_etapa->valor = $fileName;
-                    $dato_etapa->tipo=$fileType;
+                    $dato_etapa->tipo = $fileType;
                     $dato_etapa->requisitos_id = $request->requisito_id;
                     $dato_etapa->save();
                     //Guardando en el historial

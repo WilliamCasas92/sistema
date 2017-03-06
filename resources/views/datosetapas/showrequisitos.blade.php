@@ -106,8 +106,11 @@
                                 <input type="hidden" name="requisito_id[]" value="{{$requisito->id}}">
                             @else
                                 <tr>
+                                    @php
+                                    $tipo=\App\Http\Controllers\DatosEtapaController::busqueda_tipo_dato_etapa($proceso_contractual->id, $requisito->id);
+                                    @endphp
                                     <td class="text-center" width="35%"><label>{{$requisito->nombre}}</label></td>
-                                    <td width="35%">{{$valor}}<a href="/uploads/{{$valor}}-{{$requisito->id}}.doc" download="{{$valor}}">Descargar</a></td>
+                                    <td width="35%"><a href="/uploads/{{$valor}}-{{$requisito->id}}{{$proceso_contractual->id}}.{{$tipo}}" download="{{$valor}}">{{$valor}}</a></td>
                                 </tr>
                             @endif
                         @else

@@ -128,6 +128,15 @@ class DatosEtapaController extends Controller
        return $activo;
     }
 
+    static function busqueda_tipo_dato_etapa($proceso_id, $req_id)
+    {
+        $tipo = DB::table('dato_etapas')
+            ->where('proceso_contractual_id', $proceso_id)
+            ->where('requisitos_id', $req_id)
+            ->value('tipo');
+        return $tipo;
+    }
+
     public function enviar_etapa($idproceso, $idetapa)
     {
         try{
