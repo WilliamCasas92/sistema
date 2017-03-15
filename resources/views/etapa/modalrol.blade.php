@@ -7,7 +7,7 @@
             </div>
             <div class="modal-body">
                 <!-- Formulario Añadir ROLES-->
-                <form class="FormRequisito form-horizontal" method="POST" action="/etapa/{{ $etapa->id }}">
+                <form id="formRol{{$etapa->id}}" class="form-horizontal" method="POST" action="/etapa/{{ $etapa->id }}">
                     <input name="_method" type="hidden" value="PUT">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="form-group">

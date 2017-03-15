@@ -30,9 +30,9 @@
                             $('#FormSubir{{$etapa->id}}, #FormBajar{{$etapa->id}}').submit(function () {
                             // Enviamos el formulario usando AJAX
                                 $.ajax({
-                                        type: 'POST',
-                                    url: $(this).attr('action'),
-                                    data: $(this).serialize(),
+                                        type: 'PUT',
+                                        url: $(this).attr('action'),
+                                        data: $(this).serialize(),
                                     // Mostramos un mensaje con la respuesta de PHP
                                         success: function (data) {
                                         $('#listarEtapas').html(data);
@@ -62,6 +62,25 @@
 
                     @include('etapa.modalrol', compact($etapa))
                     <br><br>
+                    <script>
+                        //En este script estamos enviando el contenido del formulario Rol por medio de ajax
+                        $(document).ready(function() {
+                            // Interceptamos el evento submit del formulario agregar Rol, Al fomulario eliminar Etapa
+                            $('#formRol{{$etapa->id}}').submit(function () {
+                                // Enviamos el formulario usando AJAX
+                                $.ajax({
+                                    type: 'POST',
+                                    url: $(this).attr('action'),
+                                    data: $(this).serialize(),
+                                    // Mostramos un mensaje con la respuesta de PHP
+                                    success: function (data) {
+                                        $('#myModalRol{{$etapa->id}}').modal('hide');
+                                    }
+                                });
+                                return false;
+                            });
+                        });
+                    </script>
                     <!-- Tabla de Indice de Requisitos-->
                     <!-- Se llama la vista con la tabla de Requisitos-->
 
