@@ -103,6 +103,7 @@
                                                      data-idrequisito="{{$requisito->id}}"  data-idprocesocontractual="{{$proceso_contractual->id}}" >Subir Documento</button>
                                         </td>
                                     </div></tr>
+
                                 <input type="hidden" name="requisito_id[]" value="{{$requisito->id}}">
                             @else
                                 <tr>
