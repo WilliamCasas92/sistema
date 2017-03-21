@@ -3,9 +3,9 @@
         <table class="table table-hover">
             <thead>
             <tr>
-                <th class="text-center">Nombre dato</th>
-                <th class="text-center">Tipo de dato</th>
-                <th class="text-center">ID</th>
+                <th class="text-center">Nombre Requisito</th>
+                <th class="text-center">Tipo de Requisito</th>
+                <th class="text-center">Obligatorio</th>
                 <th class="text-center">Fecha de creación</th>
                 <th class="text-center"></th>
             </tr>
@@ -15,8 +15,12 @@
                 @if($requisito->etapas_id==$etapa->id )
                     <tr>
                         <td class="text-center">{{ $requisito->nombre }}</td>
-                        <td class="text-center">{{ $requisito->tipo_requisitos_id }}</td>
-                        <td class="text-center">{{ $requisito->id }}</td>
+                        <td class="text-center">{{ $requisito->tipo_requisitos->nombre }}</td>
+                        @if ($requisito->obligatorio==1)
+                        <td class="text-center"><span class="glyphicon glyphicon-ok"></span></td>
+                        @else
+                        <td class="text-center"><span class="glyphicon glyphicon-remove"></span></td>
+                        @endif
                         <td class="text-center">{{ $requisito->created_at }}</td>
                         <td class="text-center">
                             <!-- boton que permite llamar el modal para eliminar un requisito-->

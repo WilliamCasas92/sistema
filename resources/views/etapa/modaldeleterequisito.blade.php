@@ -9,7 +9,7 @@
             </div>
             <div class="modal-body">
                 <p>
-                    Confirma que desea eliminar <b><span id="modaldeleteRequisitoNombre"></span></b>?
+                    Confirma que desea eliminar el Requisito: <b><span id="modaldeleteRequisitoNombre"></span></b>?
                 </p>
             </div>
             <div class="modal-footer">
