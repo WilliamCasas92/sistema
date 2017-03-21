@@ -45,15 +45,15 @@
                                             <td class="text-center" width="35%"><label>Dependencia correspondiente:</label></td>
                                             <td width="35%">{{ $proceso_contractual->dependencia }}</td>
                                         </tr>
-                                        @if ($proceso_contractual->numero_contrato!='0')
+                                        @if(($proceso_contractual->numero_contrato=='0')||($proceso_contractual->numero_contrato==''))
                                             <tr>
                                                 <td class="text-center" width="35%"><label>Número de contrato:</label></td>
-                                                <td width="35%">{{ $proceso_contractual->numero_contrato }}</td>
+                                                <td width="35%">Sin asignar.</td>
                                             </tr>
                                         @else
                                             <tr>
                                                 <td class="text-center" width="35%"><label>Número de contrato:</label></td>
-                                                <td width="35%">Sin asignar.</td>
+                                                <td width="35%">{{ $proceso_contractual->numero_contrato }}</td>
                                             </tr>
                                         @endif
                                         @if ($proceso_contractual->nombre_supervisor!='')
