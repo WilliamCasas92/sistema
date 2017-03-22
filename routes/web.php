@@ -1,5 +1,5 @@
 <?php
-
+use Carbon\Carbon;
 
 //Ruta Inicio
 Route::get('/', function () {
@@ -121,9 +121,67 @@ Route::get('test5', function (){
     }
 });
 
+
+
 Route::get('test6', function (){
-    $dt = new DateTime();
-    echo $dt->format('Y');
+
+    $tipos_procesos=\App\TipoProceso::where('activo',1)->get();
+    //Datos del proceso
+    foreach ($tipos_procesos as $tipo_proceso){
+        echo "Nombre del proceso: ".$tipo_proceso->nombre;
+        $cantidadProcesos = DB::table('proceso_contractuals')->where('tipo_proceso', $tipo_proceso->nombre)->count();
+        echo "<br> Cantidad de procesos almacenados: ".$cantidadProcesos;
+        echo "<br>";
+
+        $cantidadProcesosSinEnviar = DB::table('proceso_contractuals')
+                        ->where('tipo_proceso', $tipo_proceso->nombre)
+                        ->Where('estado','Sin enviar al Área de Adquisiciones.')
+                        ->count();
+
+        echo "<br> Cantidad de procesos sin enviar a Adquisiciones: ".$cantidadProcesosSinEnviar;
+        echo "<br>";
+
+        $cantidadProcesosEnviados = DB::table('proceso_contractuals')
+                        ->where('tipo_proceso', $tipo_proceso->nombre)
+                        ->Where('estado','Enviado al Área de Adquisiciones.')
+                        ->count();
+        echo "<br> Cantidad de procesos esperando ser recibidos en Adquisiciones: ".$cantidadProcesosEnviados;
+
+        echo "<br>";
+        $proceso_contractual = \App\ProcesoContractual::where('tipo_proceso', $tipo_proceso->nombre)->orderBy('created_at', 'asc')->first();
+        echo $proceso_contractual->objeto;
+        echo "<br>";
+
+        echo "<br> Tiempo promedio en llegar a Adquisiciones: ";
+        echo "<br>";
+
+        //Datos de las etapas del proceso
+        $etapas=\App\Etapa::where('tipo_procesos_id', $tipo_proceso->id)->orderBy('indice', 'asc')->get();
+        foreach ($etapas as $etapa) {
+            echo "<br> Etapa: " . $etapa->nombre;
+            $cantidadProcesosEnEtapa = DB::table('proceso_contractuals')
+                        ->where('tipo_proceso', $tipo_proceso->nombre)
+                        ->where('estado', $etapa->nombre)->count();
+            echo "<br> Cantidad de procesos en esta etapa: ".$cantidadProcesosEnEtapa;
+            echo "<br>";
+        }
+        echo "<br> ---------------------------------------------------<br>";
+    }
+
+
+    echo "<br>";
+    echo "<br>";
+    $proceso_contractual = \App\ProcesoContractual::find(4);
+    $fechaCreacionProceso = $proceso_contractual->created_at;
+    echo 'Fecha creación: '.$fechaCreacionProceso;
+    echo "<br>";
+    $fechaActualizacionProceso = $proceso_contractual->updated_at;
+    echo 'Fecha actualización: '.$fechaActualizacionProceso;
+    echo "<br>";
+    echo "<br> Diferencia en horas: ".$fechaActualizacionProceso->diffInDays($fechaCreacionProceso);
+
+
+
 });
 
 Route::resource('archivos','ArchivoController');
