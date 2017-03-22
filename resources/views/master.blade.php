@@ -74,6 +74,8 @@
                                 <span class="glyphicon glyphicon-user"></span> Gestión de Usuarios</a></li>
                         <li><a href="{{ url('tipoproceso') }}">
                                 <span class="glyphicon glyphicon-lock"></span> Gestión de Tipos de Proceso de Contratación</a></li>
+                        <li><a href="{{ url('indicadores') }}">
+                                <span class="glyphicon glyphicon-stats"></span> Indicadores</a></li>
                     </ul>
                 </div>
             @endif
@@ -101,7 +103,7 @@
                 @yield("checkprocess")
                 @yield("consultacontent")
                 @yield("showcontractcontent")
-                @yield('contenido')<!--es una prueba-->
+                @yield("indicators")
             </div>
         </div>
     </div>

@@ -34,6 +34,8 @@ Route::group(['middleware' => 'onlyAdmin'], function() {
     Route::get('requisito/{req1}', ['as'=>'requisito.almacenar','uses'=> 'RequisitoController@almacenar']);
     Route::post('requisito/{requisito}', ['as'=>'requisito.guardar','uses'=> 'RequisitoController@guardar']);
     Route::resource('requisito', 'RequisitoController');
+    //Ruta Indicadores
+    Route::resource('indicadores', 'IndicadoresController');
 });
 
 
