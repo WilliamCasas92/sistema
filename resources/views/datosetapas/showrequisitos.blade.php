@@ -109,7 +109,8 @@
                                                     data-idrequisito="{{$requisito->id}}"  data-idprocesocontractual="{{$proceso_contractual->id}}" >Subir Documento</button>
                                         </td>
                                         <td>
-                                            <button  type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#modaldeleteDocumento" data-nombre="{{$valor}}"
+                                            <button  type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#modaldeleteDocumento"
+                                                     data-nombre="<h5><a href='/uploads/{{$valor}}-{{$requisito->id}}-{{$proceso_contractual->id}}.{{$tipo}}' download='{{$valor}}'>{{$valor}}</a></h5>"
                                             data-mostrar="#documento{{$requisito->id}}{{$proceso_contractual->id}}" data-id="{{$etapa->id}}"  data-url="{{ route('datosetapas.eliminarDocumento', array( $proceso_contractual->id, $requisito->id)) }}">Eliminar</button>
                                         </td>
                                     </div></tr>

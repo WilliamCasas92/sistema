@@ -202,6 +202,7 @@
                     // Mostramos un mensaje con la respuesta de PHP
                     success: function (data) {
                         $(mostrar).html(data);
+                        $('#Nombre').html(data);
                         $('#modaldeleteDocumento').modal('hide');                    }
                 });
                 return false;
