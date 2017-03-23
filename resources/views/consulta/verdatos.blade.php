@@ -33,6 +33,14 @@
                             <td class="text-justify" width="35%">{{$valor}}</td>
                     </tr>
                     <tr>
+                        @elseif ( $tipo_req == 'file' )
+                            @php
+                                $tipo=\App\Http\Controllers\DatosEtapaController::busqueda_tipo_dato_etapa($proceso_contractual->id, $requisito->id);
+                            @endphp
+                            <td class="text-center" width="35%"><label>{{$requisito->nombre}}</label></td>
+                            <td class="text-justify" width="35%"><a href='/uploads/{{$valor}}-{{$requisito->id}}-{{$proceso_contractual->id}}.{{$tipo}}' download='{{$valor}}'>{{$valor}}</a></td>
+                    </tr>
+                    <tr>
                         @else
                             <td class="text-center" width="35%"><label>{{$requisito->nombre}}</label></td>
                             <td width="35%">{{$valor}}</td>
