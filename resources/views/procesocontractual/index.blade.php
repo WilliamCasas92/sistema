@@ -144,7 +144,7 @@
 
                                         @if ($enviar_adquisiciones=='enabled')
                                             <!-- Enviar a Adqui -->
-                                            <a href="{{ route('procesocontractual.enviar', array($proceso_contractual->id)) }}" class="btn btn-warning btn-xs">Enviar al Área de Adquisiciones.</a><br>
+                                            <a href="{{ route('procesocontractual.enviar', array($proceso_contractual->id)) }}" class="btn btn-warning btn-xs">Enviar al Área de Adquisicionesmjg</a><br>
                                         @endif
 
                                         @if ($recibir_adquisiciones=='enabled')
