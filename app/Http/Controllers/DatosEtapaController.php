@@ -65,6 +65,8 @@ class DatosEtapaController extends Controller
                         $historial_dato_etapa->requisitos_id = $request->requisito_id[$cont];
                         $historial_dato_etapa->save();
                         $cont++;
+                    }else{
+                        $cont++;
                     }
                 } else {
                     //Crea Dato de la Etapa
@@ -199,7 +201,7 @@ class DatosEtapaController extends Controller
         if ($datos->count()){
             foreach ($datos as $dato){
                 if (($dato->obligatorio=='1') &&
-                    ( ($dato->valor=='')||($dato->valor=='0') )){
+                    ( ($dato->valor=='')||($dato->valor=='0')||($dato->valor==null))){
                         $contenido_validacion->mensaje      = 'Debe diligenciar el campo "'.$dato->nombre.'" para finalizar la etapa.';
                         $contenido_validacion->resultado    = false;
                         return $contenido_validacion;
