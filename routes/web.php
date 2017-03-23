@@ -51,6 +51,9 @@ Route::group(['middleware' => 'onlyDiligenciar'], function() {
     Route::get('datosetapas/{datoetapa}', ['as'=>'datosetapas.menu','uses'=> 'DatosEtapaController@menu']);
 
     Route::resource('datosetapas', 'DatosEtapaController');
+    //Rutas de Datos Etapas para subir y eliminar documentos
+    Route::post('datosetapas/documento', ['as'=>'datosetapas.subirDocumento','uses'=> 'DatosEtapaController@subir_documento']);
+    Route::post('datosetapas/documento/{idproceso}/{idrequisito}', ['as'=>'datosetapas.eliminarDocumento','uses'=> 'DatosEtapaController@eliminar_documento']);
 });
 
 
@@ -184,5 +187,9 @@ Route::get('test6', function (){
 
 });
 
+
+
 Route::resource('archivos','ArchivoController');
+Route::post('archivos/eliminar/{idproceso}/{idrequisito}', ['as'=>'archivos.eliminar','uses'=> 'ArchivoController@eliminar_documento']);
+
 

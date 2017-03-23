@@ -98,12 +98,22 @@
                             @if($etapa_activa=='Activo')
                                 <tr><div class="form-group">
                                         <td class="text-right">
-                                            <h5><label class="control-label " for="Input">{{$requisito->nombre}} {{$obligatorio}}:</label></h5></td>
-                                        <td> <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modaladdDocumento"
-                                                     data-idrequisito="{{$requisito->id}}"  data-idprocesocontractual="{{$proceso_contractual->id}}" >Subir Documento</button>
+                                            <h5><label class="control-label " for="Input">{{$requisito->nombre}} {{$obligatorio}}:</label></h5>
+                                        </td>
+                                        @php
+                                            $tipo=\App\Http\Controllers\DatosEtapaController::busqueda_tipo_dato_etapa($proceso_contractual->id, $requisito->id);
+                                        @endphp
+                                        <td width="35%" id="documento{{$requisito->id}}{{$proceso_contractual->id}}"><h5><a href="/uploads/{{$valor}}-{{$requisito->id}}-{{$proceso_contractual->id}}.{{$tipo}}" download="{{$valor}}">{{$valor}}</a></h5></td>
+                                        <td>
+                                            <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#modaladdDocumento" data-idetapa="{{$etapa->id}}" data-mostrar="#documento{{$requisito->id}}{{$proceso_contractual->id}}"
+                                                    data-idrequisito="{{$requisito->id}}"  data-idprocesocontractual="{{$proceso_contractual->id}}" >Subir Documento</button>
+                                        </td>
+                                        <td>
+                                            <button  type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#modaldeleteDocumento" data-nombre="{{$valor}}"
+                                            data-mostrar="#documento{{$requisito->id}}{{$proceso_contractual->id}}" data-id="{{$etapa->id}}"  data-url="{{ route('datosetapas.eliminarDocumento', array( $proceso_contractual->id, $requisito->id)) }}">Eliminar</button>
                                         </td>
                                     </div></tr>
-
+                                    <input type="hidden" name="atributo[]"  class="form-control"  autocomplete="off">
                                 <input type="hidden" name="requisito_id[]" value="{{$requisito->id}}">
                             @else
                                 <tr>
@@ -111,7 +121,7 @@
                                     $tipo=\App\Http\Controllers\DatosEtapaController::busqueda_tipo_dato_etapa($proceso_contractual->id, $requisito->id);
                                     @endphp
                                     <td class="text-center" width="35%"><label>{{$requisito->nombre}}</label></td>
-                                    <td width="35%"><a href="/uploads/{{$valor}}-{{$requisito->id}}{{$proceso_contractual->id}}.{{$tipo}}" download="{{$valor}}">{{$valor}}</a></td>
+                                    <td width="35%"><a href="/uploads/{{$valor}}-{{$requisito->id}}-{{$proceso_contractual->id}}.{{$tipo}}" download="{{$valor}}">{{$valor}}</a></td>
                                 </tr>
                             @endif
                         @else
@@ -160,9 +170,9 @@
                         $('#FormEtapa{{$etapa->id}}').submit(function () {
                             // Enviamos el formulario usando AJAX
                             $.ajax({
-                                type: 'POST',
-                                url: $(this).attr('action'),
-                                data: $(this).serialize(),
+                                    type: 'POST',
+                                    url: $(this).attr('action'),
+                                    data: $(this).serialize(),
                                 // Mostramos un mensaje con la respuesta de PHP
                                 success: function (data) {
                                     alert("Los datos fuerón guardados con exito!")

@@ -140,14 +140,17 @@
     <div class="modal" id="modalMensaje" tabindex="-1" role="dialog" aria-labelledby="modalMensaje" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog" role="document" id="datos_faltantes"></div>
     </div>
-    @include('archivo.create')
+    @include('datosetapas.modaladddocumento')
+    @include('datosetapas.modaldeletedocumento')
 @endsection
 @section('scriptDatosEtapas')
     <script src="/js/dropzone.js" type="text/javascript"></script>
     <link href="{{asset('/css/dropzone.css')}}" rel="stylesheet">
     <script>
+        var mostrar = "";
         $(document).ready(function()
         {
+
             /** Ecript de configuración de dropzone**/
              Dropzone.options.myDropzone = {
 
@@ -155,24 +158,56 @@
                      var submitBtn = document.querySelector("#submit");
                      myDropzone = this;
 
-                     this.on("complete", function (file) {
+                    this.on("complete", function (file) {
                          setTimeout(function() {
                              $('#modaladdDocumento').modal('hide');
                              myDropzone.removeFile(file);
                          },3000);
-
+                    });
+                     this.on("success", function(file, responseText) {
+                         $(mostrar).html(responseText);
+                         $('#Nombre').html(responseText);
                      });
-
 
                  }
             };
 
-            //En este se envian los datos al modal de montar documento
+            //En este se envian los datos al modal de subir documento
             $(function() {
                 $('#modaladdDocumento').on("show.bs.modal", function (e) {
                     $("#modaladdDocumentoIdrequisito").val($(e.relatedTarget).data('idrequisito'));
-                    $("#modalSaveIdproceso").val($(e.relatedTarget).data('idprocesocontractual'));
-              });
+                    $("#modaladdDocumentoIdproceso").val($(e.relatedTarget).data('idprocesocontractual'));
+                    $("#modaladdDocumentoIdetapa").val($(e.relatedTarget).data('idetapa'));
+                    mostrar = $(e.relatedTarget).data('mostrar');
+                });
+            });
+            //Toma los datos que se enviaran al modal eliminar documento
+            $(function() {
+                $('#modaldeleteDocumento').on("show.bs.modal", function (e) {
+                    $("#modaldeleteDocumentoIdrequisito").val($(e.relatedTarget).data('idrequisito'));
+                    $("#modaldeleteDocumentoIdproceso").val($(e.relatedTarget).data('idprocesocontractual'));
+                    $("#modaldeleteDocumentoForm").attr('action', $(e.relatedTarget).data('url'));
+                    $("#modaldeleteDocumentoNombre").html($(e.relatedTarget).data('nombre'));
+                    mostrar = $(e.relatedTarget).data('mostrar');
+                });
+            });
+
+            // Interceptamos el evento submit del formulario subir documento y eliminar documento
+            $('#modaldeleteDocumentoForm').submit(function () {
+                // Enviamos el formulario usando AJAX
+                $.ajax({
+                    type: 'POST',
+                    url: $(this).attr('action'),
+                    data: $(this).serialize(),
+                    // Mostramos un mensaje con la respuesta de PHP
+                    success: function (data) {
+                        $(mostrar).html(data);
+                        $('#modaldeleteDocumento').modal('hide');
+                        alert(mostrar);
+
+                    }
+                });
+                return false;
             });
 
         });
