@@ -162,7 +162,7 @@
                          setTimeout(function() {
                              $('#modaladdDocumento').modal('hide');
                              myDropzone.removeFile(file);
-                         },2000);
+                         },1000);
                     });
                      this.on("success", function(file, responseText) {
                          $(mostrar).html(responseText);
