@@ -148,6 +148,7 @@
     <link href="{{asset('/css/dropzone.css')}}" rel="stylesheet">
     <script>
         var mostrar = "";
+        var boton = "";
         $(document).ready(function()
         {
 
@@ -160,13 +161,14 @@
 
                     this.on("complete", function (file) {
                          setTimeout(function() {
-                             //$('#modaladdDocumento').modal('hide');
-                             //myDropzone.removeFile(file);
+                             $('#modaladdDocumento').modal('hide');
+                             myDropzone.removeFile(file);
                          },1000);
                     });
                      this.on("success", function(file, responseText) {
                          $(mostrar).html(responseText);
                          $('#Nombre').html(responseText);
+                         $(boton).attr("disabled", false);
                      });
 
                  }
@@ -179,6 +181,7 @@
                     $("#modaladdDocumentoIdproceso").val($(e.relatedTarget).data('idprocesocontractual'));
                     $("#modaladdDocumentoIdetapa").val($(e.relatedTarget).data('idetapa'));
                     mostrar = $(e.relatedTarget).data('mostrar');
+                    boton = $(e.relatedTarget).data('boton');
                 });
             });
             //Toma los datos que se enviaran al modal eliminar documento
@@ -189,6 +192,7 @@
                     $("#modaldeleteDocumentoForm").attr('action', $(e.relatedTarget).data('url'));
                     $("#modaldeleteDocumentoNombre").html($(e.relatedTarget).data('nombre'));
                     mostrar = $(e.relatedTarget).data('mostrar');
+                    boton = $(e.relatedTarget).data('boton');
                 });
             });
 
@@ -203,7 +207,9 @@
                     success: function (data) {
                         $(mostrar).html(data);
                         $('#Nombre').html(data);
-                        $('#modaldeleteDocumento').modal('hide');                    }
+                        $('#modaldeleteDocumento').modal('hide');
+                        $(boton).attr("disabled", true);
+                    }
                 });
                 return false;
             });
