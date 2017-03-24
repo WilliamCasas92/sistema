@@ -132,9 +132,11 @@ Route::get('test6', function (){
     //Datos del proceso
     foreach ($tipos_procesos as $tipo_proceso){
         echo "Nombre del proceso: ".$tipo_proceso->nombre;
+
         $cantidad_procesos = DB::table('proceso_contractuals')->where('tipo_proceso', $tipo_proceso->nombre)->count();
         echo "<br> Cantidad de procesos almacenados: ".$cantidad_procesos;
         echo "<br>";
+
         //Cantidad de procesos sin enviar a Adquisiciones
         $cantidad_procesos_sin_enviar = DB::table('proceso_contractuals')
                         ->where('tipo_proceso', $tipo_proceso->nombre)
@@ -143,16 +145,19 @@ Route::get('test6', function (){
 
         echo "<br> Cantidad de procesos sin enviar a Adquisiciones: ".$cantidad_procesos_sin_enviar;
         echo "<br>";
+
+
         //Cantidad de procesos esperando ser recibidos en Adquisiciones
         $cantidad_procesos_enviados = DB::table('proceso_contractuals')
                         ->where('tipo_proceso', $tipo_proceso->nombre)
                         ->Where('estado','Enviado al Área de Adquisiciones.')
                         ->count();
-        echo "<br> Cantidad de procesos esperando ser recibidos en Adquisiciones: ".$cantidad_procesos_enviados;
+        echo "<br> Cantidad de procesos esperando ser recibidos en Adquisiciones: ".$cantidad_procesos_enviados."<br>";
 
         //Tiempo promedio en llegar a Adquisiciones
         $contador_procesos_enviados_adquisiciones = 0;
         $tiempo_promedio_envio = 0;
+
         $procesos_contractuales=\App\ProcesoContractual::where('tipo_proceso',$tipo_proceso->nombre)->get();
         //Nombre de la primera etapa del tipo de proceso.
         $primera_etapa= DB::table('etapas')
@@ -163,6 +168,7 @@ Route::get('test6', function (){
             ->where('tipo_procesos_id', $tipo_proceso->id)
             ->where('indice', 1)
             ->value('id');
+
         foreach ($procesos_contractuales as $proceso_contractual){
             //Fecha de Envío a Adqui.
             $historico_proceso_etapa = \App\HistoricoProcesoEtapa::
@@ -182,17 +188,16 @@ Route::get('test6', function (){
             echo "Fecha de creación: ".$fecha_creacion_proceso;
             echo "<br>";
             echo "Fecha de envío: ".$fecha_envio_proceso;
-            echo "<br>";
             $intervalo_diferencia_fecha = $fecha_envio_proceso->diffInSeconds($fecha_creacion_proceso);
             //Acumula los tiempos de intervalos
             $tiempo_promedio_envio = $tiempo_promedio_envio + $intervalo_diferencia_fecha;
-            echo "<br> Diferencia en segundos: ".$intervalo_diferencia_fecha;
+            echo "<br> Diferencia: ".$intervalo_diferencia_fecha." segundos.";
             $contador_procesos_enviados_adquisiciones ++;
         }
         if ($contador_procesos_enviados_adquisiciones!=0){
-            echo "<br> Tiempo promedio en llegar a Adquisiciones: ".(($tiempo_promedio_envio)/($contador_procesos_enviados_adquisiciones));
+            echo "<br> Tiempo promedio en llegar a Adquisiciones: ".(($tiempo_promedio_envio)/($contador_procesos_enviados_adquisiciones))." segundos.";
         }
-
+        echo "<br>";
 
         //Datos de las etapas del proceso
         $etapas=\App\Etapa::where('tipo_procesos_id', $tipo_proceso->id)->orderBy('indice', 'asc')->get();
@@ -202,6 +207,7 @@ Route::get('test6', function (){
                         ->where('tipo_proceso', $tipo_proceso->nombre)
                         ->where('estado', $etapa->nombre)->count();
             echo "<br> Cantidad de procesos en esta etapa: ".$cantidadProcesosEnEtapa;
+
             echo "<br>";
         }
         echo "<br> ---------------------------------------------------<br>";
@@ -218,7 +224,6 @@ Route::get('test6', function (){
     echo 'Fecha actualización: '.$fechaActualizacionProceso;
     echo "<br>";
     echo "<br> Diferencia en horas: ".$fechaActualizacionProceso->diffInHours($fechaCreacionProceso);
-
 
 
 });

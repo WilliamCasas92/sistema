@@ -20,25 +20,20 @@
                     </form>
                 </form>
             </div>
-
             <!-- ACA ES DONDE SALEN LAS ETAPAS-->
             <div class="panel-group" id="accordion">
                 @include('etapa.index', compact($etapas, $requisitos))
             </div>
             <!--ES DONDE SE LLAMA EL CODIGO DEL MODAL AÑADIR REQUISITO-->
             @include('etapa.modaladdrequisito')
-
-
             <!-- se llama el modal eliminar etapa-->
             @include('etapa.modaldeleteetapa')
             <!--Se llama el modal para eliminar requisitos-->
             @include('etapa.modaldeleterequisito')
-
         </div>
         <h4><a class="btn btn-default" href="{{route('tipoproceso.index')}}">Volver a la lista de Tipos de Procesos</a></h4>
     </div>
 @endsection
-
 
 @section('scriptEtapas')
     <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">

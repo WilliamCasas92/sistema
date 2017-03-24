@@ -207,6 +207,6 @@ class EtapaController extends Controller
     }
 
     public  function contar_etapas($idProceso){
-        return Etapa::where('tipo_procesos_id',$idProceso )->count();;
+        return Etapa::where('tipo_procesos_id',$idProceso )->count();
     }
 }
