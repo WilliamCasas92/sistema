@@ -223,9 +223,3 @@ Route::get('test6', function (){
 
 });
 
-
-
-Route::resource('archivos','ArchivoController');
-Route::post('archivos/eliminar/{idproceso}/{idrequisito}', ['as'=>'archivos.eliminar','uses'=> 'ArchivoController@eliminar_documento']);
-
-
