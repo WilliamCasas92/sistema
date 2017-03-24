@@ -3,7 +3,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Arrastre el documento a la pantalla o de click en medio<span id="modalRequisitoNombre"></span></h4>
+                <h4 class="modal-title">Arrastre el documento a la pantalla o dé click en medio<span id="modalRequisitoNombre"></span></h4>
                 <span id="modalRequisitoId"></span>
             </div>
             <div class="modal-body">
@@ -15,6 +15,7 @@
                                   'class' => 'dropzone']) !!}
                 <div class="dz-message needsclick" style="height:200px;">
                     Drop your files here
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <input type="hidden" id="modaladdDocumentoIdproceso" name="proceso_contractual_id" />
                     <input type="hidden" id="modaladdDocumentoIdrequisito" name="requisito_id" />
                     <input type="hidden" id="modaladdDocumentoIdetapa" name="etapa_id" />
