@@ -161,8 +161,8 @@
 
                     this.on("complete", function (file) {
                          setTimeout(function() {
-                             $('#modaladdDocumento').modal('hide');
-                             myDropzone.removeFile(file);
+                             //$('#modaladdDocumento').modal('hide');
+                             //myDropzone.removeFile(file);
                          },1000);
                     });
                      this.on("success", function(file, responseText) {
