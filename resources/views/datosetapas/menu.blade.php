@@ -159,6 +159,9 @@
                      var submitBtn = document.querySelector("#submit");
                      myDropzone = this;
 
+                     this.on("uploadprogress", function(file) {
+                         alert("file uploaded");
+                     });
                     this.on("complete", function (file) {
                          setTimeout(function() {
                              $('#modaladdDocumento').modal('hide');
