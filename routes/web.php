@@ -151,40 +151,47 @@ Route::get('test6', function (){
         echo "<br> Cantidad de procesos esperando ser recibidos en Adquisiciones: ".$cantidad_procesos_enviados;
 
         //Tiempo promedio en llegar a Adquisiciones
-        $contador_procesos_enviados_adquisiciones=0;
+        $contador_procesos_enviados_adquisiciones = 0;
+        $tiempo_promedio_envio = 0;
         $procesos_contractuales=\App\ProcesoContractual::where('tipo_proceso',$tipo_proceso->nombre)->get();
+        //Nombre de la primera etapa del tipo de proceso.
+        $primera_etapa= DB::table('etapas')
+            ->where('tipo_procesos_id', $tipo_proceso->id)
+            ->where('indice', 1)
+            ->value('nombre');
+        $id_primera_etapa= DB::table('etapas')
+            ->where('tipo_procesos_id', $tipo_proceso->id)
+            ->where('indice', 1)
+            ->value('id');
         foreach ($procesos_contractuales as $proceso_contractual){
+            //Fecha de Envío a Adqui.
+            $historico_proceso_etapa = \App\HistoricoProcesoEtapa::
+                        where('proceso_contractual_id', $proceso_contractual->id)
+                        ->where('etapas_id', $id_primera_etapa)
+                        ->where('estado', $primera_etapa)
+                        ->first();
+            if (!$historico_proceso_etapa){
+                break;
+            }
+            $fecha_envio_proceso = $historico_proceso_etapa->created_at;
+            echo "<br>";
+            echo "ID de proceso: ".$proceso_contractual->id;
+            //Fecha de Creacion en el sistema.
             $fecha_creacion_proceso = $proceso_contractual->created_at;
             echo "<br>";
             echo "Fecha de creación: ".$fecha_creacion_proceso;
             echo "<br>";
-            echo "ID de proceso: ".$proceso_contractual->id;
+            echo "Fecha de envío: ".$fecha_envio_proceso;
             echo "<br>";
-
-            $primera_etapa= DB::table('etapas')
-                        ->where('tipo_procesos_id', $tipo_proceso->id)
-                        ->where('indice', 1)
-                        ->value('nombre');
-
-            $fecha_envio_adquisiciones = \App\HistoricoProcesoEtapa::
-                            where('proceso_contractual_id', $proceso_contractual->id)
-                            ->where('estado', $primera_etapa)
-                            ->first();
-
-
-            $fecha_envio_adquisiciones1 = DB::table('historico_proceso_etapas')
-                ->where('proceso_contractual_id', $proceso_contractual->id)
-                ->where('estado',$primera_etapa)
-                ->value('created_at');
-
-            $fecha_envio_adquisicionesX=$fecha_envio_adquisiciones->created_at;
-
-            echo "Fecha de envío: ".$fecha_envio_adquisiciones->created_at;
-            echo "<br>";
-            echo "<br> Diferencia en horas: ".$fecha_envio_adquisicionesX->diffInHours($fecha_creacion_proceso);
+            $intervalo_diferencia_fecha = $fecha_envio_proceso->diffInSeconds($fecha_creacion_proceso);
+            //Acumula los tiempos de intervalos
+            $tiempo_promedio_envio = $tiempo_promedio_envio + $intervalo_diferencia_fecha;
+            echo "<br> Diferencia en segundos: ".$intervalo_diferencia_fecha;
             $contador_procesos_enviados_adquisiciones ++;
         }
-        echo "<br> Tiempo promedio en llegar a Adquisiciones: ";
+        if ($contador_procesos_enviados_adquisiciones!=0){
+            echo "<br> Tiempo promedio en llegar a Adquisiciones: ".(($tiempo_promedio_envio)/($contador_procesos_enviados_adquisiciones));
+        }
 
 
         //Datos de las etapas del proceso
@@ -203,7 +210,7 @@ Route::get('test6', function (){
 
     echo "<br>";
     echo "<br>";
-    $proceso_contractual = \App\ProcesoContractual::find(5);
+    $proceso_contractual = \App\ProcesoContractual::find(1);
     $fechaCreacionProceso = $proceso_contractual->created_at;
     echo 'Fecha creación: '.$fechaCreacionProceso;
     echo "<br>";
