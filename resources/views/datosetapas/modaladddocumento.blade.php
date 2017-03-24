@@ -13,15 +13,15 @@
                                   'files'=>'true',
                                   'id' => 'my-dropzone' ,
                                   'class' => 'dropzone']) !!}
-                <div class="dz-message needsclick" style="height:200px;">
-                    Drop your files here
                     {{ csrf_field() }}
-                    <input type="hidden" id="modaladdDocumentoIdproceso" name="proceso_contractual_id" />
-                    <input type="hidden" id="modaladdDocumentoIdrequisito" name="requisito_id" />
-                    <input type="hidden" id="modaladdDocumentoIdetapa" name="etapa_id" />
+                    <div class="dz-message needsclick" style="height:200px;">
+                        Drop your files here
+                        <input type="hidden" id="modaladdDocumentoIdproceso" name="proceso_contractual_id" />
+                        <input type="hidden" id="modaladdDocumentoIdrequisito" name="requisito_id" />
+                        <input type="hidden" id="modaladdDocumentoIdetapa" name="etapa_id" />
 
-                </div>
-                <div class="dropzone-previews"></div>
+                    </div>
+                    <div class="dropzone-previews"></div>
                 {!! Form::close() !!}
             </div>
         </div>
