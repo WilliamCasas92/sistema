@@ -2,7 +2,7 @@
 @section('indicators')
     <div class="container col-md-12">
         <div class="panel panel-success">
-            <div class="panel-heading"><h3>Indicadores</h3></div>
+            <div class="panel-heading"><h3 align="center">Indicadores</h3></div>
             <div class="panel-body">
                 <p>Seleccióne un tipo de proceso para ver más información.</p><br>
                 <ul class="nav nav-pills nav-justified">
