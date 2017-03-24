@@ -132,8 +132,8 @@
       ignoreHiddenFiles: true,
       acceptedFiles: null,
       acceptedMimeTypes: null,
-      autoProcessQueue: true,
-      autoQueue: true,
+      autoProcessQueue: false,
+      autoQueue: false,
       addRemoveLinks: false,
       previewsContainer: null,
       hiddenInputContainer: "body",
@@ -156,7 +156,7 @@
       init: function() {
         return noop;
       },
-      forceFallback: true,
+      forceFallback: false,
       fallback: function() {
         var child, messageElement, span, _i, _len, _ref;
         this.element.className = "" + this.element.className + " dz-browser-not-supported";
