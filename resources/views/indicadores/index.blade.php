@@ -29,13 +29,10 @@
                                 }
                             @endphp
                             <p>Cantidad de procesos en trámite en el Área de Adquisiciones: {{$procesos_adqui}}</p>
-                            <p>Porcentaje en trámite: X</p>
 
                             <p>Cantidad de procesos finalizados en el Área de Adquisiciones: X</p>
-                            <p>Porcentaje de finalizados: X</p>
 
                             <p>Cantidad de procesos desiertos en el Área de Adquisiciones: X</p>
-                            <p>Porcentaje de desiertos: X</p>
                             @php($tiempo_promedio_llegada=\App\Http\Controllers\IndicadoresController::tiempo_promedio_llegada($tipo_proceso->nombre, $tipo_proceso->id))
                             <p>Tiempo promedio en llegar al Área de Adquisiciones: {{$tiempo_promedio_llegada}}</p>
 
