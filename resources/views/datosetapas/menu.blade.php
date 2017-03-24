@@ -159,7 +159,7 @@
                      var submitBtn = document.querySelector("#submit");
                      myDropzone = this;
 
-                     this.on("uploadprogress", function(file) {
+                     this.on("complete", function(file) {
                          alert("file uploaded");
                      });
                     this.on("complete", function (file) {
