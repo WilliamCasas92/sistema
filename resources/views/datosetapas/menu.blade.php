@@ -142,6 +142,7 @@
     </div>
     @include('datosetapas.modaladddocumento')
     @include('datosetapas.modaldeletedocumento')
+    @include('datosetapas.modalfinalizar')
 @endsection
 @section('scriptDatosEtapas')
     <script src="/js/dropzone.js" type="text/javascript"></script>
@@ -218,7 +219,7 @@
     </script>
     <script>
         $(document).ready(function() {
-            // Interceptamos el evento submit del formulario agregar Etapa, Al fomulario eliminar Etapa
+            // Interceptamos el evento submit del formulario pasar Etapa, Al fomulario eliminar Etapa
             $('#modalSaveForm').submit(function () {
                 // Enviamos el formulario usando AJAX
                 $.ajax({
@@ -234,13 +235,33 @@
                 });
                 return false;
             });
-
-
-
             $(function() {
                 $('#modalSave').on("show.bs.modal", function (e) {
                     $("#modalSaveNombre").html($(e.relatedTarget).data('nombre'));
                     $("#modalSaveForm").attr('action', $(e.relatedTarget).data('url'));
+                });
+            });
+            //Finalizando el proceso
+            $('#modalFinalForm').submit(function () {
+                // Enviamos el formulario usando AJAX
+                $.ajax({
+                    type: 'GET',
+                    url: $(this).attr('action'),
+                    data: $(this).serialize(),
+                    // Mostramos un mensaje con la respuesta de PHP
+                    success: function (data) {
+                        $('#modalFinal').modal('hide');
+                        $('#datos_faltantes').html(data);
+                        $('#modalSave').modal('hide');
+                        $('#modalMensaje').modal('show');
+                    }
+                });
+                return false;
+            });
+            $(function() {
+                $('#modalFinal').on("show.bs.modal", function (e) {
+                    $("#modalFinalNombre").html($(e.relatedTarget).data('nombre'));
+                    $("#modalFinalForm").attr('action', $(e.relatedTarget).data('url'));
                 });
             });
         });

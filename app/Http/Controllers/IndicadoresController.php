@@ -72,13 +72,13 @@ class IndicadoresController extends Controller
             //Fecha de Creacion del proceso en el sistema.
             $fecha_creacion_proceso = $proceso_contractual->created_at;
             //Calcula el tiempo entre creación del proceso y el recibido en adquisiciones diffInDays, diffInHours, diffInMinutes, diffInSeconds.
-            $intervalo_diferencia_fecha = $fecha_envio_proceso->diffInHours($fecha_creacion_proceso);
+            $intervalo_diferencia_fecha = $fecha_envio_proceso->diffInMinutes($fecha_creacion_proceso);
             //Acumula los tiempos de intervalos.
             $tiempo_promedio_envio = $tiempo_promedio_envio + $intervalo_diferencia_fecha;
             $contador_procesos_enviados_adquisiciones ++;
         }
         if ($contador_procesos_enviados_adquisiciones!=0){
-            return (($tiempo_promedio_envio)/($contador_procesos_enviados_adquisiciones))." hora(s).";
+            return (($tiempo_promedio_envio)/($contador_procesos_enviados_adquisiciones))." minuto(s)";
         }else{
             return "No se logró calcular el tiempo promedio.";
         }
@@ -131,13 +131,13 @@ class IndicadoresController extends Controller
             //Fecha de Creacion del proceso en el sistema.
             $fecha_etapa_actual = $historico_proceso_etapa->created_at;
             //Calcula el tiempo entre creación del proceso y el recibido en adquisiciones diffInDays, diffInHours, diffInMinutes, diffInSeconds.
-            $intervalo_diferencia_fecha = $fecha_siguiente_etapa->diffInHours($fecha_etapa_actual);
+            $intervalo_diferencia_fecha = $fecha_siguiente_etapa->diffInMinutes($fecha_etapa_actual);
             //Acumula los tiempos de intervalos.
             $tiempo_promedio = $tiempo_promedio + $intervalo_diferencia_fecha;
             $contador_procesos ++;
         }
         if ($contador_procesos!=0){
-            return (($tiempo_promedio)/($contador_procesos))." hora(s).";
+            return (($tiempo_promedio)/($contador_procesos))." minuto(s).";
         }else{
             return "No se logró calcular el tiempo promedio.";
         }

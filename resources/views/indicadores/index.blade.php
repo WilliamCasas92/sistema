@@ -4,40 +4,88 @@
         <div class="panel panel-success">
             <div class="panel-heading"><h3 align="center">Indicadores</h3></div>
             <div class="panel-body">
-                <p>Seleccióne un tipo de proceso para ver más información.</p><br>
-                <ul class="nav nav-pills nav-justified">
+                <h4 align="center">Seleccióne una modalidad de contratación para ver más información.</h4><br>
+                <ul class="well nav nav-pills nav-justified" style="background-color: white;">
                     @foreach($tipos_procesos as $tipo_proceso)
                         <li><a data-toggle="pill" href="#indicadorproceso{{$tipo_proceso->id}}">{{$tipo_proceso->nombre}}</a></li>
                     @endforeach
-                </ul><br>
+                </ul>
                 <div class="tab-content">
+                    <div id="home" class="well tab-pane fade in active" style="background-color: white;">
+                        <h4 align="center">Aquí podrá ver la información de la modalidad de contratación seleccionada.</h4>
+                    </div>
                     @foreach($tipos_procesos as $tipo_proceso)
-                        <div id="indicadorproceso{{$tipo_proceso->id}}" class="well tab-pane fade">
-                            @php($cantidad=\App\Http\Controllers\IndicadoresController::cantidad_procesos($tipo_proceso->nombre))
-                            <h3 class="text-info">{{$tipo_proceso->nombre}}</h3>
-                            <p>Cantidad de procesos almacenados en el sistema: {{$cantidad}}</p>
-                            @php($cantidad_sin_enviar=\App\Http\Controllers\IndicadoresController::cantidad_procesos_sin_enviar($tipo_proceso->nombre))
-                            <p>Cantidad de procesos sin enviar al Área de Adquisiciones: {{$cantidad_sin_enviar}}</p>
-                            @php($cantidad_enviados=\App\Http\Controllers\IndicadoresController::cantidad_procesos_enviados($tipo_proceso->nombre))
-                            <p>Cantidad de procesos esperando ser recibidos en el Área de Adquisiciones: {{$cantidad_enviados}}</p>
-                            @php
-                                $procesos_adqui=0;
-                                $etapas=\App\Http\Controllers\IndicadoresController::etapas_tipo_proceso($tipo_proceso->id);
-                                foreach($etapas as $etapa){
-                                    $cantidad_proceso_etapa=\App\Http\Controllers\IndicadoresController::cantidad_procesos_etapa($tipo_proceso->nombre, $etapa->nombre);
-                                    $procesos_adqui=$procesos_adqui+$cantidad_proceso_etapa;
-                                }
-                            @endphp
-                            <p>Cantidad de procesos en trámite en el Área de Adquisiciones: {{$procesos_adqui}}</p>
-
-                            <p>Cantidad de procesos finalizados en el Área de Adquisiciones: X</p>
-
-                            <p>Cantidad de procesos desiertos en el Área de Adquisiciones: X</p>
-                            @php($tiempo_promedio_llegada=\App\Http\Controllers\IndicadoresController::tiempo_promedio_llegada($tipo_proceso->nombre, $tipo_proceso->id))
-                            <p>Tiempo promedio en llegar al Área de Adquisiciones: {{$tiempo_promedio_llegada}}</p>
-
-                            <p>Tiempo promedio en el Área de Adquisiciones: X</p>
-                            <br>
+                        <div id="indicadorproceso{{$tipo_proceso->id}}" class="well tab-pane fade" style="background-color: white;">
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                        <h4 class="panel-title text-center">
+                                            <label class="text-info">{{$tipo_proceso->nombre}}</label>
+                                        </h4>
+                                </div>
+                                <!-- Tabla -->
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-center">Inidicadores</th>
+                                        <th class="text-center">Número de Procesos</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="text-center">
+                                    <tr>
+                                        <td>Almacenados en el sistema</td>
+                                        @php($cantidad=\App\Http\Controllers\IndicadoresController::cantidad_procesos($tipo_proceso->nombre))
+                                        <td>{{$cantidad}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sin enviar al Área de Adquisiciones</td>
+                                        @php($cantidad_sin_enviar=\App\Http\Controllers\IndicadoresController::cantidad_procesos_sin_enviar($tipo_proceso->nombre))
+                                        <td>{{$cantidad_sin_enviar}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Esperando recepción en el Área de Adquisiciones</td>
+                                        @php($cantidad_enviados=\App\Http\Controllers\IndicadoresController::cantidad_procesos_enviados($tipo_proceso->nombre))
+                                        <td>{{$cantidad_enviados}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>En Trámite dentro del Área de Adquisiciones</td>
+                                        @php
+                                            $procesos_adqui=0;
+                                            $etapas=\App\Http\Controllers\IndicadoresController::etapas_tipo_proceso($tipo_proceso->id);
+                                            foreach($etapas as $etapa){
+                                                $cantidad_proceso_etapa=\App\Http\Controllers\IndicadoresController::cantidad_procesos_etapa($tipo_proceso->nombre, $etapa->nombre);
+                                                $procesos_adqui=$procesos_adqui+$cantidad_proceso_etapa;
+                                            }
+                                        @endphp
+                                        <td>{{$procesos_adqui}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Finalizados</td>
+                                        <td>X</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Desiertos</td>
+                                        <td>X</td>
+                                    </tr>
+                                    </tbody>
+                                    <thead>
+                                    <tr>
+                                        <th class="text-center"></th>
+                                        <th class="text-center">Tiempo Promedio</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="text-center">
+                                    <tr>
+                                        <td>De comité al Área de Adquisiciones</td>
+                                        @php($tiempo_promedio_llegada=\App\Http\Controllers\IndicadoresController::tiempo_promedio_llegada($tipo_proceso->nombre, $tipo_proceso->id))
+                                        <td>{{$tiempo_promedio_llegada}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Dentro del Área de Adquisiciones</td>
+                                        <td></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                             <div class="panel-group" id="accordion">
                                 @include('indicadores.indexetapas', compact($etapas, $tipo_proceso))
                             </div>

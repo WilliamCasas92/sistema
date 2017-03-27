@@ -64,7 +64,7 @@
             @endif
             @if(Auth::user()->hasRol('Administrador'))
                 <div class="btn-group">
-                    <button type="button" class="btn btn-success">
+                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
                         <span class="glyphicon glyphicon-wrench"></span> Administración</button>
                     <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
                         <span class="caret"></span>

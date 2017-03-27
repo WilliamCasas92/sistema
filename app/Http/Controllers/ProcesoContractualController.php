@@ -220,6 +220,8 @@ class ProcesoContractualController extends Controller
         }
     }
 
+
+    //Función para enviar proceso a Adquisiciones.
     public function enviar($idproceso)
     {
         try{
@@ -250,6 +252,7 @@ class ProcesoContractualController extends Controller
         return back();
     }
 
+    //Función para recibir proceso en Adquisiciones.
     public function recibir($idproceso)
     {
         try{
@@ -286,6 +289,130 @@ class ProcesoContractualController extends Controller
         return back();
     }
 
+    //Función para finalizar proceso en Adquisiciones.
+    public function finalizar($idproceso, $idetapa)
+    {
+        try{
+            $etapa=Etapa::findOrFail($idetapa);
+            $proceso_contractual = ProcesoContractual::findOrFail($idproceso);
+            $contenido_validacion=$this->validar_datos_obligatorios($etapa->id, $proceso_contractual->id);
+            if($contenido_validacion->resultado==true){
+                $proceso_contractual = ProcesoContractual::findOrFail($idproceso);
+                $proceso_etapa=ProcesoEtapa::
+                where('proceso_contractual_id', $idproceso)
+                    ->first();
+                $proceso_etapa->user_id         = \Auth::user()->id;
+                $proceso_etapa->estado          = "Finalizado";
+                $proceso_etapa->save();
+                $proceso_contractual->estado    = "Finalizado";
+
+                //Guardando en el historial
+                $historial_proceso_etapa = new HistoricoProcesoEtapa();
+                $historial_proceso_etapa->proceso_etapa_id          = $proceso_etapa->id;
+                $historial_proceso_etapa->proceso_contractual_id    = $idproceso;
+                $historial_proceso_etapa->etapas_id                 = $proceso_etapa->etapas_id;
+                $historial_proceso_etapa->user_id                   = \Auth::user()->id;
+                $historial_proceso_etapa->estado                    = $proceso_contractual->estado;
+                $historial_proceso_etapa->save();
+                $proceso_contractual->save();
+                return view('datosetapas/procesofin');
+            }
+            return view('datosetapas/datosfaltantes', compact('contenido_validacion'));
+        } catch(Exception $e){
+            return "Fatal error -".$e->getMessage();
+        }
+        return back();
+    }
+
+    //Funcion de validar para finalizar proceso
+    public function validar_datos_obligatorios($id_etapa, $id_proceso)
+    {
+        $contenido_validacion = new \stdClass();
+        $datos = DB::table('dato_etapas')
+            ->where('proceso_contractual_id', $id_proceso)
+            ->join('requisitos', function ($join) use ($id_etapa) {
+                $join->on('dato_etapas.requisitos_id', '=', 'requisitos.id')
+                    ->where('requisitos.etapas_id', '=', $id_etapa);
+            })
+            ->get();
+        if ($datos->count()){
+            foreach ($datos as $dato){
+                if (($dato->obligatorio=='1') &&
+                    ( ($dato->valor=='')||($dato->valor=='0')||($dato->valor==null))){
+                    $contenido_validacion->mensaje      = 'Debe diligenciar el campo "'.$dato->nombre.'" para finalizar la etapa.';
+                    $contenido_validacion->resultado    = false;
+                    return $contenido_validacion;
+                }
+            }
+        }else{
+            $contenido_validacion->mensaje      = 'Debe guardar los datos antes de enviar a la siguiente etapa.';
+            $contenido_validacion->resultado    = false;
+            return $contenido_validacion;
+        }
+        $contenido_validacion->mensaje      = '';
+        $contenido_validacion->resultado    = true;
+        return $contenido_validacion;
+    }
+
+    //Función para desertar proceso en Adquisiciones.
+    public function desertar($idproceso)
+    {
+        try{
+            $proceso_contractual = ProcesoContractual::findOrFail($idproceso);
+            $proceso_etapa=ProcesoEtapa::
+            where('proceso_contractual_id', $idproceso)
+                ->first();
+            $proceso_etapa->user_id         = \Auth::user()->id;
+            $proceso_etapa->estado          = "Desierto";
+            $proceso_etapa->save();
+            $proceso_contractual->estado    = "Desierto";
+            //Guardando en el historial
+            $historial_proceso_etapa = new HistoricoProcesoEtapa();
+            $historial_proceso_etapa->proceso_etapa_id          = $proceso_etapa->id;
+            $historial_proceso_etapa->proceso_contractual_id    = $idproceso;
+            $historial_proceso_etapa->etapas_id                 = $proceso_etapa->etapas_id;
+            $historial_proceso_etapa->user_id                   = \Auth::user()->id;
+            $historial_proceso_etapa->estado                    = $proceso_contractual->estado;
+            $historial_proceso_etapa->save();
+            $proceso_contractual->save();
+        } catch(Exception $e){
+            return "Fatal error -".$e->getMessage();
+        }
+        return back();
+    }
+
+    //Función para reanudar proceso en Adquisiciones.
+    public function reanudar($idproceso)
+    {
+        try{
+            $proceso_contractual = ProcesoContractual::findOrFail($idproceso);
+            $proceso_etapa=ProcesoEtapa::
+            where('proceso_contractual_id', $idproceso)
+                ->first();
+            $proceso_etapa->user_id         = \Auth::user()->id;
+            $proceso_etapa->estado          = "Activo";
+            $proceso_etapa->save();
+            $proceso_contractual->estado    = "Desierto";
+            $proceso_contractual->estado             = DB::table('etapas')
+                ->where('tipo_procesos_id', $proceso_contractual->tipo_procesos_id )
+                ->where('indice', 1)
+                ->value('nombre');
+            //Guardando en el historial
+            $historial_proceso_etapa = new HistoricoProcesoEtapa();
+            $historial_proceso_etapa->proceso_etapa_id          = $proceso_etapa->id;
+            $historial_proceso_etapa->proceso_contractual_id    = $idproceso;
+            $historial_proceso_etapa->etapas_id                 = $proceso_etapa->etapas_id;
+            $historial_proceso_etapa->user_id                   = \Auth::user()->id;
+            $historial_proceso_etapa->estado                    = $proceso_contractual->estado;
+            $historial_proceso_etapa->save();
+            $proceso_contractual->save();
+        } catch(Exception $e){
+            return "Fatal error -".$e->getMessage();
+        }
+        return back();
+    }
+
+    //Usuario puede acceder a diligenciar datos de la etapa.
     static function etapa_usuario($proceso_estado, $tipo_proceso_id)
     {
         if( (\Auth::user()->hasRol('Administrador'))||(\Auth::user()->hasRol('Coordinador')) ){
@@ -354,4 +481,7 @@ class ProcesoContractualController extends Controller
             }
         }
     }
+
+
+
 }

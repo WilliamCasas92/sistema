@@ -141,31 +141,36 @@
                                                 }
                                             }
                                         @endphp
-
                                         @if ($enviar_adquisiciones=='enabled')
                                             <!-- Enviar a Adqui -->
                                             <a href="{{ route('procesocontractual.enviar', array($proceso_contractual->id)) }}" class="btn btn-warning btn-xs">Enviar al Área de Adquisiciones</a><br>
                                         @endif
-
                                         @if ($recibir_adquisiciones=='enabled')
                                             <!-- Recibir a Adqui -->
                                             <a href="{{ route('procesocontractual.recibir', array($proceso_contractual->id)) }}" class="btn btn-warning btn-xs">Recibir proceso en el Área de Adquisiciones</a><br>
                                         @endif
-
                                         @if ($diligenciar=='enabled')
                                             <!-- Diligenciar -->
                                             <a href="{{ route('datosetapas.menu', $proceso_contractual->id) }}" class="btn btn-success btn-xs">Diligenciar</a><br>
                                         @endif
-
                                         @if ($num_contrato=='enabled')
                                             <!-- Asignar Número de contrato -->
                                             @if(Auth::user()->hasRol('Administrador'))
-                                                <a href="{{ route('procesocontractual.edit', $proceso_contractual->id) }}" class="btn btn-info btn-xs">Editar proceso</a><br>
-                                            @else
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-primary dropdown-toggle btn-xs" data-toggle="dropdown">
+                                                            <span class="caret"></span> Mas..
+                                                        </button>
+                                                        <ul class="dropdown-menu" role="menu">
+                                                            <li><a href="{{ route('procesocontractual.edit', $proceso_contractual->id) }}">
+                                                                   Editar proceso</a></li>
+                                                            <li><a href="">
+                                                                   Desertar proceso</a></li>
+                                                        </ul>
+                                                    </div>
+                                                @else
                                                 <a href="{{ route('procesocontractual.edit', $proceso_contractual->id) }}" class="btn btn-info btn-xs">Asignar número de contrato</a><br>
                                             @endif
                                         @endif
-
                                         @if($habilitar=='enabled')
                                             <!-- Editar -->
                                             <a  href="{{ route('procesocontractual.edit', $proceso_contractual->id) }}" class="btn btn-info btn-xs">Editar proceso</a><br>
@@ -224,41 +229,36 @@
                                                 }
                                             }
                                         @endphp
-
                                         @if ($enviar_adquisiciones=='enabled')
                                             <!-- Enviar a Adqui -->
                                                 <a href="{{ route('procesocontractual.enviar', array($proceso_contractual->id)) }}" class="btn btn-warning btn-xs">Enviar al Área de Adquisiciones</a><br>
                                         @endif
-
                                         @if ($recibir_adquisiciones=='enabled')
                                             <!-- Recibir a Adqui -->
                                                 <a href="{{ route('procesocontractual.recibir', array($proceso_contractual->id)) }}" class="btn btn-warning btn-xs">Recibir proceso en el Área de Adquisiciones</a><br>
                                         @endif
-
                                         @if ($diligenciar=='enabled')
                                             <!-- Diligenciar -->
                                                 <a href="{{ route('datosetapas.menu', $proceso_contractual->id) }}" class="btn btn-success btn-xs">Diligenciar</a><br>
                                         @endif
-
                                         @if ($num_contrato=='enabled')
                                             <!-- Asignar Número de contrato -->
-                                                @if(Auth::user()->hasRol('Administrador'))
-                                                    <a href="{{ route('procesocontractual.edit', $proceso_contractual->id) }}" class="btn btn-info btn-xs">Editar proceso</a><br>
-                                                @else
-                                                    <a href="{{ route('procesocontractual.edit', $proceso_contractual->id) }}" class="btn btn-info btn-xs">Asignar número de contrato</a><br>
-                                                @endif
+                                            @if(Auth::user()->hasRol('Administrador'))
+                                                <a href="{{ route('procesocontractual.edit', $proceso_contractual->id) }}" class="btn btn-info btn-xs">Editar proceso</a><br>
+                                            @else
+                                                <a href="{{ route('procesocontractual.edit', $proceso_contractual->id) }}" class="btn btn-info btn-xs">Asignar número de contrato</a><br>
                                             @endif
-
-                                            @if($habilitar=='enabled')
-                                            <!-- Editar -->
-                                                <a  href="{{ route('procesocontractual.edit', $proceso_contractual->id) }}" class="btn btn-info btn-xs">Editar proceso</a><br>
-                                                <!-- Eliminar -->
-                                                <form action="{{ route('procesocontractual.destroy', $proceso_contractual->id) }}" method="post">
-                                                    <input name="_method" type="hidden" value="DELETE">
-                                                    <input name="_token" type="hidden"  value="{{ csrf_token() }}">
-                                                    <button type="submit" class="btn btn-danger btn-xs ">Eliminar</button>
-                                                </form>
-                                            @endif
+                                        @endif
+                                        @if($habilitar=='enabled')
+                                        <!-- Editar -->
+                                            <a  href="{{ route('procesocontractual.edit', $proceso_contractual->id) }}" class="btn btn-info btn-xs">Editar proceso</a><br>
+                                            <!-- Eliminar -->
+                                            <form action="{{ route('procesocontractual.destroy', $proceso_contractual->id) }}" method="post">
+                                                <input name="_method" type="hidden" value="DELETE">
+                                                <input name="_token" type="hidden"  value="{{ csrf_token() }}">
+                                                <button type="submit" class="btn btn-danger btn-xs ">Eliminar</button>
+                                            </form>
+                                        @endif
                                         </td>
                                     </tr>
                                 @endif
