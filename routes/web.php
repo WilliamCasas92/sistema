@@ -230,3 +230,12 @@ Route::get('test6', function (){
 
 });
 
+
+Route::get('test7', function (){
+
+    $user= App\User::first();
+    $user->notify(new \App\Notifications\CambioEtapa());
+
+});
+
+

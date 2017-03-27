@@ -16,6 +16,7 @@ use App\HistoricoDatoEtapa;
 use App\ProcesoEtapa;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
+use PhpParser\Node\Expr\New_;
 
 class DatosEtapaController extends Controller
 {
@@ -180,6 +181,8 @@ class DatosEtapaController extends Controller
                 $historial_proceso_etapa->estado            = $nextetapa;
                 $historial_proceso_etapa->save();
                 $proceso_etapa->save();
+
+
                 return view('datosetapas/pasoetapa');
             }
             return view('datosetapas/datosfaltantes', compact('contenido_validacion'));
