@@ -391,8 +391,11 @@ class ProcesoContractualController extends Controller
                 ->first();
             $proceso_etapa->user_id         = \Auth::user()->id;
             $proceso_etapa->estado          = "Activo";
+            $proceso_etapa->etapas_id                = DB::table('etapas')
+                ->where('tipo_procesos_id', $proceso_contractual->tipo_procesos_id )
+                ->where('indice', 1)
+                ->value('id');
             $proceso_etapa->save();
-            $proceso_contractual->estado    = "Desierto";
             $proceso_contractual->estado             = DB::table('etapas')
                 ->where('tipo_procesos_id', $proceso_contractual->tipo_procesos_id )
                 ->where('indice', 1)

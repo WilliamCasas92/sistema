@@ -45,6 +45,7 @@ Route::group(['middleware' => 'onlyDiligenciar'], function() {
     Route::get('procesocontractual/recibir/{idproceso}', ['as'=>'procesocontractual.recibir','uses'=> 'ProcesoContractualController@recibir']);
     Route::get('procesocontractual/finalizar/{idproceso}/{idetapa}', ['as'=>'procesocontractual.finalizar','uses'=> 'ProcesoContractualController@finalizar']);
     Route::get('procesocontractual/desertar/{idproceso}', ['as'=>'procesocontractual.desertar','uses'=> 'ProcesoContractualController@desertar']);
+    Route::get('procesocontractual/reanudar/{idproceso}', ['as'=>'procesocontractual.reanudar','uses'=> 'ProcesoContractualController@reanudar']);
     //Desglosar
     Route::resource('procesocontractual', 'ProcesoContractualController');
     //Rutas Datos Etapas

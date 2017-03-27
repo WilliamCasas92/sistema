@@ -160,11 +160,13 @@
                                                         <button type="button" class="btn btn-primary dropdown-toggle btn-xs" data-toggle="dropdown">
                                                             <span class="caret"></span> Mas..
                                                         </button>
-                                                        <ul class="dropdown-menu" role="menu">
-                                                            <li><a href="{{ route('procesocontractual.edit', $proceso_contractual->id) }}">
+                                                        <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                                                            <li><a href="{{ route('procesocontractual.edit', $proceso_contractual->id) }}" class="btn-xs">
                                                                    Editar proceso</a></li>
-                                                            <li><a href="">
+                                                            <li><a href="{{ route('procesocontractual.desertar', $proceso_contractual->id) }}" class="btn-xs">
                                                                    Desertar proceso</a></li>
+                                                            <li><a href="{{ route('procesocontractual.reanudar', $proceso_contractual->id) }}" class="btn-xs">
+                                                                    Reanudar proceso</a></li>
                                                         </ul>
                                                     </div>
                                                 @else
@@ -172,14 +174,21 @@
                                             @endif
                                         @endif
                                         @if($habilitar=='enabled')
-                                            <!-- Editar -->
-                                            <a  href="{{ route('procesocontractual.edit', $proceso_contractual->id) }}" class="btn btn-info btn-xs">Editar proceso</a><br>
-                                            <!-- Eliminar -->
-                                            <form action="{{ route('procesocontractual.destroy', $proceso_contractual->id) }}" method="post">
-                                                <input name="_method" type="hidden" value="DELETE">
-                                                <input name="_token" type="hidden"  value="{{ csrf_token() }}">
-                                                <button type="submit" class="btn btn-danger btn-xs ">Eliminar</button>
-                                            </form>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-primary dropdown-toggle btn-xs" data-toggle="dropdown">
+                                                    <span class="caret"></span> Mas..
+                                                </button>
+                                                <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                                                    <!-- Editar -->
+                                                    <li><a href="{{ route('procesocontractual.edit', $proceso_contractual->id) }}" class="btn btn-block btn-xs">Editar proceso</a></li>
+                                                    <!-- Eliminar -->
+                                                    <li><form action="{{ route('procesocontractual.destroy', $proceso_contractual->id) }}" method="post">
+                                                            <input name="_method" type="hidden" value="DELETE">
+                                                            <input name="_token" type="hidden"  value="{{ csrf_token() }}">
+                                                            <button type="submit" class="btn btn-danger btn-block btn-xs">Eliminar proceso</button>
+                                                        </form></li>
+                                                </ul>
+                                            </div>
                                         @endif
                                     </td>
                                 </tr>
@@ -250,14 +259,21 @@
                                             @endif
                                         @endif
                                         @if($habilitar=='enabled')
-                                        <!-- Editar -->
-                                            <a  href="{{ route('procesocontractual.edit', $proceso_contractual->id) }}" class="btn btn-info btn-xs">Editar proceso</a><br>
-                                            <!-- Eliminar -->
-                                            <form action="{{ route('procesocontractual.destroy', $proceso_contractual->id) }}" method="post">
-                                                <input name="_method" type="hidden" value="DELETE">
-                                                <input name="_token" type="hidden"  value="{{ csrf_token() }}">
-                                                <button type="submit" class="btn btn-danger btn-xs ">Eliminar</button>
-                                            </form>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-primary dropdown-toggle btn-xs" data-toggle="dropdown">
+                                                    <span class="caret"></span> Mas..
+                                                </button>
+                                                <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                                                    <!-- Editar -->
+                                                    <li><a  href="{{ route('procesocontractual.edit', $proceso_contractual->id) }}" class="btn btn-info btn-xs">Editar proceso</a><br></li>
+                                                    <!-- Eliminar -->
+                                                    <li><form action="{{ route('procesocontractual.destroy', $proceso_contractual->id) }}" method="post">
+                                                            <input name="_method" type="hidden" value="DELETE">
+                                                            <input name="_token" type="hidden"  value="{{ csrf_token() }}">
+                                                            <button type="submit" class="btn btn-danger btn-xs ">Eliminar proceso</button>
+                                                        </form></li>
+                                                </ul>
+                                            </div>
                                         @endif
                                         </td>
                                     </tr>
