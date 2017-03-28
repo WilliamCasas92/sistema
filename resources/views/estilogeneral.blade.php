@@ -17,8 +17,28 @@
         color: red;
     }
 
+    .green {
+        color: green;
+    }
+
+    .blue {
+        color: blue;
+    }
+
+    .yellow {
+         color: yellow;
+     }
+
+    .darkred {
+        color: darkred;
+    }
+
     .darkgreen {
         color: darkgreen;
+    }
+
+    .darkblue {
+        color: darkblue;
     }
 
     .black {

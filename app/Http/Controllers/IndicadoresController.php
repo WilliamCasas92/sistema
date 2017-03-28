@@ -19,6 +19,27 @@ class IndicadoresController extends Controller
         return view($this->path.'.index', compact('tipos_procesos'));
     }
 
+    //Totales
+    static function cantidad_procesos_totales(){
+        //Calcula la cantidad de procesos.
+        return $cantidad_procesos = DB::table('proceso_contractuals')->count();
+    }
+
+    static function cantidad_procesos_totales_finalizados(){
+        //Cantidad de procesos esperando ser recibidos en Adquisiciones
+        return $cantidad_procesos_enviados = DB::table('proceso_contractuals')
+            ->Where('estado','Finalizado')
+            ->count();
+    }
+
+    static function cantidad_procesos_totales_desiertos(){
+        //Cantidad de procesos esperando ser recibidos en Adquisiciones
+        return $cantidad_procesos_enviados = DB::table('proceso_contractuals')
+            ->Where('estado','Desierto')
+            ->count();
+    }
+
+    //Individuales por modalidad de contratación
     static function cantidad_procesos($nombreProceso){
         //Calcula la cantidad de procesos asociada al nombre del tipo de proceso de contratación.
         return $cantidad_procesos = DB::table('proceso_contractuals')->where('tipo_proceso', $nombreProceso)->count();
@@ -43,9 +64,9 @@ class IndicadoresController extends Controller
     static function cantidad_procesos_desiertos($nombreProceso){
         //Cantidad de procesos esperando ser recibidos en Adquisiciones
         return $cantidad_procesos_enviados = DB::table('proceso_contractuals')
-            ->where('tipo_proceso', $nombreProceso)
-            ->Where('estado','Desierto')
-            ->count();
+                    ->where('tipo_proceso', $nombreProceso)
+                    ->Where('estado','Desierto')
+                    ->count();
     }
 
     static function cantidad_procesos_finalizados($nombreProceso){
@@ -58,7 +79,9 @@ class IndicadoresController extends Controller
 
     static function tiempo_promedio_llegada($nombreProceso, $idProceso){
         $contador_procesos_enviados_adquisiciones = 0;
-        $tiempo_promedio_envio = 0;
+        $tiempo_promedio_envio_d = 0;
+        $tiempo_promedio_envio_h = 0;
+        $tiempo_promedio_envio_m = 0;
         //Se buscan los procesos contractuales correspondientes al tipo de proceso.
         $procesos_contractuales=ProcesoContractual::where('tipo_proceso',$nombreProceso)->get();
         //Nombre de la primera etapa del tipo de proceso para determinar la fecha de llegada.
@@ -88,13 +111,20 @@ class IndicadoresController extends Controller
             //Fecha de Creacion del proceso en el sistema.
             $fecha_creacion_proceso = $proceso_contractual->created_at;
             //Calcula el tiempo entre creación del proceso y el recibido en adquisiciones diffInDays, diffInHours, diffInMinutes, diffInSeconds.
-            $intervalo_diferencia_fecha = $fecha_envio_proceso->diffInMinutes($fecha_creacion_proceso);
+            $intervalo_diferencia_fecha_d = $fecha_envio_proceso->diffInDays($fecha_creacion_proceso);
+            $intervalo_diferencia_fecha_h = $fecha_envio_proceso->diffInHours($fecha_creacion_proceso);
+            $intervalo_diferencia_fecha_m = $fecha_envio_proceso->diffInMinutes($fecha_creacion_proceso);
             //Acumula los tiempos de intervalos.
-            $tiempo_promedio_envio = $tiempo_promedio_envio + $intervalo_diferencia_fecha;
+            $tiempo_promedio_envio_d = $tiempo_promedio_envio_d + $intervalo_diferencia_fecha_d;
+            $tiempo_promedio_envio_h = $tiempo_promedio_envio_h + $intervalo_diferencia_fecha_h;
+            $tiempo_promedio_envio_m = $tiempo_promedio_envio_m + $intervalo_diferencia_fecha_m;
             $contador_procesos_enviados_adquisiciones ++;
         }
         if ($contador_procesos_enviados_adquisiciones!=0){
-            return (($tiempo_promedio_envio)/($contador_procesos_enviados_adquisiciones))." minuto(s)";
+            $dias= (($tiempo_promedio_envio_d)/($contador_procesos_enviados_adquisiciones));
+            $horas= (($tiempo_promedio_envio_h)/($contador_procesos_enviados_adquisiciones));
+            $minutos= (($tiempo_promedio_envio_m)/($contador_procesos_enviados_adquisiciones));
+            return ($dias." dia(s). ".$horas." hora(s). ".$minutos." minutos(s).");
         }else{
             return "No se logró calcular el tiempo promedio.";
         }
@@ -157,13 +187,13 @@ class IndicadoresController extends Controller
             //Fecha de Creacion del proceso en el sistema.
             $fecha_etapa_actual = $historico_proceso_etapa->created_at;
             //Calcula el tiempo entre creación del proceso y el recibido en adquisiciones diffInDays, diffInHours, diffInMinutes, diffInSeconds.
-            $intervalo_diferencia_fecha = $fecha_siguiente_etapa->diffInMinutes($fecha_etapa_actual);
+            $intervalo_diferencia_fecha = $fecha_siguiente_etapa->diffInHours($fecha_etapa_actual);
             //Acumula los tiempos de intervalos.
             $tiempo_promedio = $tiempo_promedio + $intervalo_diferencia_fecha;
             $contador_procesos ++;
         }
         if ($contador_procesos!=0){
-            return (($tiempo_promedio)/($contador_procesos))." minuto(s).";
+            return (($tiempo_promedio)/($contador_procesos));
         }else{
             return "No se logró calcular el tiempo promedio.";
         }
@@ -206,16 +236,15 @@ class IndicadoresController extends Controller
             }
             $fecha_fin_proceso = $historico_proceso_ultima_etapa->created_at;
             //Calcula el tiempo entre creación del proceso y el recibido en adquisiciones diffInDays, diffInHours, diffInMinutes, diffInSeconds.
-            $intervalo_diferencia_fecha = $fecha_fin_proceso->diffInMinutes($fecha_inicio_proceso);
+            $intervalo_diferencia_fecha = $fecha_fin_proceso->diffInHours($fecha_inicio_proceso);
             //Acumula los tiempos de intervalos.
             $tiempo_promedio_adquisiciones = $tiempo_promedio_adquisiciones + $intervalo_diferencia_fecha;
             $contador_procesos ++;
         }
         if ($contador_procesos!=0){
-            return (($tiempo_promedio_adquisiciones)/($contador_procesos))." minuto(s)";
+            return (($tiempo_promedio_adquisiciones)/($contador_procesos));
         }else{
             return "No se logró calcular el tiempo promedio.";
         }
     }
-
 }
