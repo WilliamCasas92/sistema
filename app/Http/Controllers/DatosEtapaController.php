@@ -14,9 +14,11 @@ use App\DatoEtapa;
 use App\HistoricoProcesoEtapa;
 use App\HistoricoDatoEtapa;
 use App\ProcesoEtapa;
+use App\Notifications\CambioEtapa;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
 use PhpParser\Node\Expr\New_;
+use App\User;
 
 class DatosEtapaController extends Controller
 {
@@ -159,6 +161,8 @@ class DatosEtapaController extends Controller
                     ->value('id');
                 $proceso_etapa->user_id                  = \Auth::user()->id;
 
+                //En esta instrucción se notifica por correo a los usuarios que estan involucrados en la siguiente etapa
+
                 $nextetapa= DB::table('etapas')
                     ->where('tipo_procesos_id', $proceso_contractual->tipo_procesos_id )
                     ->where('indice', $etapa->indice + 1)
@@ -175,7 +179,6 @@ class DatosEtapaController extends Controller
                 $historial_proceso_etapa->estado            = $nextetapa;
                 $historial_proceso_etapa->save();
                 $proceso_etapa->save();
-
 
                 return view('datosetapas/pasoetapa');
             }
@@ -321,4 +324,29 @@ class DatosEtapaController extends Controller
         return ('');
     }
 
+    public function notificar($nextetapa)
+    {
+        $usuarios_id=DB::table('etapa_rol')
+            ->where('etapa_id', $nextetapa->id)
+            ->join('rols', function ($join)  {
+                $join->on('etapa_rol.rol_id', '=', 'rols.id');
+            })
+            ->join('user_rol', function ($join)  {
+                $join->on('rols.id', '=', 'user_rol.rol_id');
+            })
+            ->join('users', function ($join)  {
+                $join->on('user_rol.user_id', '=', 'users.id');
+            })
+            ->select('users.id')
+            ->distinct()
+            ->get();
+
+
+        foreach ($usuarios_id as $usuario_id){
+
+            $usuario = User::find($usuario_id->id);
+            $usuario->notify(new CambioEtapa());
+        }
+
+    }
 }
