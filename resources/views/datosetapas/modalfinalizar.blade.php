@@ -5,11 +5,11 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="modalDeleteTitulo">Confirmar finalizacion.</h4>
+                <h4 class="modal-title" id="modalDeleteTitulo">Confirmar finalización.</h4>
             </div>
             <div class="modal-body">
-                <p>
-                    ¿Seguro que ha finalizado con exito el proceso?
+                <p align="center">
+                    Presione el botón Finalizar para terminar el proceso en el Área de Adquisiciones.
                 </p>
             </div>
             <div class="modal-footer">
@@ -19,7 +19,7 @@
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <form class="form-inline">
                             <div align="center">
-                                <button type="submit" class="btn btn-danger ">Finalizar</button>
+                                <button type="submit" class="btn btn-danger">Finalizar</button>
                             </div>
                         </form>
                     </form>

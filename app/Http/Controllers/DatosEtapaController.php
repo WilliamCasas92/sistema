@@ -37,7 +37,6 @@ class DatosEtapaController extends Controller
 
     public function create()
     {
-
     }
 
      public function store(Request $request)
@@ -96,22 +95,18 @@ class DatosEtapaController extends Controller
 
     public function show($id)
     {
-
     }
 
     public function edit($id)
     {
-
     }
 
     public function update(Request $request, $id)
     {
-
     }
 
     public function destroy($id)
     {
-
     }
 
     static function imprimir_tipo_requisitos($tipo_requisito_id)

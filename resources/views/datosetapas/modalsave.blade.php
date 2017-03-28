@@ -8,7 +8,7 @@
                 <h4 class="modal-title" id="modalDeleteTitulo">Confirmar paso a la siguiente Etapa.</h4>
             </div>
             <div class="modal-body">
-                <p>
+                <p align="center">
                     ¿Seguro que ha finalizado con la etapa <b><span id="modalSaveNombre"></span></b> ?
                 </p>
             </div>
@@ -19,7 +19,7 @@
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <form class="form-inline">
                             <div align="center">
-                                <button type="submit" class="btn btn-success ">Enviar a siguiente etapa</button>
+                                <button type="submit" class="btn btn-success">Enviar a siguiente etapa</button>
                             </div>
                         </form>
                     </form>

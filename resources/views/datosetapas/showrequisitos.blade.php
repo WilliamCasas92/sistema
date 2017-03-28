@@ -112,12 +112,10 @@
                                         <td>
                                             <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#modaladdDocumento" data-idetapa="{{$etapa->id}}" data-mostrar="#documento{{$requisito->id}}{{$proceso_contractual->id}}"
                                                     data-idrequisito="{{$requisito->id}}"  data-idprocesocontractual="{{$proceso_contractual->id}}"  data-boton="#boton{{$requisito->id}}{{$proceso_contractual->id}}" >Subir Documento</button>
-                                        </td>
-                                        <td>
                                             <button  type="button" class="btn btn-danger btn-xs" id="boton{{$requisito->id}}{{$proceso_contractual->id}}" data-toggle="modal" data-target="#modaldeleteDocumento"
-                                                data-nombre="<h5><a href='/uploads/{{$valor}}-{{$requisito->id}}-{{$proceso_contractual->id}}.{{$tipo}}' download='{{$valor}}'>{{$valor}}</a></h5>"
-                                                data-mostrar="#documento{{$requisito->id}}{{$proceso_contractual->id}}" data-id="{{$etapa->id}}"  data-url="{{ route('datosetapas.eliminarDocumento', array( $proceso_contractual->id, $requisito->id)) }}"
-                                                data-boton="#boton{{$requisito->id}}{{$proceso_contractual->id}}" {{$disabled}} >Eliminar</button>
+                                                     data-nombre="<h5><a href='/uploads/{{$valor}}-{{$requisito->id}}-{{$proceso_contractual->id}}.{{$tipo}}' download='{{$valor}}'>{{$valor}}</a></h5>"
+                                                     data-mostrar="#documento{{$requisito->id}}{{$proceso_contractual->id}}" data-id="{{$etapa->id}}"  data-url="{{ route('datosetapas.eliminarDocumento', array( $proceso_contractual->id, $requisito->id)) }}"
+                                                     data-boton="#boton{{$requisito->id}}{{$proceso_contractual->id}}" {{$disabled}} >Eliminar</button>
                                         </td>
                                     </div></tr>
                                     <input type="hidden" name="atributo[]"  class="form-control"  autocomplete="off">

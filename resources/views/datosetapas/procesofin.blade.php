@@ -1,11 +1,9 @@
 <div class="modal-content">
     <div class="modal-header">
-        <h4 class="modal-title" >Finalizacion de proceso</h4>
+        <h4 class="modal-title" >Finalización del Proceso</h4>
     </div>
     <div class="modal-body">
-        <p>
-            El proceso se finalizo con exito.
-        </p>
+        <p aling="center">El proceso se finalizó con éxito.</p>
     </div>
     <div class="modal-footer" id="datos_faltantes">
         <button type="button" class="btn btn-default center-block" data-dismiss="modal"  onclick = "location.reload()">Aceptar</button>
