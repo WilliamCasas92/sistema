@@ -7,8 +7,13 @@
                 <div align="left">
                     <h4><a class="btn btn-primary" href="{{route('tipoproceso.create')}}">Crear nuevo Tipo de Proceso de Contratación</a></h4>
                 </div>
-                @if (session('status'))
+                @if (session('error'))
                     <div class="alert alert-danger">
+                        {{ session('status') }}
+                    </div>
+                @endif
+                @if (session('status'))
+                    <div class="alert alert-success">
                         {{ session('status') }}
                     </div>
                 @endif

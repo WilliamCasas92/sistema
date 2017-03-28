@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\TipoProceso;
+use App\ProcesoContractual;
 use Exception;
+use Illuminate\Support\Facades\DB;
 
 class TipoProcesoController extends Controller
 {
@@ -79,11 +81,15 @@ class TipoProcesoController extends Controller
     public function destroy($id)
     {
         try{
+            $procesocontractual = DB::table('proceso_contractuals')->where('tipo_procesos_id', $id)->count();
+            if($procesocontractual){
+                return redirect()->route('tipoproceso.index')->with('status','El tipo de proceso no se puede eliminar debido ha que ya se han creado procesos contractules de este tipo!!!');
+            }
             $tipoproceso = TipoProceso::findOrFail($id);
             $tipoproceso_nombre= $tipoproceso->nombre;
             $tipoproceso_version= $tipoproceso->version;
             $tipoproceso->delete();
-            return redirect()->route('tipoproceso.index')->with('status', 'El Tipo de proceso:'.$tipoproceso_nombre.', versión '.$tipoproceso_version.' ha sido eliminado.');
+            return redirect()->route('tipoproceso.index')->with('status', 'El Tipo de proceso:'.$tipoproceso_nombre.', versión '.$tipoproceso_version.' ha sido eliminado con éxito.');
         } catch(Exception $e){
             return "Fatal error -".$e->getMessage();
         }
