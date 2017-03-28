@@ -155,17 +155,18 @@
                                         @endif
                                         @if ($num_contrato=='enabled')
                                             <!-- Asignar Número de contrato -->
-                                            @if(Auth::user()->hasRol('Administrador'))
-                                                    <div class="btn-group">
+                                            @if((Auth::user()->hasRol('Administrador'))||(Auth::user()->hasRol('Coordinador')))
+                                                    <br><div class="btn-group">
+                                                        <button type="button" class="btn btn-primary dropdown-toggle btn-xs" data-toggle="dropdown">Opciones</button>
                                                         <button type="button" class="btn btn-primary dropdown-toggle btn-xs" data-toggle="dropdown">
-                                                            <span class="caret"></span> Mas..
-                                                        </button>
+                                                            <span class="caret"></span></button>
                                                         <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                                                            <li><a href="{{ route('procesocontractual.edit', $proceso_contractual->id) }}" class="btn-xs">
+                                                            <li><a href="{{ route('procesocontractual.edit', $proceso_contractual->id) }}" class="btn-xs btn-block">
                                                                    Editar proceso</a></li>
-                                                            <li><a href="{{ route('procesocontractual.desertar', $proceso_contractual->id) }}" class="btn-xs">
-                                                                   Desertar proceso</a></li>
-                                                            <li><a href="{{ route('procesocontractual.reanudar', $proceso_contractual->id) }}" class="btn-xs">
+                                                            <li class="divider"></li>
+                                                            <li><a href="{{ route('procesocontractual.desertar', $proceso_contractual->id) }}" class="btn-xs btn-block">
+                                                                    Desertar proceso</a></li>
+                                                            <li><a href="{{ route('procesocontractual.reanudar', $proceso_contractual->id) }}" class="btn-xs btn-block">
                                                                     Reanudar proceso</a></li>
                                                         </ul>
                                                     </div>
@@ -174,19 +175,19 @@
                                             @endif
                                         @endif
                                         @if($habilitar=='enabled')
-                                            <div class="btn-group">
+                                        <br><div class="btn-group">
+                                                <button type="button" class="btn btn-primary dropdown-toggle btn-xs" data-toggle="dropdown">Opciones</button>
                                                 <button type="button" class="btn btn-primary dropdown-toggle btn-xs" data-toggle="dropdown">
-                                                    <span class="caret"></span> Mas..
-                                                </button>
+                                                    <span class="caret"></span></button>
                                                 <ul class="dropdown-menu dropdown-menu-right" role="menu">
                                                     <!-- Editar -->
-                                                    <li><a href="{{ route('procesocontractual.edit', $proceso_contractual->id) }}" class="btn btn-block btn-xs">Editar proceso</a></li>
+                                                    <li><a href="{{ route('procesocontractual.edit', $proceso_contractual->id) }}" class="btn-xs">Editar proceso</a></li>
+                                                    <li class="divider"></li>
                                                     <!-- Eliminar -->
                                                     <li><form action="{{ route('procesocontractual.destroy', $proceso_contractual->id) }}" method="post">
                                                             <input name="_method" type="hidden" value="DELETE">
                                                             <input name="_token" type="hidden"  value="{{ csrf_token() }}">
-                                                            <button type="submit" class="btn btn-danger btn-block btn-xs">Eliminar proceso</button>
-                                                        </form></li>
+                                                            <button type="submit" class="btn-danger btn-block btn-xs">Eliminar proceso</button></form></li>
                                                 </ul>
                                             </div>
                                         @endif
@@ -252,26 +253,39 @@
                                         @endif
                                         @if ($num_contrato=='enabled')
                                             <!-- Asignar Número de contrato -->
-                                            @if(Auth::user()->hasRol('Administrador'))
-                                                <a href="{{ route('procesocontractual.edit', $proceso_contractual->id) }}" class="btn btn-info btn-xs">Editar proceso</a><br>
+                                            @if((Auth::user()->hasRol('Administrador'))||(Auth::user()->hasRol('Coordinador')))
+                                                <br><div class="btn-group">
+                                                    <button type="button" class="btn btn-primary dropdown-toggle btn-xs" data-toggle="dropdown">Opciones</button>
+                                                    <button type="button" class="btn btn-primary dropdown-toggle btn-xs" data-toggle="dropdown">
+                                                        <span class="caret"></span></button>
+                                                    <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                                                        <li><a href="{{ route('procesocontractual.edit', $proceso_contractual->id) }}" class="btn-xs btn-block">
+                                                                Editar proceso</a></li>
+                                                        <li class="divider"></li>
+                                                        <li><a href="{{ route('procesocontractual.desertar', $proceso_contractual->id) }}" class="btn-xs btn-block">
+                                                                Desertar proceso</a></li>
+                                                        <li><a href="{{ route('procesocontractual.reanudar', $proceso_contractual->id) }}" class="btn-xs btn-block">
+                                                                Reanudar proceso</a></li>
+                                                    </ul>
+                                                </div>
                                             @else
                                                 <a href="{{ route('procesocontractual.edit', $proceso_contractual->id) }}" class="btn btn-info btn-xs">Asignar número de contrato</a><br>
                                             @endif
                                         @endif
                                         @if($habilitar=='enabled')
-                                            <div class="btn-group">
+                                        <br><div class="btn-group">
+                                                <button type="button" class="btn btn-primary dropdown-toggle btn-xs" data-toggle="dropdown">Opciones</button>
                                                 <button type="button" class="btn btn-primary dropdown-toggle btn-xs" data-toggle="dropdown">
-                                                    <span class="caret"></span> Mas..
-                                                </button>
+                                                    <span class="caret"></span></button>
                                                 <ul class="dropdown-menu dropdown-menu-right" role="menu">
                                                     <!-- Editar -->
-                                                    <li><a  href="{{ route('procesocontractual.edit', $proceso_contractual->id) }}" class="btn btn-info btn-xs">Editar proceso</a><br></li>
+                                                    <li><a href="{{ route('procesocontractual.edit', $proceso_contractual->id) }}" class="btn-xs">Editar proceso</a></li>
+                                                    <li class="divider"></li>
                                                     <!-- Eliminar -->
                                                     <li><form action="{{ route('procesocontractual.destroy', $proceso_contractual->id) }}" method="post">
                                                             <input name="_method" type="hidden" value="DELETE">
                                                             <input name="_token" type="hidden"  value="{{ csrf_token() }}">
-                                                            <button type="submit" class="btn btn-danger btn-xs ">Eliminar proceso</button>
-                                                        </form></li>
+                                                            <button type="submit" class="btn-danger btn-block btn-xs">Eliminar proceso</button></form></li>
                                                 </ul>
                                             </div>
                                         @endif

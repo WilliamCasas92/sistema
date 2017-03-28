@@ -85,7 +85,6 @@ class DatosEtapaController extends Controller
                     $historial_dato_etapa->save();
                     $cont++;
                 }
-
             }
             return view('datosetapas/modalsave');
         } catch(Exception $e){

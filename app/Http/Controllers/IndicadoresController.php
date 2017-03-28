@@ -40,6 +40,22 @@ class IndicadoresController extends Controller
                     ->count();
     }
 
+    static function cantidad_procesos_desiertos($nombreProceso){
+        //Cantidad de procesos esperando ser recibidos en Adquisiciones
+        return $cantidad_procesos_enviados = DB::table('proceso_contractuals')
+            ->where('tipo_proceso', $nombreProceso)
+            ->Where('estado','Desierto')
+            ->count();
+    }
+
+    static function cantidad_procesos_finalizados($nombreProceso){
+        //Cantidad de procesos esperando ser recibidos en Adquisiciones
+        return $cantidad_procesos_enviados = DB::table('proceso_contractuals')
+            ->where('tipo_proceso', $nombreProceso)
+            ->Where('estado','Finalizado')
+            ->count();
+    }
+
     static function tiempo_promedio_llegada($nombreProceso, $idProceso){
         $contador_procesos_enviados_adquisiciones = 0;
         $tiempo_promedio_envio = 0;
@@ -117,11 +133,21 @@ class IndicadoresController extends Controller
                         ->where('tipo_procesos_id', $idProceso)
                         ->where('indice', ($etapaIndice)+ 1)
                         ->value('id');
-            $historico_proceso_siguiente_etapa = HistoricoProcesoEtapa::
-            where('proceso_contractual_id', $proceso_contractual->id)
-                ->where('etapas_id', $id_siguiente_etapa)
-                ->where('estado', $nombre_siguiente_etapa)
-                ->first();
+
+            if(!$nombre_siguiente_etapa && !$id_siguiente_etapa){
+                //Si no encuentra nombre e ID de la siguiente etapa, es la ultima.
+                $historico_proceso_siguiente_etapa = HistoricoProcesoEtapa::
+                        where('proceso_contractual_id', $proceso_contractual->id)
+                        ->where('estado', 'Finalizado')
+                        ->first();
+            }else{
+                //Si encuentra nombre o ID, existe siguiente etapa.
+                $historico_proceso_siguiente_etapa = HistoricoProcesoEtapa::
+                        where('proceso_contractual_id', $proceso_contractual->id)
+                        ->where('etapas_id', $id_siguiente_etapa)
+                        ->where('estado', $nombre_siguiente_etapa)
+                        ->first();
+            }
             //Si aún no ha llegado a la etapa ó ha pasado, se corta el ciclo.
             if(!$historico_proceso_siguiente_etapa){
                break;
@@ -143,10 +169,53 @@ class IndicadoresController extends Controller
         }
     }
 
-
-
-
-
-
+    static function tiempo_promedio_adquisiciones($nombreProceso, $idProceso){
+        $contador_procesos = 0;
+        $tiempo_promedio_adquisiciones = 0;
+        $procesos_contractuales=ProcesoContractual::where('tipo_proceso',$nombreProceso)->get();
+        //Nombre de la primera etapa del tipo de proceso para determinar la fecha de llegada.
+        $primera_etapa= DB::table('etapas')
+                    ->where('tipo_procesos_id', $idProceso)
+                    ->where('indice', 1)
+                    ->value('nombre');
+        //ID de la primera etapa del tipo de proceso para determinar la fecha de llegada.
+        $id_primera_etapa= DB::table('etapas')
+                    ->where('tipo_procesos_id', $idProceso)
+                    ->where('indice', 1)
+                    ->value('id');
+        foreach ($procesos_contractuales as $proceso_contractual){
+            //Busca en el historial el objeto que contiene el proceso contractual y que haya sido recibido en Adquisiciones.
+            $historico_proceso_primera_etapa = HistoricoProcesoEtapa::
+                    where('proceso_contractual_id', $proceso_contractual->id)
+                    ->where('etapas_id', $id_primera_etapa)
+                    ->where('estado', $primera_etapa)
+                    ->first();
+            //Si aún no ha llegado a la primera etapa, se corta el ciclo.
+            if (!$historico_proceso_primera_etapa){
+                break;
+            }
+            //Fecha de recepción del proceso en el Área de Adquisiciones.
+            $fecha_inicio_proceso = $historico_proceso_primera_etapa->created_at;
+            //Busca en el historial el objeto que contiene el proceso contractual y que haya finalizado en Adquisiciones.
+            $historico_proceso_ultima_etapa = HistoricoProcesoEtapa::
+                    where('proceso_contractual_id', $proceso_contractual->id)
+                    ->where('estado', 'Finalizado')
+                    ->first();
+            if (!$historico_proceso_ultima_etapa){
+                break;
+            }
+            $fecha_fin_proceso = $historico_proceso_ultima_etapa->created_at;
+            //Calcula el tiempo entre creación del proceso y el recibido en adquisiciones diffInDays, diffInHours, diffInMinutes, diffInSeconds.
+            $intervalo_diferencia_fecha = $fecha_fin_proceso->diffInMinutes($fecha_inicio_proceso);
+            //Acumula los tiempos de intervalos.
+            $tiempo_promedio_adquisiciones = $tiempo_promedio_adquisiciones + $intervalo_diferencia_fecha;
+            $contador_procesos ++;
+        }
+        if ($contador_procesos!=0){
+            return (($tiempo_promedio_adquisiciones)/($contador_procesos))." minuto(s)";
+        }else{
+            return "No se logró calcular el tiempo promedio.";
+        }
+    }
 
 }

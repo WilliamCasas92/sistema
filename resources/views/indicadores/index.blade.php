@@ -60,11 +60,13 @@
                                     </tr>
                                     <tr>
                                         <td>Finalizados</td>
-                                        <td>X</td>
+                                        @php($cantidad_finalizados=\App\Http\Controllers\IndicadoresController::cantidad_procesos_finalizados($tipo_proceso->nombre))
+                                        <td>{{$cantidad_finalizados}}</td>
                                     </tr>
                                     <tr>
                                         <td>Desiertos</td>
-                                        <td>X</td>
+                                        @php($cantidad_desiertos=\App\Http\Controllers\IndicadoresController::cantidad_procesos_desiertos($tipo_proceso->nombre))
+                                        <td>{{$cantidad_desiertos}}</td>
                                     </tr>
                                     </tbody>
                                     <thead>
@@ -81,7 +83,8 @@
                                     </tr>
                                     <tr>
                                         <td>Dentro del Área de Adquisiciones</td>
-                                        <td></td>
+                                        @php($tiempo_promedio_adquisiciones=\App\Http\Controllers\IndicadoresController::tiempo_promedio_adquisiciones($tipo_proceso->nombre, $tipo_proceso->id))
+                                        <td>{{$tiempo_promedio_adquisiciones}}</td>
                                     </tr>
                                     </tbody>
                                 </table>
