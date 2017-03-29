@@ -164,6 +164,9 @@
                                                             <li><a href="{{ route('procesocontractual.edit', $proceso_contractual->id) }}" class="btn-xs btn-block">
                                                                    Editar proceso</a></li>
                                                             <li class="divider"></li>
+                                                            <li><a href="{{ route('historiales.mostrar', $proceso_contractual->id) }}" class="btn-xs btn-block">
+                                                                    Ver registro de actividad</a></li>
+                                                            <li class="divider"></li>
                                                             <li><a href="{{ route('procesocontractual.desertar', $proceso_contractual->id) }}" class="btn-xs btn-block">
                                                                     Desertar proceso</a></li>
                                                             <li><a href="{{ route('procesocontractual.reanudar', $proceso_contractual->id) }}" class="btn-xs btn-block">

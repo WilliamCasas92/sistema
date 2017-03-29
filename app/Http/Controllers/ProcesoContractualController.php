@@ -392,13 +392,13 @@ class ProcesoContractualController extends Controller
                     ->where('tipo_procesos_id', $proceso_contractual->tipo_procesos_id )
                     ->where('indice', 1)
                     ->value('nombre');
-            //Guardando en el historial
+            //Guardando en el historial Reanudado y comienzo deste primera etapa.
             $historial_proceso_etapa = new HistoricoProcesoEtapa();
             $historial_proceso_etapa->proceso_etapa_id          = $proceso_etapa->id;
             $historial_proceso_etapa->proceso_contractual_id    = $idproceso;
             $historial_proceso_etapa->etapas_id                 = $proceso_etapa->etapas_id;
             $historial_proceso_etapa->user_id                   = \Auth::user()->id;
-            $historial_proceso_etapa->estado                    = $proceso_contractual->estado;
+            $historial_proceso_etapa->estado                    = "Reanudado";
             $historial_proceso_etapa->save();
             $proceso_contractual->save();
         } catch(Exception $e){

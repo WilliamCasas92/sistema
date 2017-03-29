@@ -162,7 +162,7 @@ class DatosEtapaController extends Controller
                 $proceso_etapa->user_id                  = \Auth::user()->id;
 
                 //En esta instrucción se notifica por correo a los usuarios que estan involucrados en la siguiente etapa
-                $this->notificar($proceso_etapa->etapas_id);
+                //$this->notificar($proceso_etapa->etapas_id);
 
                 $nextetapa= DB::table('etapas')
                     ->where('tipo_procesos_id', $proceso_contractual->tipo_procesos_id )
