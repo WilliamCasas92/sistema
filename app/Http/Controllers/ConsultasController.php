@@ -35,7 +35,6 @@ class ConsultasController extends Controller
         return view($this->path.'.consultaproceso', compact('procesos_contractuales', 'tipos_procesos'));
     }
 
-
     public function ver_mas($proceso_contractual_id)
     {
         $proceso_contractual = ProcesoContractual::findOrFail($proceso_contractual_id);
