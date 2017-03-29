@@ -45,9 +45,7 @@ class EtapaController extends Controller
             $etapa->save();
 
             $etapa->roles()->detach();
-            if ($request['rol_admin']){
-                $etapa->roles()->attach(1);
-            }
+            $etapa->roles()->attach(1);
             if ($request['rol_coordinador']){
                 $etapa->roles()->attach(2);
             }
@@ -99,9 +97,8 @@ class EtapaController extends Controller
             $etapa->save();
 
             $etapa->roles()->detach();
-            if ($request['rol_admin']){
-                $etapa->roles()->attach(1);
-            }
+            $etapa->roles()->attach(1);
+
             if ($request['rol_coordinador']){
                 $etapa->roles()->attach(2);
             }

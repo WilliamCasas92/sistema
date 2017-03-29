@@ -14,9 +14,6 @@
                         <label class="control-label col-md-5" for="InputRoles">Roles</label>
                         <div class="col-md-5">
                             <div class="checkbox">
-                                <label><input type="checkbox" {{ $etapa->hasRol('Administrador') ? 'checked':''}} name="rol_admin" value="1">Administrador</label>
-                            </div>
-                            <div class="checkbox">
                                 <label><input type="checkbox" {{ $etapa->hasRol('Coordinador') ? 'checked':''}} name="rol_coordinador" value="2">Coordinador</label>
                             </div>
                             <div class="checkbox">
