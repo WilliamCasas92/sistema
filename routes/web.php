@@ -172,11 +172,25 @@ Route::get('test8', function (){
     $proceso = \App\ProcesoContractual::find(2);
 
     foreach ($usuarios_id as $usuario_id) {
+            $usuario = App\User::find($usuario_id->id);
+            $roles=DB::table('etapa_rol')
+                ->where('etapa_id', 1)
+                ->join('rols', function ($join)  {
+                    $join->on('etapa_rol.rol_id', '=', 'rols.id');
+                })
+                ->join('user_rol', function ($join) use ($usuario)  {
+                    $join->on('rols.id', '=', 'user_rol.rol_id')
+                    ->where('user_rol.user_id', '=', $usuario->id);
+                })
+                ->select('rols.nombre')
+                ->get();
+            $usuario->notify(new \App\Notifications\CambioEtapa($proceso, 'juan carlos'));
+            echo $usuario->nombre . '  '. '<br>';
+            foreach ($roles as $rol){
+                echo $rol->nombre;
+            }
+            echo '<br>';
 
-
-        $usuario = App\User::find($usuario_id->id);
-        $usuario->notify(new \App\Notifications\CambioEtapa($proceso));
-        echo $usuario->nombre. '<br>';
     }
 
 
