@@ -50,7 +50,7 @@ class CambioEtapa extends Notification
                     ->line('Objeto: '.$this->proceso_contractual->objeto)
                     ->line('CDP: '.$this->proceso_contractual->numero_cdp)
                     ->line('Tipo contratación: '.$this->proceso_contractual->tipo_proceso)
-                    ->line('Etapa anterior: '.$this->nombre_etapa_anterior)
+                    ->line('Etapa anteriodr: '.$this->nombre_etapa_anterior)
                     ->line('')
                     ->action('Ingresar al sistema', 'http://apidesarrollo.elpoli.edu.co:9111/')
                     ->line('Buen día!');
