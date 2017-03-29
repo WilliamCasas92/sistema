@@ -155,14 +155,15 @@ class DatosEtapaController extends Controller
                 where('proceso_contractual_id', $idproceso)
                     ->where('etapas_id', $idetapa)
                     ->first();
-                $proceso_etapa->etapas_id                = DB::table('etapas')
+                $id_nextetapa= DB::table('etapas')
                     ->where('tipo_procesos_id', $proceso_contractual->tipo_procesos_id )
                     ->where('indice', $etapa->indice + 1)
                     ->value('id');
+                $proceso_etapa->etapas_id  =$id_nextetapa;
                 $proceso_etapa->user_id                  = \Auth::user()->id;
 
-                //En esta instrucción se notifica por correo a los usuarios que estan involucrados en la siguiente etapa
-                //$this->notificar($proceso_etapa->etapas_id);
+
+
 
                 $nextetapa= DB::table('etapas')
                     ->where('tipo_procesos_id', $proceso_contractual->tipo_procesos_id )
@@ -180,6 +181,8 @@ class DatosEtapaController extends Controller
                 $historial_proceso_etapa->estado            = $nextetapa;
                 $historial_proceso_etapa->save();
                 $proceso_etapa->save();
+                //En esta instrucción se notifica por correo a los usuarios que estan involucrados en la siguiente etapa, sobre el cambio de etapa
+                $this->notificar($id_nextetapa, $idproceso);
 
                 return view('datosetapas/pasoetapa');
             }
@@ -325,10 +328,10 @@ class DatosEtapaController extends Controller
         return ('');
     }
 
-    public function notificar($nextetapa)
+    public function notificar($id_etapa_actual, $idproceso)
     {
-        $usuarios_id=DB::table('etapa_rol')
-            ->where('etapa_id', $nextetapa)
+        $id_usuarios=DB::table('etapa_rol')
+            ->where('etapa_id', $id_etapa_actual)
             ->join('rols', function ($join)  {
                 $join->on('etapa_rol.rol_id', '=', 'rols.id');
             })
@@ -343,17 +346,18 @@ class DatosEtapaController extends Controller
             ->get();
 
 
-        foreach ($usuarios_id as $usuario_id){
+        $proceso_contractual = ProcesoContractual::findOrFail($idproceso);
+        $etapa_actual= Etapa::findOrFail($id_etapa_actual);
+        $nombre_etapa_anterior= DB::table('etapas')
+            ->where('tipo_procesos_id', $proceso_contractual->tipo_procesos_id )
+            ->where('indice', $etapa_actual->indice - 1)
+            ->value('nombre');
+        foreach ($id_usuarios as $id_usuario){
 
-            $usuario = User::find($usuario_id->id);
-            $usuario->notify(new CambioEtapa());
+            $usuario = User::find($id_usuario->id);
+            $usuario->notify(new CambioEtapa($proceso_contractual, $nombre_etapa_anterior));
         }
         return;
 
-    }
-
-    public function correo()
-    {
-        $this->notificar(1);
     }
 }
