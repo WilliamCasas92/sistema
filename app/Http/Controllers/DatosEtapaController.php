@@ -162,6 +162,7 @@ class DatosEtapaController extends Controller
                 $proceso_etapa->user_id                  = \Auth::user()->id;
 
                 //En esta instrucción se notifica por correo a los usuarios que estan involucrados en la siguiente etapa
+                $this->notificar($proceso_etapa->etapas_id);
 
                 $nextetapa= DB::table('etapas')
                     ->where('tipo_procesos_id', $proceso_contractual->tipo_procesos_id )
@@ -327,7 +328,7 @@ class DatosEtapaController extends Controller
     public function notificar($nextetapa)
     {
         $usuarios_id=DB::table('etapa_rol')
-            ->where('etapa_id', $nextetapa->id)
+            ->where('etapa_id', $nextetapa)
             ->join('rols', function ($join)  {
                 $join->on('etapa_rol.rol_id', '=', 'rols.id');
             })
@@ -347,6 +348,12 @@ class DatosEtapaController extends Controller
             $usuario = User::find($usuario_id->id);
             $usuario->notify(new CambioEtapa());
         }
+        return;
 
+    }
+
+    public function correo()
+    {
+        $this->notificar(1);
     }
 }
