@@ -81,15 +81,15 @@ class TipoProcesoController extends Controller
     public function destroy($id)
     {
         try{
+            $tipoproceso = TipoProceso::findOrFail($id);
             $procesocontractual = DB::table('proceso_contractuals')->where('tipo_procesos_id', $id)->count();
             if($procesocontractual){
-                return redirect()->route('tipoproceso.index')->with('status','El tipo de proceso no se puede eliminar debido ha que ya se han creado procesos contractules de este tipo!!!');
+                return redirect()->route('tipoproceso.index')->with('error','El Tipo de proceso: '.$tipoproceso->nombre.', versión '.$tipoproceso->version.' no se puede eliminar porque tiene etapas asociadas.');
             }
-            $tipoproceso = TipoProceso::findOrFail($id);
             $tipoproceso_nombre= $tipoproceso->nombre;
             $tipoproceso_version= $tipoproceso->version;
             $tipoproceso->delete();
-            return redirect()->route('tipoproceso.index')->with('status', 'El Tipo de proceso:'.$tipoproceso_nombre.', versión '.$tipoproceso_version.' ha sido eliminado con éxito.');
+            return redirect()->route('tipoproceso.index')->with('status', 'El Tipo de proceso: '.$tipoproceso_nombre.', versión '.$tipoproceso_version.' ha sido eliminado con éxito.');
         } catch(Exception $e){
             return "Fatal error -".$e->getMessage();
         }

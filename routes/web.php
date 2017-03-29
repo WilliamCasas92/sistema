@@ -57,6 +57,8 @@ Route::group(['middleware' => 'onlyDiligenciar'], function() {
     //Rutas de Datos Etapas para subir y eliminar documentos
     Route::post('datosetapas/documento', ['as'=>'datosetapas.subirDocumento','uses'=> 'DatosEtapaController@subir_documento']);
     Route::post('datosetapas/documento/{idproceso}/{idrequisito}', ['as'=>'datosetapas.eliminarDocumento','uses'=> 'DatosEtapaController@eliminar_documento']);
+
+    Route::get('datosetapas/correo/correo', ['as'=>'datosetapas.correo','uses'=> 'DatosEtapaController@correo']);
 });
 
 
@@ -239,4 +241,36 @@ Route::get('test7', function (){
 
 });
 
+Route::get('test8', function (){
 
+
+    /**$users = DB::table('users')
+        ->join('contacts', 'users.id', '=', 'contacts.user_id')
+        ->join('orders', 'users.id', '=', 'orders.user_id')
+        ->select('users.*', 'contacts.phone', 'orders.price')
+        ->get();
+    **/
+    $usuarios_id=DB::table('etapa_rol')
+        ->where('etapa_id', 1)
+        ->join('rols', function ($join)  {
+            $join->on('etapa_rol.rol_id', '=', 'rols.id');
+        })
+        ->join('user_rol', function ($join)  {
+            $join->on('rols.id', '=', 'user_rol.rol_id');
+        })
+        ->join('users', function ($join)  {
+            $join->on('user_rol.user_id', '=', 'users.id');
+        })
+        ->select('users.id')
+        ->distinct()
+        ->get();
+
+
+    foreach ($usuarios_id as $usuario_id){
+
+        $usuario = App\User::find($usuario_id->id);
+        $usuario->notify(new \App\Notifications\CambioEtapa());
+    }
+
+
+});
