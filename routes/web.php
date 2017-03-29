@@ -169,11 +169,14 @@ Route::get('test8', function (){
         ->distinct()
         ->get();
 
+    $proceso = \App\ProcesoContractual::find(2);
 
-    foreach ($usuarios_id as $usuario_id){
+    foreach ($usuarios_id as $usuario_id) {
+
 
         $usuario = App\User::find($usuario_id->id);
-        $usuario->notify(new \App\Notifications\CambioEtapa());
+        $usuario->notify(new \App\Notifications\CambioEtapa($proceso));
+        echo $usuario->nombre. '<br>';
     }
 
 

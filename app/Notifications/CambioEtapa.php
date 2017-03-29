@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\ProcesoContractual;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -10,15 +11,17 @@ use Illuminate\Notifications\Messages\MailMessage;
 class CambioEtapa extends Notification
 {
     use Queueable;
-
+    protected $procesoContractual;
+    protected $nombre_etapa_anterior;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(ProcesoContractual $procesoContractual, $nombre_etapa_anterior)
     {
-        //
+        $this->proceso_contractual = $procesoContractual;
+        $this->nombre_etapa_anterior =$nombre_etapa_anterior;
     }
 
     /**
@@ -41,9 +44,14 @@ class CambioEtapa extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject('Notificación del contracto 123')
+                    ->subject('[SIGECOP] Nuevo proceso CDP: '.$this->proceso_contractual->numero_cdp)
                     ->success()
-                    ->line('El proceso contractual paso a la siguiente etapa')
+                    ->line('Existe un nuevo proceso en la etapa: '. $this->proceso_contractual->estado)
+                    ->line('Objeto: '.$this->proceso_contractual->objeto)
+                    ->line('CDP: '.$this->proceso_contractual->numero_cdp)
+                    ->line('Tipo contratación: '.$this->proceso_contractual->tipo_proceso)
+                    ->line('Etapa anterior: '.$this->nombre_etapa_anterior)
+                    ->line('')
                     ->action('Ingresar al sistema', 'http://apidesarrollo.elpoli.edu.co:9111/')
                     ->line('Buen día!');
     }
