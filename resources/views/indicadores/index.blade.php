@@ -6,51 +6,51 @@
             <div class="panel-body">
                 <!-- Container (Indicators Section) -->
                 <div class="well well-sm container-fluid text-center alert alert-info">
-                    <br><br>
+                <br><br>
                     <div class="row">
-                        <div class="col-sm-3">
-                            <h1><span class="glyphicon glyphicon-globe"></span></h1>
-                            @php($cantidad_total=\App\Http\Controllers\IndicadoresController::cantidad_procesos_totales())
-                            <h2 class="count">{{$cantidad_total}}</h2>
-                            <h5><label>Procesos almacenados en el sistema.</label></h5>
-                        </div>
-                        <div class="col-sm-3 ">
-                            <h1><span class="glyphicon glyphicon-flag "></span></h1>
-                            @php
-                                $procesos_adqui=0;
-                                foreach ($tipos_procesos as $tipo_proceso){
-                                    $etapas=\App\Http\Controllers\IndicadoresController::etapas_tipo_proceso($tipo_proceso->id);
-                                    foreach($etapas as $etapa){
-                                        $cantidad_proceso_etapa=\App\Http\Controllers\IndicadoresController::cantidad_procesos_etapa($tipo_proceso->nombre, $etapa->nombre);
-                                        $procesos_adqui=$procesos_adqui+$cantidad_proceso_etapa;
-                                    }
-                                }
-                            @endphp
-                            <h2 class="count">{{$procesos_adqui}}</h2>
-                            <h5><label>Procesos en el Área de Adquisiciones.</label></h5>
-                        </div>
-                        <div class="col-sm-3 ">
-                            <h1><span class="glyphicon glyphicon-ok "></span></h1>
-                            @php($cantidad_total_finalizados=\App\Http\Controllers\IndicadoresController::cantidad_procesos_totales_finalizados())
-                            <h2 class="count">{{$cantidad_total_finalizados}}</h2>
-                            <h5><label>Procesos finalizados en el Área de Adquisiciones.</label></h5>
-                        </div>
-                        <div class="col-sm-3 ">
-                            <h1><span class="glyphicon glyphicon-fire "></span></h1>
-                            @php($cantidad_total_desiertos=\App\Http\Controllers\IndicadoresController::cantidad_procesos_totales_desiertos())
-                            <h2 class="count">{{$cantidad_total_desiertos}}</h2>
-                            <h5><label>Procesos declarados desiertos.</label></h5>
-                        </div>
+                    <div class="col-sm-3">
+                        <h1><span class="glyphicon glyphicon-globe"></span></h1>
+                        @php($cantidad_total=\App\Http\Controllers\IndicadoresController::cantidad_procesos_totales())
+                        <h2 class="count">{{$cantidad_total}}</h2>
+                        <h5><label>Procesos almacenados en el sistema.</label></h5>
                     </div>
+                    <div class="col-sm-3 ">
+                        <h1><span class="glyphicon glyphicon-flag "></span></h1>
+                        @php
+                            $procesos_adqui=0;
+                            foreach ($tipos_procesos as $tipo_proceso){
+                                $etapas=\App\Http\Controllers\IndicadoresController::etapas_tipo_proceso($tipo_proceso->id);
+                                foreach($etapas as $etapa){
+                                    $cantidad_proceso_etapa=\App\Http\Controllers\IndicadoresController::cantidad_procesos_etapa($tipo_proceso->nombre, $etapa->nombre);
+                                    $procesos_adqui=$procesos_adqui+$cantidad_proceso_etapa;
+                                }
+                            }
+                        @endphp
+                        <h2 class="count">{{$procesos_adqui}}</h2>
+                        <h5><label>Procesos en el Área de Adquisiciones.</label></h5>
+                    </div>
+                    <div class="col-sm-3 ">
+                        <h1><span class="glyphicon glyphicon-ok "></span></h1>
+                        @php($cantidad_total_finalizados=\App\Http\Controllers\IndicadoresController::cantidad_procesos_totales_finalizados())
+                        <h2 class="count">{{$cantidad_total_finalizados}}</h2>
+                        <h5><label>Procesos finalizados en el Área de Adquisiciones.</label></h5>
+                    </div>
+                    <div class="col-sm-3 ">
+                        <h1><span class="glyphicon glyphicon-fire "></span></h1>
+                        @php($cantidad_total_desiertos=\App\Http\Controllers\IndicadoresController::cantidad_procesos_totales_desiertos())
+                        <h2 class="count">{{$cantidad_total_desiertos}}</h2>
+                        <h5><label>Procesos declarados desiertos.</label></h5>
+                    </div>
+                </div>
                 </div><br>
                 <div class="well">
-                <h5 class="darkblue" align="center">Seleccióne una modalidad de contratación para ver más información.</h5><br>
-                <ul class="well nav nav-pills nav-justified" style="background-color: white;">
-                    @foreach($tipos_procesos as $tipo_proceso)
-                        <li><a data-toggle="pill" href="#indicadorproceso{{$tipo_proceso->id}}">{{$tipo_proceso->nombre}}</a></li>
-                    @endforeach
-                </ul>
-                <div class="tab-content">
+                    <h5 class="darkblue" align="center">Seleccióne una modalidad de contratación para ver más información.</h5><br>
+                    <ul class="well nav nav-pills nav-justified" style="background-color: white;">
+                        @foreach($tipos_procesos as $tipo_proceso)
+                            <li><a data-toggle="pill" href="#indicadorproceso{{$tipo_proceso->id}}">{{$tipo_proceso->nombre}}</a></li>
+                        @endforeach
+                    </ul>
+                    <div class="tab-content">
                     <div id="home" class="tab-pane fade in active" style="background-color: white;">
                         <div class="panel panel-info">
                             <h5 align="center">Aquí podrá ver la información de la modalidad de contratación seleccionada.</h5>
@@ -154,9 +154,8 @@
                             </div>
                         </div>
                     @endforeach
+                    </div>
                 </div>
-                </div>
-
             </div>
         </div>
     </div>
