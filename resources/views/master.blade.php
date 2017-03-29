@@ -117,6 +117,7 @@
     @yield('scriptUsers')
     @yield('MyscriptsDiligenciar')
     @yield('scriptComites')
+    @yield('scriptIndicador')
     @yield('scriptDatosEtapas')
 <br>
     <!-- Footer -->
