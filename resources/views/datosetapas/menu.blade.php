@@ -4,7 +4,7 @@
         <div class="panel panel-success">
             <div class="panel-heading">
                 <a data-toggle="collapse"  data-parent="#accordion" href="#collapseprocesocontractual">
-                    <h4><label class="text-success">Datos generales del contrato</label></h4>
+                    <h3><label class="text-success">Datos generales del contrato</label></h3>
                 </a>
             </div>
             <div class="panel-group" id="accordion">
@@ -134,7 +134,8 @@
                 </div>
             </div>
         </div>
-        <h4><a class="btn btn-default" href="{{route('procesocontractual.index')}}">Volver a la lista de Procesos Contractuales</a></h4>
+        <h4><a class="btn btn-default" href="{{route('procesocontractual.index')}}">
+                <span class="glyphicon glyphicon-chevron-left"></span> Ir atrás</a></h4>
     </div>
     @include('datosetapas.modalsave')
     <div class="modal" id="modalMensaje" tabindex="-1" role="dialog" aria-labelledby="modalMensaje" data-backdrop="static" data-keyboard="false">

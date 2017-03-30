@@ -78,6 +78,6 @@
                 </form>
             </div>
         </div>
-        <h4><a class="btn btn-default" href="{{route('users.index')}}">Volver a la lista de usuarios</a></h4>
+        <h4><a class="btn btn-default" href="{{route('users.index')}}"><span class="glyphicon glyphicon-chevron-left"></span> Ir atrás</a></h4>
     </div>
 @endsection

@@ -2,7 +2,7 @@
 @section('createprocesstype')
     <div class="container col-md-12">
         <div class="panel panel-success">
-            <div class="panel-heading"><h3>Crear Nuevo Tipo de Proceso de Contratación</h3></div>
+            <div class="panel-heading"><h3>Crear nuevo tipo de Proceso de Contratación</h3></div>
             <div class="panel-body">
                 @if (session('error'))
                     <div class="alert alert-danger">
@@ -39,7 +39,7 @@
                 </form>
             </div>
         </div>
-        <h4><a class="btn btn-default" href="{{route('tipoproceso.index')}}">Volver a la lista de Tipos de Procesos</a></h4>
+        <h4><a class="btn btn-default" href="{{route('tipoproceso.index')}}"><span class="glyphicon glyphicon-chevron-left"></span> Ir atrás</a></h4>
     </div>
 @endsection
 

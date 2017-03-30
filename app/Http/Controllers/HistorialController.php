@@ -38,6 +38,7 @@ class HistorialController extends Controller
             ->whereNotIn('id', [$id_dato_actual])
             ->where('requisitos_id', $id_requisito)
             ->where('proceso_contractual_id', $id_proceso)
+            ->orderBy('id', 'dsc')
             ->first();
 
         if (!$dato_anterior){

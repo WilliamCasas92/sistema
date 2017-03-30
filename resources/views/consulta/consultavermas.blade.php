@@ -4,7 +4,7 @@
         <div class="panel panel-success">
             <div class="panel-heading">
                 <a data-toggle="collapse"  data-parent="#accordion" href="#collapseprocesocontractual">
-                    <h4><label class="text-success">Datos generales del contrato</label></h4>
+                    <h3><label class="text-success">Datos generales del contrato</label></h3>
                 </a>
             </div>
             <div class="panel-group" id="accordion">
@@ -134,6 +134,6 @@
                 </div>
             </div>
         </div>
-        <h4><a class="btn btn-default" href="{{route('consulta.mostrar')}}">Volver a la lista de consultas</a></h4>
+        <h4><a class="btn btn-default" href="{{route('consulta.mostrar')}}"><span class="glyphicon glyphicon-chevron-left"></span> Ir atrás</a></h4>
     </div>
 @endsection

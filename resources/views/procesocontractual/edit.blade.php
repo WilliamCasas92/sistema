@@ -176,7 +176,7 @@
                 </form>
             </div>
         </div>
-        <h4><a class="btn btn-default" href="{{route('procesocontractual.index')}}">Volver a la lista de Tipos de Procesos</a></h4>
+        <h4><a class="btn btn-default" href="{{route('procesocontractual.index')}}"><span class="glyphicon glyphicon-chevron-left"></span> Ir atrás</a></h4>
     </div>
 @endsection
 @section('scriptComites')
