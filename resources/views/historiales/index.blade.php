@@ -8,22 +8,61 @@
                 <p>Objeto: {{$proceso_contractual->objeto}}</p>
 
                 <h1>Datos Etapas</h1>
-
-                @foreach($historicos_datos_etapas as $historico_dato_etapa)
-                    <p>{{$historico_dato_etapa->id}}</p>
-                    <p>{{$historico_dato_etapa->valor}}</p>
-                @endforeach
+                <table class="table table-hover">
+                    <thead>
+                    <th class="text-center">Usuario</th>
+                    <th class="text-center">Actividad</th>
+                    <th class="text-center">Fecha de Activdad</th>
+                    </thead>
+                    <tbody class="text-center">
+                    @foreach($historicos_datos_etapas as $historico_dato_etapa)
+                        @php($usuario=\App\Http\Controllers\HistorialController::buscar_usuario($historico_dato_etapa->user_id))
+                        @php($requisito=\App\Http\Controllers\HistorialController::buscar_requisito($historico_dato_etapa->requisitos_id))
+                        <tr>
+                            <td>{{$usuario->nombre}} {{$usuario->apellidos}}<br>{{$usuario->email}}</td>
+                            @php($dato_anterior=\App\Http\Controllers\HistorialController::buscar_dato_anterior($historico_dato_etapa->requisitos_id, $historico_dato_etapa->proceso_contractual_id, $historico_dato_etapa->id))
+                            @if($dato_anterior==false)
+                                @php
+                                    if(!$historico_dato_etapa->valor){
+                                        $texto='(Campo vacio)';
+                                    }else{
+                                        $texto=$historico_dato_etapa->valor;
+                                    }
+                                @endphp
+                                <td>Agregó un nuevo dato en <label>{{$requisito->nombre}}</label><br>
+                                    <label>{{$texto}}</label>.</td>
+                            @else
+                                @php
+                                    if(!$dato_anterior->valor){
+                                        $texto1='(Campo vacio)';
+                                    }else{
+                                        $texto1=$dato_anterior->valor;
+                                    }
+                                    if(!$historico_dato_etapa->valor){
+                                        $texto2='(Campo vacio)';
+                                    }else{
+                                        $texto2=$historico_dato_etapa->valor;
+                                    }
+                                @endphp
+                                <td>Cambió <label>{{$requisito->nombre}}</label><br>
+                                    De {{$texto1}} a <label>{{$texto2}}</label>.</td>
+                            @endif
+                            <td>{{$historico_dato_etapa->created_at->format('l jS \\of F Y h:i:s A')}}</td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
                 <br>
 
                 <h1>Procesos Etapas</h1>
-                <table class="table">
-                    <thea>
+                <table class="table table-hover">
+                    <thead>
                     <tr>
-                        <th class="text-center">Datos del Usuario</th>
+                        <th class="text-center">Usuario</th>
                         <th class="text-center">Actividad</th>
                         <th class="text-center">Fecha de Activdad</th>
                     </tr>
-                    </thea>
+                    </thead>
                     <tbody class="text-center">
                     @foreach($historicos_proceso_etapas as $historico_proceso_etapa)
                         @php($usuario=\App\Http\Controllers\HistorialController::buscar_usuario($historico_proceso_etapa->user_id))
@@ -48,7 +87,7 @@
                             @elseif($historico_proceso_etapa->estado=='Reanudado')
                                 <tr>
                                     <td>{{$usuario->nombre}} {{$usuario->apellidos}}<br>{{$usuario->email}}</td>
-                                    <td>Proceso REANUDADO.<br>Proceso enviado a la etapa de: {{$proceso_contractual->estado}}.</td>
+                                    <td>Proceso REANUDADO.<br>Proceso enviado a la primera etapa.</td>
                                     <td>{{$historico_proceso_etapa->created_at->format('l jS \\of F Y h:i:s A')}}</td>
                                 </tr>
                             @else
