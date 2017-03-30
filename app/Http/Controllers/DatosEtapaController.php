@@ -342,7 +342,6 @@ class DatosEtapaController extends Controller
                 $join->on('user_rol.user_id', '=', 'users.id');
             })
             ->select('users.id')
-            ->distinct()
             ->get();
 
 
