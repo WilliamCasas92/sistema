@@ -18,10 +18,11 @@ class CambioEtapa extends Notification
      *
      * @return void
      */
-    public function __construct(ProcesoContractual $procesoContractual, $nombre_etapa_anterior)
+    public function __construct(ProcesoContractual $procesoContractual, $nombre_etapa_anterior, $roles)
     {
         $this->proceso_contractual = $procesoContractual;
-        $this->nombre_etapa_anterior =$nombre_etapa_anterior;
+        $this->nombre_etapa_anterior = $nombre_etapa_anterior;
+        $this->roles = $roles;
     }
 
     /**
@@ -46,14 +47,14 @@ class CambioEtapa extends Notification
         return (new MailMessage)
                     ->subject('[SIGECOP] Nuevo proceso CDP: '.$this->proceso_contractual->numero_cdp)
                     ->success()
-                    ->line('Existe un nuevo proceso en la etapa: '. $this->proceso_contractual->estado)
-                    ->line('Objeto: '.$this->proceso_contractual->objeto)
-                    ->line('CDP: '.$this->proceso_contractual->numero_cdp)
+                    ->line('Existe un nuevo proceso en la etapa '. $this->proceso_contractual->estado.' con los datos: ')
                     ->line('Tipo contratación: '.$this->proceso_contractual->tipo_proceso)
-                    ->line('Etapa anteriodr: '.$this->nombre_etapa_anterior)
+                     ->line('CDP: '.$this->proceso_contractual->numero_cdp)
+                    ->line('Objeto: '.$this->proceso_contractual->objeto)
+                    ->line('Etapa anterior: '.$this->nombre_etapa_anterior)
+                    ->line('Funciones que tiene asociados en esta etapa: '. $this->roles)
                     ->line('')
-                    ->action('Ingresar al sistema', 'http://apidesarrollo.elpoli.edu.co:9111/')
-                    ->line('Buen día!');
+                    ->action('Ingresar al sistema', 'http://apidesarrollo.elpoli.edu.co:9111/');
     }
 
     /**

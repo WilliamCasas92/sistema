@@ -184,7 +184,7 @@ Route::get('test8', function (){
                 })
                 ->select('rols.nombre')
                 ->get();
-            $usuario->notify(new \App\Notifications\CambioEtapa($proceso, 'juan carlos'));
+            $usuario->notify(new \App\Notifications\CambioEtapa($proceso, 'juan carlos',"ESCRITOR"));
             echo $usuario->nombre . '  '. '<br>';
             foreach ($roles as $rol){
                 echo $rol->nombre;

@@ -366,6 +366,8 @@ class ProcesoContractualController extends Controller
             $historial_proceso_etapa->user_id                   = \Auth::user()->id;
             $historial_proceso_etapa->estado                    = $proceso_contractual->estado;
             $historial_proceso_etapa->save();
+            //Notificar proceso desertado
+
             $proceso_contractual->save();
         } catch(Exception $e){
             return "Fatal error -".$e->getMessage();

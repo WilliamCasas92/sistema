@@ -182,7 +182,7 @@ class DatosEtapaController extends Controller
                 $historial_proceso_etapa->save();
                 $proceso_etapa->save();
                 //En esta instrucción se notifica por correo a los usuarios que estan involucrados en la siguiente etapa, sobre el cambio de etapa
-                $this->notificar($id_nextetapa, $idproceso);
+                $this->notificar_cambio_etapa($id_nextetapa, $idproceso);
 
                 return view('datosetapas/pasoetapa');
             }
@@ -328,8 +328,9 @@ class DatosEtapaController extends Controller
         return ('');
     }
 
-    public function notificar($id_etapa_actual, $idproceso)
+    public function notificar_cambio_etapa($id_etapa_actual, $idproceso)
     {
+        // se realiza la consulta dei id los usuarios que tienen roles asociados a la etapa del proceso
         $id_usuarios=DB::table('etapa_rol')
             ->where('etapa_id', $id_etapa_actual)
             ->join('rols', function ($join)  {
@@ -344,17 +345,39 @@ class DatosEtapaController extends Controller
             ->select('users.id')
             ->get();
 
-
+        //Se busca el proceso contractual
         $proceso_contractual = ProcesoContractual::findOrFail($idproceso);
+        //Se busca la entidad de la etapa actual
         $etapa_actual= Etapa::findOrFail($id_etapa_actual);
+        //Se busca el nombre de la etapa anterior
         $nombre_etapa_anterior= DB::table('etapas')
             ->where('tipo_procesos_id', $proceso_contractual->tipo_procesos_id )
             ->where('indice', $etapa_actual->indice - 1)
             ->value('nombre');
+        //Se realiza un foreach para buscar los usuarios con el id asociado a la etapa del proceso
         foreach ($id_usuarios as $id_usuario){
-
+            $roles_usurio_etapa ="";
+            //Se realiza la busquedad del usuario con su id
             $usuario = User::find($id_usuario->id);
-            $usuario->notify(new CambioEtapa($proceso_contractual, $nombre_etapa_anterior));
+            //Se buscan los roles asociados con la etapa y el usuario
+            $roles=DB::table('etapa_rol')
+                ->where('etapa_id', $etapa_actual->id )
+                ->join('rols', function ($join)  {
+                    $join->on('etapa_rol.rol_id', '=', 'rols.id');
+                })
+                ->join('user_rol', function ($join) use ($usuario)  {
+                    $join->on('rols.id', '=', 'user_rol.rol_id')
+                        ->where('user_rol.user_id', '=', $usuario->id);
+                })
+                ->select('rols.nombre')
+                ->get();
+                //Concatenan los roles de los usuarios para ser enviados al contralador cambio de etapa
+                foreach ($roles as $rol){
+                    $roles_usurio_etapa .= $rol->nombre. "";
+                }
+                //Se dice cual es el usuario que se desea notificar y con los datos para enviar por correo
+                //Nombre de la etapa anterior entidad proceso contractual y los roles asociados al usuario
+                $usuario->notify(new CambioEtapa($proceso_contractual, $nombre_etapa_anterior, $roles_usurio_etapa));
         }
         return;
 
