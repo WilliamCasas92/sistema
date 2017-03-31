@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\ProcesoContractual;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -11,14 +12,15 @@ class CambioEstado extends Notification
 {
     use Queueable;
 
+    protected $procesoContractual;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(ProcesoContractual $procesoContractual)
     {
-        //
+        $this->proceso_contractual =$procesoContractual;
     }
 
     /**
@@ -41,9 +43,15 @@ class CambioEstado extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', 'https://laravel.com')
-                    ->line('Thank you for using our application!');
+            ->subject('[SIGECOP] Cambio de estado del proceso con CDP: '.$this->proceso_contractual->numero_cdp)
+            ->success()
+            ->line('CDP: '.$this->proceso_contractual->numero_cdp)
+            ->line('Objeto: '.$this->proceso_contractual->objeto)
+            ->line('Tipo contratación: '.$this->proceso_contractual->tipo_proceso)
+            ->line('El contracto ha esta en
+                 '. $this->proceso_contractual->estado)
+            ->line('')
+            ->action('Ingresar al sistema', 'http://apidesarrollo.elpoli.edu.co:9111/');
     }
 
     /**

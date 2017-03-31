@@ -343,6 +343,7 @@ class DatosEtapaController extends Controller
                 $join->on('user_rol.user_id', '=', 'users.id');
             })
             ->select('users.id')
+            ->distinct()
             ->get();
 
         //Se busca el proceso contractual
@@ -373,7 +374,7 @@ class DatosEtapaController extends Controller
                 ->get();
                 //Concatenan los roles de los usuarios para ser enviados al contralador cambio de etapa
                 foreach ($roles as $rol){
-                    $roles_usurio_etapa .= $rol->nombre. "";
+                    $roles_usurio_etapa .= $rol->nombre." ";
                 }
                 //Se dice cual es el usuario que se desea notificar y con los datos para enviar por correo
                 //Nombre de la etapa anterior entidad proceso contractual y los roles asociados al usuario

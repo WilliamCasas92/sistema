@@ -141,8 +141,19 @@ Route::get('test6', function (){
 
 Route::get('test7', function (){
 
-    $user= App\User::first();
-    $user->notify(new \App\Notifications\CambioEtapa());
+
+    $id_rol_administrador=1;
+    $id_usuarios =DB::table('users')
+        ->join('user_rol', function ($join) use ($id_rol_administrador)  {
+            $join->on('users.id', '=', 'user_rol.user_id')
+                ->where('user_rol.rol_id', '=', $id_rol_administrador);
+        })
+        ->select('users.id')
+        ->get();
+    foreach ($id_usuarios as $id_usuario){
+        $usuario=App\User::find($id_usuario->id);
+        $usuario->notify(new \App\Notifications\CambioEstado());
+    }
 
 });
 
