@@ -157,9 +157,7 @@
                                             <!-- Asignar Número de contrato -->
                                             @if((Auth::user()->hasRol('Administrador'))||(Auth::user()->hasRol('Coordinador')))
                                                     <br><div class="btn-group">
-                                                        <button type="button" class="btn btn-primary dropdown-toggle btn-xs" data-toggle="dropdown">Opciones</button>
-                                                        <button type="button" class="btn btn-primary dropdown-toggle btn-xs" data-toggle="dropdown">
-                                                            <span class="caret"></span></button>
+                                                        <button type="button" class="btn btn-primary dropdown-toggle btn-xs" data-toggle="dropdown">Opciones <span class="caret"></span></button>
                                                         <ul class="dropdown-menu dropdown-menu-right" role="menu">
                                                             <li><a href="{{ route('procesocontractual.edit', $proceso_contractual->id) }}" class="btn-xs btn-block">
                                                                    Editar proceso</a></li>
@@ -179,8 +177,7 @@
                                         @endif
                                         @if($habilitar=='enabled')
                                         <br><div class="btn-group">
-                                                <button type="button" class="btn btn-primary dropdown-toggle btn-xs" data-toggle="dropdown">Opciones</button>
-                                                <button type="button" class="btn btn-primary dropdown-toggle btn-xs" data-toggle="dropdown">
+                                                    <button type="button" class="btn btn-primary dropdown-toggle btn-xs" data-toggle="dropdown">Opciones <span class="caret"></span></button>
                                                     <span class="caret"></span></button>
                                                 <ul class="dropdown-menu dropdown-menu-right" role="menu">
                                                     <!-- Editar -->
