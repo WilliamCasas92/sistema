@@ -41,6 +41,10 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\CheckRolDiligenciar::class,
         ],
 
+        'allUsers' => [
+            \App\Http\Middleware\CheckAllUsers::class,
+        ],
+
         'api' => [
             'throttle:60,1',
             'bindings',

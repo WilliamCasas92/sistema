@@ -8,9 +8,14 @@ class CheckAdmin
 {
     public function handle($request, Closure $next)
     {
-        if (\Auth::user()->hasRol('Administrador')) {
-            return $next($request);
+        if (\Auth::check()) {
+            if (\Auth::user()->hasRol('Administrador')) {
+                return $next($request);
+            }else{
+                return redirect('home');
+            }
+        }else{
+            return redirect('/');
         }
-        return redirect('home');
     }
 }

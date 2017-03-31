@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class CheckRolDiligenciar
+class CheckAllUsers
 {
     public function handle($request, Closure $next)
     {
@@ -18,7 +18,8 @@ class CheckRolDiligenciar
                 (\Auth::user()->hasRol('Gestor de notificación'))               ||
                 (\Auth::user()->hasRol('Gestor de afiliación'))                 ||
                 (\Auth::user()->hasRol('Gestor de publicación'))                ||
-                (\Auth::user()->hasRol('Gestor de archivo'))                    ){
+                (\Auth::user()->hasRol('Gestor de archivo'))                    ||
+                (\Auth::user()->hasRol('Usuario general'))                    ){
                 return $next($request);
             }else{
                 return redirect('home');
@@ -28,10 +29,3 @@ class CheckRolDiligenciar
         }
     }
 }
-
-
-
-
-
-
-

@@ -6,20 +6,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//Ruta Home
-Route::get('home', function () {
-    return view('home');
-});
-
 //Rutas LogIn LogOut
 Auth::routes();
-Route::get('/home', 'HomeController@index');
 
 //Rutas Google
 Route::get('social/google', 'SocialController@getSocialAuth');
 Route::get('social/callback/google', 'SocialController@getSocialAuthCallback');
 
-//Rutas Administrador
+//Rutas ADMINISTRADOR
 Route::group(['middleware' => 'onlyAdmin'], function() {
     //Rutas Usuarios
     Route::resource('users', 'UserController');
@@ -40,7 +34,7 @@ Route::group(['middleware' => 'onlyAdmin'], function() {
     Route::get('procesocontractual/historial/{proceso_id}', ['as'=>'historiales.mostrar','uses'=> 'HistorialController@mostrar']);
 });
 
-
+//Rutas DILIGENCIAR
 Route::group(['middleware' => 'onlyDiligenciar'], function() {
     //Rutas Procesos Contractuales
     Route::get('procesocontractual/enviar/{idproceso}', ['as'=>'procesocontractual.enviar','uses'=> 'ProcesoContractualController@enviar']);
@@ -48,25 +42,32 @@ Route::group(['middleware' => 'onlyDiligenciar'], function() {
     Route::get('procesocontractual/finalizar/{idproceso}/{idetapa}', ['as'=>'procesocontractual.finalizar','uses'=> 'ProcesoContractualController@finalizar']);
     Route::get('procesocontractual/desertar/{idproceso}', ['as'=>'procesocontractual.desertar','uses'=> 'ProcesoContractualController@desertar']);
     Route::get('procesocontractual/reanudar/{idproceso}', ['as'=>'procesocontractual.reanudar','uses'=> 'ProcesoContractualController@reanudar']);
-    //Desglosar
     Route::resource('procesocontractual', 'ProcesoContractualController');
     //Rutas Datos Etapas
     Route::get('datosetapas/enviar/{idproceso}/{idetapa}', ['as'=>'datosetapas.enviaretapa','uses'=> 'DatosEtapaController@enviar_etapa']);
-
     Route::get('datosetapas/{datoetapa}', ['as'=>'datosetapas.menu','uses'=> 'DatosEtapaController@menu']);
-
     Route::resource('datosetapas', 'DatosEtapaController');
     //Rutas de Datos Etapas para subir y eliminar documentos
     Route::post('datosetapas/documento', ['as'=>'datosetapas.subirDocumento','uses'=> 'DatosEtapaController@subir_documento']);
     Route::post('datosetapas/documento/{idproceso}/{idrequisito}', ['as'=>'datosetapas.eliminarDocumento','uses'=> 'DatosEtapaController@eliminar_documento']);
-
+    //Rutas de Documentos
     Route::get('datosetapas/correo/correo', ['as'=>'datosetapas.correo','uses'=> 'DatosEtapaController@correo']);
 });
 
+Route::group(['middleware' => 'allUsers'], function() {
+    //Rutas Consulta de procesos
+    Route::get('consultaproceso', ['as'=>'consulta.mostrar','uses'=> 'ConsultasController@mostrar']);
+    Route::get('consultaproceso/{idproceso}', ['as'=>'consulta.consultavermas','uses'=> 'ConsultasController@ver_mas']);
+    //App Home
+    Route::get('/home', 'HomeController@index');
+    //Ruta Home
+    Route::get('home', function () {
+        return view('home');
+    });
+});
 
-//Rutas Consulta de procesos
-Route::get('consultaproceso', ['as'=>'consulta.mostrar','uses'=> 'ConsultasController@mostrar']);
-Route::get('consultaproceso/{idproceso}', ['as'=>'consulta.consultavermas','uses'=> 'ConsultasController@ver_mas']);
+
+
 
 
 //TESTS
