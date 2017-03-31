@@ -18,7 +18,7 @@
                     <table class="table">
                         <thead style="font-size : 11px;">
                         <tr>
-                            <th class="text-center">Modalidad</th>
+                            <th class="text-center" width="35%">Modalidad</th>
                             <th class="text-center">CPD</th>
                             <th class="text-center" width="35%">OBJETO</th>
                         </tr>
@@ -27,7 +27,7 @@
                         <tr>
                             <td class="text-center">{{$proceso_contractual->tipo_proceso}}</td>
                             <td class="text-center">{{$proceso_contractual->numero_cdp}}</td>
-                            <td class="text-center" width="35%">{{$proceso_contractual->objeto}}</td>
+                            <td class="text-justify" width="35%">{{$proceso_contractual->objeto}}</td>
                         </tr>
                         </tbody>
                     </table>
@@ -71,6 +71,13 @@
                                                 }else{
                                                     $texto=$historico_dato_etapa->valor;
                                                 }
+                                                if($requisito->tipo_requisitos->tipo=='checkbox'){
+                                                    if($historico_dato_etapa->valor=='1'){
+                                                        $texto='Si';
+                                                    }else{
+                                                        $texto='No';
+                                                    }
+                                                }
                                             @endphp
                                             <td>Agregó en el campo <label>"{{$requisito->nombre}}"</label><br>
                                                 El siguiente dato: <label>{{$texto}}</label>.</td>
@@ -80,6 +87,13 @@
                                                     $texto='(Campo vacio)';
                                                 }else{
                                                     $texto=$historico_dato_etapa->valor;
+                                                }
+                                                if($requisito->tipo_requisitos->tipo=='checkbox'){
+                                                    if($historico_dato_etapa->valor=='1'){
+                                                        $texto='Si';
+                                                    }else{
+                                                        $texto='No';
+                                                    }
                                                 }
                                             @endphp
                                             <td>Actualizó en el campo <label>"{{$requisito->nombre}}"</label><br>
