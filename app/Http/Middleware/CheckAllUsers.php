@@ -22,10 +22,10 @@ class CheckAllUsers
                 (\Auth::user()->hasRol('Usuario general'))                    ){
                 return $next($request);
             }else{
-                return redirect('home');
+                return response()->view('errors.rol');
             }
         }else{
-            return redirect('/');
+            return response()->view('errors.login');
         }
     }
 }
