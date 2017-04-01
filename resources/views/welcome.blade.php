@@ -13,7 +13,8 @@
     <form action="{{ url('social/google') }}">
         <div class="container-fluid text-center">
             <img src="images/logo-institucion-300dpi-02.png" width='700' height='150'><br><br>
-            <h1>Bienvenido al Sistema de gestión para procesos contractuales</h1>
+            <h1>SIGECOP</h1>
+            <h1>Sistema de gestión para procesos contractuales</h1>
             <h1>Politécnico Colombiano Jaime Isaza Cadavid</h1><br><br>
             <button type="submit" class="btn btn-success">Conectarse</button>
         </div>

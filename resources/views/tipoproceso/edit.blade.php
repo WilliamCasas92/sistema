@@ -16,6 +16,8 @@
                         <label class="control-label col-md-4" for="InputName">Nombre del Tipo de Proceso:</label>
                         <div class="col-md-4">
                             <input type="text" name="nombre" class="form-control" placeholder="Nombre del Tipo de Proceso:" value="{{ $tipoproceso->nombre }}" required>
+                            <p style="font-size : 10px;">Nota: Tenga en cuenta que al actualizar el nombre del tipo de proceso,
+                                también actualizará el nombre de la modalidad de los procesos asociados a este tipo de contratación.</p>
                         </div>
                     </div>
                     <div class="form-group">

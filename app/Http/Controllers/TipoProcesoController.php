@@ -59,6 +59,7 @@ class TipoProcesoController extends Controller
     public function update(Request $request, $id)
     {
         $tipoproceso = TipoProceso::findOrFail($id);
+        $viejo_nombre=$tipoproceso->nombre;
         $tipoproceso->nombre       = $request->nombre;
         $tipoproceso->version       = $request->version;
         if($tipoprocesoAux=TipoProceso::select()
@@ -75,6 +76,7 @@ class TipoProcesoController extends Controller
             $tipoproceso->activo       ='0';
         }
         $tipoproceso->save();
+        DB::table('proceso_contractuals')->where('tipo_proceso', $viejo_nombre)->update(array('tipo_proceso' => $tipoproceso->nombre));
         return redirect()->route('tipoproceso.index');
     }
 

@@ -22,7 +22,8 @@
                 <img class="imglogo" src="{{asset('images/logo-institucion-300dpi-blanco-05.png')}}" width='360' height='75'>
             </div>
             <div align="center" class="col-md-6">
-                <h1 style="color:white;">Sistema de gestión para procesos contractuales</h1>
+                <h1 style="color:white;">SIGECOP</h1>
+                <h3 style="color:white;">Sistema de gestión para procesos contractuales</h3>
             </div>
             <div align="right">
                 <div class="col-md-3" style="color:white;">
