@@ -34,7 +34,7 @@ class ProcesoContractualController extends Controller
             ->get();
             //->paginate(50);
 
-        $tipos_procesos= TipoProceso::all();
+        $tipos_procesos= TipoProceso::where('activo',1)->get();
         return view($this->path.'.index', compact('procesos_contractuales', 'tipos_procesos'));
     }
 
@@ -64,7 +64,10 @@ class ProcesoContractualController extends Controller
             $proceso_contractual->id_supervisor      = $request->id_supervisor;
             $proceso_contractual->email_supervisor   = $request->email_supervisor;
             $proceso_contractual->user_id            = \Auth::user()->id;
-            $proceso_contractual->tipo_procesos_id   = DB::table('tipo_procesos')->where('nombre', $request->tipo_proceso)->value('id');
+            $proceso_contractual->tipo_procesos_id   = DB::table('tipo_procesos')
+                                                            ->where('nombre', $request->tipo_proceso)
+                                                            ->where('activo', 1)
+                                                            ->value('id');
             $proceso_contractual->estado             = 'Sin enviar al Área de Adquisiciones.';
 
             if(ProcesoContractual::select()

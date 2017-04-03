@@ -31,7 +31,7 @@ class ConsultasController extends Controller
                 ->orderBy('year_cdp', 'desc')
                 ->orderBy('numero_cdp', 'desc')->paginate(10);
 
-        $tipos_procesos= TipoProceso::all();
+        $tipos_procesos= TipoProceso::where('activo',1)->get();
         return view($this->path.'.consultaproceso', compact('procesos_contractuales', 'tipos_procesos'));
     }
 
