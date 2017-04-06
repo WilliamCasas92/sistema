@@ -233,7 +233,6 @@
                         $('#modalSave').modal('hide');
                         $('#modalMensaje').modal('show');
                         $('#datos_faltantes').fadeIn(1000).html(data);
-
                     }
                 });
                 return false;
@@ -246,6 +245,7 @@
             });
             //Finalizando el proceso
             $('#modalFinalForm').submit(function () {
+                $('#cargandoFinalizar').html('<div><img class="center-block" src="/images/loading.gif" width="100" height="100"/></div>');
                 // Enviamos el formulario usando AJAX
                 $.ajax({
                     type: 'GET',
@@ -254,9 +254,9 @@
                     // Mostramos un mensaje con la respuesta de PHP
                     success: function (data) {
                         $('#modalFinal').modal('hide');
-                        $('#datos_faltantes').html(data);
-                        $('#modalSave').modal('hide');
                         $('#modalMensaje').modal('show');
+                        $('#datos_faltantes').fadeIn(1000).html(data);
+
                     }
                 });
                 return false;
