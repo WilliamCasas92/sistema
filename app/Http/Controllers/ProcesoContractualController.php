@@ -117,7 +117,7 @@ class ProcesoContractualController extends Controller
             }
 
             $proceso_contractual->save();
-            return redirect()->route('procesocontractual.index');
+            return redirect()->route('consulta.mostrar');
         } catch(Exception $e){
             return "Fatal error -".$e->getMessage();
         }
@@ -204,7 +204,7 @@ class ProcesoContractualController extends Controller
             $proceso_contractual->fecha_comiteevaluador = '';
         }
         $proceso_contractual->save();
-        return redirect()->route('procesocontractual.index');
+        return redirect()->route('consulta.mostrar');
     }
 
     public function destroy($id)
@@ -503,7 +503,6 @@ class ProcesoContractualController extends Controller
             $usuario=User::find($id_usuario->id);
             $usuario->notify(new \App\Notifications\CambioEstado($proceso_contractual));
         }
-
         return;
     }
 

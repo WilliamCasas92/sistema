@@ -29,8 +29,8 @@
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-4" for="InputYearCDP">Año CDP: </label>
-                        <div class="col-md-3">
-                            <input type="text" name="year_cdp" class="form-control" autocomplete="off" placeholder="Digite el año de expedición del CDP" required>
+                        <div class="col-md-2">
+                            <input type="text" name="year_cdp" class="form-control" autocomplete="off" placeholder="Año de expedición del CDP" value="{{date("Y")}}" required>
                         </div>
                     </div>
                     <div class="form-group">

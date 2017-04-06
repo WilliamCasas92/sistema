@@ -4,13 +4,6 @@
         <div class="panel panel-success">
             <div class="panel-heading text-center"><h3>Procesos de Contratación</h3></div>
             <div class="panel-body">
-                @if( (Auth::user()->hasRol('Administrador'))||
-                        (Auth::user()->hasRol('Coordinador'))||
-                            (Auth::user()->hasRol('Secretario técnico de dependencia')) )
-                    <div align="left">
-                        <h4><a class="btn btn-primary" href="{{route('procesocontractual.create')}}">Crear nuevo proceso de contratación</a></h4>
-                    </div><br>
-                @endif
                 <!-- Seccion para la busqueda-->
                 <div class="panel-group" id="accordion">
                     <div class="panel panel-default">
@@ -65,7 +58,7 @@
 
                         <form class="form-inline">
                             <div align="center">
-                                <br><button type="submit" class="btn btn-primary">Buscar</button>
+                                <br><button type="submit" class="btn btn-primary btn-sm">Buscar</button>
                             </div>
                         </form>
                     </form>
@@ -74,6 +67,13 @@
                         </div>
                     </div>
                 </div>
+                @if( (Auth::user()->hasRol('Administrador'))||
+                        (Auth::user()->hasRol('Coordinador'))||
+                            (Auth::user()->hasRol('Secretario técnico de dependencia')) )
+                    <div align="center">
+                        <h4><a class="btn btn-primary btn-sm" href="{{route('procesocontractual.create')}}">Crear nuevo proceso de contratación</a></h4>
+                    </div><br>
+                @endif
                 <!-- Tabla de Indice de Procesos creados-->
                 <div name="ResultadosDeBusqueda">
                     <div class=" well table-responsive">
