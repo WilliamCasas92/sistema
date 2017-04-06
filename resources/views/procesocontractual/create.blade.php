@@ -28,6 +28,12 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label class="control-label col-md-4" for="InputYearCDP">Año CDP: </label>
+                        <div class="col-md-3">
+                            <input type="text" name="year_cdp" class="form-control" autocomplete="off" placeholder="Digite el año de expedición del CDP" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="control-label col-md-4" for="InputObjeto">Objeto: </label>
                         <div class="col-md-5">
                             <textarea rows="6" name="objeto" class="form-control" autocomplete="off" placeholder="Digite el objeto del contrato" required></textarea>

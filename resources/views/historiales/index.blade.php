@@ -33,11 +33,74 @@
                     </table>
                 </div>
                 <ul class="nav nav-tabs">
-                    <li class="active"><a data-toggle="tab" href="#menu1">Actividad en los datos</a></li>
-                    <li><a data-toggle="tab" href="#menu2">Actividad en las Etapas</a></li>
+                    <li class="active"><a data-toggle="tab" href="#menu2">Actividad en las Etapas</a></li>
+                    <li><a data-toggle="tab" href="#menu1">Actividad en los datos</a></li>
                 </ul>
                 <div class="tab-content">
-                    <div id="menu1" class="well tab-pane fade in active" style="background-color: white;">
+                    <div id="menu2" class="well tab-pane fade in active" style="background-color: white;">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <label class="text-info">Cambios realizados</label>
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="panel-group" id="accordion">
+                            <!-- Tabla cambios de etapas-->
+                            @if($historicos_proceso_etapas)
+                                <table class="table table-hover">
+                                    <thead style="font-size : 11px;">
+                                    <tr>
+                                        <th class="text-center">Usuario</th>
+                                        <th class="text-center">Actividad</th>
+                                        <th class="text-center">Fecha de Activdad</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody style="font-size : 11px;" class="text-center">
+                                    @foreach($historicos_proceso_etapas as $historico_proceso_etapa)
+                                        @php($usuario=\App\Http\Controllers\HistorialController::buscar_usuario($historico_proceso_etapa->user_id))
+                                        @if($historico_proceso_etapa->estado=='Enviado al Área de Adquisiciones.')
+                                            <tr>
+                                                <td>{{$usuario->nombre}} {{$usuario->apellidos}}<br>{{$usuario->email}}</td>
+                                                <td>Proceso <label>ENVIADO al Área de Adquisiciones</label>.</td>
+                                                <td>{{$historico_proceso_etapa->created_at->format('l jS \\of F Y h:i:s A')}}</td>
+                                            </tr>
+                                        @elseif($historico_proceso_etapa->estado=='Finalizado')
+                                            <tr>
+                                                <td>{{$usuario->nombre}} {{$usuario->apellidos}}<br>{{$usuario->email}}</td>
+                                                <td>Proceso <label>FINALIZADO</label> en el Área de Adquisiciones.</td>
+                                                <td>{{$historico_proceso_etapa->created_at->format('l jS \\of F Y h:i:s A')}}</td>
+                                            </tr>
+                                        @elseif($historico_proceso_etapa->estado=='Desierto')
+                                            <tr>
+                                                <td>{{$usuario->nombre}} {{$usuario->apellidos}}<br>{{$usuario->email}}</td>
+                                                <td>Proceso declarado <label>DESIERTO</label>.</td>
+                                                <td>{{$historico_proceso_etapa->created_at->format('l jS \\of F Y h:i:s A')}}</td>
+                                            </tr>
+                                        @elseif($historico_proceso_etapa->estado=='Reanudado')
+                                            <tr>
+                                                <td>{{$usuario->nombre}} {{$usuario->apellidos}}<br>{{$usuario->email}}</td>
+                                                <td>Proceso <label>REANUDADO</label>.<br>Proceso enviado a la primera etapa.</td>
+                                                <td>{{$historico_proceso_etapa->created_at->format('l jS \\of F Y h:i:s A')}}</td>
+                                            </tr>
+                                        @else
+                                            <tr>
+                                                <td>{{$usuario->nombre}} {{$usuario->apellidos}}<br>{{$usuario->email}}</td>
+                                                <td>Proceso enviado a la etapa de: <label>{{$historico_proceso_etapa->estado}}</label>.</td>
+                                                <td>{{$historico_proceso_etapa->created_at->format('l jS \\of F Y h:i:s A')}}</td>
+                                            </tr>
+                                        @endif
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            @elseif(isEmpty($historicos_proceso_etapas))
+                                <div class="panel panel-info">
+                                    <h5 align="center">No existen cambios realizados.</h5>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                    <div id="menu1" class="well tab-pane fade " style="background-color: white;">
                         <div class="panel panel-info">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
@@ -106,69 +169,6 @@
                                 </tbody>
                                 </table>
                             @elseif(!count($historicos_datos_etapas))
-                                <div class="panel panel-info">
-                                    <h5 align="center">No existen cambios realizados.</h5>
-                                </div>
-                            @endif
-                        </div>
-                    </div>
-                    <div id="menu2" class="well tab-pane fade" style="background-color: white;">
-                        <div class="panel panel-info">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">
-                                    <label class="text-info">Cambios realizados</label>
-                                </h4>
-                            </div>
-                        </div>
-                        <div class="panel-group" id="accordion">
-                            <!-- Tabla cambios de etapas-->
-                            @if($historicos_proceso_etapas)
-                                <table class="table table-hover">
-                                    <thead style="font-size : 11px;">
-                                    <tr>
-                                        <th class="text-center">Usuario</th>
-                                        <th class="text-center">Actividad</th>
-                                        <th class="text-center">Fecha de Activdad</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody style="font-size : 11px;" class="text-center">
-                                    @foreach($historicos_proceso_etapas as $historico_proceso_etapa)
-                                        @php($usuario=\App\Http\Controllers\HistorialController::buscar_usuario($historico_proceso_etapa->user_id))
-                                        @if($historico_proceso_etapa->estado=='Enviado al Área de Adquisiciones.')
-                                            <tr>
-                                                <td>{{$usuario->nombre}} {{$usuario->apellidos}}<br>{{$usuario->email}}</td>
-                                                <td>Proceso <label>ENVIADO al Área de Adquisiciones</label>.</td>
-                                                <td>{{$historico_proceso_etapa->created_at->format('l jS \\of F Y h:i:s A')}}</td>
-                                            </tr>
-                                        @elseif($historico_proceso_etapa->estado=='Finalizado')
-                                            <tr>
-                                                <td>{{$usuario->nombre}} {{$usuario->apellidos}}<br>{{$usuario->email}}</td>
-                                                <td>Proceso <label>FINALIZADO</label> en el Área de Adquisiciones.</td>
-                                                <td>{{$historico_proceso_etapa->created_at->format('l jS \\of F Y h:i:s A')}}</td>
-                                            </tr>
-                                        @elseif($historico_proceso_etapa->estado=='Desierto')
-                                            <tr>
-                                                <td>{{$usuario->nombre}} {{$usuario->apellidos}}<br>{{$usuario->email}}</td>
-                                                <td>Proceso declarado <label>DESIERTO</label>.</td>
-                                                <td>{{$historico_proceso_etapa->created_at->format('l jS \\of F Y h:i:s A')}}</td>
-                                            </tr>
-                                        @elseif($historico_proceso_etapa->estado=='Reanudado')
-                                            <tr>
-                                                <td>{{$usuario->nombre}} {{$usuario->apellidos}}<br>{{$usuario->email}}</td>
-                                                <td>Proceso <label>REANUDADO</label>.<br>Proceso enviado a la primera etapa.</td>
-                                                <td>{{$historico_proceso_etapa->created_at->format('l jS \\of F Y h:i:s A')}}</td>
-                                            </tr>
-                                        @else
-                                            <tr>
-                                                <td>{{$usuario->nombre}} {{$usuario->apellidos}}<br>{{$usuario->email}}</td>
-                                                <td>Proceso enviado a la etapa de: <label>{{$historico_proceso_etapa->estado}}</label>.</td>
-                                                <td>{{$historico_proceso_etapa->created_at->format('l jS \\of F Y h:i:s A')}}</td>
-                                            </tr>
-                                        @endif
-                                    @endforeach
-                                    </tbody>
-                                </table>
-                            @elseif(isEmpty($historicos_proceso_etapas))
                                 <div class="panel panel-info">
                                     <h5 align="center">No existen cambios realizados.</h5>
                                 </div>

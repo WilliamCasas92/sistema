@@ -50,19 +50,6 @@
                 <span class="glyphicon glyphicon-home"></span> Inicio</a>
             <a href="{{ url('consultaproceso') }}" type="button" class="btn btn-success">
                 <span class="glyphicon glyphicon-search"></span> Procesos Contractuales</a>
-            @if (   (\Auth::user()->hasRol('Administrador'))                        ||
-                    (\Auth::user()->hasRol('Coordinador'))                          ||
-                    (\Auth::user()->hasRol('Secretario técnico de dependencia'))    ||
-                    (\Auth::user()->hasRol('Secretario'))                           ||
-                    (\Auth::user()->hasRol('Abogado'))                              ||
-                    (\Auth::user()->hasRol('Gestor de contratación'))               ||
-                    (\Auth::user()->hasRol('Gestor de notificación'))               ||
-                    (\Auth::user()->hasRol('Gestor de afiliación'))                 ||
-                    (\Auth::user()->hasRol('Gestor de publicación'))                ||
-                    (\Auth::user()->hasRol('Gestor de archivo'))                    )
-                <a href="{{ url('procesocontractual') }}" type="button" class="btn btn-success">
-                <span class="glyphicon glyphicon-edit"></span></a>
-            @endif
             @if(Auth::user()->hasRol('Administrador'))
                 <div class="btn-group">
                     <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">

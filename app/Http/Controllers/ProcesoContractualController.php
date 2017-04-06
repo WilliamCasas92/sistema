@@ -49,7 +49,7 @@ class ProcesoContractualController extends Controller
             $proceso_contractual = new ProcesoContractual();
             $proceso_contractual->tipo_proceso      = $request->tipo_proceso;
             $proceso_contractual->numero_cdp        = $request->num_cdp;
-            $proceso_contractual->year_cdp          = date("Y");
+            $proceso_contractual->year_cdp          = $request->year_cdp;
             $proceso_contractual->objeto            = $request->objeto;
             $proceso_contractual->valor             = $request->num_valor;
             $proceso_contractual->plazo             = $request->num_plazo;

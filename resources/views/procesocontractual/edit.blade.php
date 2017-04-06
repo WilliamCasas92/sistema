@@ -39,6 +39,12 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label class="control-label col-md-4" for="InputYearCDP">Año CDP: </label>
+                        <div class="col-md-3">
+                            <input type="text" name="year_cdp" {{$readonly}} class="form-control" autocomplete="off" placeholder="Digite el año de expedición del CDP" value="{{$proceso_contractual->year_cdp}}" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="control-label col-md-4" for="InputObjeto">Objeto: </label>
                         <div class="col-md-5">
                             <textarea rows="6" name="objeto" {{$readonly}} class="form-control" autocomplete="off" required>{{$proceso_contractual->objeto}}</textarea>
