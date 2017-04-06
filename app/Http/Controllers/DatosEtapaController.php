@@ -56,16 +56,19 @@ class DatosEtapaController extends Controller
                     if($requisito->tipo_requisitos_id != 3) {
                         //Edita Dato de la Etapa
                         $dato_etapa = DatoEtapa::findOrFail($dato_etapa_id);
+                        $valor_anterior = $dato_etapa->valor;
                         $dato_etapa->valor = $atributo_;
                         $dato_etapa->user_id = \Auth::user()->id;
                         $dato_etapa->save();
-                        //Guardando en el historial
-                        $historial_dato_etapa = new HistoricoDatoEtapa();
-                        $historial_dato_etapa->proceso_contractual_id = $request->proceso_contractual_id;
-                        $historial_dato_etapa->valor = $atributo_;
-                        $historial_dato_etapa->user_id = \Auth::user()->id;
-                        $historial_dato_etapa->requisitos_id = $request->requisito_id[$cont];
-                        $historial_dato_etapa->save();
+                        if($valor_anterior != $atributo_) {
+                            //Guardando en el historial
+                            $historial_dato_etapa = new HistoricoDatoEtapa();
+                            $historial_dato_etapa->proceso_contractual_id = $request->proceso_contractual_id;
+                            $historial_dato_etapa->valor = $atributo_;
+                            $historial_dato_etapa->user_id = \Auth::user()->id;
+                            $historial_dato_etapa->requisitos_id = $request->requisito_id[$cont];
+                            $historial_dato_etapa->save();
+                        }
                         $cont++;
                     }else{
                         $cont++;
@@ -79,12 +82,15 @@ class DatosEtapaController extends Controller
                     $dato_etapa->requisitos_id = $request->requisito_id[$cont];
                     $dato_etapa->save();
                     //Guardando en el historial
-                    $historial_dato_etapa = new HistoricoDatoEtapa();
-                    $historial_dato_etapa->proceso_contractual_id = $request->proceso_contractual_id;
-                    $historial_dato_etapa->valor = $atributo_;
-                    $historial_dato_etapa->user_id = \Auth::user()->id;;
-                    $historial_dato_etapa->requisitos_id = $request->requisito_id[$cont];
-                    $historial_dato_etapa->save();
+                    if($dato_etapa->valor) {
+                        $historial_dato_etapa = new HistoricoDatoEtapa();
+                        $historial_dato_etapa->proceso_contractual_id = $request->proceso_contractual_id;
+                        $historial_dato_etapa->valor = $atributo_;
+                        $historial_dato_etapa->user_id = \Auth::user()->id;;
+                        $historial_dato_etapa->requisitos_id = $request->requisito_id[$cont];
+                        $historial_dato_etapa->save();
+
+                    }
                     $cont++;
                 }
             }
@@ -286,13 +292,7 @@ class DatosEtapaController extends Controller
                         $dato_etapa->valor = "";
                         $dato_etapa->requisitos_id = $requisto->id;
                         $dato_etapa->save();
-                        //Guardando en el historial
-                        $historial_dato_etapa = new HistoricoDatoEtapa();
-                        $historial_dato_etapa->proceso_contractual_id = $request->proceso_contractual_id;
-                        $historial_dato_etapa->valor = "";
-                        $historial_dato_etapa->user_id = \Auth::user()->id;;
-                        $historial_dato_etapa->requisitos_id = $requisto->id;
-                        $historial_dato_etapa->save();
+                        //No es necesario guardar historial de los campos que crea en blanco
                     }
             }
             //return view('datosetapas/modalsave');
