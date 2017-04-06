@@ -24,7 +24,7 @@ class ProcesoContractualController extends Controller
         $objeto = \Request::get('Objeto');
 
         $procesos_contractuales= ProcesoContractual::
-        Where('numero_cdp', 'like', '%'.$num_cdp.'%')
+            Where('numero_cdp', 'like', '%'.$num_cdp.'%')
             ->Where('numero_contrato', 'like', '%'.$num_contrato.'%')
             ->Where('tipo_proceso', 'like', '%'.$tipo_proceso.'%')
             ->Where('dependencia', 'like', $dependencia.'%')
@@ -32,7 +32,6 @@ class ProcesoContractualController extends Controller
             ->orderBy('year_cdp', 'desc')
             ->orderBy('numero_cdp', 'desc')
             ->get();
-            //->paginate(50);
 
         $tipos_procesos= TipoProceso::where('activo',1)->get();
         return view($this->path.'.index', compact('procesos_contractuales', 'tipos_procesos'));

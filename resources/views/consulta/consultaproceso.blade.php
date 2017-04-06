@@ -4,12 +4,19 @@
         <div class="panel panel-success">
             <div class="panel-heading text-center"><h3>Consulta Procesos de Contratación</h3></div>
             <div class="panel-body">
-
+                @if( (Auth::user()->hasRol('Administrador'))||
+                        (Auth::user()->hasRol('Coordinador'))||
+                            (Auth::user()->hasRol('Secretario técnico de dependencia')) )
+                    <div align="left">
+                        <h4><a class="btn btn-primary" href="{{route('procesocontractual.create')}}">Crear nuevo proceso de contratación</a></h4>
+                    </div><br>
+                @endif
+                <!-- Seccion para la busqueda-->
                 <div class="panel-group" id="accordion">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <a data-toggle="collapse"  data-parent="#accordion" href="#collapseconsulta">
-                                <h4><label class="text-info">Filtrar búsqueda
+                                <h4><label class="text-info">Filtrar búsqueda de procesos
                                     <span class="glyphicon glyphicon-search"></span>
                                 </label></h4>
                             </a>
@@ -67,6 +74,7 @@
                         </div>
                     </div>
                 </div>
+                <!-- Tabla de Indice de Procesos creados-->
                 <div name="ResultadosDeBusqueda">
                     <div class=" well table-responsive">
                         @if($procesos_contractuales->count())
@@ -83,26 +91,8 @@
                                     <th class="text-center"></th>
                                 </tr>
                                 </thead>
-                                <tbody style="font-size : 11px;">
-                                @foreach($procesos_contractuales as $proceso_contractual)
-                                    <tr>
-                                        <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->numero_cdp }}</td>
-                                        <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->year_cdp }}</td>
-                                        <td style="font-size : 11px;" class="text-justify" width="35%">{{ $proceso_contractual->objeto }}</td>
-                                        @if(($proceso_contractual->numero_contrato=='0')||($proceso_contractual->numero_contrato==''))
-                                            <td style="font-size : 11px;" class="text-center">Sin asignar.</td>
-                                        @else
-                                            <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->numero_contrato }}</td>
-                                        @endif
-                                        <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->dependencia }}</td>
-                                        <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->tipo_proceso }}</td>
-                                        <td style="font-size : 11px;" class="text-center">{{ $proceso_contractual->estado }}</td>
-                                        <td class="text-center">
-                                            <a href="{{ route('consulta.consultavermas', $proceso_contractual->id) }}" class="btn btn-info btn-xs">Ver más</a><br>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                                @endforeach
+                                <!-- Tabla de Indice de Procesos a diligenciar-->
+                                @include('procesocontractual.index', compact($procesos_contractuales, $tipos_procesos))
                             </table>
                         @else
                             <h4 class="well" align="center">No existen procesos por consultar.</h4>
