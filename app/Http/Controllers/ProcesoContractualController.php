@@ -506,4 +506,8 @@ class ProcesoContractualController extends Controller
         return;
     }
 
+    static function procesos_contractuales(){
+        return ProcesoContractual::all();
+    }
+
 }

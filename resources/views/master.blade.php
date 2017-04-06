@@ -48,8 +48,30 @@
         <div align="center">
             <a href="{{ url('home') }}" type="button" class="btn btn-success">
                 <span class="glyphicon glyphicon-home"></span> Inicio</a>
+            @php
+                $cont_tareas=0;
+                $procesos_contractuales=\App\Http\Controllers\ProcesoContractualController::procesos_contractuales();
+                foreach ($procesos_contractuales as $proceso_contractual){
+                    $etapa_usuario=\App\Http\Controllers\ProcesoContractualController::etapa_usuario($proceso_contractual->estado, $proceso_contractual->tipo_procesos_id);
+                    if(($etapa_usuario==true) && ($proceso_contractual->estado!='Finalizado')){
+                        $cont_tareas++;
+                    }
+                }
+            @endphp
             <a href="{{ url('consultaproceso') }}" type="button" class="btn btn-success">
-                <span class="glyphicon glyphicon-search"></span> Procesos Contractuales</a>
+                <span class="glyphicon glyphicon-search"></span> Procesos Contractuales
+                @if ( (\Auth::user()->hasRol('Coordinador'))                          ||
+                   (\Auth::user()->hasRol('Secretario técnico de dependencia'))    ||
+                   (\Auth::user()->hasRol('Secretario'))                           ||
+                   (\Auth::user()->hasRol('Abogado'))                              ||
+                   (\Auth::user()->hasRol('Gestor de contratación'))               ||
+                   (\Auth::user()->hasRol('Gestor de notificación'))               ||
+                   (\Auth::user()->hasRol('Gestor de afiliación'))                 ||
+                   (\Auth::user()->hasRol('Gestor de publicación'))                ||
+                   (\Auth::user()->hasRol('Gestor de archivo'))                    )
+                    <span class="badge">{{$cont_tareas}} pendientes</span>
+                @endif
+            </a>
             @if(Auth::user()->hasRol('Administrador'))
                 <div class="btn-group">
                     <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
@@ -85,7 +107,6 @@
                 @yield("editprocesstype")
                 @yield("createetapa")
                 @yield("editetapa")
-                @yield("indexcontractualprocess")
                 @yield("createcontractualprocess")
                 @yield("editcontractualprocess")
                 @yield("checkprocess")
