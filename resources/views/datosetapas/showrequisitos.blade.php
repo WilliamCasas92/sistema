@@ -60,7 +60,7 @@
                                     <h5><label class="control-label" for="Input">{{$requisito->nombre}} {{$obligatorio}}:</label></h5>
                                 </td>
                                     <div class="checkbox">
-                                        <td><label><input {{$checkbox_activado}} id="checked{{$requisito->id}}" type="checkbox" {{ $valor==1 ? 'checked':''}} value="1" name="atributo[]" {{$required}}></label></td>
+                                        <td><label><input {{$checkbox_activado}} id="checked{{$requisito->id}}" type="checkbox" {{ $valor==1 ? 'checked':''}} value="1" name="atributo[]" {{$required}} onblur="alert('hola juan')"></label></td>
                                         <script>
                                             document.getElementById('checked{{$requisito->id}}').onchange = function() {
                                                 document.getElementById('unchecked{{$requisito->id}}').disabled = this.checked;
@@ -84,7 +84,7 @@
                             <tr><div class="form-group">
                                     <td class="text-right">
                                         <h5><label class="control-label " for="Input">{{$requisito->nombre}} {{$obligatorio}}:</label></h5></td>
-                                        <td><textarea {{$requisito_activado}} rows="5" name="atributo[]" class="form-control" autocomplete="off" {{$required}}>{{$valor}}</textarea></td>
+                                        <td><textarea {{$requisito_activado}} rows="5" name="atributo[]" class="form-control" autocomplete="off" {{$required}} onblur="alert('carlos')">{{$valor}}</textarea></td>
                                 </div>
                             </tr>
                                 <input type="hidden" name="requisito_id[]" value="{{$requisito->id}}">
@@ -134,7 +134,14 @@
                             <tr><div class="form-group">
                                     <td class="text-right">
                                         <h5><label class="control-label " for="Input">{{$requisito->nombre}} {{$obligatorio}}:</label></h5></td>
-                                        <td><input {{$requisito_activado}} type="{{$tipo_req}}" name="atributo[]" class="form-control" value="{{$valor}}" autocomplete="off" {{$required}}></td>
+                                        @php
+                                            $maxdate=date("Y-m-d");
+                                            $mensajedate='max='.$maxdate.'';
+                                            if($tipo_req!="date"){
+                                                $mensajedate='';
+                                            }
+                                        @endphp
+                                        <td><input {{$requisito_activado}} type="{{$tipo_req}}" name="atributo[]" {{$mensajedate}} class="form-control" value="{{$valor}}" autocomplete="off" {{$required}} onblur="alert('osorio')"></td>
                                 </div></tr>
                                 <input type="hidden" name="requisito_id[]" value="{{$requisito->id}}">
                             @else
@@ -165,6 +172,11 @@
                 </form>
                 <script>
                     $(document).ready(function() {
+
+                        function enviar_formulario(){
+                            alert('juan carlos');
+                        }
+
                         // Interceptamos el evento submit del formulario agregar Etapa, Al fomulario eliminar Etapa
                         $('#FormEtapa{{$etapa->id}}').submit(function () {
                             // Enviamos el formulario usando AJAX
