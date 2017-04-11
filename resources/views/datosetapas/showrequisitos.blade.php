@@ -54,13 +54,13 @@
                                     $disabled='';
                                 }
                             @endphp
-                            <input id="unchecked{{$requisito->id}}" type="hidden" name="atributo[]" value="0" {{$disabled}}>
+                            <input id="unchecked{{$requisito->id}}" type="hidden" name="atributo[]" value="0" {{$disabled}} >
                             <tr><div class="form-group">
                                 <td class="text-right">
                                     <h5><label class="control-label" for="Input">{{$requisito->nombre}} {{$obligatorio}}:</label></h5>
                                 </td>
                                     <div class="checkbox">
-                                        <td><label><input {{$checkbox_activado}} id="checked{{$requisito->id}}" type="checkbox" {{ $valor==1 ? 'checked':''}} value="1" name="atributo[]" {{$required}} onchange="enviar()"></label></td>
+                                        <td><label><input {{$checkbox_activado}} id="checked{{$requisito->id}}" type="checkbox" {{ $valor==1 ? 'checked':''}} value="1" name="atributo[]" {{$required}} onchange="enviar()" ></label></td>
                                         <script>
                                             document.getElementById('checked{{$requisito->id}}').onchange = function() {
                                                 document.getElementById('unchecked{{$requisito->id}}').disabled = this.checked;
@@ -183,6 +183,8 @@
                     $(document).ready( function() {
                         // Interceptamos el evento submit del formulario agregar Etapa, Al fomulario eliminar Etapa
                          $('#FormEtapa{{$etapa->id}}').submit(function () {
+                             $('#btnGuardar{{$etapa->id}}').attr("disabled", true);
+                             $('#btnGuardar{{$etapa->id}}').html('Guardando...');
                             // Enviamos el formulario usando AJAX
                            $.ajax({
                                     type: 'POST',
@@ -190,7 +192,8 @@
                                     data: $(this).serialize(),
                                 // Mostramos un mensaje con la respuesta de PHP
                                 success: function (data) {
-
+                                    $('#btnGuardar{{$etapa->id}}').attr("disabled", false);
+                                    $('#btnGuardar{{$etapa->id}}').html('Guardar');
                                 }
                             });
                             return false;
