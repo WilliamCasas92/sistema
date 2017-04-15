@@ -127,6 +127,28 @@
                     </div>
                 </div>
             </div>
+            <!-- Observaciones que contiene el contracto-->
+            <div class="margincollapse">
+                <div class="panel-group panel-default" >
+                    <div class="panel-heading">
+                        <a data-toggle="collapse"  href="#collapseprocesoobservaciones">
+                            <h4 class="panel-title">
+                                <label class="text-success">Observaciones del contracto</label>
+                            </h4>
+                        </a>
+                    </div>
+                    <div class="panel-group" id="accordion">
+                        <div class="panel panel-default">
+                            <div id="collapseprocesoobservaciones" class="panel-collapse collapse">
+
+                                    @include('datosetapas.showobservaciones', compact($observaciones, $proceso_contractual))
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
            <!-- ACA ES DONDE SALEN LAS ETAPAS-->
             <div class="margincollapse">
                 <div class="panel-group" id="accordion">
@@ -264,6 +286,39 @@
                 $('#modalFinal').on("show.bs.modal", function (e) {
                     $("#modalFinalNombre").html($(e.relatedTarget).data('nombre'));
                     $("#modalFinalForm").attr('action', $(e.relatedTarget).data('url'));
+                });
+            });
+            //Toma los datos del formulario agregar, editar y  eliminar observación
+            $('#modalFinalForm').submit(function () {
+                $('#cargandoFinalizar').html('<div><img class="center-block" src="/images/loading.gif" width="100" height="100"/></div>');
+                // Enviamos el formulario usando AJAX
+                $.ajax({
+                    type: 'GET',
+                    url: $(this).attr('action'),
+                    data: $(this).serialize(),
+                    // Mostramos un mensaje con la respuesta de PHP
+                    success: function (data) {
+                        $('#modalFinal').modal('hide');
+                        $('#modalMensaje').modal('show');
+                        $('#datos_faltantes').fadeIn(1000).html(data);
+
+                    }
+                });
+                return false;
+            });
+            //Envia los datos al formulario crear observación
+            $(function() {
+                $('#modaladdObservacion').on("show.bs.modal", function (e) {
+                    $("#modaladdObservacionIdproceso").val($(e.relatedTarget).data('idproceso'));
+                });
+            });
+            //Envia los datos al formulario Editar observación
+            $(function() {
+                $('#modaleditObservacion').on("show.bs.modal", function (e) {
+                    $("#modaleditObservacionIdproceso").val($(e.relatedTarget).data('idproceso'));
+                    $("#modaleditObservacionTexto").val($(e.relatedTarget).data('observacion'));
+                    $("#modaleditObservacionForm").attr('action', $(e.relatedTarget).data('url'));
+
                 });
             });
         });

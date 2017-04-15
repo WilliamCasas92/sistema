@@ -60,7 +60,7 @@
                                     <h5><label class="control-label" for="Input">{{$requisito->nombre}} {{$obligatorio}}:</label></h5>
                                 </td>
                                     <div class="checkbox">
-                                        <td><label><input {{$checkbox_activado}} id="checked{{$requisito->id}}" type="checkbox" {{ $valor==1 ? 'checked':''}} value="1" name="atributo[]" {{$required}} onchange="enviar()" ></label></td>
+                                        <td><label><input {{$checkbox_activado}} id="checked{{$requisito->id}}" type="checkbox" {{ $valor==1 ? 'checked':''}} value="1" name="atributo[]" {{$required}} onblur="enviar()" ></label></td>
                                         <script>
                                             document.getElementById('checked{{$requisito->id}}').onchange = function() {
                                                 document.getElementById('unchecked{{$requisito->id}}').disabled = this.checked;

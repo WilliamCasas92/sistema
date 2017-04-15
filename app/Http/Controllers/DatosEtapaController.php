@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Observacion;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\ProcesoContractual;
@@ -33,8 +34,9 @@ class DatosEtapaController extends Controller
         $proceso_contractual=DB::table('proceso_contractuals')->where('id', $proceso_contractual_id)->first();
         $etapas=Etapa::where('tipo_procesos_id', $proceso_contractual->tipo_procesos_id)->orderBy('indice', 'asc')->get();
         $requisitos=Requisito::all();
+        $observaciones = Observacion::where('proceso_contractual_id',$proceso_contractual_id)->orderBy('created_at','desc')->get();
         //$datos_etapas_proceso=DatoEtapa::where('proceso_contractual_id', $proceso_contractual->id)->get();
-        return view($this->path.'.menu', compact('proceso_contractual', 'etapas', 'requisitos'));
+        return view($this->path.'.menu', compact('proceso_contractual', 'etapas', 'requisitos', 'observaciones'));
     }
 
     public function create()

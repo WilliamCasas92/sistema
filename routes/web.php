@@ -52,6 +52,8 @@ Route::group(['middleware' => 'onlyDiligenciar'], function() {
     Route::post('datosetapas/documento/{idproceso}/{idrequisito}', ['as'=>'datosetapas.eliminarDocumento','uses'=> 'DatosEtapaController@eliminar_documento']);
     //Rutas de Documentos
     Route::get('datosetapas/correo/correo', ['as'=>'datosetapas.correo','uses'=> 'DatosEtapaController@correo']);
+    //Rutas de observaciones
+    Route::resource('observacion', 'ObservacionesController');
 });
 
 Route::group(['middleware' => 'allUsers'], function() {

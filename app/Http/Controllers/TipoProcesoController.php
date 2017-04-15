@@ -88,6 +88,10 @@ class TipoProcesoController extends Controller
             if($procesocontractual){
                 return redirect()->route('tipoproceso.index')->with('error','El Tipo de proceso: '.$tipoproceso->nombre.', versión '.$tipoproceso->version.' no se puede eliminar porque tiene etapas asociadas.');
             }
+            $etapas = DB::table('etapas')->where('tipo_procesos_id', $id)->count();
+            if($etapas){
+                return redirect()->route('tipoproceso.index')->with('error','El Tipo de proceso: '.$tipoproceso->nombre.', versión '.$tipoproceso->version.' no se puede eliminar porque tiene etapas asociadas.');
+            }
             $tipoproceso_nombre= $tipoproceso->nombre;
             $tipoproceso_version= $tipoproceso->version;
             $tipoproceso->delete();
