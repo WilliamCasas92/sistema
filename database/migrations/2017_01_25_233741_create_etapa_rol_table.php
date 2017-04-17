@@ -12,10 +12,10 @@ class CreateEtapaRolTable extends Migration
         Schema::create('etapa_rol', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->integer('etapa_id'); //->unsigned();
-            //$table->foreign('etapa_id')->references('id')->on('etapas');
-            $table->integer('rol_id'); //->unsigned();
-            //$table->foreign('rol_id')->references('id')->on('rols');
+            $table->integer('etapa_id')->unsigned();
+            $table->foreign('etapa_id')->references('id')->on('etapas');
+            $table->integer('rol_id')->unsigned();
+            $table->foreign('rol_id')->references('id')->on('rols');
         });
     }
 

@@ -17,6 +17,8 @@ class CreateHistoricoDatoEtapasTable extends Migration
             $table->increments('id');
             $table->longText('valor');
             $table->integer('proceso_contractual_id');
+            $table->integer('dato_etapa_id')->unsigned();
+            $table->foreign('dato_etapa_id')->references('id')->on('dato_etapas');
             $table->integer('requisitos_id');
             $table->integer('user_id');
             $table->timestamps();
