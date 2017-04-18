@@ -19,6 +19,10 @@
                             <button type="button" class="btn btn-info btn-xs center-block" data-toggle="modal" data-target="#modaleditObservacion"
                             data-idproceso="{{$proceso_contractual->id}}" data-observacion="{{$observacion->observacion}}" data-url="{{ route('observacion.update',array($observacion->id))}}">Editar</button>
                         </td>
+                        <td>
+                            <button type="button" class="btn btn-danger btn-xs center-block" data-toggle="modal" data-target="#modaldeleteObservacion"
+                                    data-idproceso="{{$proceso_contractual->id}}" data-observacion="{{$observacion->observacion}}" data-url="{{ route('observacion.destroy',array($observacion->id))}}">Eliminar</button>
+                        </td>
                     </tr>
                 @endforeach
             @else
@@ -31,5 +35,6 @@
         data-idproceso="{{$proceso_contractual->id}}">Añadir Observación</button>
         @include('datosetapas.modaladdobservaciones')
         @include('datosetapas.modaleditobservaciones')
+        @include('datosetapas.modaldeleteobservaciones')
     </div>
 </div>

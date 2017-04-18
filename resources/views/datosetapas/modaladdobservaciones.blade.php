@@ -8,7 +8,7 @@
                 <h4 class="modal-title" id="modalDeleteTitulo">Agregar Observación</h4>
             </div>
             <div class="modal-body">
-                <form action="{{ url('observacion') }}" method="POST">
+                <form id="modaladdObservacionForm" action="{{ url('observacion') }}" method="POST">
                     {{ csrf_field() }}
                     <label for="comment">   Obserservación:</label>
                     <input type="hidden" id="modaladdObservacionIdproceso" name="proceso_contractual_id" />

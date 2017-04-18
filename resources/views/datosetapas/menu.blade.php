@@ -288,24 +288,22 @@
                     $("#modalFinalForm").attr('action', $(e.relatedTarget).data('url'));
                 });
             });
-            //Toma los datos del formulario agregar, editar y  eliminar observación
-            $('#modalFinalForm').submit(function () {
-                $('#cargandoFinalizar').html('<div><img class="center-block" src="/images/loading.gif" width="100" height="100"/></div>');
+            //Toma los datos del formulario agregar y  eliminar observación y los envia por ajax
+            $('#modaladdObservacionForm, #modaldeleteObservacionForm, #modaleditObservacionForm').submit(function () {
                 // Enviamos el formulario usando AJAX
                 $.ajax({
-                    type: 'GET',
+                    type: 'POST',
                     url: $(this).attr('action'),
                     data: $(this).serialize(),
                     // Mostramos un mensaje con la respuesta de PHP
                     success: function (data) {
-                        $('#modalFinal').modal('hide');
-                        $('#modalMensaje').modal('show');
-                        $('#datos_faltantes').fadeIn(1000).html(data);
-
+                        $('#modaladdObservacion, #modaldeleteObservacion, #modaleditObservacion').modal('hide');
+                        $('#modaladdObservacionForm')[0].reset();
                     }
                 });
                 return false;
             });
+
             //Envia los datos al formulario crear observación
             $(function() {
                 $('#modaladdObservacion').on("show.bs.modal", function (e) {
@@ -318,6 +316,14 @@
                     $("#modaleditObservacionIdproceso").val($(e.relatedTarget).data('idproceso'));
                     $("#modaleditObservacionTexto").val($(e.relatedTarget).data('observacion'));
                     $("#modaleditObservacionForm").attr('action', $(e.relatedTarget).data('url'));
+
+                });
+            });
+            //Envia los datos al  formulario eliminar observación
+            $(function() {
+                $('#modaldeleteObservacion').on("show.bs.modal", function (e) {
+                    $("#modaldeleteObservacionTexto").val($(e.relatedTarget).data('observacion'));
+                    $("#modaldeleteObservacionForm").attr('action', $(e.relatedTarget).data('url'));
 
                 });
             });

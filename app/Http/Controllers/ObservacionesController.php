@@ -99,7 +99,13 @@ class ObservacionesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+            $observacion = Observacion::find($id);;
+            $observacion->delete();
+            return redirect()->back();
+        } catch(Exception $e){
+            return "Fatal error -".$e->getMessage();
+        }
     }
 
     static function busqueda_usuario($id)
