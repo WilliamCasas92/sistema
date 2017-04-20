@@ -1,5 +1,5 @@
-<div class="panel-body" id="showObservaciones">
-    <div class="table-responsive">
+
+    <div class="table-responsive" id="showObservaciones">
         <table class="table table-condensed table-headborderless">
             @if($observaciones->count())
                 <tr>
@@ -31,10 +31,4 @@
                 </tr>
             @endif
         </table>
-        <button type="button" class="btn btn-success btn-xs center-block" data-toggle="modal" data-target="#modaladdObservacion"
-        data-idproceso="{{$proceso_contractual->id}}">Añadir Observación</button>
-        @include('datosetapas.modaladdobservaciones')
-        @include('datosetapas.modaleditobservaciones')
-        @include('datosetapas.modaldeleteobservaciones')
     </div>
-</div>

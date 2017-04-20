@@ -15,8 +15,8 @@
                     <input type="hidden" value="{{Auth::user()->id}}" name="user_id" />
                     <textarea rows="5" name="observacion" class="form-control" required></textarea><br/>
                     <div align="center">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                        <input type="submit" class="btn btn-success" value="Enviar">
+                        <button type="button" class="btn" data-dismiss="modal">Cerrar</button>
+                        <input type="submit" class="btn btn-success" value="Guardar">
                     </div>
                 </form>
             </div>

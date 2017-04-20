@@ -8,12 +8,13 @@
                 <h4 class="modal-title" >Eliminar Observación</h4>
             </div>
             <div class="modal-body">
-                <label for="comment">   Obserservación:</label>
-                <textarea  rows="5" id="modaldeleteObservacionTexto" class="form-control" required></textarea><br/>
+                <label>Seguro que desea eliminar la obserservación:</label></br>
+                <modal   id="modaldeleteObservacionTexto"></modal>
                 <form   id="modaldeleteObservacionForm" method="POST">
                     <input name="_method" type="hidden" value="DELETE">
                     {{ csrf_field() }}
                     <div align="center">
+                        </br>
                         <button type="button" class="btn " data-dismiss="modal">Cerrar</button>
                         <input type="submit" class="btn btn-danger" value="Eliminar">
                     </div>

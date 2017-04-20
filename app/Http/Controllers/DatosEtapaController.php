@@ -67,6 +67,7 @@ class DatosEtapaController extends Controller
                             $historial_dato_etapa = new HistoricoDatoEtapa();
                             $historial_dato_etapa->proceso_contractual_id = $request->proceso_contractual_id;
                             $historial_dato_etapa->valor = $atributo_;
+                            $historial_dato_etapa->dato_etapa_id = $dato_etapa_id;
                             $historial_dato_etapa->user_id = \Auth::user()->id;
                             $historial_dato_etapa->requisitos_id = $request->requisito_id[$cont];
                             $historial_dato_etapa->save();
@@ -87,8 +88,10 @@ class DatosEtapaController extends Controller
                     if($dato_etapa->valor) {
                         $historial_dato_etapa = new HistoricoDatoEtapa();
                         $historial_dato_etapa->proceso_contractual_id = $request->proceso_contractual_id;
+                        $ultimo_dato_etapa= DatoEtapa::all()->last();
+                        $historial_dato_etapa->dato_etapa_id = $ultimo_dato_etapa->id;
                         $historial_dato_etapa->valor = $atributo_;
-                        $historial_dato_etapa->user_id = \Auth::user()->id;;
+                        $historial_dato_etapa->user_id = \Auth::user()->id;
                         $historial_dato_etapa->requisitos_id = $request->requisito_id[$cont];
                         $historial_dato_etapa->save();
 
@@ -96,7 +99,7 @@ class DatosEtapaController extends Controller
                     $cont++;
                 }
             }
-            return view('datosetapas/modalsave');
+            return " ";
         } catch(Exception $e){
             return "Fatal error -".$e->getMessage();
         }
@@ -257,6 +260,7 @@ class DatosEtapaController extends Controller
                     //Guardando en el historial
                     $historial_dato_etapa = new HistoricoDatoEtapa();
                     $historial_dato_etapa->proceso_contractual_id = $request->proceso_contractual_id;
+                    $historial_dato_etapa->dato_etapa_id = $dato_etapa_id;
                     $historial_dato_etapa->valor = $fileName;
                     $historial_dato_etapa->user_id = \Auth::user()->id;
                     $historial_dato_etapa->requisitos_id = $request->requisito_id;
@@ -282,6 +286,8 @@ class DatosEtapaController extends Controller
                             $historial_dato_etapa = new HistoricoDatoEtapa();
                             $historial_dato_etapa->proceso_contractual_id = $request->proceso_contractual_id;
                             $historial_dato_etapa->valor = $fileName;
+                            $ultimo_dato_etapa= DatoEtapa::all()->last();
+                            $historial_dato_etapa->dato_etapa_id = $ultimo_dato_etapa->id;
                             $historial_dato_etapa->user_id = \Auth::user()->id;;
                             $historial_dato_etapa->requisitos_id = $request->requisito_id;
                             $historial_dato_etapa->save();
@@ -323,7 +329,8 @@ class DatosEtapaController extends Controller
         //Guardando en el historial
         $historial_dato_etapa = new HistoricoDatoEtapa();
         $historial_dato_etapa->proceso_contractual_id = $idproceso;
-        $historial_dato_etapa->valor = "";
+        $historial_dato_etapa->dato_etapa_id = $dato_etapa_id;
+        $historial_dato_etapa->valor = "Elimino";
         $historial_dato_etapa->user_id = \Auth::user()->id;
         $historial_dato_etapa->requisitos_id = $idrequisito;
         $historial_dato_etapa->save();

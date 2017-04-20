@@ -140,9 +140,14 @@
                     <div class="panel-group" id="accordion">
                         <div class="panel panel-default">
                             <div id="collapseprocesoobservaciones" class="panel-collapse collapse">
-
+                                <div class="panel-body" >
                                     @include('datosetapas.showobservaciones', compact($observaciones, $proceso_contractual))
-
+                                    <button type="button" class="btn btn-success btn-xs center-block" data-toggle="modal" data-target="#modaladdObservacion"
+                                            data-idproceso="{{$proceso_contractual->id}}">Añadir Observación</button>
+                                    @include('datosetapas.modaladdobservaciones')
+                                    @include('datosetapas.modaleditobservaciones')
+                                    @include('datosetapas.modaldeleteobservaciones')
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -327,7 +332,7 @@
             //Envia los datos al  formulario eliminar observación
             $(function() {
                 $('#modaldeleteObservacion').on("show.bs.modal", function (e) {
-                    $("#modaldeleteObservacionTexto").val($(e.relatedTarget).data('observacion'));
+                    $("#modaldeleteObservacionTexto").html($(e.relatedTarget).data('observacion'));
                     $("#modaldeleteObservacionForm").attr('action', $(e.relatedTarget).data('url'));
 
                 });
