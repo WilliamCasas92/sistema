@@ -1,4 +1,4 @@
-<div class="panel-body">
+<div class="panel-body" id="showObservaciones">
     <div class="table-responsive">
         <table class="table table-condensed table-headborderless">
             @if($observaciones->count())

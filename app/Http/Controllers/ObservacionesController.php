@@ -3,16 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Observacion;
+use App\ProcesoContractual;
 use App\User;
 use Illuminate\Http\Request;
 
 class ObservacionesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    private $path = 'datosetapas';
+
     public function index()
     {
         //
@@ -42,7 +40,9 @@ class ObservacionesController extends Controller
             $observacion->user_id = $request->user_id;
             $observacion->observacion= $request->observacion;
             $observacion->save();
-            return redirect()->back();
+            $observaciones = Observacion::where('proceso_contractual_id',$request->proceso_contractual_id)->orderBy('created_at','desc')->get();
+            $proceso_contractual = ProcesoContractual::find($request->proceso_contractual_id);
+            return view($this->path.'.showobservaciones', compact('observaciones', 'proceso_contractual'));
         } catch(Exception $e){
             return "Fatal error -".$e->getMessage();
         }
@@ -85,7 +85,9 @@ class ObservacionesController extends Controller
             $observacion->user_id = $request->user_id;
             $observacion->observacion= $request->observacion;
             $observacion->save();
-            return redirect()->back();
+            $observaciones = Observacion::where('proceso_contractual_id',$request->proceso_contractual_id)->orderBy('created_at','desc')->get();
+            $proceso_contractual = ProcesoContractual::find($request->proceso_contractual_id);
+            return view($this->path.'.showobservaciones', compact('observaciones', 'proceso_contractual'));
         } catch(Exception $e){
             return "Fatal error -".$e->getMessage();
         }
@@ -100,9 +102,12 @@ class ObservacionesController extends Controller
     public function destroy($id)
     {
         try{
-            $observacion = Observacion::find($id);;
+            $observacion = Observacion::find($id);
+            $aux = $observacion;
             $observacion->delete();
-            return redirect()->back();
+            $observaciones = Observacion::where('proceso_contractual_id',$aux->proceso_contractual_id)->orderBy('created_at','desc')->get();
+            $proceso_contractual = ProcesoContractual::find($aux->proceso_contractual_id);
+            return view($this->path.'.showobservaciones', compact('observaciones', 'proceso_contractual'));
         } catch(Exception $e){
             return "Fatal error -".$e->getMessage();
         }

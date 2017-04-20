@@ -291,14 +291,19 @@
             //Toma los datos del formulario agregar y  eliminar observación y los envia por ajax
             $('#modaladdObservacionForm, #modaldeleteObservacionForm, #modaleditObservacionForm').submit(function () {
                 // Enviamos el formulario usando AJAX
+
                 $.ajax({
                     type: 'POST',
                     url: $(this).attr('action'),
                     data: $(this).serialize(),
                     // Mostramos un mensaje con la respuesta de PHP
-                    success: function (data) {
-                        $('#modaladdObservacion, #modaldeleteObservacion, #modaleditObservacion').modal('hide');
+                    success: function (data){
+
+                        $('#modaladdObservacion').modal('hide');
+                        $('#modaldeleteObservacion').modal('hide');
+                        $('#modaleditObservacion').modal('hide');
                         $('#modaladdObservacionForm')[0].reset();
+                        $('#showObservaciones').html(data);
                     }
                 });
                 return false;
