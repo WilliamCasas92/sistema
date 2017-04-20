@@ -212,7 +212,7 @@ class ProcesoContractualController extends Controller
         try{
             $proceso_contractual = ProcesoContractual::findOrFail($id);
             $proceso_contractual->delete();
-            return redirect()->route('procesocontractual.index');
+            return redirect()->route('consulta.mostrar');
         } catch(Exception $e){
             return "Fatal error -".$e->getMessage();
         }
