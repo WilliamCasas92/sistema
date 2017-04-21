@@ -104,3 +104,34 @@
         </div>
     </div>
 @endsection
+
+@section('scriptconsultacontent')
+    <script>
+        $(document).ready(function() {
+            //Con este Script se envian los datos al modal eliminar proceso_contractual
+            //El cual es llamado vista index.blade de la carpeta proceso contractual
+            $(function() {
+                $('#modalDelete').on("show.bs.modal", function (e) {
+                    $("#modalDeleteCdp").html($(e.relatedTarget).data('cdp'));
+                    $("#modalDeleteForm").attr('action', $(e.relatedTarget).data('url'));
+                });
+            });
+            //Con este Script se envian los datos al modal Reanudar proceso_contractual
+            //El cual es llamado en la vista index.blade de la carpeta proceso contractual
+            $(function() {
+                $('#modalReanudar').on("show.bs.modal", function (e) {
+                    $("#modalReanudarCdp").html($(e.relatedTarget).data('cdp'));
+                    $("#modalReanudarHref").attr('href', $(e.relatedTarget).data('href'));
+                });
+            });
+            //Con este Script se envian los datos al modal Desertar proceso_contractual
+            //El cual es llamado vista index.blade de la carpeta proceso contractual
+            $(function() {
+                $('#modalDesertar').on("show.bs.modal", function (e) {
+                    $("#modalDesertarCdp").html($(e.relatedTarget).data('cdp'));
+                    $("#modalDesertarHref").attr('href', $(e.relatedTarget).data('href'));
+                });
+            });
+        });
+    </script>
+@endsection

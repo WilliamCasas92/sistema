@@ -23,7 +23,7 @@
             </div>
             <div align="center" class="col-md-6">
                 <h1 style="color:white;">SIGECOP</h1>
-                <h3 style="color:white;">Sistema de gestión para procesos contractuales</h3>
+                <h3 style="color:white;">Sistema de Gestión para Procesos Contractuales del Poli</h3>
             </div>
             <div align="right">
                 <div class="col-md-3" style="color:white;">
@@ -128,6 +128,7 @@
     @yield('scriptComites')
     @yield('scriptIndicador')
     @yield('scriptDatosEtapas')
+    @yield('scriptconsultacontent')
 <br>
     <!-- Footer -->
     <footer class="footer text-center">
