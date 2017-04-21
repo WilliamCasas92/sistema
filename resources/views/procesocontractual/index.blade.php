@@ -79,6 +79,18 @@
                                             Desertar proceso</a></li>
                                     <li><a href="{{ route('procesocontractual.reanudar', $proceso_contractual->id) }}" class="btn-xs btn-block">
                                             Reiniciar proceso</a></li>
+                                    <li>
+                                        <a type="button" class="btn btn-xs btn-block" data-toggle="modal" data-target="#modalReanudar"
+                                           data-href="{{ route('procesocontractual.reanudar', $proceso_contractual->id) }}" data-cdp="{{$proceso_contractual->numero_cdp }}" >
+                                            Reiniciar proceso
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a type="button" class="btn btn-xs btn-block" data-toggle="modal" data-target="#modalDesertar"
+                                           data-href="{{ route('procesocontractual.desertar', $proceso_contractual->id) }}" data-cdp="{{$proceso_contractual->numero_cdp }}" >
+                                            Desertar Proceso
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                         @else
@@ -93,10 +105,12 @@
                             <li><a href="{{ route('procesocontractual.edit', $proceso_contractual->id) }}" class="btn-xs">Editar proceso</a></li>
                             <li class="divider"></li>
                             <!-- Eliminar -->
-                            <li><form action="{{ route('procesocontractual.destroy', $proceso_contractual->id) }}" method="post">
-                                    <input name="_method" type="hidden" value="DELETE">
-                                    <input name="_token" type="hidden"  value="{{ csrf_token() }}">
-                                    <button type="submit" class="btn-danger btn-block btn-xs">Eliminar proceso</button></form></li>
+                            <li>
+                                <button type="button" class="btn btn-danger btn-xs btn-block" data-toggle="modal" data-target="#modalDelete"
+                                        data-url="{{ route('procesocontractual.destroy', $proceso_contractual->id) }}"
+                                        data-cdp="{{$proceso_contractual->numero_cdp }}">Eliminar proceso</button>
+                            </li>
+
                         </ul>
                     </div>
                 @endif
@@ -175,6 +189,18 @@
                                         Desertar proceso</a></li>
                                 <li><a href="{{ route('procesocontractual.reanudar', $proceso_contractual->id) }}" class="btn-xs btn-block">
                                         Reiniciar proceso</a></li>
+                                <li>
+                                    <a type="button" class="btn btn-xs btn-block" data-toggle="modal" data-target="#modalReanudar"
+                                       data-href="{{ route('procesocontractual.reanudar', $proceso_contractual->id) }}" data-cdp="{{$proceso_contractual->numero_cdp }}" >
+                                        Reiniciar proceso
+                                    </a>
+                                </li>
+                                <li>
+                                    <a type="button" class="btn btn-xs btn-block" data-toggle="modal" data-target="#modalDesertar"
+                                       data-href="{{ route('procesocontractual.desertar', $proceso_contractual->id) }}" data-cdp="{{$proceso_contractual->numero_cdp }}" >
+                                        Desertar Proceso
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     @else
@@ -191,10 +217,11 @@
                             <li><a href="{{ route('procesocontractual.edit', $proceso_contractual->id) }}" class="btn-xs">Editar proceso</a></li>
                             <li class="divider"></li>
                             <!-- Eliminar -->
-                            <li><form action="{{ route('procesocontractual.destroy', $proceso_contractual->id) }}" method="post">
-                                    <input name="_method" type="hidden" value="DELETE">
-                                    <input name="_token" type="hidden"  value="{{ csrf_token() }}">
-                                    <button type="submit" class="btn-danger btn-block btn-xs">Eliminar proceso</button></form></li>
+                            <li>
+                                <button type="button" class="btn btn-danger btn-xs btn-block" data-toggle="modal" data-target="#modalDelete"
+                                        data-url="{{ route('procesocontractual.destroy', $proceso_contractual->id) }}"
+                                        data-cdp="{{$proceso_contractual->numero_cdp }}">Eliminar proceso</button>
+                            </li>
                         </ul>
                     </div>
                 @endif
@@ -220,4 +247,7 @@
         @endif
     </tbody>
     @endforeach
+    @include('procesocontractual.modaldeleteproceso')
+    @include('procesocontractual.modaldesertarproceso')
+    @include('procesocontractual.modalreanudarproceso')
 @endif

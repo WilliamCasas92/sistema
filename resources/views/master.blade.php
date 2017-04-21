@@ -128,6 +128,7 @@
     @yield('scriptComites')
     @yield('scriptIndicador')
     @yield('scriptDatosEtapas')
+    @yield('scriptconsultacontent')
 <br>
     <!-- Footer -->
     <footer class="footer text-center">
