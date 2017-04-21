@@ -15,7 +15,7 @@
                     <input type="hidden" name="idtipoproceso" class="form-control" value="{{ $id }}" required><br>
                     <form class="form-inline">
                         <div align="center">
-                            <button type="submit" class="btn btn-primary">Añadir Etapa</button>
+                            <button type="submit" class="btn btn-primary">Agregar Etapa</button>
                         </div>
                     </form>
                 </form>

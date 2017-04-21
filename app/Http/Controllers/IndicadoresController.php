@@ -135,7 +135,7 @@ class IndicadoresController extends Controller
         if ($contador_procesos_enviados_adquisiciones!=0){
             return round((($tiempo_promedio_envio)/($contador_procesos_enviados_adquisiciones)),1);
         }else{
-            return "No se logró calcular el tiempo promedio.";
+            return "Aún no es posible calcular el tiempo promedio.";
         }
     }
 
@@ -188,7 +188,7 @@ class IndicadoresController extends Controller
         if ($contador_procesos!=0){
             return round((($tiempo_promedio_adquisiciones)/($contador_procesos)),1);
         }else{
-            return "No se logró calcular el tiempo promedio.";
+            return "Aún no es posible calcular el tiempo promedio.";
         }
     }
 
@@ -249,7 +249,7 @@ class IndicadoresController extends Controller
         if ($contador_procesos!=0){
             return round((($tiempo_promedio)/($contador_procesos)),1);
         }else{
-            return "No se logró calcular el tiempo promedio.";
+            return "Aún no es posible calcular el tiempo promedio.";
         }
     }
 }
