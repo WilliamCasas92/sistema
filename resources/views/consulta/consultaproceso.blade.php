@@ -119,9 +119,9 @@
             //Con este Script se envian los datos al modal Reanudar proceso_contractual
             //El cual es llamado en la vista index.blade de la carpeta proceso contractual
             $(function() {
-                $('#modalReanudar').on("show.bs.modal", function (e) {
-                    $("#modalReanudarCdp").html($(e.relatedTarget).data('cdp'));
-                    $("#modalReanudarHref").attr('href', $(e.relatedTarget).data('href'));
+                $('#modalReiniciar').on("show.bs.modal", function (e) {
+                    $("#modalReiniciarCdp").html($(e.relatedTarget).data('cdp'));
+                    $("#modalReiniciarHref").attr('href', $(e.relatedTarget).data('href'));
                 });
             });
             //Con este Script se envian los datos al modal Desertar proceso_contractual
