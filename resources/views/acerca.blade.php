@@ -10,7 +10,8 @@
                     <br><br><label>
                     <p>SIGECOP fue desarrollado por los estudiantes:</p><br>
                     <p>William Casas Jaramillo</p>
-                    <p>Juan Carlos Osorio Vásquez</p></label>
+                    <p>Juan Carlos Osorio Vásquez</p>
+                    <p>Del programa académico Ingeniería Informática</p></label>
                 </div>
                 <br><br><br>
             </div>
