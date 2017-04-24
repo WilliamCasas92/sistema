@@ -6,6 +6,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
                 <h4 class="modal-title">Confirmar Reinicio de Proceso</h4>
+
             </div>
             <div class="modal-body">
                 <p>
