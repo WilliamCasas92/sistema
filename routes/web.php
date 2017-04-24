@@ -66,6 +66,8 @@ Route::group(['middleware' => 'allUsers'], function() {
     Route::get('home', function () {
         return view('home');
     });
+    //Ruta Acerca
+    Route::get('acerca', 'HomeController@about');
 });
 
 

@@ -4,7 +4,7 @@
             <div class="panel-heading">
                 <h4 class="panel-title row">
                     <div class="col-md-4">
-                        <a data-toggle="collapse" style="color: black" href="#collapse{{ $etapa->id }}">
+                        <a data-toggle="collapse" style="color: black" href="#collapse{{ $etapa->id }}" title="Click aquí para Abrir Etapa">
                             <label class="text-success">{{ $etapa->nombre }}</label>
                         </a>
                     </div>

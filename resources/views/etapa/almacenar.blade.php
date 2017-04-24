@@ -9,7 +9,13 @@
                     <div class="form-group">
                         <label class="control-label col-md-4" for="InputName">Nombre de la etapa:</label>
                         <div class="col-md-4">
-                            <input type="text" name="nombre" class="form-control" autocomplete="off" placeholder="Nombre de la Etapa" required>
+                            <input type="text" id="nombreetapa" name="nombre" class="form-control" autocomplete="off" placeholder="Nombre de la Etapa" onblur="Mayuscula()" required>
+                            <script>
+                                function Mayuscula() {
+                                    var x = document.getElementById("nombreetapa");
+                                    x.value = x.value.toUpperCase();
+                                }
+                            </script>
                         </div>
                     </div>
                     <input type="hidden" name="idtipoproceso" class="form-control" value="{{ $id }}" required><br>
