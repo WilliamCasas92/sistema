@@ -6,6 +6,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
                 <h4 class="modal-title">Confirmar Reinicio de Proceso</h4>
+
             </div>
             <div class="modal-body">
                 <p>
@@ -14,9 +15,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
-
                 <a class=" btn btn-danger" id="modalReiniciarHref">Reiniciar</a>
-
             </div>
         </div>
     </div>
