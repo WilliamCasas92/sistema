@@ -7,11 +7,11 @@
     @endif
     <div class="container col-md-12">
         <div class="panel panel-success">
-            <div class="panel-heading"><h3>Usuarios Registrados</h3></div>
+            <div class="panel-heading text-center"><h2>Usuarios Registrados</h2></div>
             <div class="panel-body">
-                <div align="left">
-                    <h4><a class="btn btn-primary" href="{{route('users.create')}}">Crear nuevo usuario</a></h4>
-                </div>
+                <div align="center">
+                    <h4><a class="btn btn-primary btn-sm" href="{{route('users.create')}}">Nuevo usuario</a></h4>
+                </div><br>
                 <div class="table-responsive">
                     @if($users)
                         <table class="table table-hover">

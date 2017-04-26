@@ -5,15 +5,17 @@
         <div class="panel panel-success">
             <div class="panel-heading text-center"><h2>Acerca</h2></div>
             <div class="panel-body">
-                <!-- Container (Services Section) -->
+                <!-- Container (About) -->
                 <div class="container-fluid text-center">
-                    <br><br><label>
-                    <p>SIGECOP fue desarrollado por los estudiantes:</p><br>
+                    <h4>SIGECOP fue desarrollado por</h4>
                     <p>William Casas Jaramillo</p>
-                    <p>Juan Carlos Osorio Vásquez</p>
-                    <p>Del programa académico Ingeniería Informática</p></label>
+                    <p>Juan Carlos Osorio Vásquez</p><br>
+                    <h4>Asesorado por</h4>
+                    <p>M. Sc. Roberto Antonio Manjarrés Betancur</p><br>
+                    <h4>Del Programa Académico</h4>
+                    <p>Ingeniería Informática - Politécnico Colombiano Jaime Isaza Cadavid</p>
+                    <p>2017</p>
                 </div>
-                <br><br><br>
             </div>
         </div>
     </div>

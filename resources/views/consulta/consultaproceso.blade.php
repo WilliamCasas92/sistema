@@ -2,7 +2,7 @@
 @section('consultacontent')
     <div class="container col-md-12">
         <div class="panel panel-success">
-            <div class="panel-heading text-center"><h3>Procesos de Contratación</h3></div>
+            <div class="panel-heading text-center"><h2>Procesos de Contratación</h2></div>
             <div class="panel-body">
                 <!-- Seccion para la busqueda-->
                 <div class="panel-group" id="accordion">
@@ -71,7 +71,7 @@
                         (Auth::user()->hasRol('Coordinador'))||
                             (Auth::user()->hasRol('Secretario técnico de dependencia')) )
                     <div align="center">
-                        <h4><a class="btn btn-primary btn-sm" href="{{route('procesocontractual.create')}}">Crear nuevo proceso de contratación</a></h4>
+                        <h4><a class="btn btn-primary btn-sm" href="{{route('procesocontractual.create')}}">Nuevo proceso de contratación</a></h4>
                     </div><br>
                 @endif
                 <!-- Tabla de Indice de Procesos creados-->
