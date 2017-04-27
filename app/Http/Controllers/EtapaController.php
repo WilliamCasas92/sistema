@@ -36,7 +36,7 @@ class EtapaController extends Controller
     {
         try{
             $etapa = new Etapa();
-            $etapa->nombre       = $request->nombre;
+            $etapa->nombre       = strtoupper($request->nombre);
             $etapa->tipo_procesos_id = $request->idtipoproceso;
             //En este se cuenta el numero de etapas que existen en proceso para añadir el indice a la etapa
             $indice = $this->contar_etapas($request->idtipoproceso);

@@ -15,7 +15,7 @@
                     <div class="form-group">
                         <label class="control-label col-md-4" for="InputName">Nombre del Tipo de Proceso:</label>
                         <div class="col-md-4">
-                            <input type="text" name="nombre" class="form-control" placeholder="Nombre del Tipo de Proceso:" value="{{ $tipoproceso->nombre }}" required>
+                            <input type="text"  id="nombreproceso" name="nombre" class="form-control" placeholder="Nombre del Tipo de Proceso:" value="{{ $tipoproceso->nombre }}" onblur="Mayuscula()" required>
                             <p style="font-size : 10px;">Nota: Tenga en cuenta que al actualizar el nombre del tipo de proceso,
                                 también actualizará el nombre de la modalidad de los procesos asociados a este tipo de contratación.</p>
                         </div>
@@ -44,4 +44,10 @@
         </div>
         <h4><a class="btn btn-default" href="{{route('tipoproceso.index')}}"><span class="glyphicon glyphicon-chevron-left"></span> Ir atrás</a></h4>
     </div>
+    <script>
+        function Mayuscula() {
+            var x = document.getElementById("nombreproceso");
+            x.value = x.value.toUpperCase();
+        }
+    </script>
 @endsection
