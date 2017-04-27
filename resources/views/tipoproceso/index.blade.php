@@ -2,11 +2,11 @@
 @section('indexprocesstype')
     <div class="container col-md-12">
         <div class="panel panel-success">
-            <div class="panel-heading"><h3>Tipos de Procesos Registrados</h3></div>
+            <div class="panel-heading text-center"><h2>Tipos de Procesos Registrados</h2></div>
             <div class="panel-body">
-                <div align="left">
-                    <h4><a class="btn btn-primary" href="{{route('tipoproceso.create')}}">Crear nuevo Tipo de Proceso de Contratación</a></h4>
-                </div>
+                <div align="center">
+                    <h4><a class="btn btn-primary btn-sm" href="{{route('tipoproceso.create')}}">Nuevo tipo de proceso de contratación</a></h4>
+                </div><br>
                 @if (session('error'))
                     <div class="alert alert-danger">
                         {{ session('error') }}

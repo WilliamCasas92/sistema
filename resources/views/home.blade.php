@@ -2,7 +2,7 @@
 @section('homecontent')
     <div class="container col-md-12">
         <div class="panel panel-success">
-            <div class="panel-heading text-center"><h1>Servicios de la plataforma</h1></div>
+            <div class="panel-heading text-center"><h2>Servicios de SIGECOP</h2></div>
             <div class="panel-body">
                 <!-- Container (Services Section) -->
                 <div class="container-fluid text-center">

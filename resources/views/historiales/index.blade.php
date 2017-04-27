@@ -2,9 +2,7 @@
 @section('indicators')
     <div class="container col-md-12">
         <div class="panel panel-success">
-            <div class="panel-heading">
-                <h3>Registro de Actividad</h3>
-            </div>
+            <div class="panel-heading text-center"><h2>Registro de Actividad</h2></div>
             <div class="panel-body">
                 <div class="well well-sm" style="background-color: white;">
                     <!-- Tabla datos contrato-->

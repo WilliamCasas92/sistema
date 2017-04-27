@@ -2,7 +2,7 @@
 @section('editetapa')
     <div class="container col-md-12">
         <div class="panel panel-success">
-            <div class="panel-heading"><h3>Gestión de Etapas: </h3></div>
+            <div class="panel-heading text-center"><h3>Gestión de Etapas: {{$tipo_proceso->nombre}}</h3></div>
             <div class="panel-body">
                 <form id="formEtapa" class="form-horizontal" method="post" action="/etapa">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">

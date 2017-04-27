@@ -15,16 +15,14 @@ class EtapaController extends Controller
     private $path = 'etapa';
     public function index()
     {
-        //$data = Etapa::all();
-        //return view($this->path.'.index', compact('data'));
     }
-    //este metodo es con el cual se muestran las etapas con los requisitos
+
     public function almacenar($id)
     {
         $etapas=Etapa::where('tipo_procesos_id', $id)->orderBy('indice', 'asc')->get();
         $requisitos=Requisito::all();
-        //return view($this->path.'.almacenar', compact('data', 'id', 'data1'));
-        return view($this->path.'.almacenar', compact('etapas', 'id', 'requisitos'));
+        $tipo_proceso=TipoProceso::findOrFail($id);
+        return view($this->path.'.almacenar', compact('etapas', 'id', 'requisitos', 'tipo_proceso'));
     }
 
     public function create()
@@ -84,9 +82,6 @@ class EtapaController extends Controller
     public function edit($id)
     {
         $etapa = Etapa::findOrFail($id);
-        //return view($this->path.'.index', compact('etapa'));
-       // $data=Etapa::where('tipo_procesos_id', $id)->get();
-        //$data1=Requisito::all();
         return view($this->path.'.modalrol', compact('etapa'));
     }
 
@@ -145,7 +140,6 @@ class EtapaController extends Controller
                 $indiceEtapa = ++$indiceEtapa;
             }
             return $this->mostrar($idProceso);
-            //return redirect()->back();
         } catch(Exception $e){
             return "Fatal error -".$e->getMessage();
         }
@@ -183,7 +177,6 @@ class EtapaController extends Controller
             $indice = $this->contar_etapas($etapa->tipo_procesos_id);
             $idProceso = $etapa->tipo_procesos_id;
             if($etapa->indice < $indice) {
-                //$auxEtapa= Etapa::where(['tipo_procesos_id',$etapa->idtipoproceso], ['indice', $etapa->indice + 1])->get();
                 $auxEtapa = Etapa::where('tipo_procesos_id', $etapa->tipo_procesos_id)->where('indice', $etapa->indice + 1)->first();
                 $auxIndice = $etapa->indice;
                 $etapa->indice = $auxEtapa->indice;
