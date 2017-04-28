@@ -13,7 +13,18 @@ class UserController extends Controller
 
     public function index()
     {
-        $users= User::all();
+        $nombre = \Request::get('nombre');
+        $apellidos = \Request::get('apellidos');
+        $correo = \Request::get('correo');
+        if($nombre != null || $apellidos !=null || $correo != null){
+            $users= User::Where('nombre', 'like', '%'.$nombre.'%')
+                    ->Where('apellidos', 'like', '%'.$apellidos.'%')
+                    ->Where('email', 'like', '%'.$correo.'%')
+                    ->orderBy('nombre', 'desc')
+                    ->get();
+        }else{
+            $users= User::all();
+        }
         return view($this->path.'.index', compact('users'));
     }
 

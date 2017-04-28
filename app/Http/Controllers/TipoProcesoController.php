@@ -26,7 +26,7 @@ class TipoProcesoController extends Controller
     {
         try{
             $tipoproceso = new TipoProceso();
-            $tipoproceso->nombre       = $request->nombre;
+            $tipoproceso->nombre       = strtoupper($request->nombre);
             $tipoproceso->version       = $request->version;
             if(TipoProceso::select()
                         ->where('nombre','=', $tipoproceso->nombre)
@@ -60,7 +60,7 @@ class TipoProcesoController extends Controller
     {
         $tipoproceso = TipoProceso::findOrFail($id);
         $viejo_nombre=$tipoproceso->nombre;
-        $tipoproceso->nombre       = $request->nombre;
+        $tipoproceso->nombre       = strtoupper($request->nombre);
         $tipoproceso->version       = $request->version;
         if($tipoprocesoAux=TipoProceso::select()
                 ->where('nombre','=', $tipoproceso->nombre)
