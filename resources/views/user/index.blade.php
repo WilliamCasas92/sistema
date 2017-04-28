@@ -10,53 +10,10 @@
             <div class="panel-heading text-center"><h2>Usuarios Registrados</h2></div>
             <div class="panel-body">
 
-                <!-- Seccion para la busqueda-->
-                <div class="panel-group" id="accordion">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <a data-toggle="collapse"  data-parent="#accordion" href="#collapseconsulta">
-                                <h4><label class="text-info">Filtrar búsqueda de usuarios <span class="glyphicon glyphicon-search"></span></label></h4>
-                            </a>
-                        </div>
-                        <div id="collapseconsulta" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                <div class="well" name="FiltrosUsuario">
-                                    <form class="form-horizontal" method="get" role="buscar" action="{{url('consultausuario')}}">
-                                        <div class="form-group">
-                                            <h6><label class="control-label col-md-2" for="nombre">Nombre: </label></h6>
-                                            <div class="col-md-3">
-                                                <input type="text" name="nombre" class="form-control" placeholder="Nombre del Usuario">
-                                            </div>
-                                            <h6><label class="control-label col-md-3" for="apellidos">Apellidos: </label></h6>
-                                            <div class="col-md-3">
-                                                <input type="text" name="apellidos" class="form-control" placeholder="Apellidos del Usuario">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <h6><label class="control-label col-md-5" for="correo">Correo: </label></h6>
-                                            <div class="col-md-3">
-                                                <input type="text" name="correo" class="form-control" autocomplete="off" placeholder="Correo Institucional del Usuario">
-                                            </div>
-                                        </div>
-
-                                        <form class="form-inline">
-                                            <div align="center">
-                                                <br><button type="submit" class="btn btn-primary btn-sm">Buscar</button>
-                                            </div>
-                                        </form>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
                 <div align="center">
                     <h4><a class="btn btn-primary btn-sm" href="{{route('users.create')}}">Nuevo usuario</a></h4>
                 </div><br>
                 <div class="table-responsive">
-                    @if($users!= null)
                         <table class="table table-hover">
                             <thead>
                             <tr>
@@ -67,25 +24,39 @@
                                 <th class="text-center"></th>
                             </tr>
                             </thead>
+                            <tr>
+                                <form class="form-horizontal" method="post" role="buscar" action="{{url('filtrarusuarios')}}">
+                                    {{csrf_field()}}
+                                    <td><input type="text" name="nombre" class="form-control" title="Añada nombre para filtrar"></td>
+                                    <td><input type="text" name="apellidos" class="form-control" title="Añada apellidos para filtrar"></td>
+                                    <td><input type="text" name="correo" class="form-control" autocomplete="off" title="Añada correo para filtrar"></td>
+                                    <td></td>
+                                    <td><button type="submit" class="btn btn-primary center-block btn-sm">Filtrar</button></td>
+
+                                </form>
+                            </tr>
                             <tbody>
-                            @foreach($users as $user)
-                                <tr>
-                                    <td class="text-center">{{ $user->nombre }}</td>
-                                    <td class="text-center">{{ $user->apellidos }}</td>
-                                    <td class="text-center">{{ $user->email }}</td>
-                                    <td class="text-center">{{ $user->created_at }}</td>
-                                    <td class="text-center">
-                                        <a href="{{ route('users.edit', $user->id) }}" class="btn btn-info btn-xs">Editar</a>
-                                        <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#modalDelete" data-nombre="{{$user->nombre }}  {{$user->apellidos }} "
-                                           data-url="{{ route('users.destroy', $user->id) }}">Eliminar</button>
-                                    </td>
-                                </tr>
+                            @if(count($users))
+                                @foreach($users as $user)
+                                    <tr>
+                                        <td class="text-center">{{ $user->nombre }}</td>
+                                        <td class="text-center">{{ $user->apellidos }}</td>
+                                        <td class="text-center">{{ $user->email }}</td>
+                                        <td class="text-center">{{ $user->created_at }}</td>
+                                        <td class="text-center">
+                                            <a href="{{ route('users.edit', $user->id) }}" class="btn btn-info btn-xs">Editar</a>
+                                            <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#modalDelete" data-nombre="{{$user->nombre }}  {{$user->apellidos }} "
+                                               data-url="{{ route('users.destroy', $user->id) }}">Eliminar</button>
+                                        </td>
+                                    </tr>
+
+                                @endforeach
                             </tbody>
-                            @endforeach
-                        </table>
-                    @else
-                        <h3>No existen ninguna coincidencias con la busquedad.</h3>
-                    @endif
+                            </table>
+                        @else
+                            </table>
+                            <h3 class="text-center">No existen coincidencias con la búsqueda</h3>
+                        @endif.
                 </div>
             </div>
         </div>
