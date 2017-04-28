@@ -6,7 +6,7 @@
         <link href="assets/css/bootstrap.css" rel="stylesheet">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="icon" type="image/gif/png" href="{{asset('images/logo-institucion.png')}}">
-        <title>Contratación Poli</title>
+        <title>SIGECOP</title>
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
     </head>
     <body>
