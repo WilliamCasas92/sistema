@@ -31,9 +31,13 @@ Route::group(['middleware' => 'onlyAdmin'], function() {
     Route::resource('requisito', 'RequisitoController');
     //Ruta Indicadores
     Route::resource('indicadores', 'IndicadoresController');
+});
+
+Route::group(['middleware' => 'onlyAdminCoordinador'], function() {
     //Ruta Historial
     Route::get('procesocontractual/historial/{proceso_id}', ['as'=>'historiales.mostrar','uses'=> 'HistorialController@mostrar']);
 });
+
 
 //Rutas DILIGENCIAR
 Route::group(['middleware' => 'onlyDiligenciar'], function() {

@@ -37,6 +37,10 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\CheckAdmin::class,
         ],
 
+        'onlyAdminCoordinador' => [
+            \App\Http\Middleware\CheckHistoriales::class,
+        ],
+
         'onlyDiligenciar' => [
             \App\Http\Middleware\CheckRolDiligenciar::class,
         ],
