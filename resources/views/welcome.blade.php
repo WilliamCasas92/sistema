@@ -24,7 +24,8 @@
         <div class="container">
             <p class="text-muted text-center">
                 Politécnico Colombiano Jaime Isaza Cadavid © {{date("Y")}}
-                Carrera 48 # 7-151 El Poblado, Medellín - PBX: 3197900</p>
+                Carrera 48 # 7-151 El Poblado, Medellín - PBX: 3197900
+            </p>
         </div>
     </footer>
     </body>
