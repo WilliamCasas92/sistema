@@ -4,8 +4,9 @@
             <div class="panel-heading">
                 <h4 class="panel-title row">
                     <div class="col-md-4">
-                        <a data-toggle="collapse" class="btn btn-default btn-sm center-block" href="#collapse{{ $etapa->id }}" title="Click aquí para desplegar la información">
-                            <label class="">{{ $etapa->nombre }}</label>
+                        <a data-toggle="collapse" class="btn btn-default btn-sm center-block" style="white-space: normal;"
+                           href="#collapse{{ $etapa->id }}" title="{{ $etapa->nombre }}">
+                            <label>{{ $etapa->nombre }}</label>
                         </a>
                     </div>
                     <div class="col-md-1">
