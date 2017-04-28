@@ -33,6 +33,7 @@ Route::group(['middleware' => 'onlyAdmin'], function() {
     Route::resource('indicadores', 'IndicadoresController');
 });
 
+//Rutas SOLO ADMIN Y COORDINADOR
 Route::group(['middleware' => 'onlyAdminCoordinador'], function() {
     //Ruta Historial
     Route::get('procesocontractual/historial/{proceso_id}', ['as'=>'historiales.mostrar','uses'=> 'HistorialController@mostrar']);
