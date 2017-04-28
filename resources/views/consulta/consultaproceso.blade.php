@@ -8,10 +8,9 @@
                 <div class="panel-group" id="accordion">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <a data-toggle="collapse"  data-parent="#accordion" href="#collapseconsulta">
-                                <h4><label class="text-info">Filtrar búsqueda de procesos
-                                    <span class="glyphicon glyphicon-search"></span>
-                                </label></h4>
+                            <a data-toggle="collapse"  data-parent="#accordion" href="#collapseconsulta" title="Clic aquí para realizar filtro"
+                               class="btn btn-primary btn-block btn-lg">
+                                <label>Buscar Procesos</label> <span class="glyphicon glyphicon-search"></span>
                             </a>
                         </div>
                         <div id="collapseconsulta" class="panel-collapse collapse">

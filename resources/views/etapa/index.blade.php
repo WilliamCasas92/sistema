@@ -4,8 +4,8 @@
             <div class="panel-heading">
                 <h4 class="panel-title row">
                     <div class="col-md-4">
-                        <a data-toggle="collapse" style="color: black" href="#collapse{{ $etapa->id }}" title="Click aquí para Abrir Etapa">
-                            <label class="text-success">{{ $etapa->nombre }}</label>
+                        <a data-toggle="collapse" class="btn btn-default btn-sm center-block" href="#collapse{{ $etapa->id }}" title="Click aquí para desplegar la información">
+                            <label class="">{{ $etapa->nombre }}</label>
                         </a>
                     </div>
                     <div class="col-md-1">
@@ -13,7 +13,7 @@
                             <form  id="FormSubir{{$etapa->id}}" method="post" action="/etapa/subir/{{$etapa->id}}">
                                 <input name="_method" type="hidden" value="PUT">
                                 <input name="_token" type="hidden"  value="{{ csrf_token() }}">
-                                <button type="submit" class="glyphicon glyphicon-triangle-top btn" title="Subir Etapa"></button>
+                                <button type="submit" class="glyphicon glyphicon-triangle-top btn btn-default" title="Subir Etapa"></button>
                             </form>
                         @endif
                     </div>
@@ -22,7 +22,7 @@
                         <form  id="FormBajar{{$etapa->id}}" method="post" action="/etapa/bajar/{{$etapa->id}}">
                             <input name="_method" type="hidden" value="PUT">
                             <input name="_token" type="hidden"  value="{{ csrf_token() }}">
-                            <button type="submit"  class="glyphicon glyphicon-triangle-bottom btn" title="Bajar Etapa"></button>
+                            <button type="submit"  class="glyphicon glyphicon-triangle-bottom btn btn-default" title="Bajar Etapa"></button>
                         </form>
                         @endif
                     </div>
@@ -85,7 +85,6 @@
                     </script>
                     <!-- Tabla de Indice de Requisitos-->
                     <!-- Se llama la vista con la tabla de Requisitos-->
-
                     @include('etapa.indexrequisitos', compact($requisitos, $etapa))
                 </div>
             </div>

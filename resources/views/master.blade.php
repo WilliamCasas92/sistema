@@ -12,7 +12,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <script src="/js/jquery-3.1.1.js" type="text/javascript"></script>
     <link rel="icon" type="image/gif/png" href="{{asset('images/logo-institucion.png')}}">
-    <title>Sistema Contratación</title>
+    <title>SIGECOP</title>
 </head>
 <header id="colorheader">
     <!-- Header Welcome -->
@@ -129,14 +129,12 @@
     @yield('scriptIndicador')
     @yield('scriptDatosEtapas')
     @yield('scriptconsultacontent')
-<br>
     <!-- Footer -->
-    <footer class="footer text-center">
-        <div class="panel-footer">
-            <p class="text-muted">
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted text-center">
                 Politécnico Colombiano Jaime Isaza Cadavid © {{date("Y")}}
-                Carrera 48 # 7-151 El Poblado, Medellín - PBX: 3197900
-            </p>
+                Carrera 48 # 7-151 El Poblado, Medellín - PBX: 3197900</p>
         </div>
     </footer>
 </body>

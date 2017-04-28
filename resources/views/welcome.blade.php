@@ -6,7 +6,8 @@
         <link href="assets/css/bootstrap.css" rel="stylesheet">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="icon" type="image/gif/png" href="{{asset('images/logo-institucion.png')}}">
-        <title>Contratación Poli</title>
+        @include('estilogeneral')
+        <title>SIGECOP</title>
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
     </head>
     <body>
@@ -19,14 +20,12 @@
             <button type="submit" class="btn btn-success">Conectarse</button>
         </div>
     </form>
-    </body>
-    <footer class="footer container-fluid text-center">
-        <br><br><br><br><br><br><br><br><br><br><br>
-        <div class="panel">
-            <p class="text-muted">
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted text-center">
                 Politécnico Colombiano Jaime Isaza Cadavid © {{date("Y")}}
-                Carrera 48 # 7-151 El Poblado, Medellín - PBX: 3197900
-            </p>
+                Carrera 48 # 7-151 El Poblado, Medellín - PBX: 3197900</p>
         </div>
     </footer>
+    </body>
 </html>

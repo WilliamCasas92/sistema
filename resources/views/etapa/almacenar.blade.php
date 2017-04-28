@@ -26,6 +26,7 @@
                     </form>
                 </form>
             </div>
+            <br>
             <!-- ACA ES DONDE SALEN LAS ETAPAS-->
             <div class="panel-group" id="accordion">
                 @include('etapa.index', compact($etapas, $requisitos))
