@@ -17,7 +17,7 @@ Route::get('social/callback/google', 'SocialController@getSocialAuthCallback');
 Route::group(['middleware' => 'onlyAdmin'], function() {
     //Rutas Usuarios
     Route::resource('users', 'UserController');
-    Route::get('consultausuario', ['as'=>'consulta.usuario','uses'=> 'UserController@index']);
+    Route::post('filtrarusuarios', ['as'=>'filtrar.usuario','uses'=> 'UserController@search']);
     //Rutas TipoProceso
     Route::resource('tipoproceso', 'TipoProcesoController');
     //Rutas Etapa

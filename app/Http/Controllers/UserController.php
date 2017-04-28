@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Rol;
 use Exception;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -13,18 +14,10 @@ class UserController extends Controller
 
     public function index()
     {
-        $nombre = \Request::get('nombre');
-        $apellidos = \Request::get('apellidos');
-        $correo = \Request::get('correo');
-        if($nombre != null || $apellidos !=null || $correo != null){
-            $users= User::Where('nombre', 'like', '%'.$nombre.'%')
-                    ->Where('apellidos', 'like', '%'.$apellidos.'%')
-                    ->Where('email', 'like', '%'.$correo.'%')
-                    ->orderBy('nombre', 'desc')
-                    ->get();
-        }else{
-            $users= User::all();
-        }
+        $users= DB::table('users')
+            ->orderBy('nombre', 'asc')
+            ->get();;
+
         return view($this->path.'.index', compact('users'));
     }
 
@@ -153,5 +146,23 @@ class UserController extends Controller
         } catch(Exception $e){
             return "Fatal error -".$e->getMessage();
         }
+    }
+
+    public  function search(Request $request){
+        $nombre =  $request->nombre;
+        $apellidos = $request->apellidos;
+        $correo = $request->correo;
+        if($request->nombre != null || $request->apellidos !=null || $request->correo != null){
+            $users= User::Where('nombre', 'like', '%'.$nombre.'%')
+                ->Where('apellidos', 'like', '%'.$apellidos.'%')
+                ->Where('email', 'like', '%'.$correo.'%')
+                ->orderBy('nombre', 'asc')
+                ->get();
+        }else{
+            $users= DB::table('users')
+                ->orderBy('nombre', 'asc')
+                ->get();;
+        }
+        return view($this->path.'.index', compact('users'));
     }
 }
