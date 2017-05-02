@@ -43,15 +43,15 @@ class CambioEstado extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
+            ->from('sigecop@elpoli.edu.co', 'SIGECOP')
             ->subject('[SIGECOP] Cambio de estado del proceso con CDP: '.$this->proceso_contractual->numero_cdp)
             ->success()
             ->line('CDP: '.$this->proceso_contractual->numero_cdp)
             ->line('Objeto: '.$this->proceso_contractual->objeto)
             ->line('Tipo contratación: '.$this->proceso_contractual->tipo_proceso)
-            ->line('El contracto ha esta en
-                 '. $this->proceso_contractual->estado)
+            ->line('El contracto tiene el estado de'. $this->proceso_contractual->estado)
             ->line('')
-            ->action('Ingresar al sistema', 'http://apidesarrollo.elpoli.edu.co:9111/');
+            ->action('Ingresar al sistema', 'http://sigecop.elpoli.edu.co/');
     }
 
     /**

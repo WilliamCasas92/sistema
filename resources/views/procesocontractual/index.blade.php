@@ -75,12 +75,16 @@
                                     <li><a href="{{ route('historiales.mostrar', $proceso_contractual->id) }}" class="btn-xs btn-block">
                                             Ver registro de actividad</a></li>
                                     <li class="divider"></li>
+                                    <!-- Reiniciar Proceso-->
                                     <li><a type="button" class="btn btn-xs btn-block" data-toggle="modal" data-target="#modalReiniciar"
-                                           data-href="{{ route('procesocontractual.reanudar', $proceso_contractual->id) }}" data-cdp="{{$proceso_contractual->numero_cdp }}" >Reiniciar proceso</a>
+                                           data-href="{{ route('procesocontractual.reanudar', $proceso_contractual->id) }}" data-cdp="{{$proceso_contractual->numero_cdp }}" >Reiniciar Proceso</a>
                                     </li>
-                                    <li>                                        <a type="button" class="btn btn-xs btn-block" data-toggle="modal" data-target="#modalDesertar"
+                                    <!--Desertar Proceso-->
+                                    @if($proceso_contractual->estado != 'Desierto')
+                                    <li><a type="button" class="btn btn-xs btn-block" data-toggle="modal" data-target="#modalDesertar"
                                            data-href="{{ route('procesocontractual.desertar', $proceso_contractual->id) }}" data-cdp="{{$proceso_contractual->numero_cdp }}" >Desertar Proceso</a>
                                     </li>
+                                    @endif
                                 </ul>
                             </div>
                         @else
@@ -175,12 +179,16 @@
                                 <li><a href="{{ route('procesocontractual.edit', $proceso_contractual->id) }}" class="btn-xs btn-block">
                                         Editar proceso</a></li>
                                 <li class="divider"></li>
+                                <!--Reiniciar Proceso -->
                                 <li><a type="button" class="btn btn-xs btn-block" data-toggle="modal" data-target="#modalReiniciar"
-                                       data-href="{{ route('procesocontractual.reanudar', $proceso_contractual->id) }}" data-cdp="{{$proceso_contractual->numero_cdp }}" >Reiniciar proceso</a>
+                                       data-href="{{ route('procesocontractual.reanudar', $proceso_contractual->id) }}" data-cdp="{{$proceso_contractual->numero_cdp }}" >Reiniciar Proceso</a>
                                 </li>
+                                <!--Desertar Proceso -->
+                                @if($proceso_contractual->estado != 'Desierto')
                                 <li><a type="button" class="btn btn-xs btn-block" data-toggle="modal" data-target="#modalDesertar"
                                        data-href="{{ route('procesocontractual.desertar', $proceso_contractual->id) }}" data-cdp="{{$proceso_contractual->numero_cdp }}" >Desertar Proceso</a>
                                 </li>
+                                @endif
                             </ul>
                         </div>
                     @else

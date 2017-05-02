@@ -45,6 +45,7 @@ class CambioEtapa extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
+                    ->from('adquisicionespolitecnicojic@gmail.com', 'SIGECOP')
                     ->subject('[SIGECOP] Nuevo proceso CDP: '.$this->proceso_contractual->numero_cdp)
                     ->success()
                     ->line('Existe un nuevo proceso en la etapa '. $this->proceso_contractual->estado.' con los datos: ')
@@ -54,7 +55,7 @@ class CambioEtapa extends Notification
                     ->line('Etapa anterior: '.$this->nombre_etapa_anterior)
                     ->line('Funciones que tiene asociados en esta etapa: '. $this->roles)
                     ->line('')
-                    ->action('Ingresar al sistema', 'http://apidesarrollo.elpoli.edu.co:9111/');
+                    ->action('Ingresar al sistema', 'http://sigecop.elpoli.edu.co/');
     }
 
     /**
