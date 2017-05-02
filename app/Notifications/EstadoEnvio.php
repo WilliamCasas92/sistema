@@ -44,7 +44,7 @@ class EstadoEnvio extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->from('sigecop@elpoli.edu.co', 'SIGECOP')
+            //->from('sigecop@elpoli.edu.co', 'SIGECOP')
             ->subject('[SIGECOP] Nuevo proceso CDP: '.$this->proceso_contractual->numero_cdp)
             ->success()
             ->line('Existe un nuevo proceso en la etapa '. $this->proceso_contractual->estado.' con los datos: ')
