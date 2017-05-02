@@ -8,11 +8,12 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class CambioEstado extends Notification
+class EstadoEnvio extends Notification
 {
     use Queueable;
 
     protected $procesoContractual;
+
     /**
      * Create a new notification instance.
      *
@@ -20,7 +21,7 @@ class CambioEstado extends Notification
      */
     public function __construct(ProcesoContractual $procesoContractual)
     {
-        $this->proceso_contractual =$procesoContractual;
+        $this->proceso_contractual = $procesoContractual;
     }
 
     /**
@@ -44,14 +45,14 @@ class CambioEstado extends Notification
     {
         return (new MailMessage)
             ->from('sigecop@elpoli.edu.co', 'SIGECOP')
-            ->subject('[SIGECOP] Cambio de estado del proceso con CDP: '.$this->proceso_contractual->numero_cdp)
+            ->subject('[SIGECOP] Nuevo proceso CDP: '.$this->proceso_contractual->numero_cdp)
             ->success()
+            ->line('Existe un nuevo proceso en la etapa '. $this->proceso_contractual->estado.' con los datos: ')
+            ->line('Tipo contratación: '.$this->proceso_contractual->tipo_proceso)
             ->line('CDP: '.$this->proceso_contractual->numero_cdp)
             ->line('Objeto: '.$this->proceso_contractual->objeto)
-            ->line('Tipo contratación: '.$this->proceso_contractual->tipo_proceso)
-            ->line('El contracto tiene el estado de'. $this->proceso_contractual->estado)
+            ->line('El proceso fue enviado ha Adquisiciones')
             ->line('')
-
             ->action('Ingresar al sistema', 'http://sigecop.elpoli.edu.co/');
     }
 
