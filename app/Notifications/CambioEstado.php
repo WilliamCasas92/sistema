@@ -43,7 +43,7 @@ class CambioEstado extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            //->from('sigecop@elpoli.edu.co', 'SIGECOP')
+            // ->from('sigecop@elpoli.edu.co', 'SIGECOP')
             ->subject('[SIGECOP] Cambio de estado del proceso con CDP: '.$this->proceso_contractual->numero_cdp)
             ->success()
             ->line('CDP: '.$this->proceso_contractual->numero_cdp)
