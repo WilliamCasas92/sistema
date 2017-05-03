@@ -57,7 +57,8 @@
                 @endif
                 @if ($recibir_adquisiciones=='enabled')
                     <!-- Recibir a Adqui -->
-                    <a href="{{ route('procesocontractual.recibir', array($proceso_contractual->id)) }}" class="btn btn-warning btn-xs">Recibir proceso en Adquisiciones</a><br>
+                    <a href="{{ route('procesocontractual.recibir', array($proceso_contractual->id)) }}" class="btn btn-warning btn-xs">Recibir proceso en Adquisiciones</a><br><br>
+                    <a href="{{ route('consulta.consultavermas', $proceso_contractual->id) }}" class="btn btn-info btn-xs">Ver más</a>
                 @endif
                 @if ($diligenciar=='enabled')
                     <!-- Diligenciar -->
@@ -69,10 +70,10 @@
                             <br><div class="btn-group">
                                 <button type="button" class="btn btn-primary dropdown-toggle btn-xs" data-toggle="dropdown">Opciones <span class="caret"></span></button>
                                 <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                                    <li><a href="{{ route('procesocontractual.edit', $proceso_contractual->id) }}" class="btn-xs btn-block">
+                                    <li><a type="button" href="{{ route('procesocontractual.edit', $proceso_contractual->id) }}" class="btn btn-xs btn-block">
                                            Editar proceso</a></li>
                                     <li class="divider"></li>
-                                    <li><a href="{{ route('historiales.mostrar', $proceso_contractual->id) }}" class="btn-xs btn-block">
+                                    <li><a type="button" href="{{ route('historiales.mostrar', $proceso_contractual->id) }}" class="btn btn-xs btn-block">
                                             Ver registro de actividad</a></li>
                                     <li class="divider"></li>
                                     <!-- Reiniciar Proceso-->
@@ -176,11 +177,14 @@
                                 <button type="button" class="btn btn-primary dropdown-toggle btn-xs" data-toggle="dropdown">
                                 <span class="caret"></span></button>
                             <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                                <li><a href="{{ route('procesocontractual.edit', $proceso_contractual->id) }}" class="btn-xs btn-block">
+                                <li><a type="button" href="{{ route('procesocontractual.edit', $proceso_contractual->id) }}" class="btn btn-xs btn-block">
                                         Editar proceso</a></li>
                                 <li class="divider"></li>
+                                <li><a type="button" href="{{ route('historiales.mostrar', $proceso_contractual->id) }}" class="btn btn-xs btn-block">
+                                        Ver registro de actividad</a></li>
+                                <li class="divider"></li>
                                 <!--Reiniciar Proceso -->
-                                <li><a type="button" class="btn btn-xs btn-block" data-toggle="modal" data-target="#modalReiniciar"
+                                <li><a type="button" class="btn-xs btn-block" data-toggle="modal" data-target="#modalReiniciar"
                                        data-href="{{ route('procesocontractual.reanudar', $proceso_contractual->id) }}" data-cdp="{{$proceso_contractual->numero_cdp }}" >Reiniciar Proceso</a>
                                 </li>
                                 <!--Desertar Proceso -->
