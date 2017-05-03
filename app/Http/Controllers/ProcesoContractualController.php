@@ -244,9 +244,9 @@ class ProcesoContractualController extends Controller
             $historial_proceso_etapa->user_id                   = \Auth::user()->id;
             $historial_proceso_etapa->estado                    = $proceso_contractual->estado;
             $historial_proceso_etapa->save();
-            $this->notificar_estado_envio($proceso_contractual);
+            $aux_proceso_contracual = $proceso_contractual;
             $proceso_contractual->save();
-
+            $this->notificar_estado_envio($aux_proceso_contracual);
 
         } catch(Exception $e){
             return "Fatal error -".$e->getMessage();
@@ -284,8 +284,9 @@ class ProcesoContractualController extends Controller
             $historial_proceso_etapa->user_id                   = \Auth::user()->id;
             $historial_proceso_etapa->estado                    = $proceso_contractual->estado;
             $historial_proceso_etapa->save();
-            $this->notificar_inicio($id_etapa, $proceso_contractual);
+            $aux_proceso_contractual =$proceso_contractual;
             $proceso_contractual->save();
+            $this->notificar_inicio($id_etapa, $aux_proceso_contractual);
             //Notificar que el proceso a sido recibido
         } catch(Exception $e){
             return "Fatal error -".$e->getMessage();
@@ -318,8 +319,9 @@ class ProcesoContractualController extends Controller
                 $historial_proceso_etapa->estado                    = $proceso_contractual->estado;
                 $historial_proceso_etapa->save();
                 //Esta es la función que notifica por correo que el proceso ha finalizado
-                $this->notificar_estado($proceso_contractual);  
+                $aux_proceso_contractual = $proceso_contractual;
                 $proceso_contractual->save();
+                $this->notificar_estado($aux_proceso_contractual);
                 return view('datosetapas/procesofin');
             }
             return view('datosetapas/datosfaltantes', compact('contenido_validacion'));
@@ -379,9 +381,10 @@ class ProcesoContractualController extends Controller
             $historial_proceso_etapa->user_id                   = \Auth::user()->id;
             $historial_proceso_etapa->estado                    = $proceso_contractual->estado;
             $historial_proceso_etapa->save();
-            //Notificar proceso desertado
-            $this->notificar_estado($proceso_contractual);
+            $aux_proceso_contractual = $proceso_contractual;
             $proceso_contractual->save();
+            //Notificar proceso desertado
+            $this->notificar_estado($aux_proceso_contractual);
 
         } catch(Exception $e){
             return "Fatal error -".$e->getMessage();
@@ -416,9 +419,10 @@ class ProcesoContractualController extends Controller
             $historial_proceso_etapa->user_id                   = \Auth::user()->id;
             $historial_proceso_etapa->estado                    = "Reanudado";
             $historial_proceso_etapa->save();
-            //Notificar que el proceso sea reanudado
-            $this->notificar_estado($proceso_contractual);
+            $aux_proceso_contractual =$proceso_contractual;
             $proceso_contractual->save();
+            //Notificar que el proceso sea reanudado
+            $this->notificar_estado($aux_proceso_contractual);
         } catch(Exception $e){
             return "Fatal error -".$e->getMessage();
         }

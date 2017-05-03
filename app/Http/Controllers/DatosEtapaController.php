@@ -193,7 +193,7 @@ class DatosEtapaController extends Controller
                 $historial_proceso_etapa->save();
                 $proceso_etapa->save();
                 //En esta instrucción se notifica por correo a los usuarios que estan involucrados en la siguiente etapa, sobre el cambio de etapa
-                $this->notificar_cambio_etapa($id_nextetapa, $idproceso);
+                $this->notificar_cambio_etapa($id_nextetapa, $proceso_contractual);
 
                 return view('datosetapas/pasoetapa');
             }
@@ -337,7 +337,7 @@ class DatosEtapaController extends Controller
         return ('');
     }
 
-    public function notificar_cambio_etapa($id_etapa_actual, $idproceso)
+    public function notificar_cambio_etapa($id_etapa_actual, ProcesoContractual $proceso_contractual)
     {
         // se realiza la consulta dei id los usuarios que tienen roles asociados a la etapa del proceso
         $id_usuarios=DB::table('etapa_rol')
@@ -356,7 +356,6 @@ class DatosEtapaController extends Controller
             ->get();
 
         //Se busca el proceso contractual
-        $proceso_contractual = ProcesoContractual::findOrFail($idproceso);
         //Se busca la entidad de la etapa actual
         $etapa_actual= Etapa::findOrFail($id_etapa_actual);
         //Se busca el nombre de la etapa anterior
