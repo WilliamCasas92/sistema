@@ -500,11 +500,11 @@ class ProcesoContractualController extends Controller
     }
 
     public function notificar_estado(ProcesoContractual $proceso_contractual){
-        $id_rol_administrador=1;
+        $id_rol_coordinador=2;
         $id_usuarios =DB::table('users')
-            ->join('user_rol', function ($join) use ($id_rol_administrador)  {
+            ->join('user_rol', function ($join) use ($id_rol_coordinador)  {
                 $join->on('users.id', '=', 'user_rol.user_id')
-                    ->where('user_rol.rol_id', '=', $id_rol_administrador);
+                    ->where('user_rol.rol_id', '=', $id_rol_coordinador                           );
             })
             ->select('users.id')
             ->get();
@@ -516,14 +516,12 @@ class ProcesoContractualController extends Controller
     }
 
     public function notificar_estado_envio(ProcesoContractual $proceso_contractual){
-        $id_rol_administrador=1;
-        $id_rol_secretario=0;
-        $id_usuarios =DB::table('users')
-            ->join('user_rol', function ($join) use ($id_rol_administrador)  {
-                $join->on('users.id', '=', 'user_rol.user_id')
-                    ->where('user_rol.rol_id', '=', $id_rol_administrador)
-                    ->orwhere('user_rol.rol_id', '=', $id_rol_administrador);
 
+        $id_rol_secretario=3;
+        $id_usuarios =DB::table('users')
+            ->join('user_rol', function ($join) use ( $id_rol_secretario)  {
+                $join->on('users.id', '=', 'user_rol.user_id')
+                    ->where('user_rol.rol_id','=',$id_rol_secretario);
             })
             ->select('users.id')
             ->distinct()
@@ -538,10 +536,12 @@ class ProcesoContractualController extends Controller
     public function notificar_inicio($id_etapa_actual, ProcesoContractual $proceso_contractual)
     {
         // se realiza la consulta dei id los usuarios que tienen roles asociados a la etapa del proceso
+        $id_rol_administrador =1;
         $id_usuarios=DB::table('etapa_rol')
             ->where('etapa_id', $id_etapa_actual)
-            ->join('rols', function ($join)  {
-                $join->on('etapa_rol.rol_id', '=', 'rols.id');
+            ->join('rols', function ($join) use ($id_rol_administrador)  {
+                $join->on('etapa_rol.rol_id', '=', 'rols.id')
+                        ->where('etapa_rol.rol_id','<>',$id_rol_administrador);
             })
             ->join('user_rol', function ($join)  {
                 $join->on('rols.id', '=', 'user_rol.rol_id');

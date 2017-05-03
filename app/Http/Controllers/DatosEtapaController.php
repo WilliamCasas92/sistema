@@ -340,10 +340,13 @@ class DatosEtapaController extends Controller
     public function notificar_cambio_etapa($id_etapa_actual, ProcesoContractual $proceso_contractual)
     {
         // se realiza la consulta dei id los usuarios que tienen roles asociados a la etapa del proceso
+        //Envia correo a todos los roles asociados a una etapa, menos a losroles de administración
+        $id_rol_administrador =1;
         $id_usuarios=DB::table('etapa_rol')
             ->where('etapa_id', $id_etapa_actual)
-            ->join('rols', function ($join)  {
-                $join->on('etapa_rol.rol_id', '=', 'rols.id');
+            ->join('rols', function ($join) use ($id_rol_administrador)  {
+                $join->on('etapa_rol.rol_id', '=', 'rols.id')
+                    ->where('etapa_rol.rol_id','<>',$id_rol_administrador);
             })
             ->join('user_rol', function ($join)  {
                 $join->on('rols.id', '=', 'user_rol.rol_id');
