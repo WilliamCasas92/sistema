@@ -133,7 +133,13 @@
                     <div class="panel-heading">
                         <a data-toggle="collapse"  href="#collapseprocesoobservaciones">
                             <h4 class="panel-title">
-                                <label class="text-success">Observaciones del contracto</label>
+                                @php
+                                    $cont_observaciones=0;
+                                    foreach ($observaciones as $observación){
+                                            $cont_observaciones++;
+                                    }
+                                @endphp
+                                <label class="text-success">Observaciones <span class="badge">{{$cont_observaciones}}</span></label>
                             </h4>
                         </a>
                     </div>
