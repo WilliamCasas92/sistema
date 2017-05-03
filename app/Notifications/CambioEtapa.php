@@ -45,7 +45,7 @@ class CambioEtapa extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->from('adquisicionespolitecnicojic@gmail.com', 'SIGECOP')
+                    // ->from('adquisicionespolitecnicojic@gmail.com', 'SIGECOP')
                     ->subject('[SIGECOP] Nuevo proceso CDP: '.$this->proceso_contractual->numero_cdp)
                     ->success()
                     ->line('Existe un nuevo proceso en la etapa '. $this->proceso_contractual->estado.' con los datos: ')

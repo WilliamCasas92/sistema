@@ -9,10 +9,11 @@
                         {{ session('error') }}
                     </div>
                 @endif
+                <h6>Campos obligatorios(*)</h6>
                 <form class="form-horizontal" method="post" action="/procesocontractual">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="form-group">
-                        <label class="control-label col-md-4" for="InputName">Tipo de Proceso de Contratación: </label>
+                        <label class="control-label col-md-4" for="InputName">Tipo de Proceso de Contratación (*): </label>
                         <div class="col-md-5">
                             <select class="form-control" name="tipo_proceso" id="tipo_proceso" required>
                                 @foreach($tipos_procesos as $tipo_proceso)
@@ -22,37 +23,37 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-4" for="InputNumCDP">CDP: </label>
+                        <label class="control-label col-md-4" for="InputNumCDP">CDP (*): </label>
                         <div class="col-md-3">
                             <input type="text" name="num_cdp" class="form-control" autocomplete="off" placeholder="Digite el número de CDP" required>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-4" for="InputYearCDP">Año CDP: </label>
+                        <label class="control-label col-md-4" for="InputYearCDP">Año CDP (*): </label>
                         <div class="col-md-2">
                             <input type="text" name="year_cdp" class="form-control" autocomplete="off" placeholder="Año de expedición del CDP" value="{{date("Y")}}" required>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-4" for="InputObjeto">Objeto: </label>
+                        <label class="control-label col-md-4" for="InputObjeto">Objeto (*): </label>
                         <div class="col-md-5">
                             <textarea rows="6" name="objeto" class="form-control" autocomplete="off" placeholder="Digite el objeto del contrato" required></textarea>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-4" for="InputValor">Valor del contrato: </label>
+                        <label class="control-label col-md-4" for="InputValor">Valor del contrato (*): </label>
                         <div class="col-md-3">
                             <input type="number" name="num_valor" class="form-control" autocomplete="off" min="0" step="1" placeholder="Digite el valor del contrato" required>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-4" for="InputValor">Plazo de ejecución (días): </label>
+                        <label class="control-label col-md-4" for="InputValor">Plazo de ejecución (días)(*): </label>
                         <div class="col-md-5">
                             <input type="number" name="num_plazo" class="form-control" autocomplete="off" min="1" step="1" placeholder="Digite el número de días de ejecución del contrato" required>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-4" for="InputDependencia">Depedencia: </label>
+                        <label class="control-label col-md-4" for="InputDependencia">Depedencia (*): </label>
                         <div class="col-md-5">
                             <select class="form-control" name="dependencia" id="dependencia" required>
                                 <option value="Rectoría">Rectoría</option>
@@ -82,7 +83,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="control-label col-md-4" for="InputRoles">Comités participes:</label><br>
+                        <label class="control-label col-md-4" for="InputRoles">Comités participantes (*): </label><br>
                         <div class="col-md-8">
                             <div class="checkbox">
                                 <label><input id="comite_docenciainv" type="checkbox" name="comite_docenciainv" value="1" required>Comité Interno de Docencia e Investigación</label>
