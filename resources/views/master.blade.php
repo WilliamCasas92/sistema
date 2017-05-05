@@ -51,7 +51,7 @@
     <nav class="navbar navbar-default navbarsize" id="estilonavbar">
         @if (Auth::check())
         <div align="center">
-            <a href="{{ url('home') }}" type="button" class="btn btn-success">
+            <a href="{{ url('inicio') }}" type="button" class="btn btn-success">
                 <span class="glyphicon glyphicon-home"></span> Inicio</a>
             @php
                 $cont_tareas=0;

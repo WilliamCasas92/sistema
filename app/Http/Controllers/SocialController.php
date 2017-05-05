@@ -34,7 +34,7 @@ class SocialController extends Controller {
           {
               if($registro = User::select()->where('email','=', $user->email)->first()){
                   Auth::login($registro);
-                  return redirect('home');
+                  return redirect('inicio');
               }
               return view('errors.login');
           }else {
