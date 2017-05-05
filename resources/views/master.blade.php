@@ -27,6 +27,7 @@
             </div>
             <div align="right">
                 <div class="col-md-3" style="color:white;">
+                    @if (Auth::check())
                     <h4>Bienvenido(a)</h4>
                     <h5>{{ Auth::user()->nombre }} {{ Auth::user()->apellidos }}</h5>
                     <h5>{{ Auth::user()->email }}</h5>
@@ -39,6 +40,7 @@
                     <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                         {{ csrf_field() }}
                     </form>
+                    @endif
                 </div>
             </div>
         </div>
@@ -99,6 +101,7 @@
         <div class="row">
             <div class="container margincontainer">
                 @yield("homecontent")
+                @yield("errorlogin")
                 @yield("createuser")
                 @yield("indexuser")
                 @yield("edituser")

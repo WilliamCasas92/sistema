@@ -2,9 +2,7 @@
 use Carbon\Carbon;
 
 //Ruta Inicio
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'SocialController@getSocialAuth');
 
 //Rutas LogIn LogOut
 Auth::routes();
