@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
+use App\Http\Controllers\Controller;
+use App\User;
+use Socialite;
+
 class HomeController extends Controller
 {
     public function __construct()
@@ -15,7 +19,7 @@ class HomeController extends Controller
 
     public function index()
     {
-        return view('home');
+        return view('inicio');
     }
 
     public function about()
@@ -26,7 +30,10 @@ class HomeController extends Controller
     public function desconexion(){
         Auth::logout();
         Session::flush();
-        return redirect('/');
+        if(!config("services.google")) abort('404');
+
+        return Socialite::driver('google')->redirect();
+        //return redirect('/');
         //return redirect('https://mail.google.com/a/elpoli.edu.co/');
     }
 
