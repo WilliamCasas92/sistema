@@ -1,11 +1,9 @@
 <?php
-use Carbon\Carbon;
 
 //Ruta Inicio
 Route::get('/', 'SocialController@getSocialAuth');
 
-//Rutas LogIn LogOut
-Auth::routes();
+
 
 //Rutas Google
 Route::get('social/google', 'SocialController@getSocialAuth');
@@ -36,7 +34,6 @@ Route::group(['middleware' => 'onlyAdminCoordinador'], function() {
     //Ruta Historial
     Route::get('procesocontractual/historial/{proceso_id}', ['as'=>'historiales.mostrar','uses'=> 'HistorialController@mostrar']);
 });
-
 
 //Rutas DILIGENCIAR
 Route::group(['middleware' => 'onlyDiligenciar'], function() {
@@ -72,4 +69,10 @@ Route::group(['middleware' => 'allUsers'], function() {
     });
     //Ruta Acerca
     Route::get('acerca', 'HomeController@about');
+
+    Route::post('desconexion', 'HomeController@desconexion');
 });
+
+//Rutas LogIn LogOut
+
+Auth::routes();
