@@ -61,11 +61,11 @@ Route::group(['middleware' => 'allUsers'], function() {
     //Rutas Consulta de procesos
     Route::get('consultaproceso', ['as'=>'consulta.mostrar','uses'=> 'ConsultasController@mostrar']);
     Route::get('consultaproceso/{idproceso}', ['as'=>'consulta.consultavermas','uses'=> 'ConsultasController@ver_mas']);
-    //App Inicio
-    Route::get('/inicio', 'HomeController@index');
-    //Ruta Inicio
-    Route::get('inicio', function () {
-        return view('inicio');
+    //App Home
+    Route::get('/home', 'HomeController@index');
+    //Ruta Home
+    Route::get('home', function () {
+        return view('home');
     });
     //Ruta Acerca
     Route::get('acerca', 'HomeController@about');
