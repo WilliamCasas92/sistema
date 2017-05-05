@@ -2,7 +2,7 @@
 @section('indicators')
     <div class="container col-md-12">
         <div class="panel panel-success">
-            <div class="panel-heading text-center"><h2>Indicadores</h2></div>
+            <div class="panel-heading text-center"><label style="font-size : 25px;">Indicadores</label></div>
             <div class="panel-body">
                 <!-- Container (Indicators Section) -->
                 <div class="well well-sm container-fluid text-center alert alert-info">

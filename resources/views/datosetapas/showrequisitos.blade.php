@@ -8,14 +8,14 @@
         <table class="table table-condensed table-headborderless">
     @endif
         @if($etapa_activa!='Activo')
-            <h5 class="text-info"><label>Información de Etapa</label></h5>
+            <h5 class="text"><label>Información de Etapa</label></h5>
         @else
-            <h5 class="text-info"><label>Diligencie los siguientes datos<br><br>Campos obligatorios (*)</label></h5>
+            <h5 class="text"><label>Diligencie los siguientes datos<br><br>Campos obligatorios (*)</label></h5>
         @endif
         <thead style="font-size : 11px;">
         <tr>
             <th class="text-center text-info" width="35%"></th>
-            <th class="text-center" width="50%"></th>
+            <th class="text-justify" width="50%"></th>
         </tr>
         </thead>
         <tbody style="font-size : 11px;">
@@ -71,7 +71,7 @@
                             <input type="hidden" name="requisito_id[]" value="{{$requisito->id}}">
                         @else
                             <tr>
-                                <td class="text-center" width="35%"><label>{{$requisito->nombre}}</label></td>
+                                <td class="text-justify" width="35%"><label>{{$requisito->nombre}}</label></td>
                                 @if ($valor==1)
                                     <td width="35%">Si</td>
                                 @else
@@ -90,7 +90,7 @@
                                 <input type="hidden" name="requisito_id[]" value="{{$requisito->id}}">
                             @else
                                 <tr>
-                                    <td class="text-center" width="35%"><label>{{$requisito->nombre}}</label></td>
+                                    <td class="text-justify" width="35%"><label>{{$requisito->nombre}}</label></td>
                                     <td class="text-justify" width="35%">{{$valor}}</td>
                                 </tr>
                             @endif
@@ -125,7 +125,7 @@
                                     @php
                                     $tipo=\App\Http\Controllers\DatosEtapaController::busqueda_tipo_dato_etapa($proceso_contractual->id, $requisito->id);
                                     @endphp
-                                    <td class="text-center" width="35%"><label>{{$requisito->nombre}}</label></td>
+                                    <td class="text-justify" width="35%"><label>{{$requisito->nombre}}</label></td>
                                     <td width="35%"><a href="/uploads/{{$valor}}-{{$requisito->id}}-{{$proceso_contractual->id}}.{{$tipo}}" download="{{$valor}}">{{$valor}}</a></td>
                                 </tr>
                             @endif
@@ -140,7 +140,7 @@
                                 <input type="hidden" name="requisito_id[]" value="{{$requisito->id}}">
                             @else
                                 <tr>
-                                    <td class="text-center" width="35%"><label>{{$requisito->nombre}}</label></td>
+                                    <td class="text-justify" width="35%"><label>{{$requisito->nombre}}</label></td>
                                     <td width="35%">{{$valor}}</td>
                                 </tr>
                             @endif

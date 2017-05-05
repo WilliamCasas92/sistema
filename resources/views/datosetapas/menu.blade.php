@@ -4,7 +4,7 @@
         <div class="panel panel-success">
             <div class="panel-heading">
                 <a data-toggle="collapse"  data-parent="#accordion" href="#collapseprocesocontractual">
-                    <h3><label class="text-success">Datos generales del contrato</label></h3>
+                    <h3><label onmouseover="this.style.cursor='pointer';" class="text-success">Datos generales del contrato (Ver más)</label></h3>
                 </a>
             </div>
             <div class="panel-group" id="accordion">
@@ -13,90 +13,90 @@
                         <div class="panel-body">
                             <div class="table-responsive">
                                 <table class="table table-condensed table-headborderless">
-                                    <h5 class="text-primary" ><label>Información general del contrato</label></h5>
+                                    <h5 class="text" ><label>Información general del contrato</label></h5>
                                     <thead style="font-size : 11px;">
                                     <tr>
-                                        <th class="text-center text-primary" width="35%"></th>
-                                        <th class="text-center" width="50%"></th>
+                                        <th class="text-justify text-primary" width="35%"></th>
+                                        <th class="text-justify" width="50%"></th>
                                     </tr>
                                     </thead>
                                     <tbody style="font-size : 11px;">
                                     <tr>
-                                        <td class="text-center" width="35%"><label>Tipo de proceso de contratacion:</label></td>
+                                        <td class="text-justify" width="35%"><label>Tipo de proceso de contratacion:</label></td>
                                         <td width="35%">{{ $proceso_contractual->tipo_proceso }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="text-center" width="35%"><label>Número de CDP:</label></td>
+                                        <td class="text-justify" width="35%"><label>Número de CDP:</label></td>
                                         <td width="35%">{{ $proceso_contractual->numero_cdp }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="text-center" width="35%" ><label>Objeto del contrato:</label></td>
+                                        <td class="text-justify" width="35%" ><label>Objeto del contrato:</label></td>
                                         <td class="text-justify" width="35%">{{ $proceso_contractual->objeto }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="text-center" width="35%"><label>Valor del contrato:</label></td>
+                                        <td class="text-justify" width="35%"><label>Valor del contrato:</label></td>
                                         <td width="35%">${{number_format($proceso_contractual->valor)}}</td>
                                     </tr>
                                     <tr>
-                                        <td class="text-center" width="35%"><label>Periodo de ejecución:</label></td>
+                                        <td class="text-justify" width="35%"><label>Periodo de ejecución:</label></td>
                                         <td width="35%">{{ $proceso_contractual->plazo }} día(s)</td>
                                     </tr>
                                     <tr>
-                                        <td class="text-center" width="35%"><label>Dependencia correspondiente:</label></td>
+                                        <td class="text-justify" width="35%"><label>Dependencia correspondiente:</label></td>
                                         <td width="35%">{{ $proceso_contractual->dependencia }}</td>
                                     </tr>
                                     @if(($proceso_contractual->numero_contrato=='0')||($proceso_contractual->numero_contrato==''))
                                         <tr>
-                                            <td class="text-center" width="35%"><label>Número de contrato:</label></td>
+                                            <td class="text-justify" width="35%"><label>Número de contrato:</label></td>
                                             <td width="35%">Sin asignar.</td>
                                         </tr>
                                     @else
                                         <tr>
-                                            <td class="text-center" width="35%"><label>Número de contrato:</label></td>
+                                            <td class="text-justify" width="35%"><label>Número de contrato:</label></td>
                                             <td width="35%">{{ $proceso_contractual->numero_contrato }}</td>
                                         </tr>
                                     @endif
                                     @if ($proceso_contractual->nombre_supervisor!='')
                                         <tr>
-                                            <td class="text-center" width="35%"><label>Nombre del supervisor:</label></td>
+                                            <td class="text-justify" width="35%"><label>Nombre del supervisor:</label></td>
                                             <td width="35%">{{ $proceso_contractual->nombre_supervisor }}</td>
                                         </tr>
                                     @else
                                         <tr>
-                                            <td class="text-center" width="35%"><label>Nombre del supervisor:</label></td>
+                                            <td class="text-justify" width="35%"><label>Nombre del supervisor:</label></td>
                                             <td width="35%">Sin asignar.</td>
                                         </tr>
                                     @endif
                                     @if ($proceso_contractual->id_supervisor!='')
                                         <tr>
-                                            <td class="text-center" width="35%"><label>Identificación del supervisor:</label></td>
+                                            <td class="text-justify" width="35%"><label>Identificación del supervisor:</label></td>
                                             <td width="35%">{{ $proceso_contractual->id_supervisor }}</td>
                                         </tr>
                                     @else
                                         <tr>
-                                            <td class="text-center" width="35%"><label>Identificación del supervisor:</label></td>
+                                            <td class="text-justify" width="35%"><label>Identificación del supervisor:</label></td>
                                             <td width="35%">Sin asignar.</td>
                                         </tr>
                                     @endif
                                     @if ($proceso_contractual->email_supervisor!='')
                                         <tr>
-                                            <td class="text-center" width="35%"><label>Email del supervisor:</label></td>
+                                            <td class="text-justify" width="35%"><label>Email del supervisor:</label></td>
                                             <td width="35%">{{ $proceso_contractual->email_supervisor }}</td>
                                         </tr>
                                     @else
                                         <tr>
-                                            <td class="text-center" width="35%"><label>Email del supervisor:</label></td>
+                                            <td class="text-justify" width="35%"><label>Email del supervisor:</label></td>
                                             <td width="35%">Sin asignar.</td>
                                         </tr>
                                     @endif
                                     @if(Auth::user()->hasRol('Administrador'))
                                         <tr>
-                                            <td class="text-center" width="35%"><label>Fecha y Hora de ingreso en el sistema:</label></td>
+                                            <td class="text-justify" width="35%"><label>Fecha y Hora de ingreso en el sistema:</label></td>
                                             <td width="35%">{{ $proceso_contractual->created_at }}</td>
                                         </tr>
                                     @endif
                                     <tr>
-                                        <td class="text-center" width="35%"><label>Comites participantes:</label></td>
+                                        <td class="text-justify" width="35%"><label>Comites participantes:</label></td>
                                         <td width="35%">
                                             @if ( ($proceso_contractual->comiteinterno)=='1' )
                                                 Comité Interno de Docencia e Investigación <label>Fecha:</label> {{$proceso_contractual->fecha_comiteinterno}}</br>
@@ -117,7 +117,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="text-center" width="35%"><label>Estado del proceso:</label></td>
+                                        <td class="text-justify" width="35%"><label>Estado del proceso:</label></td>
                                         <td width="35%">{{ $proceso_contractual->estado }}</td>
                                     </tr>
                                     </tbody>
@@ -139,7 +139,7 @@
                                             $cont_observaciones++;
                                     }
                                 @endphp
-                                <label class="text-success">Observaciones <span class="badge">{{$cont_observaciones}}</span></label>
+                                <label onmouseover="this.style.cursor='pointer';" class="text-success">Observaciones <span class="badge">{{$cont_observaciones}}</span></label>
                             </h4>
                         </a>
                     </div>

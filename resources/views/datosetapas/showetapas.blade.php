@@ -31,7 +31,7 @@
             <div class="panel-heading" id="{{$color_panel_activo}}">
                 <a data-toggle="collapse"  href="#collapse{{ $etapa->id }}">
                 <h4 class="panel-title">
-                    <label class="text-success">{{ $etapa->nombre }}</label>
+                    <label class="text-success" onmouseover="this.style.cursor='pointer';">{{ $etapa->nombre }}</label>
                 </h4></a>
             </div>
             <div id="collapse{{ $etapa->id }}" class="panel-collapse collapse">

@@ -3,11 +3,11 @@
 @endphp
 <div class="table-responsive">
     <table class="table table-condensed table-headborderless">
-        <h5 class="text-info"><label>Información de Etapa</label></h5>
+        <h5 class="text"><label>Información de Etapa</label></h5>
         <thead style="font-size : 11px;">
             <tr>
-                <th class="text-center text-info" width="35%"></th>
-                <th class="text-center" width="50%"></th>
+                <th class="text-justify text-info" width="35%"></th>
+                <th class="text-justify" width="50%"></th>
             </tr>
         </thead>
         <tbody style="font-size : 11px;">
@@ -20,7 +20,7 @@
                 @endphp
                     <tr>
                         @if( $tipo_req == 'checkbox')
-                            <td class="text-center" width="35%"><label>{{$requisito->nombre}}</label></td>
+                            <td class="text-justify" width="35%"><label>{{$requisito->nombre}}</label></td>
                             @if ($valor==1)
                                 <td width="35%">Si</td>
                             @else
@@ -29,7 +29,7 @@
                     </tr>
                     <tr>
                         @elseif ( $tipo_req == 'textarea' )
-                            <td class="text-center" width="35%"><label>{{$requisito->nombre}}</label></td>
+                            <td class="text-justify" width="35%"><label>{{$requisito->nombre}}</label></td>
                             <td class="text-justify" width="35%">{{$valor}}</td>
                     </tr>
                     <tr>
@@ -37,12 +37,12 @@
                             @php
                                 $tipo=\App\Http\Controllers\DatosEtapaController::busqueda_tipo_dato_etapa($proceso_contractual->id, $requisito->id);
                             @endphp
-                            <td class="text-center" width="35%"><label>{{$requisito->nombre}}</label></td>
+                            <td class="text-justify" width="35%"><label>{{$requisito->nombre}}</label></td>
                             <td class="text-justify" width="35%"><a href='/uploads/{{$valor}}-{{$requisito->id}}-{{$proceso_contractual->id}}.{{$tipo}}' download='{{$valor}}'>{{$valor}}</a></td>
                     </tr>
                     <tr>
                         @else
-                            <td class="text-center" width="35%"><label>{{$requisito->nombre}}</label></td>
+                            <td class="text-justify" width="35%"><label>{{$requisito->nombre}}</label></td>
                             <td width="35%">{{$valor}}</td>
                         @endif
                     </tr>

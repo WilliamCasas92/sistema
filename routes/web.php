@@ -12,7 +12,7 @@ Route::get('social/callback/google', 'SocialController@getSocialAuthCallback');
 //Rutas ADMINISTRADOR
 Route::group(['middleware' => 'onlyAdmin'], function() {
     //Rutas Usuarios
-    Route::resource('users', 'UserController');
+    Route::resource('usuarios', 'UserController');
     Route::post('filtrarusuarios', ['as'=>'filtrar.usuario','uses'=> 'UserController@search']);
     //Rutas TipoProceso
     Route::resource('tipoproceso', 'TipoProcesoController');

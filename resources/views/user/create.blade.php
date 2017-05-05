@@ -9,7 +9,7 @@
                         {{ session('error') }}
                     </div>
                 @endif
-                <form class="form-horizontal" method="post" action="/users">
+                <form class="form-horizontal" method="post" action="/usuarios">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="form-group">
                         <label class="control-label col-md-4" for="InputName">Nombres:</label>
@@ -78,6 +78,6 @@
                 </form>
             </div>
         </div>
-        <h4><a class="btn btn-default" href="{{route('users.index')}}"><span class="glyphicon glyphicon-chevron-left"></span> Ir atrás</a></h4>
+        <h4><a class="btn btn-default" href="{{route('usuarios.index')}}"><span class="glyphicon glyphicon-chevron-left"></span> Ir atrás</a></h4>
     </div>
 @endsection

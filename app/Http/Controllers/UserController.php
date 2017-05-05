@@ -71,7 +71,7 @@ class UserController extends Controller
             if ($request['rol_usuariogeneral']) {
                 $user->roles()->attach(11);
             }
-            return redirect()->route('users.index')->with('add', 'El usuario fue agregado con exito.');
+            return redirect()->route('usuarios.index')->with('add', 'El usuario fue agregado con exito.');
         } catch(Exception $e){
             return "Fatal error -".$e->getMessage();
         }
@@ -133,7 +133,7 @@ class UserController extends Controller
         if ($request['rol_usuariogeneral']) {
             $user->roles()->attach(11);
         }
-        return redirect()->route('users.index')->with('add', 'El usuario ha sido eliminado.');
+        return redirect()->route('usuarios.index')->with('add', 'El usuario ha sido eliminado.');
     }
 
     public function destroy($id)
@@ -142,7 +142,7 @@ class UserController extends Controller
             $user = User::findOrFail($id);
             $user->roles()->detach();
             $user->delete();
-            return redirect()->route('users.index');
+            return redirect()->route('usuarios.index');
         } catch(Exception $e){
             return "Fatal error -".$e->getMessage();
         }

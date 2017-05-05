@@ -4,7 +4,7 @@
             <div class="panel-heading">
                 <a data-toggle="collapse"  href="#collapse{{ $etapa->id }}">
                 <h4 class="panel-title">
-                    <label class="text-success">{{$etapa->nombre}}</label>
+                    <label onmouseover="this.style.cursor='pointer';" class="text-success">{{$etapa->nombre}}</label>
                 </h4>
                 </a>
             </div>

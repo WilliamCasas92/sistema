@@ -2,7 +2,7 @@
 @section('consultacontent')
     <div class="container col-md-12">
         <div class="panel panel-success">
-            <div class="panel-heading text-center"><h2>Procesos de Contratación</h2></div>
+            <div class="panel-heading text-center"><label style="font-size : 25px;">Procesos de Contratación</label></div>
             <div class="panel-body">
                 <!-- Seccion para la busqueda-->
                 <div class="panel-group" id="accordion">

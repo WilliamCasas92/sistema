@@ -85,7 +85,7 @@
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="{{ url('users') }}">
+                        <li><a href="{{ url('usuarios') }}">
                                 <span class="glyphicon glyphicon-user"></span> Gestión de Usuarios</a></li>
                         <li><a href="{{ url('tipoproceso') }}">
                                 <span class="glyphicon glyphicon-lock"></span> Gestión de Tipos de Proceso de Contratación</a></li>

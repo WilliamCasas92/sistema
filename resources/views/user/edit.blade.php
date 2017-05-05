@@ -10,7 +10,7 @@
                         {{ session('error') }}
                     </div>
                 @endif
-                <form class="form-horizontal" method="post" action="/users/{{$user->id}}">
+                <form class="form-horizontal" method="post" action="/usuarios/{{$user->id}}">
                     <input name="_method" type="hidden" value="PUT">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="form-group">
@@ -77,6 +77,6 @@
                 </form>
             </div>
         </div>
-        <h4><a class="btn btn-default" href="{{route('users.index')}}"><span class="glyphicon glyphicon-chevron-left"></span> Ir atrás</a></h4>
+        <h4><a class="btn btn-default" href="{{route('usuarios.index')}}"><span class="glyphicon glyphicon-chevron-left"></span> Ir atrás</a></h4>
     </div>
 @endsection

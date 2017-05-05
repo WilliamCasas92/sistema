@@ -7,12 +7,11 @@
     @endif
     <div class="container col-md-12">
         <div class="panel panel-success">
-            <div class="panel-heading text-center"><h2>Usuarios Registrados</h2></div>
+            <div class="panel-heading text-center"><label style="font-size : 25px;">Usuarios Registrados</label></div>
             <div class="panel-body">
-
                 <div align="center">
-                    <h4><a class="btn btn-primary btn-sm" href="{{route('users.create')}}">Nuevo usuario</a></h4>
-                </div><br>
+                    <h4><a class="btn btn-primary btn-sm" href="{{route('usuarios.create')}}">Nuevo usuario</a></h4>
+                </div>
                 <div class="table-responsive">
                         <table class="table table-hover">
                             <thead>
@@ -32,7 +31,6 @@
                                     <td><input type="text" name="correo" class="form-control" autocomplete="off" title="Añada correo para filtrar"></td>
                                     <td></td>
                                     <td><button type="submit" class="btn btn-primary center-block btn-sm">Filtrar</button></td>
-
                                 </form>
                             </tr>
                             <tbody>
@@ -44,9 +42,9 @@
                                         <td class="text-center">{{ $user->email }}</td>
                                         <td class="text-center">{{ $user->created_at }}</td>
                                         <td class="text-center">
-                                            <a href="{{ route('users.edit', $user->id) }}" class="btn btn-info btn-xs">Editar</a>
+                                            <a href="{{ route('usuarios.edit', $user->id) }}" class="btn btn-info btn-xs">Editar</a>
                                             <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#modalDelete" data-nombre="{{$user->nombre }}  {{$user->apellidos }} "
-                                               data-url="{{ route('users.destroy', $user->id) }}">Eliminar</button>
+                                               data-url="{{ route('usuarios.destroy', $user->id) }}">Eliminar</button>
                                         </td>
                                     </tr>
 
