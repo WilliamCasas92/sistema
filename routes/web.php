@@ -92,6 +92,6 @@ Route::get('test1', function (){
         ->get();
 
     foreach ($procesos_contractuales as $proceso){
-        echo $proceso->id. ' '.$proceso->numero_cdp.' '.$proceso->objeto.' '. $proceso->user_id.'</br>';
+        echo $proceso->id. ' '.$proceso->numero_cdp.'  '.$proceso->objeto.' '. $proceso->user_id.'</br>';
     }
 });
