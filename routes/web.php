@@ -1,11 +1,9 @@
 <?php
-use Carbon\Carbon;
 
 //Ruta Inicio
 Route::get('/', 'SocialController@getSocialAuth');
 
-//Rutas LogIn LogOut
-Auth::routes();
+
 
 //Rutas Google
 Route::get('social/google', 'SocialController@getSocialAuth');
@@ -36,7 +34,6 @@ Route::group(['middleware' => 'onlyAdminCoordinador'], function() {
     //Ruta Historial
     Route::get('procesocontractual/historial/{proceso_id}', ['as'=>'historiales.mostrar','uses'=> 'HistorialController@mostrar']);
 });
-
 
 //Rutas DILIGENCIAR
 Route::group(['middleware' => 'onlyDiligenciar'], function() {
@@ -72,26 +69,10 @@ Route::group(['middleware' => 'allUsers'], function() {
     });
     //Ruta Acerca
     Route::get('acerca', 'HomeController@about');
+
+    Route::post('desconexion', 'HomeController@desconexion');
 });
 
+//Rutas LogIn LogOut
 
-
-
-Route::get('test8', function (){
-    $id_rol_coordinador=2;
-    $id_rol_secretario=3;
-    $id_usuarios =DB::table('users')
-        ->join('user_rol', function ($join) use ($id_rol_coordinador, $id_rol_secretario)  {
-            $join->on('users.id', '=', 'user_rol.user_id')
-                ->where('user_rol.rol_id','=',$id_rol_coordinador)
-                ->orOn('users.id', '=', 'user_rol.user_id')
-                ->where('user_rol.rol_id','=',$id_rol_secretario);
-        })
-        ->select('users.id')
-        ->distinct()
-        ->get();
-    foreach ($id_usuarios as $id_usuario){
-        $usuario=\App\User::find($id_usuario->id);
-        echo  $usuario->nombre.' '.$usuario->apellidos.'<br>';
-    }
-});
+Auth::routes();

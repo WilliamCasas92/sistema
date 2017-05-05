@@ -19,7 +19,9 @@
     <div class="container-fluid well-md headersize" id="colorheader">
         <div class="row">
             <div class="col-md-3">
-                <img class="imglogo" src="{{asset('images/logo-institucion-300dpi-blanco-05.png')}}" width='360' height='75'>
+                <a href="http://www.politecnicojic.edu.co/">
+                    <img class="imglogo" src="{{asset('images/logo-institucion-300dpi-blanco-05.png')}}" width='360' height='75'>
+                </a>
             </div>
             <div align="center" class="col-md-6">
                 <h1 style="color:white;">SIGECOP</h1>
@@ -31,13 +33,13 @@
                     <h4>Bienvenido(a)</h4>
                     <h5>{{ Auth::user()->nombre }} {{ Auth::user()->apellidos }}</h5>
                     <h5>{{ Auth::user()->email }}</h5>
-                    <a type="button" class="btn btn-danger btn-xs" href="{{ url('/logout') }}"
+                    <a type="button" class="btn btn-danger btn-xs" href="{{ url('desconexion') }}"
                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                         <span class="glyphicon glyphicon-log-out"></span>
                         Salir
                     </a>
-                    <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                    <form id="logout-form" action="{{ url('desconexion') }}" method="POST" style="display: none;">
                         {{ csrf_field() }}
                     </form>
                     @endif
@@ -47,6 +49,7 @@
     </div>
     <!-- Header NavBar -->
     <nav class="navbar navbar-default navbarsize" id="estilonavbar">
+        @if (Auth::check())
         <div align="center">
             <a href="{{ url('home') }}" type="button" class="btn btn-success">
                 <span class="glyphicon glyphicon-home"></span> Inicio</a>
@@ -93,15 +96,17 @@
             @endif
             <a href="{{ url('acerca') }}" type="button" class="btn btn-success"><span class="glyphicon glyphicon-info-sign"></span> Acerca</a>
         </div>
+        @endif
     </nav>
 </header>
 <body>
 <!-- Vistas -->
     <div class="container-fluid panel-body">
         <div class="row">
-            <div class="container margincontainer">
+            <div class="container margincontainer"><br>
                 @yield("homecontent")
                 @yield("errorlogin")
+                @yield("errorrol")
                 @yield("createuser")
                 @yield("indexuser")
                 @yield("edituser")
