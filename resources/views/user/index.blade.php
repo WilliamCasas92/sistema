@@ -30,7 +30,12 @@
                                     <td><input type="text" name="apellidos" class="form-control" title="Añada apellidos para filtrar"></td>
                                     <td><input type="text" name="correo" class="form-control" autocomplete="off" title="Añada correo para filtrar"></td>
                                     <td></td>
-                                    <td><button type="submit" class="btn btn-primary center-block btn-sm">Filtrar</button></td>
+                                    <td>
+                                        <button type="submit" class="btn btn-primary btn-xs">Filtrar</button>
+                                        @if(isset($mostrar_todos))
+                                            <a class="btn-info btn btn-xs" href="{{route('usuarios.index')}}">Ver Todos</a>
+                                        @endif
+                                    </td>
                                 </form>
                             </tr>
                             <tbody>
@@ -42,7 +47,7 @@
                                         <td class="text-center">{{ $user->email }}</td>
                                         <td class="text-center">{{ $user->created_at }}</td>
                                         <td class="text-center">
-                                            <a href="{{ route('usuarios.edit', $user->id) }}" class="btn btn-info btn-xs">Editar</a>
+                                            <a href="{{ route('usuarios.edit', $user->id) }}" class="btn btn-info btn-xs ">Editar</a>
                                             <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#modalDelete" data-nombre="{{$user->nombre }}  {{$user->apellidos }} "
                                                data-url="{{ route('usuarios.destroy', $user->id) }}">Eliminar</button>
                                         </td>

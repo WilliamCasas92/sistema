@@ -163,6 +163,7 @@ class UserController extends Controller
                 ->orderBy('nombre', 'asc')
                 ->get();;
         }
-        return view($this->path.'.index', compact('users'));
+        $mostrar_todos=1;
+        return view($this->path.'.index', compact('users', 'mostrar_todos'));
     }
 }
