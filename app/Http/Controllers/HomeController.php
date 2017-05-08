@@ -30,11 +30,6 @@ class HomeController extends Controller
     public function desconexion(){
         Auth::logout();
         Session::flush();
-        if(!config("services.google")) abort('404');
-
-        return Socialite::driver('google')->redirect();
-        //return redirect('/');
-        //return redirect('https://mail.google.com/a/elpoli.edu.co/');
+        return redirect('https://mail.google.com/a/elpoli.edu.co/');
     }
-
 }
