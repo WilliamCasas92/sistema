@@ -3,11 +3,10 @@
 @endphp
 <div class="table-responsive">
     <table class="table table-condensed table-headborderless">
-        <h5 class="text"><label>Información de Etapa</label></h5>
-        <thead style="font-size : 11px;">
+        <thead style="font-size : 13px;">
             <tr>
-                <th class="text-justify text-info" width="35%"></th>
-                <th class="text-justify" width="50%"></th>
+                <th class="text-justify text-info" width="35%">Requisito</th>
+                <th class="text-justify text-info" width="50%">Valor</th>
             </tr>
         </thead>
         <tbody style="font-size : 11px;">
@@ -52,7 +51,7 @@
     </table>
 </div>
 @if ($existen_datos!=true)
-    <h3>No hay información para esta etapa.</h3>
+    <h4>No hay información para esta etapa.</h4>
 @endif
 
 

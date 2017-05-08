@@ -172,15 +172,10 @@ class DatosEtapaController extends Controller
                     ->value('id');
                 $proceso_etapa->etapas_id  =$id_nextetapa;
                 $proceso_etapa->user_id                  = \Auth::user()->id;
-
-
-
-
                 $nextetapa= DB::table('etapas')
                     ->where('tipo_procesos_id', $proceso_contractual->tipo_procesos_id )
                     ->where('indice', $etapa->indice + 1)
                     ->value('nombre');
-
                 $proceso_contractual->estado             = $nextetapa;
                 $proceso_contractual->save();
                 //Guardando en el historial
@@ -194,7 +189,6 @@ class DatosEtapaController extends Controller
                 $proceso_etapa->save();
                 //En esta instrucción se notifica por correo a los usuarios que estan involucrados en la siguiente etapa, sobre el cambio de etapa
                 $this->notificar_cambio_etapa($id_nextetapa, $proceso_contractual);
-
                 return view('datosetapas/pasoetapa');
             }
             return view('datosetapas/datosfaltantes', compact('contenido_validacion'));
@@ -392,6 +386,5 @@ class DatosEtapaController extends Controller
                 $usuario->notify(new CambioEtapa($proceso_contractual, $nombre_etapa_anterior, $roles_usurio_etapa));
         }
         return;
-
     }
 }

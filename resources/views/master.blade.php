@@ -129,6 +129,7 @@
     <script src="/assets/js/bootstrap.js"></script>
     <!--<script src="/js/jquery-3.1.1.js" type="text/javascript"></script>-->
     @yield('scriptEtapas')
+    @yield('scriptEtapasShow')
     @yield('scriptMenu')
     @yield('scriptTipoProceso')
     @yield('scriptUsers')

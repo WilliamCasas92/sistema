@@ -2,7 +2,7 @@
 @section('indexprocesstype')
     <div class="container col-md-12">
         <div class="panel panel-success">
-            <div class="panel-heading text-center"><label style="font-size : 25px;">Bienvenido(a) a SIGECOP</label></div>
+            <div class="panel-heading text-center"><label style="font-size : 25px;">Tipos de Procesos Registrados</label></div>
             <div class="panel-body">
                 <div align="center">
                     <h4><a class="btn btn-primary btn-sm" href="{{route('tipoproceso.create')}}">Nuevo tipo de proceso de contratación</a></h4>

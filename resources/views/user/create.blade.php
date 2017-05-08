@@ -2,7 +2,7 @@
 @section('createuser')
     <div class="container col-md-12">
         <div class="panel panel-success">
-            <div class="panel-heading"><h3>Registrar Nuevo Usuario</h3></div>
+            <div class="panel-heading"><label style="font-size : 20px;">Registrar Nuevo Usuario</label></div>
             <div class="panel-body">
                 @if (session('error'))
                     <div class="alert alert-danger">

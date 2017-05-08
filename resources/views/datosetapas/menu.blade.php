@@ -4,8 +4,18 @@
         <div class="panel panel-success">
             <div class="panel-heading">
                 <a data-toggle="collapse"  data-parent="#accordion" href="#collapseprocesocontractual">
-                    <h3><label onmouseover="this.style.cursor='pointer';" class="text-success">Datos generales del contrato (Ver más)</label></h3>
+                    <h3><label onmouseover="this.style.cursor='pointer';" class="text-success">Datos generales del contrato <u id="VerMas" style="font-size : 15px;">Ver más</u></label></h3>
                 </a>
+                <script>
+                        $("#VerMas").click(function(){
+                            var text = $('#VerMas').text();
+                            if (text == 'Ver más'){
+                                $('#VerMas').text('Ver menos');
+                            } else {
+                                $('#VerMas').text('Ver más');
+                            }
+                        });
+                </script>
             </div>
             <div class="panel-group" id="accordion">
                 <div class="panel panel-default">
@@ -129,7 +139,7 @@
             </div>
             <!-- Observaciones que contiene el contracto-->
             <div class="margincollapse">
-                <div class="panel-group panel-default" >
+                <div class="panel-group panel-success" >
                     <div class="panel-heading">
                         <a data-toggle="collapse"  href="#collapseprocesoobservaciones">
                             <h4 class="panel-title">

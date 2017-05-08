@@ -3,9 +3,9 @@
     <div class="container col-md-12">
         <div class="panel panel-success">
             @if(Auth::user()->hasRol('Gestor de contratación'))
-                <div class="panel-heading"><h3>Asigne número de contrato</h3></div>
+                <div class="panel-heading"><label style="font-size : 20px;">Asigne número de contrato</label></div>
             @else
-                <div class="panel-heading"><h3>Editar Proceso de Contratación</h3></div>
+                <div class="panel-heading"><label style="font-size : 20px;">Editar Proceso de Contratación</label></div>
             @endif
             @php
                 if(Auth::user()->hasRol('Gestor de contratación')){

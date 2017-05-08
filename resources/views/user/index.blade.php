@@ -52,7 +52,6 @@
                                                data-url="{{ route('usuarios.destroy', $user->id) }}">Eliminar</button>
                                         </td>
                                     </tr>
-
                                 @endforeach
                             </tbody>
                             </table>

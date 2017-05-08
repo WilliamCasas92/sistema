@@ -1,4 +1,9 @@
 <div>
+    <div class="text-center">
+        <button id="btnexpandir" type="button" class="btn btn-xs btn-block btn-success" title="Motrar contenido de todas las etapas">
+            <span class="glyphicon glyphicon-chevron-down"></span> Expandir</button>
+        <button id="btncontraer" type="button" class="btn btn-xs btn-block btn-success hide" title="Ocultar contenido de todas las etapas">
+            <span class="glyphicon glyphicon-chevron-up"></span> Contraer</button></div>
     @foreach($etapas as $etapa)
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -16,3 +21,27 @@
         </div>
     @endforeach
 </div>
+<script>
+    $(document).ready(function() {
+        $("#btnexpandir").click(function(){
+            @foreach($etapas as $etapa)
+                   $("#collapse{{ $etapa->id }}").addClass("in");
+            @endforeach
+        });
+        $("#btncontraer").click(function(){
+            @foreach($etapas as $etapa)
+                   $("#collapse{{ $etapa->id }}").removeClass("in");
+            @endforeach
+        });
+        $("#btnexpandir").click(function(){
+            $("#btncontraer").removeClass("hide");
+            $("#btnexpandir").hide();
+            $("#btncontraer").show();
+        });
+        $("#btncontraer").click(function(){
+            $("#btnexpandir").show();
+            $("#btncontraer").hide();
+        });
+    })
+</script>
+

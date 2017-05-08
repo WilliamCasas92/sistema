@@ -2,7 +2,7 @@
 @section('createcontractualprocess')
     <div class="container col-md-12">
         <div class="panel panel-success">
-            <div class="panel-heading"><h3>Crear nuevo proceso de contratación</h3></div>
+            <div class="panel-heading"><label style="font-size : 20px;">Crear nuevo proceso de contratación</label></div>
             <div class="panel-body">
                 @if (session('error'))
                     <div class="alert alert-danger">

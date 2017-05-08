@@ -29,7 +29,7 @@
                 @endforeach
             @else
                 <tr>
-                    <h4>En este momento no hay observaciones para mostrar</h4>
+                    <h5>No hay observaciones para mostrar.</h5>
                 </tr>
             @endif
         </table>

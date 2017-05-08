@@ -8,14 +8,18 @@
         <table class="table table-condensed table-headborderless">
     @endif
         @if($etapa_activa!='Activo')
-            <h5 class="text"><label>Información de Etapa</label></h5>
         @else
-            <h5 class="text"><label>Diligencie los siguientes datos<br><br>Campos obligatorios (*)</label></h5>
+            <h5 class="text"><label>Campos obligatorios (*)</label></h5>
         @endif
-        <thead style="font-size : 11px;">
+        <thead style="font-size : 13px;">
         <tr>
-            <th class="text-center text-info" width="35%"></th>
-            <th class="text-justify" width="50%"></th>
+            @if($etapa_activa!='Activo')
+                <th class="text-justify text-info" width="35%">Requisito</th>
+                <th class="text-justify text-info" width="50%">Valor</th>
+            @else
+                <th class="text-justify text-info" width="35%"></th>
+                <th class="text-justify text-info" width="50%"></th>
+            @endif
         </tr>
         </thead>
         <tbody style="font-size : 11px;">
@@ -165,7 +169,7 @@
                     </div>
                 </form>
             @else
-                <h3>No hay información por diligenciar.</h3>
+                <h4>No hay información por diligenciar.</h4>
             @endif
         </form>
         </tbody>
