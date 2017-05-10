@@ -591,4 +591,8 @@ class ProcesoContractualController extends Controller
         return ProcesoContractual::all();
     }
 
+    static function procesos_contractuales_orderby(){
+        return ProcesoContractual::orderBy('updated_at','desc')->take(5)->get();
+    }
+
 }
