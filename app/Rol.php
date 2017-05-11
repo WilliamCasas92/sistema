@@ -2,10 +2,13 @@
 
 namespace App;
 
+use App\DatesTranslator;
 use Illuminate\Database\Eloquent\Model;
 
 class Rol extends Model
 {
+    use DatesTranslator;
+
     //Uno o varios ROLES pertenecen a muchos USUARIOS
     public function users()
     {

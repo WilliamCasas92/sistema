@@ -2,10 +2,13 @@
 
 namespace App;
 
+use App\DatesTranslator;
 use Illuminate\Database\Eloquent\Model;
 
 class ProcesoEtapa extends Model
 {
+    use DatesTranslator;
+
     public function proceso_contractuals()
     {
         return $this->belongsTo('App\ProcesoContractual');

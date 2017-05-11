@@ -2,10 +2,13 @@
 
 namespace App;
 
+use App\DatesTranslator;
 use Illuminate\Database\Eloquent\Model;
 
 class DatoEtapa extends Model
 {
+    use DatesTranslator;
+
     public function requisitos()
     {
         return $this->belongsTo('App\Requisito');

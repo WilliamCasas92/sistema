@@ -166,7 +166,7 @@ return [
         /*
          * Package Service Providers...
          */
-
+        Jenssegers\Date\DateServiceProvider::class,
         //
 
         /*
@@ -229,6 +229,7 @@ return [
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+        'Date' => Jenssegers\Date\Date::class,
 
 
     ],

@@ -2,10 +2,13 @@
 
 namespace App;
 
+use App\DatesTranslator;
 use Illuminate\Database\Eloquent\Model;
 
 class ProcesoContractual extends Model
 {
+    use DatesTranslator;
+
     public function tipo_procesos()
     {
         return $this->belongsTo('App\TipoProceso');

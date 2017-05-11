@@ -61,31 +61,31 @@
                                             <tr>
                                                 <td>{{$usuario->nombre}} {{$usuario->apellidos}}<br>{{$usuario->email}}</td>
                                                 <td>Proceso <label>ENVIADO al Área de Adquisiciones</label>.</td>
-                                                <td>{{$historico_proceso_etapa->created_at->format('l jS \\of F Y h:i:s A')}}</td>
+                                                <td>{{$historico_proceso_etapa->created_at->format(('l d \d\e F \d\e Y, h:i:s A'))}}</td>
                                             </tr>
                                         @elseif($historico_proceso_etapa->estado=='Finalizado')
                                             <tr>
                                                 <td>{{$usuario->nombre}} {{$usuario->apellidos}}<br>{{$usuario->email}}</td>
                                                 <td>Proceso <label>FINALIZADO</label> en el Área de Adquisiciones.</td>
-                                                <td>{{$historico_proceso_etapa->created_at->format('l jS \\of F Y h:i:s A')}}</td>
+                                                <td>{{$historico_proceso_etapa->created_at->format('l d \d\e F \d\e Y, h:i:s A')}}</td>
                                             </tr>
                                         @elseif($historico_proceso_etapa->estado=='Desierto')
                                             <tr>
                                                 <td>{{$usuario->nombre}} {{$usuario->apellidos}}<br>{{$usuario->email}}</td>
                                                 <td>Proceso declarado <label>DESIERTO</label>.</td>
-                                                <td>{{$historico_proceso_etapa->created_at->format('l jS \\of F Y h:i:s A')}}</td>
+                                                <td>{{$historico_proceso_etapa->created_at->format(('l d \d\e F \d\e Y, h:i:s A'))}}</td>
                                             </tr>
                                         @elseif($historico_proceso_etapa->estado=='Reanudado')
                                             <tr>
                                                 <td>{{$usuario->nombre}} {{$usuario->apellidos}}<br>{{$usuario->email}}</td>
                                                 <td>Proceso <label>REANUDADO</label>.<br>Proceso enviado a la primera etapa.</td>
-                                                <td>{{$historico_proceso_etapa->created_at->format('l jS \\of F Y h:i:s A')}}</td>
+                                                <td>{{$historico_proceso_etapa->created_at->format('l d \d\e F \d\e Y, h:i:s A')}}</td>
                                             </tr>
                                         @else
                                             <tr>
                                                 <td>{{$usuario->nombre}} {{$usuario->apellidos}}<br>{{$usuario->email}}</td>
                                                 <td>Proceso enviado a la etapa de: <label>{{$historico_proceso_etapa->estado}}</label>.</td>
-                                                <td>{{$historico_proceso_etapa->created_at->format('l jS \\of F Y h:i:s A')}}</td>
+                                                <td>{{$historico_proceso_etapa->created_at->format('l d \d\e F \d\e Y, h:i:s A')}}</td>
                                             </tr>
                                         @endif
                                     @endforeach
@@ -161,7 +161,7 @@
                                                 El siguiente dato: <label>{{$texto}}</label>.</td>
                                         @endif
                                         <td>{{$requisito->etapas->nombre}}</td>
-                                        <td>{{$historico_dato_etapa->created_at->format('l jS \\of F Y h:i:s A')}}</td>
+                                        <td>{{$historico_dato_etapa->created_at->format('l d \d\e F \d\e Y, h:i:s A')}}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>

@@ -2,10 +2,12 @@
 
 namespace App;
 
+use App\DatesTranslator;
 use Illuminate\Database\Eloquent\Model;
 
 class Etapa extends Model
 {
+    use DatesTranslator;
     //Una ETAPA perenece a un TIPO DE PROCESO
     public function tipo_procesos()
     {
