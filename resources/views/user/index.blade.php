@@ -31,10 +31,7 @@
                                     <td><input type="text" name="correo" class="form-control" autocomplete="off" title="Añada correo para filtrar"></td>
                                     <td></td>
                                     <td class="text-center">
-                                        <button type="submit" class="btn btn-primary btn-xs">Filtrar</button>
-                                        @if(isset($mostrar_todos))
-                                            <a class="btn-info btn btn-xs" href="{{route('usuarios.index')}}">Ver Todos</a>
-                                        @endif
+                                        <button type="submit" class="btn btn-primary btn-xs btn-group-lg">Filtrar</button>
                                     </td>
                                 </form>
                             </tr>

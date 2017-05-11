@@ -63,7 +63,7 @@
                     }
                 }
             @endphp
-            <a href="{{ url('consultaproceso') }}" type="button" class="btn btn-success">
+            <a href="{{ url('mostrarprocesos') }}" type="button" class="btn btn-success">
                 <span class="glyphicon glyphicon-search"></span> Procesos Contractuales
                 @if ( (\Auth::user()->hasRol('Coordinador'))                          ||
                    (\Auth::user()->hasRol('Secretario técnico de dependencia'))    ||

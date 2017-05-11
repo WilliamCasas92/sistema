@@ -59,7 +59,8 @@ Route::group(['middleware' => 'onlyDiligenciar'], function() {
 
 Route::group(['middleware' => 'allUsers'], function() {
     //Rutas Consulta de procesos
-    Route::get('consultaproceso', ['as'=>'consulta.mostrar','uses'=> 'ConsultasController@mostrar']);
+    Route::get('mostrarprocesos', ['as'=>'consulta.mostrar','uses'=> 'ConsultasController@mostrar']);
+    Route::post('consultaproceso', ['as'=>'consulta.consultar','uses'=> 'ConsultasController@consultar']);
     Route::get('consultaproceso/{idproceso}', ['as'=>'consulta.consultavermas','uses'=> 'ConsultasController@ver_mas']);
     //App Home
     Route::get('/home', 'HomeController@index');
@@ -76,22 +77,3 @@ Route::group(['middleware' => 'allUsers'], function() {
 //Rutas LogIn LogOut
 
 Auth::routes();
-
-
-Route::get('test1', function (){
-
-    $procesos_contractuales=DB::table('user_rol')
-        ->join('rols', function ($join) {
-            $join->on('user_rol.rol_id', '=', 'rols.id')
-                ->where('user_rol.user_id', '=', 4);
-        })
-        ->join('etapa_rol', 'rols.id', '=', 'etapa_rol.rol_id')
-        ->join('proceso_etapas', 'etapa_rol.etapa_id', '=', 'proceso_etapas.etapas_id')
-        ->join('proceso_contractuals', 'proceso_etapas.proceso_contractual_id', '=', 'proceso_contractuals.id')
-        ->select('proceso_contractuals.*', 'user_rol.user_id')
-        ->get();
-
-    foreach ($procesos_contractuales as $proceso){
-        echo $proceso->id. ' '.$proceso->numero_cdp.'  '.$proceso->objeto.' '. $proceso->user_id.'</br>';
-    }
-});
