@@ -7,7 +7,7 @@
             @php($etapa_usuario=\App\Http\Controllers\ProcesoContractualController::etapa_usuario($proceso_contractual->estado, $proceso_contractual->tipo_procesos_id))
             @if(($etapa_usuario==true) && ($proceso_contractual->estado!='Finalizado'))
                 <div class="well text-justify">
-                    <strong>Tienes este proceso desde: </strong> {{$proceso_contractual->updated_at->format('l d \d\e F \d\e Y, h:i:s A')}}<br>
+                    <strong>Fecha de llegada: </strong> {{$proceso_contractual->updated_at->format('l d \d\e F \d\e Y, h:i:s A')}}<br>
                     <strong>Modalidad:</strong> {{$proceso_contractual->tipo_proceso}}.<br>
                     <strong>CDP:</strong> {{$proceso_contractual->numero_cdp}}.<br>
                     <strong>Objeto:</strong> {{$proceso_contractual->objeto}}<br>
