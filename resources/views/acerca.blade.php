@@ -53,8 +53,16 @@
                     <h4>Asesorado por</h4>
                     <p>M. Sc. Roberto Antonio Manjarrés Betancur</p><br>
                     <h4>Del Programa Académico</h4>
-                    <p>Ingeniería Informática - Politécnico Colombiano Jaime Isaza Cadavid</p>
-                    <p>2017</p>
+                    <p>Ingeniería Informática - Facultad de Ingenierías</p>
+                    <p>Politécnico Colombiano Jaime Isaza Cadavid &copy; 2017 – Todos los derechos reservados</p>
+                    <p chrome ><strong><br>Para mejorar tu experiencia en SIGECOP cambia tu navegador a <a href="https://www.google.com/chrome/">Google Chrome</a>.</strong></p>
+                    <script>
+                        if (window.chrome) {
+                            $('p[chrome]').hide();
+                        }else {
+                            $('p[chrome]').show();
+                        }
+                    </script>
                 </div>
             </div>
         </div>

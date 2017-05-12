@@ -1,6 +1,6 @@
 <div class="panel panel-success">
     @php($exiten=false)
-    <div class="panel-heading text-center"><strong>¡Te han enviado recientemente los siguientes procesos contractuales!</strong></div>
+    <div class="panel-heading text-center"><strong>¡Estos son los nuevos procesos de contratación que estan por atender!</strong></div>
     <div class="panel-body">
         @php($procesos_contractuales=\App\Http\Controllers\ProcesoContractualController::procesos_contractuales_orderby())
         @foreach ($procesos_contractuales as $proceso_contractual)
