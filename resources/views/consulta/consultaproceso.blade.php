@@ -45,7 +45,7 @@
                                             </select>
                                         </td>
                                         <td>
-                                            <select class="form-control input-sm" name="TipoProceso" id="TipoProceso">
+                                            <select class="form-control input-sm" name="TipoProceso"  id="TipoProceso">
                                                 <option value=""></option>
                                                 @foreach($tipos_procesos as $tipo_proceso)
                                                     <option value="{{$tipo_proceso->nombre}}">{{$tipo_proceso->nombre}}</option>
