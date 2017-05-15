@@ -83,17 +83,7 @@
 
 @section('scriptUsers')
     <script language="javascript">
-        function ValidarCheck()
-        {
-            if(document.getElementById('rol_admin').checked && document.getElementById('rol_coordinador').checked
-                && document.getElementById('rol_secretario').checked && document.getElementById('rol_abogado').checked
-                && document.getElementById('rol_gestorcontratacion').checked && document.getElementById('rol_gestornotificacion').checked
-                && document.getElementById('rol_gestorarchivo').checked && document.getElementById('rol_gestorpublicacion').checked
-                && document.getElementById('rol_secretariotecnico').checked){
-                return false;
 
-            }
-        };
 
         $(document).ready(function() {
             document.getElementById('rol_usuariogeneral').onchange = function() {
@@ -168,7 +158,14 @@
                     document.getElementById('rol_usuariogeneral').disabled = this.checked;
                 }
             };
+            function ValidarCheck()
+            {
+                if(document.getElementById('rol_admin').checked==true){
+                    return false;
 
-        })
+                }
+            };
+
+         })
     </script>
 @endsection

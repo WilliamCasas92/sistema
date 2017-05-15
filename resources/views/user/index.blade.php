@@ -32,6 +32,9 @@
                                     <td></td>
                                     <td class="text-center">
                                         <button type="submit" class="btn btn-primary btn-xs btn-group-lg">Filtrar</button>
+                                        @if(isset($mostrar_todos))
+                                            <a class="btn-info btn btn-xs" href="{{route('usuarios.index')}}">Ver Todos</a>
+                                        @endif
                                     </td>
                                 </form>
                             </tr>
