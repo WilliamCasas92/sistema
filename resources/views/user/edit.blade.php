@@ -80,3 +80,95 @@
         <h4><a class="btn btn-default" href="{{route('usuarios.index')}}"><span class="glyphicon glyphicon-chevron-left"></span> Ir atrás</a></h4>
     </div>
 @endsection
+
+@section('scriptUsers')
+    <script language="javascript">
+        function ValidarCheck()
+        {
+            if(document.getElementById('rol_admin').checked && document.getElementById('rol_coordinador').checked
+                && document.getElementById('rol_secretario').checked && document.getElementById('rol_abogado').checked
+                && document.getElementById('rol_gestorcontratacion').checked && document.getElementById('rol_gestornotificacion').checked
+                && document.getElementById('rol_gestorarchivo').checked && document.getElementById('rol_gestorpublicacion').checked
+                && document.getElementById('rol_secretariotecnico').checked){
+                return false;
+
+            }
+        };
+
+        $(document).ready(function() {
+            document.getElementById('rol_usuariogeneral').onchange = function() {
+                document.getElementById('rol_admin').disabled = this.checked;
+                document.getElementById('rol_coordinador').disabled = this.checked;
+                document.getElementById('rol_secretario').disabled = this.checked;
+                document.getElementById('rol_abogado').disabled = this.checked;
+                document.getElementById('rol_gestorcontratacion').disabled = this.checked;
+                document.getElementById('rol_gestornotificacion').disabled = this.checked;
+                document.getElementById('rol_gestorafiliacion').disabled = this.checked;
+                document.getElementById('rol_gestorarchivo').disabled = this.checked;
+                document.getElementById('rol_gestorpublicacion').disabled = this.checked;
+                document.getElementById('rol_secretariotecnico').disabled = this.checked;
+            };
+            document.getElementById('rol_admin').onchange = function() {
+                valor=ValidarCheck();
+                if(valor) {
+                    document.getElementById('rol_usuariogeneral').disabled = this.checked;
+                }
+            };
+            document.getElementById('rol_coordinador').onchange = function() {
+                valor=ValidarCheck();
+                if(valor) {
+                    document.getElementById('rol_usuariogeneral').disabled = this.checked;
+                }
+            };
+            document.getElementById('rol_secretario').onchange = function() {
+                document.getElementById('rol_secretariotecnico').disabled = this.checked;
+                valor=ValidarCheck();
+                if(valor) {
+                    document.getElementById('rol_usuariogeneral').disabled = this.checked;
+                }
+            };
+            document.getElementById('rol_abogado').onchange = function() {
+                valor=ValidarCheck();
+                if(valor) {
+                    document.getElementById('rol_usuariogeneral').disabled = this.checked;
+                }
+            };
+            document.getElementById('rol_gestorcontratacion').onchange = function() {
+                valor=ValidarCheck();
+                if(valor) {
+                    document.getElementById('rol_usuariogeneral').disabled = this.checked;
+                }
+            };
+            document.getElementById('rol_gestornotificacion').onchange = function() {
+                valor=ValidarCheck();
+                if(valor) {
+                    document.getElementById('rol_usuariogeneral').disabled = this.checked;
+                }
+            };
+            document.getElementById('rol_gestorafiliacion').onchange = function() {
+                valor=ValidarCheck();
+                if(valor) {
+                    document.getElementById('rol_usuariogeneral').disabled = this.checked;
+                }
+            };
+            document.getElementById('rol_gestorpublicacion').onchange = function() {
+                if(ValidarCheck()) {
+                    document.getElementById('rol_usuariogeneral').disabled = this.checked;
+                }
+            };
+            document.getElementById('rol_secretariotecnico').onchange = function() {
+                valor=ValidarCheck();
+                if(valor) {
+                    document.getElementById('rol_usuariogeneral').disabled = this.checked;
+                }
+            };
+            document.getElementById('rol_secretariotecnico').onchange = function() {
+                document.getElementById('rol_secretario').disabled = this.checked;
+                if(ValidarCheck()) {
+                    document.getElementById('rol_usuariogeneral').disabled = this.checked;
+                }
+            };
+
+        })
+    </script>
+@endsection

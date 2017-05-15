@@ -138,6 +138,7 @@
     @yield('scriptIndicador')
     @yield('scriptDatosEtapas')
     @yield('scriptconsultacontent')
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
