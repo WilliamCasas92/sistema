@@ -70,11 +70,9 @@
                             </div>
                         </div>
                     </div><br>
-                    <form class="form-inline">
-                        <div align="center">
-                            <button type="submit" id="crear_usuario" class="btn btn-default">Crear usuario</button>
-                        </div>
-                    </form>
+                    <div align="center" class="form-inline">
+                            <input type="submit" name="Crear usuario" class="btn btn-default">
+                    </div>
                 </form>
             </div>
         </div>

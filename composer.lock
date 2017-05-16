@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "78708190fd6d4e0637d136b958ac408f",
+    "content-hash": "2040a718556df6fded75b4e8f1b2b061",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -2472,12 +2472,12 @@
             "version": "0.9.6",
             "source": {
                 "type": "git",
-                "url": "https://github.com/padraic/mockery.git",
+                "url": "https://github.com/mockery/mockery.git",
                 "reference": "65d4ca18e15cb02eeb1e5336f884e46b9b905be0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/padraic/mockery/zipball/65d4ca18e15cb02eeb1e5336f884e46b9b905be0",
+                "url": "https://api.github.com/repos/mockery/mockery/zipball/65d4ca18e15cb02eeb1e5336f884e46b9b905be0",
                 "reference": "65d4ca18e15cb02eeb1e5336f884e46b9b905be0",
                 "shasum": ""
             },
@@ -2894,6 +2894,52 @@
             "time": "2016-10-03T07:40:28+00:00"
         },
         {
+            "name": "phpunit/php-invoker",
+            "version": "1.1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/php-invoker.git",
+                "reference": "86074bf0fc2caf02ec8819a93f65a37cd0b44c8e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-invoker/zipball/86074bf0fc2caf02ec8819a93f65a37cd0b44c8e",
+                "reference": "86074bf0fc2caf02ec8819a93f65a37cd0b44c8e",
+                "shasum": ""
+            },
+            "require": {
+                "ext-pcntl": "*",
+                "php": ">=5.3.3",
+                "phpunit/php-timer": ">=1.0.6"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
+                }
+            ],
+            "description": "Utility class for invoking callables with a timeout.",
+            "homepage": "https://github.com/sebastianbergmann/php-invoker/",
+            "keywords": [
+                "process"
+            ],
+            "time": "2015-06-21T13:32:55+00:00"
+        },
+        {
             "name": "phpunit/php-text-template",
             "version": "1.2.1",
             "source": {
@@ -3029,16 +3075,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "5.7.4",
+            "version": "5.7.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "af91da3f2671006ff5d0628023de3b7ac4d1ef09"
+                "reference": "69f832b87c731d5cacad7f91948778fe98335fdd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/af91da3f2671006ff5d0628023de3b7ac4d1ef09",
-                "reference": "af91da3f2671006ff5d0628023de3b7ac4d1ef09",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/69f832b87c731d5cacad7f91948778fe98335fdd",
+                "reference": "69f832b87c731d5cacad7f91948778fe98335fdd",
                 "shasum": ""
             },
             "require": {
@@ -3050,7 +3096,7 @@
                 "myclabs/deep-copy": "~1.3",
                 "php": "^5.6 || ^7.0",
                 "phpspec/prophecy": "^1.6.2",
-                "phpunit/php-code-coverage": "^4.0.3",
+                "phpunit/php-code-coverage": "^4.0.4",
                 "phpunit/php-file-iterator": "~1.4",
                 "phpunit/php-text-template": "~1.2",
                 "phpunit/php-timer": "^1.0.6",
@@ -3107,7 +3153,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2016-12-13T16:19:44+00:00"
+            "time": "2017-01-28T06:14:33+00:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",

@@ -11,7 +11,6 @@ class UserTest extends TestCase
      *
      * @return void
      */
-    use WithoutMiddleware;
 
     public function testExample()
     {
@@ -22,13 +21,22 @@ class UserTest extends TestCase
             ->visit('/usuarios')
             ->see($user->nombre);
 
-        $this->visit('/usuarios/create')
+        $this->visit('usuarios/create')
             ->type('Juan Pablo', 'nombre')
             ->type('Torres Mendoza', 'apellidos')
             ->type('juan_vásquez82112@elpoli.edu.co','email')
             ->check('rol_secretario')
             ->check('rol_abogado')
-            ->press('crear_usuario');
+            ->press('Crear usuario')
+            ->seePageIs('/usuarios');
+
+        $response = $this->call('POST', '/usuarios', ['nombre' => 'Juan', 'apellidos' => 'Vásquez',
+            'email'=>'juan_vásquez82101@elpoli.edu.co', 'rol_admin'=> '', 'rol_coordinador'=>'1', 'rol_secretario'=>'1',
+            'rol_abogado'=>'', 'rol_gestorcontratacion'=>'', 'rol_gestornotificacion'=>'', 'rol_gestorafiliacion'=>'',
+            'rol_gestorarchivo'=>'', 'rol_gestorpublicacion'=>'', 'rol_secretariotecnico'=>'1', 'rol_usuariogeneral'=>'']);
+
+        $this->assertResponseStatus( $response->status());
+
     }
 
 }
