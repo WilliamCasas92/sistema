@@ -72,7 +72,7 @@
                     </div><br>
                     <form class="form-inline">
                         <div align="center">
-                            <button type="submit" class="btn btn-default">Crear usuario</button>
+                            <button type="submit" id="crear_usuario" class="btn btn-default">Crear usuario</button>
                         </div>
                     </form>
                 </form>

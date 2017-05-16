@@ -20,8 +20,15 @@ class UserTest extends TestCase
         $this->actingAs($user)
             ->withSession(['foo' => 'bar'])
             ->visit('/usuarios')
-
             ->see($user->nombre);
+
+        $this->visit('/usuarios/create')
+            ->type('Juan Pablo', 'nombre')
+            ->type('Torres Mendoza', 'apellidos')
+            ->type('juan_vásquez82112@elpoli.edu.co','email')
+            ->check('rol_secretario')
+            ->check('rol_abogado')
+            ->press('crear_usuario');
     }
 
 }

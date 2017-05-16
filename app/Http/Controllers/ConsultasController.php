@@ -17,10 +17,17 @@ class ConsultasController extends Controller
     public function mostrar()
     {
         $id_rol_admin =1;
+        $id_rol_coordinador=2;
         $id_rol_secretario = 3;
         $id_rol_secretario_tecnico = 10;
         $user_id = \Auth::user()->id;
         $procesos_contractuales = DB::table('proceso_contractuals');
+
+        $admin = DB::table('user_rol')
+            ->where('rol_id', '=', $id_rol_secretario)
+            ->where('user_id', '=', $user_id)
+            ->get();
+
 
         $secretario = DB::table('user_rol')
             ->where('rol_id', '=', $id_rol_secretario)
@@ -59,8 +66,8 @@ class ConsultasController extends Controller
 
             $procesos_contractuales=DB::table('proceso_contractuals')
                 ->where('estado', '=', 'Enviado al Área de Adquisiciones.')
-                ->union($procesos_contractuales)
                 ->union($procesos_contractuales2)
+                ->union($procesos_contractuales)
                 ->simplePaginate();
 
         }elseif (count($secretario) == 0 && count( $secretario_tecnico)!= 0){
@@ -76,8 +83,8 @@ class ConsultasController extends Controller
 
             $procesos_contractuales=DB::table('proceso_contractuals')
                 ->where('estado', '=', 'Sin enviar al Área de Adquisiciones.')
-                ->union($procesos_contractuales)
                 ->union($procesos_contractuales2)
+                ->union($procesos_contractuales)
                 ->simplePaginate();
 
         }elseif (count($secretario) != 0 && count( $secretario_tecnico)!= 0){
@@ -94,8 +101,8 @@ class ConsultasController extends Controller
             $procesos_contractuales=DB::table('proceso_contractuals')
                 ->where('estado', '=', 'Enviado al Área de Adquisiciones.')
                 ->orwhere('estado', '=', 'Sin enviar al Área de Adquisiciones.')
-                ->union($procesos_contractuales)
                 ->union($procesos_contractuales2)
+                ->union($procesos_contractuales)
                 ->simplePaginate();
         }
 
