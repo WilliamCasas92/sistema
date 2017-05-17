@@ -37,11 +37,9 @@
                             </div>
                         </div>
                     </div>
-                    <form class="form-inline">
-                        <div align="center">
-                            <button type="submit" class="btn btn-default">Crear Tipo de Proceso de Contratación</button>
-                        </div>
-                    </form>
+                    <div align="center" class="form-inline">
+                        <input type="submit" value="Crear Tipo de Proceso de Contratación" class="btn btn-default">
+                    </div>
                 </form>
             </div>
         </div>
