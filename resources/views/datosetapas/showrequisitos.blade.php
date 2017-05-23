@@ -103,7 +103,7 @@
                             <tr><div class="form-group">
                                     <td class="text-right">
                                         <h5><label class="control-label " for="Input">{{$requisito->nombre}} {{$obligatorio}}:</label></h5></td>
-                                    <td><input {{$requisito_activado}} type="text" name="atributo[]" class="form-control datepicker" value="{{$valor}}" autocomplete="off" {{$required}} onchange="enviar()"></td>
+                                    <td><input {{$requisito_activado}} type="date" name="atributo[]" class="form-control" value="{{$valor}}" autocomplete="off" {{$required}} onchange="enviar()"></td>
                                 </div>
                             </tr>
                             <input type="hidden" name="requisito_id[]" value="{{$requisito->id}}">
@@ -186,14 +186,6 @@
                 <h4>No hay información por diligenciar.</h4>
             @endif
         </form>
-        <script>
-            $('.datepicker').datepicker({
-                todayBtn: "linked",
-                clearBtn: true,
-                language: "es",
-                autoclose: true
-            });
-        </script>
         </tbody>
         @if($etapa_activa=='Activo')
                 <script>
