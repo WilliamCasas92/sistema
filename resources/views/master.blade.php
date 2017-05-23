@@ -11,6 +11,13 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <script src="/js/jquery-3.1.1.js" type="text/javascript"></script>
+    <!-- datePicker Starts-->
+    <link rel="stylesheet" href="{{asset('datePicker/css/bootstrap-datepicker3.css')}}">
+    <link rel="stylesheet" href="{{asset('datePicker/css/bootstrap-standalone.css')}}">
+    <script src="{{asset('datePicker/js/bootstrap-datepicker.js')}}"></script>
+    <!-- Languaje -->
+    <script src="{{asset('datePicker/locales/bootstrap-datepicker.es.min.js')}}"></script>
+    <!-- datePicker Ends -->
     <link rel="icon" type="image/gif/png" href="{{asset('images/logo-institucion.png')}}">
     <title>SIGECOP</title>
 </head>

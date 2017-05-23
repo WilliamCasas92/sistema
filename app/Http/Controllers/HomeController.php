@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\HistoricoProcesoEtapa;
+use App\ProcesoEtapa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -31,5 +33,14 @@ class HomeController extends Controller
         Auth::logout();
         Session::flush();
         return redirect('https://mail.google.com/a/elpoli.edu.co/');
+    }
+
+    static function buscar_proceso_etapa($proceso_id){
+        $proceso_etapa = ProcesoEtapa::find($proceso_id);
+        if (!$proceso_etapa){
+            return 0;
+        }else{
+            return $fecha = $proceso_etapa->updated_at->format('l d \d\e F \d\e Y, h:i:s A');
+        }
     }
 }

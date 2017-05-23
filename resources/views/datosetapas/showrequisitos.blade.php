@@ -98,6 +98,21 @@
                                     <td class="text-justify" width="35%">{{$valor}}</td>
                                 </tr>
                             @endif
+                    @elseif ( $tipo_req == 'date' )
+                        @if($etapa_activa=='Activo')
+                            <tr><div class="form-group">
+                                    <td class="text-right">
+                                        <h5><label class="control-label " for="Input">{{$requisito->nombre}} {{$obligatorio}}:</label></h5></td>
+                                    <td><input {{$requisito_activado}} type="text" name="atributo[]" class="form-control datepicker" value="{{$valor}}" autocomplete="off" {{$required}} onchange="enviar()"></td>
+                                </div>
+                            </tr>
+                            <input type="hidden" name="requisito_id[]" value="{{$requisito->id}}">
+                        @else
+                            <tr>
+                                <td class="text-justify" width="35%"><label>{{$requisito->nombre}}</label></td>
+                                <td class="text-justify" width="35%">{{$valor}}</td>
+                            </tr>
+                        @endif
                     @elseif ($tipo_req == 'file')
                             @if($etapa_activa=='Activo')
                                 <tr><div class="form-group">
@@ -138,7 +153,6 @@
                             <tr><div class="form-group">
                                     <td class="text-right">
                                         <h5><label class="control-label " for="Input">{{$requisito->nombre}} {{$obligatorio}}:</label></h5></td>
-
                                         <td><input {{$requisito_activado}} type="{{$tipo_req}}" name="atributo[]" class="form-control" value="{{$valor}}" autocomplete="off" {{$required}} onchange="enviar()"></td>
                                 </div></tr>
                                 <input type="hidden" name="requisito_id[]" value="{{$requisito->id}}">
@@ -172,6 +186,14 @@
                 <h4>No hay información por diligenciar.</h4>
             @endif
         </form>
+        <script>
+            $('.datepicker').datepicker({
+                todayBtn: "linked",
+                clearBtn: true,
+                language: "es",
+                autoclose: true
+            });
+        </script>
         </tbody>
         @if($etapa_activa=='Activo')
                 <script>

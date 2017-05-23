@@ -153,25 +153,25 @@
                     <div class="form-group">
                         <label class="control-label col-md-4">Fecha de reunión de Comité Interno: </label>
                         <div class="col-md-3">
-                            <input id="comitecheck1" type="date" name="date_aprobación1" max="{{date("Y-m-d")}}" {{$readonly}} class="form-control" value="{{$proceso_contractual->fecha_comiteinterno}}" disabled>
+                            <input id="comitecheck1" type="text" name="date_aprobación1" {{$readonly}} class="form-control datepicker" value="{{$proceso_contractual->fecha_comiteinterno}}" disabled>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-4">Fecha de reunión de Comité Interno de Rectoría: </label>
                         <div class="col-md-3">
-                            <input id="comitecheck2" type="date" name="date_aprobación2" max="{{date("Y-m-d")}}" {{$readonly}} class="form-control" value="{{$proceso_contractual->fecha_comiterectoria}}" disabled>
+                            <input id="comitecheck2" type="text" name="date_aprobación2" {{$readonly}} class="form-control datepicker" value="{{$proceso_contractual->fecha_comiterectoria}}" disabled>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-4">Fecha de reunión de Comité Asesor de Contratación:</label>
                         <div class="col-md-3">
-                            <input id="comitecheck3" type="date" name="date_aprobación3" max="{{date("Y-m-d")}}" {{$readonly}} class="form-control" value="{{$proceso_contractual->fecha_comiteasesor}}" disabled>
+                            <input id="comitecheck3" type="text" name="date_aprobación3" {{$readonly}} class="form-control datepicker" value="{{$proceso_contractual->fecha_comiteasesor}}" disabled>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-4">Fecha de reunión de Comité Evaluador:</label>
                         <div class="col-md-3">
-                            <input id="comitecheck4" type="date" name="date_aprobación4" max="{{date("Y-m-d")}}" {{$readonly}} class="form-control" value="{{$proceso_contractual->fecha_comiteevaluador}}" disabled>
+                            <input id="comitecheck4" type="text" name="date_aprobación4" {{$readonly}} class="form-control datepicker" value="{{$proceso_contractual->fecha_comiteevaluador}}" disabled>
                         </div>
                     </div>
                     <form class="form-inline">
@@ -184,6 +184,15 @@
         </div>
         <h4><a class="btn btn-default" href="{{route('consulta.mostrar')}}"><span class="glyphicon glyphicon-chevron-left"></span> Ir atrás</a></h4>
     </div>
+    <script>
+        $('.datepicker').datepicker({
+            todayBtn: "linked",
+            clearBtn: true,
+            language: "es",
+            endDate: "today",
+            autoclose: true
+        });
+    </script>
 @endsection
 @section('scriptComites')
     @if(Auth::user()->hasRol('Gestor de contratación'))
