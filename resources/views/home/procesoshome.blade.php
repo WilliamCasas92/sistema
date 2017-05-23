@@ -16,7 +16,7 @@
                     @endif
                     <strong>Modalidad:</strong> {{$proceso_contractual->tipo_proceso}}.<br>
                     <strong>CDP:</strong> {{$proceso_contractual->numero_cdp}}.<br>
-                    <strong>Objeto:</strong> {{$proceso_contractual->objeto}}<br>
+                    <strong>Objeto:</strong> {{$proceso_contractual->objeto}}<br><br>
                     <div class="text-center">
                         @if($proceso_contractual->estado=='Sin enviar al Área de Adquisiciones.')
                             <a href="{{ route('procesocontractual.enviar', array($proceso_contractual->id)) }}" class="btn btn-warning btn-sm">Enviar a Adquisiciones</a>
