@@ -10,9 +10,9 @@
                     <strong>Estado:</strong> {{$proceso_contractual->estado}}<br>
                     @php($date_llegada=\App\Http\Controllers\HomeController::buscar_proceso_etapa($proceso_contractual->id))
                     @if (!$date_llegada)
-                        <strong>Fecha de creación: </strong> {{$proceso_contractual->updated_at->format('l d \d\e F \d\e Y, h:i:s A')}}<br>
+                        <strong>Fecha: </strong> {{$proceso_contractual->updated_at->format('l d \d\e F \d\e Y, h:i:s A')}}<br>
                     @else
-                        <strong>Fecha de llegada: </strong> {{$date_llegada}}<br>
+                        <strong>Fecha: </strong> {{$date_llegada}}<br>
                     @endif
                     <strong>Modalidad:</strong> {{$proceso_contractual->tipo_proceso}}.<br>
                     <strong>CDP:</strong> {{$proceso_contractual->numero_cdp}}.<br>
