@@ -40,6 +40,10 @@
                             <td class="text-justify" width="35%"><a href='/uploads/{{$valor}}-{{$requisito->id}}-{{$proceso_contractual->id}}.{{$tipo}}' download='{{$valor}}'>{{$valor}}</a></td>
                     </tr>
                     <tr>
+                        @elseif ( $tipo_req == 'enlace' )
+                            <td class="text-justify" width="35%"><label>{{$requisito->nombre}}</label></td>
+                            <td class="text-justify" width="35%"><a href="{{$valor}}" target="_blank">{{$valor}}</a></td>
+                    <tr>
                         @else
                             <td class="text-justify" width="35%"><label>{{$requisito->nombre}}</label></td>
                             <td width="35%">{{$valor}}</td>

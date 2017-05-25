@@ -5,11 +5,7 @@ use App\TipoRequisito;
 
 class TipoRequisitoTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
+
     public function run()
     {
         //Tipo de dato 1: texto
@@ -30,34 +26,40 @@ class TipoRequisitoTableSeeder extends Seeder
         $tipo_documento->tipo='file';
         $tipo_documento->save();
 
-        //Tipo de dato 3: email
+        //Tipo de dato 4: email
         $tipo_email = new TipoRequisito();
         $tipo_email->nombre='Email';
         $tipo_email->tipo='email';
         $tipo_email->save();
 
-        //Tipo de dato 4: fecha
+        //Tipo de dato 5: fecha
         $tipo_fecha = new TipoRequisito();
         $tipo_fecha->nombre='Fecha';
         $tipo_fecha->tipo='date';
         $tipo_fecha->save();
 
-        //Tipo de dato 5: hora
+        //Tipo de dato 6: hora
         $tipo_hora = new TipoRequisito();
         $tipo_hora->nombre='Hora';
         $tipo_hora->tipo='time';
         $tipo_hora->save();
 
-        //Tipo de dato 6: Checkbox
+        //Tipo de dato 7: Checkbox
         $tipo_booleano = new TipoRequisito();
         $tipo_booleano->nombre='Casilla de verificación';
         $tipo_booleano->tipo='checkbox';
         $tipo_booleano->save();
 
-        //Tipo de dato 7: double
+        //Tipo de dato 8: double
         $tipo_double = new TipoRequisito();
         $tipo_double->nombre='Número';
         $tipo_double->tipo='number';
+        $tipo_double->save();
+
+        //Tipo de dato 9: enlace
+        $tipo_double = new TipoRequisito();
+        $tipo_double->nombre='Enlace';
+        $tipo_double->tipo='enlace';
         $tipo_double->save();
     }
 }

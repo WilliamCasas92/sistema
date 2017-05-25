@@ -113,6 +113,22 @@
                                 <td class="text-justify" width="35%">{{$valor}}</td>
                             </tr>
                         @endif
+                    @elseif ( $tipo_req == 'enlace' )
+                        @if($etapa_activa=='Activo')
+                            <tr><div class="form-group">
+                                    <td class="text-right">
+                                        <h5><label class="control-label " for="Input">{{$requisito->nombre}} {{$obligatorio}}:</label></h5></td>
+                                    <td><input {{$requisito_activado}} type="text" name="atributo[]" class="form-control" value="{{$valor}}" autocomplete="off" {{$required}} onchange="enviar()"></td>
+                                </div>
+                            </tr>
+                            <input type="hidden" name="requisito_id[]" value="{{$requisito->id}}">
+                        @else
+                            <tr>
+                                Hola
+                                <td class="text-justify" width="35%"><label>{{$requisito->nombre}}</label></td>
+                                <td class="text-justify" width="35%"><a href="{{$valor}}" target="_blank">{{$valor}}</a></td>
+                            </tr>
+                        @endif
                     @elseif ($tipo_req == 'file')
                             @if($etapa_activa=='Activo')
                                 <tr><div class="form-group">
