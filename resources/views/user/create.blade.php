@@ -96,36 +96,79 @@
                 document.getElementById('rol_secretariotecnico').disabled = this.checked;
             };
             document.getElementById('rol_admin').onchange = function() {
-                document.getElementById('rol_usuariogeneral').disabled = this.checked;
+                valor=ValidarCheck();
+                if(valor) {
+                    document.getElementById('rol_usuariogeneral').disabled = this.checked;
+                }
             };
             document.getElementById('rol_coordinador').onchange = function() {
-                document.getElementById('rol_usuariogeneral').disabled = this.checked;
+                valor=ValidarCheck();
+                if(valor) {
+                    document.getElementById('rol_usuariogeneral').disabled = this.checked;
+                }
             };
             document.getElementById('rol_secretario').onchange = function() {
                 document.getElementById('rol_secretariotecnico').disabled = this.checked;
-                document.getElementById('rol_usuariogeneral').disabled = this.checked;
+                valor=ValidarCheck();
+                if(valor) {
+                    document.getElementById('rol_usuariogeneral').disabled = this.checked;
+                }
             };
             document.getElementById('rol_abogado').onchange = function() {
-                document.getElementById('rol_usuariogeneral').disabled = this.checked;
+                valor=ValidarCheck();
+                if(valor) {
+                    document.getElementById('rol_usuariogeneral').disabled = this.checked;
+                }
             };
             document.getElementById('rol_gestorcontratacion').onchange = function() {
-                document.getElementById('rol_usuariogeneral').disabled = this.checked;
+                valor=ValidarCheck();
+                if(valor) {
+                    document.getElementById('rol_usuariogeneral').disabled = this.checked;
+                }
             };
             document.getElementById('rol_gestornotificacion').onchange = function() {
-                document.getElementById('rol_usuariogeneral').disabled = this.checked;
+                valor=ValidarCheck();
+                if(valor) {
+                    document.getElementById('rol_usuariogeneral').disabled = this.checked;
+                }
             };
             document.getElementById('rol_gestorafiliacion').onchange = function() {
-                document.getElementById('rol_usuariogeneral').disabled = this.checked;
+                valor=ValidarCheck();
+                if(valor) {
+                    document.getElementById('rol_usuariogeneral').disabled = this.checked;
+                }
             };
             document.getElementById('rol_gestorpublicacion').onchange = function() {
-                document.getElementById('rol_usuariogeneral').disabled = this.checked;
-            };
-            document.getElementById('rol_secretariotecnico').onchange = function() {
-                document.getElementById('rol_usuariogeneral').disabled = this.checked;
+                if(ValidarCheck()) {
+                    document.getElementById('rol_usuariogeneral').disabled = this.checked;
+                }
             };
             document.getElementById('rol_secretariotecnico').onchange = function() {
                 document.getElementById('rol_secretario').disabled = this.checked;
-                document.getElementById('rol_usuariogeneral').disabled = this.checked;
+                if(ValidarCheck()) {
+                    document.getElementById('rol_usuariogeneral').disabled = this.checked;
+                }
+            };
+
+            document.getElementById('rol_gestorarchivo').onchange = function() {
+                if(ValidarCheck()) {
+                    document.getElementById('rol_usuariogeneral').disabled = this.checked;
+                }
+
+            };
+            function ValidarCheck()
+            {
+                if(document.getElementById('rol_admin').checked==false && document.getElementById('rol_coordinador').checked==false && document.getElementById('rol_secretario').checked==false &&
+                    document.getElementById('rol_abogado').checked==false && document.getElementById('rol_gestorcontratacion').checked==false && document.getElementById('rol_gestorafiliacion').checked==false
+                    && document.getElementById('rol_gestorpublicacion').checked==false && document.getElementById('rol_secretariotecnico').checked==false && document.getElementById('rol_gestornotificacion').checked==false
+                    && document.getElementById('rol_gestorarchivo').checked==false){
+                    return true;
+                }else {
+                    if (document.getElementById('rol_usuariogeneral').disabled == false) {
+                        return true;
+                    }
+                }
+                return false;
             };
         })
     </script>
