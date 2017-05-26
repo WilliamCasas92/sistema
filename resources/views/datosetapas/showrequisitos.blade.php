@@ -124,7 +124,6 @@
                             <input type="hidden" name="requisito_id[]" value="{{$requisito->id}}">
                         @else
                             <tr>
-                                Hola
                                 <td class="text-justify" width="35%"><label>{{$requisito->nombre}}</label></td>
                                 <td class="text-justify" width="35%"><a href="{{$valor}}" target="_blank">{{$valor}}</a></td>
                             </tr>
