@@ -183,6 +183,17 @@
     <div class="modal" id="modalMensaje" tabindex="-1" role="dialog" aria-labelledby="modalMensaje" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog" role="document" id="datos_faltantes"></div>
     </div>
+    <div class="modal" id="modalMensaje" tabindex="-1" role="dialog" aria-labelledby="modalMensaje" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog" role="document" id="datos_faltantes"></div>
+    </div>
+    <div class="modal" id="modalImagen" tabindex="-1" role="dialog" aria-labelledby="modalMensaje" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog" role="document" id="datos_faltantes">
+            <div>
+                <img class="center-block" src="/images/loading.gif" width="100" height="100"/>
+            </div>
+        </div>
+
+    </div>
     @include('datosetapas.modaladddocumento')
     @include('datosetapas.modaldeletedocumento')
     @include('datosetapas.modalfinalizar')
@@ -264,7 +275,8 @@
         $(document).ready(function() {
             // Interceptamos el evento submit del formulario pasar Etapa, Al fomulario eliminar Etapa
             $('#modalSaveForm').submit(function () {
-                $('#cargando').html('<div><img class="center-block" src="/images/loading.gif" width="100" height="100"/></div>');
+                $('#modalSave').modal('hide');
+                $('#modalImagen').modal('show');
                 // Enviamos el formulario usando AJAX
                 $.ajax({
                     type: 'GET',
@@ -272,9 +284,9 @@
                     data: $(this).serialize(),
                     // Mostramos un mensaje con la respuesta de PHP
                     success: function (data) {
-                        $('#modalSave').modal('hide');
                         $('#modalMensaje').modal('show');
-                        $('#datos_faltantes').fadeIn(1000).html(data);
+                        $('#modalImagen').modal('hide');
+                        $('#datos_faltantes').html(data);
                     }
                 });
                 return false;
@@ -287,7 +299,8 @@
             });
             //Finalizando el proceso
             $('#modalFinalForm').submit(function () {
-                $('#cargandoFinalizar').html('<div><img class="center-block" src="/images/loading.gif" width="100" height="100"/></div>');
+                $('#modalFinal').modal('hide');
+                $('#modalImagen').modal('show');
                 // Enviamos el formulario usando AJAX
                 $.ajax({
                     type: 'GET',
@@ -295,9 +308,9 @@
                     data: $(this).serialize(),
                     // Mostramos un mensaje con la respuesta de PHP
                     success: function (data) {
-                        $('#modalFinal').modal('hide');
                         $('#modalMensaje').modal('show');
-                        $('#datos_faltantes').fadeIn(1000).html(data);
+                        $('#modalImagen').modal('hide');
+                        $('#datos_faltantes').html(data);
 
                     }
                 });

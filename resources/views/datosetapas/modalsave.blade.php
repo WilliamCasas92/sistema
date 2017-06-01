@@ -1,11 +1,11 @@
 <div class="modal" id="modalSave" tabindex="-1" role="dialog" aria-labelledby="modalSaveTitulo" data-backdrop="static" data-keyboard="false">
-    <div id="cargando" class="modal-dialog" role="document">
+    <div  class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="modalDeleteTitulo">Confirmar paso a la siguiente Etapa.</h4>
+                <h4 class="modal-title">Confirmar paso a la siguiente Etapa.</h4>
             </div>
             <div class="modal-body">
                 <p align="center">

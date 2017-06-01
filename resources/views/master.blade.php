@@ -13,7 +13,7 @@
     <script src="/js/jquery-3.1.1.js" type="text/javascript"></script>
     <!-- datePicker Starts-->
     <link rel="stylesheet" href="{{asset('datePicker/css/bootstrap-datepicker3.css')}}">
-    <link rel="stylesheet" href="{{asset('datePicker/css/bootstrap-standalone.css')}}">
+    <link rel="stylesheet" href="{{asset('datePicker/css/bootstrap-datepicker.standalone.css')}}">
     <script src="{{asset('datePicker/js/bootstrap-datepicker.js')}}"></script>
     <!-- Languaje -->
     <script src="{{asset('datePicker/locales/bootstrap-datepicker.es.min.js')}}"></script>

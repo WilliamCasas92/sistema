@@ -1,5 +1,5 @@
 <div class="modal" id="modalFinal" tabindex="-1" role="dialog" aria-labelledby="modalSaveTitulo" data-backdrop="static" data-keyboard="false">
-    <div id="cargandoFinalizar" class="modal-dialog" role="document">
+    <div  class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">

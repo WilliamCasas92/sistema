@@ -208,7 +208,7 @@
                         $('#FormEtapa{{$etapa->id}}').trigger("submit");
                     }
                     $(document).ready( function() {
-                        // Interceptamos el evento submit del formulario agregar Etapa, Al fomulario eliminar Etapa
+                        // Interceptamos el evento submit del formulario guardar datos
                          $('#FormEtapa{{$etapa->id}}').submit(function () {
                              $('#btnGuardar{{$etapa->id}}').attr("disabled", true);
                              $('#btnGuardar{{$etapa->id}}').html('Guardando...');
