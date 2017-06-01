@@ -34,7 +34,6 @@ class CambioEstado extends Notification
             ->line('SIGECOP te informa que el proceso con CDP '.$this->proceso_contractual->numero_cdp.' se le ha actualizado su estado a: '.$this->proceso_contractual->estado.'.')
             ->line('Tipo contratación: '.$this->proceso_contractual->tipo_proceso.'.')
             ->line('Objeto: '.$this->proceso_contractual->objeto.'.')
-            ->line('Tipo contratación: '.$this->proceso_contractual->tipo_proceso.'.')
             ->line('')
             ->action('Ir a SIGECOP', 'http://sigecop.elpoli.edu.co/');
     }
