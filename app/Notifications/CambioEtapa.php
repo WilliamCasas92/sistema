@@ -40,7 +40,7 @@ class CambioEtapa extends Notification
                     ->line('Etapa de la que proviene: '.$this->nombre_etapa_anterior.'.')
                     ->line('Puedes acceder a diligenciar el proceso debido a que posees los siguientes roles: '. $this->roles)
                     ->line('')
-                    ->action('¡Diligenciar ahora!', 'http://policontratos.app/datosetapas/'.$this->proceso_contractual->id);
+                    ->action('¡Diligenciar ahora!', 'http://sigecop.elpoli.edu.co/datosetapas/'.$this->proceso_contractual->id);
     }
 
     public function toArray($notifiable)

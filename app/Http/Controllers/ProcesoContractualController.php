@@ -247,7 +247,7 @@ class ProcesoContractualController extends Controller
             $aux_proceso_contracual = $proceso_contractual;
             $proceso_contractual->save();
             $this->notificar_estado_envio($aux_proceso_contracual);
-
+            return redirect()->route('consulta.mostrar');
         } catch(Exception $e){
             return "Fatal error -".$e->getMessage();
         }
@@ -286,8 +286,9 @@ class ProcesoContractualController extends Controller
             $historial_proceso_etapa->save();
             $aux_proceso_contractual =$proceso_contractual;
             $proceso_contractual->save();
-            $this->notificar_inicio($id_etapa, $aux_proceso_contractual);
             //Notificar que el proceso a sido recibido
+            $this->notificar_inicio($id_etapa, $aux_proceso_contractual);
+            return redirect()->route('consulta.mostrar');
         } catch(Exception $e){
             return "Fatal error -".$e->getMessage();
         }
@@ -385,7 +386,7 @@ class ProcesoContractualController extends Controller
             $proceso_contractual->save();
             //Notificar proceso desertado
             $this->notificar_estado($aux_proceso_contractual);
-
+            return redirect()->route('consulta.mostrar');
         } catch(Exception $e){
             return "Fatal error -".$e->getMessage();
         }
